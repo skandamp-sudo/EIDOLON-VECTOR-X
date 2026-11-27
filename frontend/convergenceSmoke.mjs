@@ -20,6 +20,22 @@ try {
   await page.getByRole('button',{name:'Approve simulated PO'}).click()
   await page.getByText(/0 at-risk orders · 0 open proposals/).waitFor()
  }
+ if(check==='all'||check==='symbiosis'){
+  await step.selectOption('4')
+  const approve=page.getByRole('button',{name:'Approve recommendation'})
+  await approve.waitFor()
+  await page.getByRole('button',{name:'Pause agent'}).click()
+  assert.equal(await approve.isDisabled(),true)
+  await page.getByRole('button',{name:'Resume agent'}).click()
+  await page.getByLabel('Agent interaction mode').selectOption('Suggestion only')
+  await approve.waitFor()
+  assert.equal(await approve.isDisabled(),true)
+  await page.getByRole('button',{name:'Abort pending action'}).click()
+  await page.getByText(/Pending sweep aborted/).waitFor()
+  await page.getByRole('button',{name:'Resume agent'}).click()
+  await page.getByLabel('Agent interaction mode').selectOption('Automatic preview')
+  await page.getByRole('button',{name:'Undo selection'}).click()
+ }
  // Additional module checks
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}

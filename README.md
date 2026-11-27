@@ -125,3 +125,5 @@ Production serves live calibration inference and the recorded four-encoder evide
 - CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
 
 - SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
+
+- SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
