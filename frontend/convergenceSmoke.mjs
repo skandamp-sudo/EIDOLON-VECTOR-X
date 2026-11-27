@@ -70,6 +70,7 @@ try {
   await opt.check()
   await page.getByRole('button',{name:'Record preference'}).click()
   await page.getByRole('button',{name:'Accept shortcut'}).click()
+  await page.getByText('1 of 1 retained shortcut decisions accepted.').waitFor()
   await page.getByRole('button',{name:'Shortcut to CORTEX'}).waitFor()
   await page.getByRole('button',{name:'Restore static layout'}).click()
   await page.getByRole('button',{name:'Undo adaptation'}).click()

@@ -35,6 +35,8 @@ export default function Morph({context,onNavigate}:{context:Domain;onNavigate:(d
  const [,refresh]=useState(0),[pref,setPref]=useState<Domain>('CORTEX'),[effort,setEffort]=useState('')
  const update=()=>refresh(x=>x+1)
  const scores=learn(events,context),best=scores.find(s=>s.positive&&s.estimate>.5&&!dismissed.has(context+'/'+s.domain))
+ const reviews=events.filter(e=>e.domain==='MORPH'&&['approve','reject'].includes(e.action))
+ const accepted=reviews.filter(e=>e.action==='approve').length
  const backs=events.filter(e=>e.action==='back').length
  const reset=()=>{configureLearning(false);clearHistory();layout=null;previous=null;undoAvailable=false;trial=null;results=[];trialCount=0;dismissed.clear();lastVisit=null;window.dispatchEvent(new Event('vector-x-reset-preferences'));try{sessionStorage.removeItem('vector-x.inventory-saves.v1')}catch{};setEffort('');update()}
  const finish=(success:boolean)=>{if(!trial||trial.end!==null)return
@@ -46,7 +48,8 @@ export default function Morph({context,onNavigate}:{context:Domain;onNavigate:(d
  const useShortcut=enabled&&(!trial||trial.end!==null||trial.condition==='adaptive')?layout:null
  return <section className="panel foundry-panel"><h2>Adaptive navigation</h2>
  <label><input type="checkbox" checked={enabled} onChange={e=>{configureLearning(e.target.checked);if(!e.target.checked){trial=null;layout=null;previous=null;undoAvailable=false}update()}}/> Learn from this tab</label>
- <div className="layout-study"><section><h3>Static layout</h3><p>Workspace directory · fixed order</p><ol>{domains.map(d=><li key={d}>{d}</li>)}</ol></section><section><h3>Adaptive layout</h3><p>{useShortcut?'Pinned shortcut: '+useShortcut.shortcut:enabled?'No accepted shortcut':'Learning is off'}</p><small>{events.length} opted-in interactions · {backs} backtracks</small></section></div>
+ <div className="layout-study"><section><h3>Static layout</h3><p>Workspace directory · fixed order</p><ol>{domains.map(d=><li key={d}>{d}</li>)}</ol></section><section><h3>Adaptive layout</h3><p>{useShortcut?'Pinned shortcut: '+useShortcut.shortcut:enabled?'No accepted shortcut':'Learning is off'}</p><small>{events.length} opted-in interactions · {backs} backtracks</small><p>{!enabled?'Enable learning to record a preference and compare a shortcut here.':!best&&!useShortcut?'Choose a destination below and record a preference to generate a proposal.':best&&!useShortcut?'Review the proposed shortcut below.':null}</p>
+ {enabled&&<p>{reviews.length?accepted+' of '+reviews.length+' retained shortcut decisions accepted.':'No shortcut decisions recorded.'}</p>}</section></div>
  <p>Human evaluation pending.</p><p>Opt-in records up to 256 module names, actions and timestamps in memory. A smoothed reward estimate ranks shortcuts using explicit preference and completion as positive signals, retries and backtracks as negative signals. Query and document text are excluded.</p>
  {enabled&&<><label>Preferred destination<select value={pref} onChange={e=>setPref(e.target.value as Domain)}>{domains.map(d=><option key={d}>{d}</option>)}</select></label>
  <button onClick={()=>{record(pref,'prefer',context)}}>Record preference</button>
@@ -63,6 +66,7 @@ export default function Morph({context,onNavigate}:{context:Domain;onNavigate:(d
  trial={origin:context,condition:adaptive?'adaptive':'static',target,start:Date.now(),steps:0,errors:0,effort:null,end:null,success:null};setEffort('');update()}}>Start navigation task</button>
  {trial&&<><p role="status">{trial.condition} task · reach {trial.target} · {trial.steps} module changes · {trial.errors} intermediate destinations</p><label>Mental effort<select value={effort} onChange={e=>setEffort(e.target.value)}><option value="">Unrated</option>{[1,2,3,4,5,6,7].map(i=><option key={i}>{i}</option>)}</select></label>
  <button disabled={trial.end!==null||context!==trial.target} onClick={()=>finish(true)}>Mark destination reached</button><button disabled={trial.end!==null} onClick={()=>finish(false)}>End incomplete task</button></>}
+ {results.length>0&&<div className="preview-scroll"><table><caption>Finished attempts retained in this tab</caption><thead><tr><th>Condition</th><th>Destination</th><th>Elapsed seconds</th><th>Route changes</th><th>Outcome</th></tr></thead><tbody>{results.map((r,i)=><tr key={i}><th>{r.condition}</th><td>{r.target}</td><td>{r.end===null?'Unavailable':((r.end-r.start)/1000).toFixed(1)}</td><td>{r.steps}</td><td>{r.success?'Reached':'Incomplete'}</td></tr>)}</tbody></table></div>}
  <button onClick={()=>exportEvidence('navigation-study',{events,context,scores,layout,trials:results,decisions:events.filter(e=>e.domain==='MORPH'&&['approve','reject'].includes(e.action)).length,acceptances:events.filter(e=>e.action==='approve'&&e.domain==='MORPH').length})}>Export local history</button></>}
  <button onClick={reset}>Delete history and reset learning</button></section>
 }
