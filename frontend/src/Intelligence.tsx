@@ -10,7 +10,7 @@ import './lab.css'
 
 type Entry = {direction: Direction; validation?: Concept['validation']}
 const modes: Mode[] = ['original','naive','learned','locked']
-const views: Mode[] = ['original','naive','locked']
+
 const storageKey = 'vector-x.learned-directions.v1'
 function savedDirections(id: string): Direction[] {
   const raw = localStorage.getItem(storageKey)
@@ -50,10 +50,10 @@ function Results({ run, documents, camera, setCamera, selected, setSelected }: {
         <td>{fmt(v.applied)}</td><td>{fmt(v.target_delta)}</td><td>{fmt(v.drift)}</td><td>{fmt(v.cosine)}</td><td>{v.satisfied ? 'Met' : 'Exceeded'}</td><td>{fmt(v.ndcg)}</td></tr> })}</tbody></table></div>
     {run.conflicts.map((c,i) => <small key={i}>{c.a} / {c.b} · direction cosine {fmt(c.cosine)}. </small>)}
   </section>
-  <section><h2>Parallel Universes</h2><p>Orbit a view to move all three cameras. Corpus positions and scales are shared. Amber traces the query.</p>
+  <section><h2>Parallel Universes</h2><p>Orbit a view to move all four cameras. Corpus positions and scales are shared. Amber traces the query.</p>
     <label>Inspect index point<select value={selected} onChange={e => setSelected(Number(e.target.value))}>
       {documents.map((s,i) => <option key={i} value={i}>{i+1} · {s.slice(0,70)}</option>)}</select></label>
-    <div className="universes">{views.map(mode => <div key={mode}>
+    <div className="universes">{modes.map(mode => <div key={mode}>
       <FoundryMap title={title[mode]} camera={camera} changeCamera={setCamera} points={points} selected={selected} select={setSelected} path={run.variants[mode].trajectory}/>
       <ol>{run.variants[mode].neighbors.map(n => <li key={n.id}>{documents[n.id]} <b>{fmt(n.score)}</b></li>)}</ol>
     </div>)}</div>

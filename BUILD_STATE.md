@@ -98,3 +98,5 @@ Release 6094410d2238a5bd29f78578d8c6231a2c2ed19e passed 48 Python tests, TypeScr
 ## Obsidian visual branch
 
 Tagged engineering base 43e8830. Captured baseline on sixteen routes at four viewports. The shell and guided Mission Control use existing routes and live coefficient samples. TypeScript and Vite build passed.
+
+Inventory and vector checkpoint: ledger-derived quantity bands and dated order timeline passed duplicate, approval and reset checks. All four parallel comparison views use the shared geometry and camera. Local Chrome passed synchronized rotation and imported dataset operations.

@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Minus, Plus, RotateCcw, Orbit, Move } from '
 import { colors, topics } from './explore'
 import type { Run, XYZ } from './explore'
 
-const home = { yaw: .65, pitch: -.18, zoom: 1 }
+const home = { yaw: .65, pitch: -.18, zoom: 1, x:0, y:0 }
 export default function Galaxy({ run, selected, select }: { run: Run | null; selected: number | null; select: (id:number)=>void }) {
   const [view, setView] = useState(home)
   const drag = useRef<[number,number] | null>(null)
@@ -14,7 +14,7 @@ export default function Galaxy({ run, selected, select }: { run: Run | null; sel
     return (point: XYZ) => {
       const v = new Vector3(...point).applyEuler(rotation)
       const k = 210 * view.zoom * 4 / (4 - v.z)
-      return { x: 360 + v.x*k, y: 184 - v.y*k, z: v.z }
+      return { x: 360 + view.x + v.x*k, y: 184 + view.y - v.y*k, z: v.z }
     }
   }, [view])
   const points = run?.documents.map(d => ({...d, ...projection(d.xyz)})) ?? []
@@ -23,13 +23,14 @@ export default function Galaxy({ run, selected, select }: { run: Run | null; sel
   function turn(x: number, y: number) {
     setView(v => ({...v, yaw: v.yaw+x, pitch: Math.max(-1.5,Math.min(1.5,v.pitch+y))}))
   }
+  function pan(x:number,y:number){setView(v=>({...v,x:Math.max(-200,Math.min(200,v.x+x)),y:Math.max(-120,Math.min(120,v.y+y))}))}
   function zoom(step:number) { setView(v => ({...v,zoom: Math.min(1.65,Math.max(.65,v.zoom+step))})) }
   return <section className="atlas-plot panel" aria-label="Semantic Universe">
     <div className="panel-head"><div className="panel-title"><Orbit size={19}/><h2>Semantic Universe</h2></div><span className="frame-label">PCA · 3D</span></div>
-    <div className="space"><svg viewBox="0 0 720 364" className="galaxy" role="group" aria-label="Rotatable three-dimensional PCA map. Arrow keys orbit the camera." tabIndex={0}
-      onKeyDown={e => {const directions:Record<string,number[]>={ArrowLeft:[-.15,0],ArrowRight:[.15,0],ArrowUp:[0,-.15],ArrowDown:[0,.15]};if(directions[e.key]){e.preventDefault();const [x,y]=directions[e.key];turn(x,y)}}}
+    <div className="space"><svg viewBox="0 0 720 364" className="galaxy" role="group" aria-label="Rotatable three-dimensional PCA map. Arrow keys orbit. Shift plus arrow pans." tabIndex={0}
+      onKeyDown={e => {const directions:Record<string,number[]>={ArrowLeft:[-.15,0],ArrowRight:[.15,0],ArrowUp:[0,-.15],ArrowDown:[0,.15]};if(directions[e.key]){e.preventDefault();const [x,y]=directions[e.key];if(e.shiftKey)pan(x*120,y*120);else turn(x,y)}}}
       onPointerDown={e => {drag.current=[e.clientX,e.clientY];moved.current=false}}
-      onPointerMove={e => {if(!drag.current)return; const dx=e.clientX-drag.current[0],dy=e.clientY-drag.current[1];if(Math.abs(dx)+Math.abs(dy)<3&&!moved.current)return; moved.current=true;e.currentTarget.setPointerCapture(e.pointerId);turn(dx*.008,dy*.008);drag.current=[e.clientX,e.clientY]}}
+      onPointerMove={e => {if(!drag.current)return; const dx=e.clientX-drag.current[0],dy=e.clientY-drag.current[1];if(Math.abs(dx)+Math.abs(dy)<3&&!moved.current)return; moved.current=true;e.currentTarget.setPointerCapture(e.pointerId);if(e.shiftKey)pan(dx,dy);else turn(dx*.008,dy*.008);drag.current=[e.clientX,e.clientY]}}
       onPointerUp={()=>{drag.current=null}} onPointerLeave={()=>{drag.current=null}} onPointerCancel={()=>{drag.current=null}}>
       <defs>{topics.map(t=><radialGradient key={t} id={'halo'+t}><stop stopColor={colors[t]} stopOpacity=".23"/><stop offset=".42" stopColor={colors[t]} stopOpacity=".09"/><stop offset="1" stopColor={colors[t]} stopOpacity="0"/></radialGradient>)}
       <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.8"/></filter></defs>
@@ -68,6 +69,6 @@ export default function Galaxy({ run, selected, select }: { run: Run | null; sel
       })}</>}
     </svg>{!run&&<p className="space-empty">Awaiting a valid embedding</p>}
     <div className="view-tools"><button aria-label="Rotate galaxy left" onClick={()=>turn(-.2,0)}><ChevronLeft/></button><button aria-label="Rotate galaxy right" onClick={()=>turn(.2,0)}><ChevronRight/></button><button aria-label="Zoom out" onClick={()=>zoom(-.12)}><Minus/></button><button aria-label="Zoom in" onClick={()=>zoom(.12)}><Plus/></button><button aria-label="Reset galaxy camera" onClick={()=>setView(home)}><RotateCcw/></button></div></div>
-    <div className="plot-foot"><span><i className="query-dot"/> Original <i className="steered-dot"/> Steered</span><span><Move size={13}/> Drag to orbit</span></div>
+    <div className="plot-foot"><span><i className="query-dot"/> Original <i className="steered-dot"/> Steered</span><span><Move size={13}/> Drag to orbit · Shift to pan</span></div>
   </section>
 }
