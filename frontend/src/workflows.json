@@ -1,0 +1,711 @@
+[
+  {
+    "id": "PS01",
+    "name": "CORTEX",
+    "official": "Rapid Knowledge Internalization",
+    "user": "A researcher must decide whether two coastal measurements support a contradiction.",
+    "action": "Enter “pressure”, follow row 1, inspect the source and its offset, then mark Supports. Compare sampling locations before answering.",
+    "metrics": "Compare weighted reading with keyword and source-order controls. Comprehension and decision accuracy score keyed answers. Time and optional effort describe individual attempts.",
+    "limit": "Lexical similarity identifies shared terms. The four notes and scripted response do not establish reduced cognitive load at scale.",
+    "source": "frontend/src/convergence/Cortex.tsx",
+    "baseline": "Weighted reading vs keyword or source order",
+    "sample": "4 authored field notes; one scripted attempt",
+    "evidence": "/evidence/judge/cortex.json",
+    "nodes": [
+      {
+        "title": "Collection",
+        "input": "Notebook or mapped local text",
+        "output": "Numbered passages",
+        "impl": "Split nonblank source at bounded chunks, preserving row and offset."
+      },
+      {
+        "title": "Explore relationships",
+        "input": "Passage tokens and query",
+        "output": "Weighted lexical links",
+        "impl": "Rank weighted terms or compare against keyword and source order."
+      },
+      {
+        "title": "Inspect original",
+        "input": "Selected link",
+        "output": "Source quotation",
+        "impl": "Follow the row and offset to read the original and check context."
+      },
+      {
+        "title": "Evidence sufficient?",
+        "input": "Quoted source and research question",
+        "output": "Reader assessment",
+        "impl": "The reader decides whether the passage supports a conclusion."
+      },
+      {
+        "title": "Explore more",
+        "input": "Insufficient support",
+        "output": "Another source",
+        "impl": "Follow peer links or refine the search terms."
+      },
+      {
+        "title": "Annotate and decide",
+        "input": "Selected passage",
+        "output": "Attributed annotation",
+        "impl": "Mark support, conflict or an open question."
+      },
+      {
+        "title": "Score the task",
+        "input": "Keyed decision, time and optional effort",
+        "output": "Attempt record",
+        "impl": "Compare the authored response with the answer key and export."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 2,
+        "label": "Next"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "Next"
+      },
+      {
+        "src": 3,
+        "dst": 4,
+        "label": "no"
+      },
+      {
+        "src": 4,
+        "dst": 1,
+        "label": "refine"
+      },
+      {
+        "src": 3,
+        "dst": 5,
+        "label": "yes"
+      },
+      {
+        "src": 5,
+        "dst": 6,
+        "label": "Next"
+      }
+    ]
+  },
+  {
+    "id": "PS02",
+    "name": "SUPPLY",
+    "official": "Smart Inventory Intelligence",
+    "user": "A planner needs to know which order will miss its customer request date and why.",
+    "action": "Delay supplier P1. Compare O1 against the fixture at the same simulated day. Reset before approving the original shortage proposal.",
+    "metrics": "Six authored snapshots: CRD risk precision 1.0, recall 1.0; reactive recall 0. Three warnings were 5, 3 and 5 days early. Four dated shipments had mean absolute error 0 days.",
+    "limit": "The arrival assumption drives projected shipment. Planner outcomes and actual supplier commitments are unmeasured. Duplicate events are rejected.",
+    "source": "frontend/src/convergence/inventoryLedger.ts",
+    "baseline": "Dated allocation vs reactive risk flag",
+    "sample": "6 authored order snapshots",
+    "evidence": "/evidence/judge/supply.json",
+    "nodes": [
+      {
+        "title": "Inventory events",
+        "input": "Dated orders, purchases and stock",
+        "output": "Event ledger",
+        "impl": "Choose the sample ledger or append a validated simulation event."
+      },
+      {
+        "title": "Validate event",
+        "input": "Schema, date and event ID",
+        "output": "Accepted or rejected event",
+        "impl": "Reject malformed events and duplicate IDs before allocation."
+      },
+      {
+        "title": "Replay and allocate",
+        "input": "Ordered event ledger",
+        "output": "Stock and incoming lot allocations",
+        "impl": "Allocate stock first and then incoming lots in booking order."
+      },
+      {
+        "title": "CRD at risk?",
+        "input": "Allocations and request date",
+        "output": "Risk flag and projected day",
+        "impl": "Count units unavailable by the customer request date."
+      },
+      {
+        "title": "Monitor",
+        "input": "Sufficient dated stock",
+        "output": "Current briefing",
+        "impl": "Continue monitoring the ledger and stale-feed indicator."
+      },
+      {
+        "title": "Investigate shortage",
+        "input": "Late or missing allocation",
+        "output": "Shortage and proposal if applicable",
+        "impl": "A late lot explains risk. A purchase proposal requires missing units."
+      },
+      {
+        "title": "Approve purchase?",
+        "input": "Open proposal and human decision",
+        "output": "Decision event",
+        "impl": "Validate chosen quantity before applying the simulated approval."
+      },
+      {
+        "title": "Reject or hold",
+        "input": "No approval",
+        "output": "Unchanged physical allocation",
+        "impl": "Retain current state or record a simulated rejection."
+      },
+      {
+        "title": "Compare and audit",
+        "input": "Current and starting ledger at the same day",
+        "output": "Scenario delta and event history",
+        "impl": "Inspect shortage and projected ship dates at the same clock time."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 2,
+        "label": "valid"
+      },
+      {
+        "src": 1,
+        "dst": 0,
+        "label": "invalid"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "Next"
+      },
+      {
+        "src": 3,
+        "dst": 4,
+        "label": "no"
+      },
+      {
+        "src": 3,
+        "dst": 5,
+        "label": "yes"
+      },
+      {
+        "src": 5,
+        "dst": 6,
+        "label": "missing"
+      },
+      {
+        "src": 6,
+        "dst": 7,
+        "label": "no"
+      },
+      {
+        "src": 6,
+        "dst": 8,
+        "label": "yes"
+      },
+      {
+        "src": 7,
+        "dst": 8,
+        "label": "Next"
+      },
+      {
+        "src": 4,
+        "dst": 8,
+        "label": "Next"
+      }
+    ]
+  },
+  {
+    "id": "PS03",
+    "name": "SYMBIOSIS",
+    "official": "Human–Agent Interaction",
+    "user": "An operator wants a feasible steering proposal while retaining control over the selection.",
+    "action": "Choose an objective, inspect the proposal, approve it, then undo. Pause or abort a pending sweep to retain control.",
+    "metrics": "Compare approval mode with the sequential form. Record decision history, completion time and optional trust/control ratings. No participant comparison is available.",
+    "limit": "Algorithmic proposals operate over a bounded sweep. A feasible point can have unknown nDCG when relevance labels are absent.",
+    "source": "frontend/src/Frontier.tsx",
+    "baseline": "Recommendation vs sequential form",
+    "sample": "One interactive calibration sweep",
+    "evidence": "/evidence/judge/symbiosis.json",
+    "nodes": [
+      {
+        "title": "Objective",
+        "input": "Query, direction, protection and limits",
+        "output": "Requested sweep",
+        "impl": "Choose maximize gain or minimize drift."
+      },
+      {
+        "title": "Compute alternatives",
+        "input": "Requested limits and encoder basis",
+        "output": "Measured operating points",
+        "impl": "Sweep bounded signed strengths and compute gain, drift, cosine and optional nDCG."
+      },
+      {
+        "title": "Feasible proposal?",
+        "input": "Measured points",
+        "output": "Nondominated positive-gain candidates",
+        "impl": "Filter for feasibility and choose the objective-ordered frontier recommendation."
+      },
+      {
+        "title": "Edit or pause",
+        "input": "No positive-gain proposal or changed limits",
+        "output": "Deferred or revised sweep",
+        "impl": "Pause or abort pending work. Editing constraints recomputes when enabled."
+      },
+      {
+        "title": "Human approval?",
+        "input": "Candidate and current selection",
+        "output": "Approve, reject or modify",
+        "impl": "Inspect measured differences before approving the reversible local selection."
+      },
+      {
+        "title": "Retain selection",
+        "input": "Rejected proposal",
+        "output": "Current operating point",
+        "impl": "Rejection retains the operator’s selected point."
+      },
+      {
+        "title": "Apply and undo",
+        "input": "Approved alternative",
+        "output": "Selected local preview",
+        "impl": "Inspect ranked documents and undo to the previous point."
+      },
+      {
+        "title": "Decision history",
+        "input": "Local timeline and optional ratings",
+        "output": "Exported session evidence",
+        "impl": "Record observed actions and completion time; ratings require operator input."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 2,
+        "label": "Next"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "no"
+      },
+      {
+        "src": 3,
+        "dst": 0,
+        "label": "revise"
+      },
+      {
+        "src": 2,
+        "dst": 4,
+        "label": "yes"
+      },
+      {
+        "src": 4,
+        "dst": 5,
+        "label": "no"
+      },
+      {
+        "src": 4,
+        "dst": 6,
+        "label": "yes"
+      },
+      {
+        "src": 5,
+        "dst": 7,
+        "label": "Next"
+      },
+      {
+        "src": 6,
+        "dst": 7,
+        "label": "Next"
+      }
+    ]
+  },
+  {
+    "id": "PS04",
+    "name": "MORPH",
+    "official": "Self-Learning UI Management Model",
+    "user": "A workspace user wants a shorter route to a frequently useful destination.",
+    "action": "Enable learning, record CORTEX as preferred, inspect the counts and accept. Undo returns to the preceding layout.",
+    "metrics": "Static and adaptive trials can log task duration, route changes, errors and optional effort. The estimate (1 + positive)/(2 + positive + negative) describes recorded signals.",
+    "limit": "The tab retains up to 256 events. Scripted acceptance is a functional check. Causal usability benefit requires independent participants.",
+    "source": "frontend/src/convergence/Morph.tsx",
+    "baseline": "Adaptive vs static directory",
+    "sample": "One scripted tab; no independent participants",
+    "evidence": "/evidence/judge/morph.json",
+    "nodes": [
+      {
+        "title": "Consent?",
+        "input": "Static directory and operator choice",
+        "output": "Recording enabled or off",
+        "impl": "Only opt-in module names, actions and timestamps enter tab memory."
+      },
+      {
+        "title": "Static navigation",
+        "input": "Learning off or insufficient rewards",
+        "output": "Fixed directory",
+        "impl": "The operator can continue without accepting a layout change."
+      },
+      {
+        "title": "Record interactions",
+        "input": "Opted-in visits and explicit preferences",
+        "output": "Bounded event history",
+        "impl": "Keep up to 256 events; document and query text are excluded."
+      },
+      {
+        "title": "Sufficient signal?",
+        "input": "Positive and negative contextual rewards",
+        "output": "Eligible destination",
+        "impl": "Smooth reward counts and require a positive signal for a suggestion."
+      },
+      {
+        "title": "Recommend",
+        "input": "Ranked destination",
+        "output": "Proposed shortcut",
+        "impl": "Show reward counts and retain the current layout while waiting."
+      },
+      {
+        "title": "Accept shortcut?",
+        "input": "Operator decision",
+        "output": "Apply or reject",
+        "impl": "A human chooses the adaptation."
+      },
+      {
+        "title": "Apply shortcut",
+        "input": "Accepted destination",
+        "output": "Reversible navigation option",
+        "impl": "A shortcut navigates to the chosen workspace."
+      },
+      {
+        "title": "Compare and reset",
+        "input": "Static/adaptive trials and decisions",
+        "output": "Timing, route changes and outcome",
+        "impl": "Inspect completed trials, undo the adaptation or delete local history."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "no"
+      },
+      {
+        "src": 0,
+        "dst": 2,
+        "label": "yes"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "Next"
+      },
+      {
+        "src": 3,
+        "dst": 1,
+        "label": "no"
+      },
+      {
+        "src": 3,
+        "dst": 4,
+        "label": "yes"
+      },
+      {
+        "src": 4,
+        "dst": 5,
+        "label": "Next"
+      },
+      {
+        "src": 5,
+        "dst": 1,
+        "label": "no"
+      },
+      {
+        "src": 5,
+        "dst": 6,
+        "label": "yes"
+      },
+      {
+        "src": 6,
+        "dst": 7,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 7,
+        "label": "Next"
+      }
+    ]
+  },
+  {
+    "id": "PS05",
+    "name": "VECTOR-X",
+    "official": "Embedding Model with Vector Steering and Semantic Space Visualizer",
+    "user": "A retrieval engineer needs to explain a rank change while limiting movement along a protected model direction.",
+    "action": "Select a corpus and hash-bound encoder. Define a query and expected IDs. Apply Semantic Lock with the Adaptive Governor. Inspect the dense baseline, constrained candidate, violations and per-task gate.",
+    "metrics": "Recall@K counts labeled coverage; nDCG@K discounts lower ranks. Drift and retained cosine test endpoint geometry. Projection overlap measures how many full-space neighbors survive in 3D.",
+    "limit": "PCA is a display branch off the full-dimensional model space. It supplies no retrieval scores. A passed geometric constraint does not establish protected human meaning.",
+    "source": "backend/debugger.py",
+    "baseline": "Dense baseline vs constrained steering",
+    "sample": "24 calibration rows and 1 fixed judgment",
+    "evidence": "/evidence/judge/flagship.json",
+    "nodes": [
+      {
+        "title": "Dataset and labels",
+        "input": "Calibration rows or bounded private import",
+        "output": "Validated source IDs",
+        "impl": "Choose and map text. Reject malformed or over-limit records."
+      },
+      {
+        "title": "Select encoder",
+        "input": "Local model selection and expected identity",
+        "output": "Model-bound index",
+        "impl": "Verify the installed basis and derive directions within it."
+      },
+      {
+        "title": "Embed query",
+        "input": "Query and corpus texts",
+        "output": "Full-dimensional vectors",
+        "impl": "Encode representable documents and the query."
+      },
+      {
+        "title": "Representable?",
+        "input": "Model output",
+        "output": "Dense signal or abstention",
+        "impl": "A missing vector leaves dense methods unranked."
+      },
+      {
+        "title": "Lexical fallback",
+        "input": "Missing dense query signal",
+        "output": "BM25 hits if terms overlap",
+        "impl": "Report the abstention and compare rank fusion where possible."
+      },
+      {
+        "title": "Original retrieval",
+        "input": "Full-space query and indexed records",
+        "output": "Baseline ranks",
+        "impl": "Rank by full-dimensional similarity with the versioned tie policy."
+      },
+      {
+        "title": "Target and protection",
+        "input": "Model-bound axes and signed strength",
+        "output": "Steering request",
+        "impl": "Choose the target, protected direction, drift cap and cosine floor."
+      },
+      {
+        "title": "Constraints met?",
+        "input": "Normalized candidate endpoint",
+        "output": "Admissible strength or fallback",
+        "impl": "Semantic Lock projects the direction. The governor tests signed gain, drift and retained cosine."
+      },
+      {
+        "title": "Reduce or retain",
+        "input": "Infeasible or singular step",
+        "output": "Lower strength or identity",
+        "impl": "Search the grid and disclose why a step was reduced or rejected."
+      },
+      {
+        "title": "Compare rankings",
+        "input": "Baseline and candidate against fixed judgments",
+        "output": "Rank changes, Recall and nDCG",
+        "impl": "Inspect missed IDs and geometry separately."
+      },
+      {
+        "title": "Quality gate?",
+        "input": "Labels, configured thresholds and geometry",
+        "output": "PASS or BLOCK with reasons",
+        "impl": "Evaluate every task and aggregate the release decision."
+      },
+      {
+        "title": "Blocked configuration",
+        "input": "Threshold, abstention or geometry failure",
+        "output": "Recorded reason",
+        "impl": "Keep the full report even when a configuration is blocked."
+      },
+      {
+        "title": "Export and replay",
+        "input": "Model hash, dataset fingerprint and settings",
+        "output": "Exact report comparison",
+        "impl": "Download the JSON and replay locally with the same verified encoder."
+      },
+      {
+        "title": "PCA display only",
+        "input": "Full-dimensional calibration vectors",
+        "output": "Three-dimensional display",
+        "impl": "Project coordinates for inspection. Retrieval uses the original dimensions."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 2,
+        "label": "Next"
+      },
+      {
+        "src": 2,
+        "dst": 13,
+        "label": "display"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "Next"
+      },
+      {
+        "src": 3,
+        "dst": 4,
+        "label": "no"
+      },
+      {
+        "src": 3,
+        "dst": 5,
+        "label": "yes"
+      },
+      {
+        "src": 5,
+        "dst": 6,
+        "label": "Next"
+      },
+      {
+        "src": 6,
+        "dst": 7,
+        "label": "Next"
+      },
+      {
+        "src": 7,
+        "dst": 8,
+        "label": "no"
+      },
+      {
+        "src": 7,
+        "dst": 9,
+        "label": "yes"
+      },
+      {
+        "src": 8,
+        "dst": 9,
+        "label": "Next"
+      },
+      {
+        "src": 4,
+        "dst": 9,
+        "label": "Next"
+      },
+      {
+        "src": 9,
+        "dst": 10,
+        "label": "Next"
+      },
+      {
+        "src": 10,
+        "dst": 11,
+        "label": "block"
+      },
+      {
+        "src": 10,
+        "dst": 12,
+        "label": "pass"
+      },
+      {
+        "src": 11,
+        "dst": 12,
+        "label": "Next"
+      }
+    ]
+  },
+  {
+    "id": "PS06",
+    "name": "CLARITY",
+    "official": "Ambiguity Identification and Resolution in Natural Language",
+    "user": "An operator needs to resolve an ambiguous instruction before a simulated action proceeds.",
+    "action": "Inspect “Send it”. Identify the pronoun, enter “ocean waves”, confirm it and compare retrieved passages. The original reading may have no vector.",
+    "metrics": "Six authored ambiguous cases were detected and localized. Two unambiguous controls were correctly left alone; the lexical baseline detected one positive. Independent resolution quality is open.",
+    "limit": "Finite English rules can miss ambiguities. Weights are heuristic. A zero-vector reading has unavailable similarity. No external action runs.",
+    "source": "frontend/src/convergence/Clarity.tsx",
+    "baseline": "Span rules vs lexical baseline",
+    "sample": "6 ambiguous and 2 unambiguous authored cases",
+    "evidence": "/evidence/judge/clarity.json",
+    "nodes": [
+      {
+        "title": "Instruction",
+        "input": "Text and bounded prior context",
+        "output": "Rule input",
+        "impl": "Inspect the submitted instruction without executing it."
+      },
+      {
+        "title": "Locate ambiguity",
+        "input": "Matched language constructions",
+        "output": "Spans and alternatives",
+        "impl": "Mark recognized cues and rank clarification questions with heuristic weights."
+      },
+      {
+        "title": "User confirms?",
+        "input": "Candidate readings or missing referent",
+        "output": "Confirmed meaning or unresolved cue",
+        "impl": "Ask the operator to supply an entity, reference frame or alternative."
+      },
+      {
+        "title": "Clarify or defer",
+        "input": "Unresolved cue",
+        "output": "Simulated deferral or follow-up",
+        "impl": "Preserve partial answers; a consequential verb can trigger DEFER."
+      },
+      {
+        "title": "Compare readings",
+        "input": "Direct and clarified text",
+        "output": "Ranked passages or explicit error",
+        "impl": "Encode each reading with its own deadline and disclose excluded vocabulary."
+      },
+      {
+        "title": "Transfer or export",
+        "input": "Confirmed interpretation or measured readings",
+        "output": "Explicit local handoff or evidence",
+        "impl": "The operator can open the confirmed reading in Vector Warp or export the record."
+      }
+    ],
+    "edges": [
+      {
+        "src": 0,
+        "dst": 1,
+        "label": "Next"
+      },
+      {
+        "src": 1,
+        "dst": 2,
+        "label": "Next"
+      },
+      {
+        "src": 2,
+        "dst": 3,
+        "label": "no"
+      },
+      {
+        "src": 3,
+        "dst": 2,
+        "label": "clarify"
+      },
+      {
+        "src": 2,
+        "dst": 4,
+        "label": "yes"
+      },
+      {
+        "src": 4,
+        "dst": 5,
+        "label": "Next"
+      }
+    ]
+  }
+]

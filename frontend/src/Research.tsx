@@ -1,3 +1,4 @@
+import {EvidenceCenter} from './Judge'
 import { useEffect, useState } from 'react'
 import { downloadFile } from './foundryData'
 import { fmt } from './labTypes'
@@ -49,7 +50,7 @@ export default function Research({online,vaultOnly=false}:{online:boolean;vaultO
       .catch(()=>{if(!c.signal.aborted)setError('The published evaluation record could not be loaded.')})
     return ()=>c.abort()
   },[])
-  if(vaultOnly)return <section className="foundry intelligence"><div className="atlas-intro"><h1>Evidence Vault</h1><p>Frozen SciFact comparisons and independent QASPER outcomes.</p></div>{record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}<Recovery online={online}/></section>
+  if(vaultOnly)return <section className="foundry intelligence"><div className="atlas-intro"><h1>Evidence Vault</h1><p>Frozen SciFact comparisons and independent QASPER outcomes.</p></div><EvidenceCenter/>{record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}<Recovery online={online}/></section>
   return <section className="foundry intelligence"><div className="atlas-intro"><h1>Research Lab</h1><p>Inspect independent retrieval judgments and test the cost of steering on the calibration index.</p></div>
     <Recovery online={online}/>
     {record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}

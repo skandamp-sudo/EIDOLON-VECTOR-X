@@ -4,6 +4,7 @@ import {fmt, labRequest} from './labTypes'
 import type {Direction, Workspace} from './labTypes'
 import {savedDirections} from './Intelligence'
 import {localRequest} from './localRequest'
+import {openReview} from './reviewDraft'
 import {hosted} from './apiOrigin'
 
 const methods = {bm25:'BM25',dense:'Dense cosine',fusion:'Hybrid rank fusion',unconstrained:'Unconstrained steering',locked:'Constrained steering',spherical:'Protected-sphere rotation'}
@@ -22,7 +23,7 @@ type Result = {order:number[]; recall:number|null; ndcg:number|null; missed:numb
 type Outcome = {query:string; relevant:number[]; change:string; methods:Record<Method,Result>; delta:{recall:number|null; ndcg:number|null};
   gate_reasons:string[]; governor_reason:string|null; sphere_reason?:string|null}
 type Report = {protocol:string; encoder?:string; dimensions?:number; gate:string; model_id:string; dataset_sha256:string; represented:number; documents:number;
-  changes:Record<string,number>; tasks:Outcome[]; replay:{settings:Settings}; summary:Record<Method,{recall:number|null;ndcg:number|null;abstentions:number;violations:number|null;geometry_measured:number}>}
+  changes:Record<string,number>; tasks:Outcome[]; replay:{settings:Settings;target?:string|Direction;protection?:string|Direction}; summary:Record<Method,{recall:number|null;ndcg:number|null;abstentions:number;violations:number|null;geometry_measured:number}>}
 const defaults:Settings={baseline:'dense',candidate:'locked',k:3,strength:1,max_drift:.05,min_cosine:.8,min_recall:0,min_ndcg:0,
   block_regressions:true,block_abstentions:true,require_geometry:true}
 
@@ -60,13 +61,17 @@ function Outcomes({report,docs}:{report:Report;docs:Doc[]}) {
   </section>
 }
 
+// One bounded form retained only after the explicit calibration-task handoff.
+let returning:{modelId:string; tasks:Task[]; which:number; cfg:Settings; target:string; protect:string}|null=null
 export default function Studio({modelId, imported}:{modelId:string; imported?:StudioCorpus}) {
+  const [restored]=useState(()=>!imported&&returning?.modelId===modelId?returning:null)
+  useEffect(()=>{if(restored===returning)returning=null},[restored])
   const [encoder,chooseEncoder]=useState<Encoder>('focus')
   const [axisNames,setAxisNames]=useState<string[]>([])
   const [workspace,load]=useState<Pick<Workspace,'model_id'|'documents'>|null>(null),[attempt,retry]=useState(0)
-  const [directions,options]=useState<Direction[]>([]),[target,aim]=useState('Ocean affinity'),[protect,guard]=useState('Botanical affinity')
-  const [tasks,setTasks]=useState<Task[]>([imported?{query:'',relevant:[]}:{query:'telescope light',relevant:[6]}])
-  const [which,select]=useState(0),[filter,search]=useState(''),[cfg,config]=useState(defaults)
+  const [directions,options]=useState<Direction[]>([]),[target,aim]=useState(restored?.target??'Ocean affinity'),[protect,guard]=useState(restored?.protect??'Botanical affinity')
+  const [tasks,setTasks]=useState<Task[]>(restored?.tasks??[imported?{query:'',relevant:[]}:{query:'telescope light',relevant:[6]}])
+  const [which,select]=useState(restored?.which??0),[filter,search]=useState(''),[cfg,config]=useState(restored?.cfg??defaults)
   const [report,show]=useState<Report|null>(null),[error,notice]=useState(''),[busy,working]=useState(false)
   const wireReport=useRef<string | null>(null)
   const active=useRef<AbortController|null>(null)
@@ -112,6 +117,13 @@ export default function Studio({modelId, imported}:{modelId:string; imported?:St
     if(wireReport.current) return '{"source":'+JSON.stringify(source)+','+wireReport.current.slice(1)
     return JSON.stringify({...result,source},null,2)
   }
+  function reviewOperatingPoints(result:Report){
+    const {target,protection,settings}=result.replay
+    if(!target||!protection||typeof target==='string'||typeof protection==='string'||imported)return
+    const task=result.tasks[which]
+    returning={modelId,tasks:structuredClone(tasks),which,cfg:{...cfg},target:target.name,protect:protection.name}
+    openReview({model:result.model_id,dataset:result.dataset_sha256,query:task.query,relevant:[...task.relevant],target,protection,strength:settings.strength,drift:settings.max_drift,cosine:settings.min_cosine})
+  }
   const methodChoice=(key:'baseline'|'candidate')=><label>{key==='baseline'?'Baseline method':'Candidate method'}<select value={cfg[key]} onChange={e=>setting(key,e.target.value as Method)}>{keys.filter(k=>encoder!=='focus'||k!=='spherical').map(k=><option key={k} value={k}>{methods[k]}</option>)}</select></label>
   const numeric=(key:'k'|'strength'|'max_drift'|'min_cosine'|'min_recall'|'min_ndcg',name:string,min:number,max:number,step:number)=><label>{name}<input type="number" required min={min} max={max} step={step} value={Number.isFinite(cfg[key])?cfg[key]:''} onChange={e=>setting(key,e.target.valueAsNumber)}/></label>
   const available=docs.length>0&&docs.length<=256
@@ -122,6 +134,8 @@ export default function Studio({modelId, imported}:{modelId:string; imported?:St
       config({...cfg,baseline:cfg.baseline==='spherical'?'dense':cfg.baseline,candidate:cfg.candidate==='spherical'?'locked':cfg.candidate})
     }}>{Object.entries(encoders).map(([k,label])=><option key={k} value={k}>{label}</option>)}</select></label>}
     {encoder!=='focus'&&<p>Local model-specific centroid directions. Spherical strength limits angular travel in radians. Comparisons use the same source IDs and judgments.</p>}
+    {workspace&&<details><summary>Active encoder and supported operations</summary><p className="studio-hash">{encoders[encoder]} · available for this session · model {workspace.model_id}</p><p>{encoder==='focus'?'Saved calibration directions; five retrieval methods.':'Six methods including protected-sphere rotation; directions and index are specific to this model basis.'} {hosted?'Hosted calibration data only.':'Private datasets stay on this machine unless you export them.'}</p></details>}
+    {error&&!workspace&&encoder!=='focus'&&<p>The selected model could not be loaded. Retry or select FOCUS 8D to begin a separate comparison.</p>}
     {error&&<p role="alert">{error} {!workspace&&<button onClick={()=>retry(attempt+1)}>Retry workspace</button>}</p>}
     {!workspace&&!error&&<p role="status">Loading the encoder and documents…</p>}
     {workspace&&<form onSubmit={e=>{e.preventDefault();void run()}}><fieldset disabled={busy} className="studio-fields">
@@ -150,6 +164,7 @@ export default function Studio({modelId, imported}:{modelId:string; imported?:St
       </fieldset></form>}
     {busy&&<p role="status">Comparing retrieval methods… <button onClick={()=>active.current?.abort()}>Cancel comparison</button></p>}
     {report&&<><Outcomes report={report} docs={docs}/><div className="panel foundry-panel"><p>The JSON export includes query text, judgments, settings and directions. Local import reports also include the mapped source texts for replay.</p>
+      {!hosted&&!imported&&encoder==='focus'&&<button onClick={()=>reviewOperatingPoints(report)}>Review active task in SYMBIOSIS</button>}
       <button onClick={()=>downloadFile('vector-x-retrieval-report.json','application/json',exportJson(report))}>Export reproducible report</button></div></>}
   </section>
 }

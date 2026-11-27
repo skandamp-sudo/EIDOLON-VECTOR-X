@@ -1,0 +1,54 @@
+[
+  {
+    "path": "artifacts/source/evidence/scifact-v1/first.json",
+    "sha256": "0bec8f1aad44be2520b470541d01c96510abf3ae62cbb8a365649606abef3310"
+  },
+  {
+    "path": "artifacts/source/evidence/scifact-v1/reproduction.json",
+    "sha256": "7d6331ec742537df52e701173ac3d020092e632f7111984f39449c0db7dbda69"
+  },
+  {
+    "path": "artifacts/source/evidence/scifact-v1/diagnosis.json",
+    "sha256": "6598c639f957e10660be712efe1729dafdabc8e6129d6ff7ed7e2b56650889b8"
+  },
+  {
+    "path": "artifacts/source/evidence/scifact-v1/norm_control.py",
+    "sha256": "392a4bd1560c00eefa4ebd85beaf967f13713a0689744fcf0a79564c10e80ff1"
+  },
+  {
+    "path": "artifacts/source/evidence/scifact-v1/coverage.py",
+    "sha256": "16491e686d433e3e0b4f8a1d1f27399a703653c73218552f51cbf7a8002c5a61"
+  },
+  {
+    "path": "artifacts/qasper-repeat/legacy16.json",
+    "sha256": "d53ce22d6c22bad40622d18dce9a0cfad9d227043bc4182b2415a4a8b7c96bb1"
+  },
+  {
+    "path": "artifacts/source/frontend/public/evidence/recovery-v2/legacy16.json",
+    "sha256": "a22bbc16dd431960ebe4fe447f11d1bc6647dcc30c9a6ff92f988efe9473ab37"
+  },
+  {
+    "path": "artifacts/qasper-repeat/expanded.json",
+    "sha256": "51624cc193780fa263db89384fb600c30bbb881fd6a785bba8a58f7808cb4dab"
+  },
+  {
+    "path": "artifacts/source/frontend/public/evidence/recovery-v2/expanded.json",
+    "sha256": "de5b50e0615b90a2094618d915b44804dac711c9c108b6010cb6eab63294cc11"
+  },
+  {
+    "path": "artifacts/qasper-repeat/minilm.json",
+    "sha256": "1206b43bc9135e830a902621ae0df37ac38d2ff3f31702aedda8032a714becda"
+  },
+  {
+    "path": "artifacts/source/frontend/public/evidence/recovery-v2/minilm.json",
+    "sha256": "94e4262faa648fcda49cb7c23b25e69bb50a4805069652455054d0d71e9ca438"
+  },
+  {
+    "path": "artifacts/qasper-repeat/legacy8.json",
+    "sha256": "8624c0803380069b6ee19852c9cb657fbc5c7969843882f43dbe9ea163af172e"
+  },
+  {
+    "path": "artifacts/source/frontend/public/evidence/recovery-v2/legacy8.json",
+    "sha256": "deb6ea767598e40fb99c497306c9b3034090bb6162d83c231c05fcd8ad60aaef"
+  }
+]

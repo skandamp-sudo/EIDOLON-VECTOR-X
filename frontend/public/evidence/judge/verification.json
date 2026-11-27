@@ -1,0 +1,28 @@
+{
+  "checkpoint": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "python_tests": 65,
+  "outcome": "OK",
+  "browser_exports": [
+    "Exact report replay matched \u00b7 1 tasks \u00b7 gate PASS",
+    "legacy8 8 PASS export/replay passed",
+    "Exact report replay matched \u00b7 1 tasks \u00b7 gate PASS",
+    "legacy16 16 PASS export/replay passed",
+    "Exact report replay matched \u00b7 1 tasks \u00b7 gate BLOCK",
+    "expanded 128 BLOCK export/replay passed",
+    "Exact report replay matched \u00b7 1 tasks \u00b7 gate BLOCK",
+    "minilm 384 BLOCK export/replay passed"
+  ],
+  "scope": "Recorded checkpoint; subsequent candidate QA is documented in BUILD_STATE.md.",
+  "candidate_verification": {
+    "nodes": 52,
+    "viewports": 30,
+    "presentationSteps": 15,
+    "browser": "158.0.8127.37",
+    "pageErrors": [],
+    "handoffs": [
+      "FOCUS \u2192 SYMBIOSIS and back",
+      "CLARITY \u2192 Atlas and back"
+    ]
+  },
+  "candidate_python_tests": 65
+}

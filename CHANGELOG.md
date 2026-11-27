@@ -72,3 +72,7 @@ Added responsive workspace navigation, a calibration signature chart, a stock al
 ## 27 November 2026 IST · ASCENSION numerical recovery
 
 Scoped controlled reductions to research steering. Preserved signed-zero values in browser downloads and verified exact local replay in all four bases. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).
+
+## ASCENSION 016 · 27 November 2026 23:10 IST
+
+Added System Flow & Architecture, three guided presentations, six scoped workflow guides and a verification center. Linked compatible FOCUS calibration configurations to an explicit model-checked SYMBIOSIS review, preserved return form settings and refined partial CLARITY retries. Linked fixed demonstration evidence and archived negative results. Changes remain on the candidate branch.

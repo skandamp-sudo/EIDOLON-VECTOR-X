@@ -1,0 +1,12 @@
+{
+  "snapshot": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "browser": "Chrome 158.0.8127.37",
+  "workspace": "PS04",
+  "observations": [
+    "Learning begins off. The static workspace directory remains the comparison condition.",
+    "An opt-in preference for CORTEX produces a proposal with its observed reward counts and smoothed estimate.",
+    "Human acceptance makes a CORTEX shortcut available in this tab.",
+    "The estimate breakdown exposes the scored destinations and retained reward counts. Undo remains available."
+  ],
+  "scope": "Scripted engineering demonstration. No participant outcomes."
+}

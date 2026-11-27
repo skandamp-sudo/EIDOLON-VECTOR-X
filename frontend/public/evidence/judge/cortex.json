@@ -1,0 +1,12 @@
+{
+  "snapshot": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "browser": "Chrome 158.0.8127.37",
+  "workspace": "PS01",
+  "observations": [
+    "The four-passage field notebook opens with a research priority, collection and source inspector.",
+    "The search term is highlighted in its original passage with row and offset provenance.",
+    "The reader records a supporting passage. The annotation is attributed to the reader.",
+    "A scripted answer is scored against the sample key. Effort is unrated and the measured duration is an automation run."
+  ],
+  "scope": "Scripted engineering demonstration. No participant outcomes."
+}

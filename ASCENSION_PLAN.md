@@ -29,3 +29,7 @@ Exact replay failed for the 16D negative-strength ASCENSION fixture. See [BUILD_
 ## Recovery gate outcome
 
 The authorized recovery passed the 16D gate and the four-model controls on the recorded Intel Mac. The fixture and negative outcomes remain archived. Resume the six workspace milestones on the feature branch. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).
+
+## Continuation 016 acceptance record
+
+The local six-workspace candidate connects the per-PS official matrix to the implemented flows. The judge can inspect, navigate, act and compare against archived evidence. The registered numerical replay and all historical evidence retain their original scope. The external judge bundle separates the frozen release, FOCUS candidate and subsequent ASCENSION changes. Safari remains the outstanding browser gate. Keep main frozen and request separate authorization before any deployment.

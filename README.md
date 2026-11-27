@@ -99,7 +99,7 @@ Start installs missing locked dependencies, fits the local model and enables Vit
 
 1. **VERIFIED · Interactive baseline.** 27 model, parser and HTTP tests passed, plus TypeScript, Vite build and desktop/mobile Chrome smoke. [Phase 1 evidence and demonstration](REVIEW_PHASE_1.md)
 2. **VERIFIED · Learned control.** Class-balanced ridge directions, Semantic Lock, a measured strength governor, change analysis, projection diagnostics and synchronized Parallel Universes. [Phase 2 evidence and demo](REVIEW_PHASE_2.md) The review gate passed 35 Python tests, TypeScript, Vite and desktop/mobile Chrome checks. Multi-model comparison is deferred pending a second compatible encoder.
-3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration. Foundry adds split management and reproducible experiment exports. PDF/NPY imports are optional.
+3. **Scientific review paused · Evaluation and delivery.** The Evidence Vault preserves the frozen SciFact stop and QASPER outcomes. The local ASCENSION candidate adds separate engineering controls. PDF/NPY imports remain optional.
 
 ## Semantic intelligence
 
@@ -174,3 +174,7 @@ Choose **Start Guided Demo** in Mission Control to follow the investigation or *
 ## Local ASCENSION engineering candidate
 
 The local Retrieval Debugger compares six methods in four model-bound workspaces. Choose a research encoder and protected-sphere rotation, run a labeled task, inspect the release decision and export its reproducible JSON. Historical research and the local calibration comparisons have separate evidence scopes. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).
+
+## ASCENSION judge candidate
+
+Open the [local Mission Control](http://localhost:5173/), [System Flow](http://localhost:5173/#system-flow), [Guided Demo](http://localhost:5173/#guided-demo) or [Evidence Vault](http://localhost:5173/#evidence-vault). All six interactive flows link to their live feature, recorded artifact and source. The 16D demonstration and three-row vocabulary-gap reports live in frontend/public/evidence/judge. The original judged OBSIDIAN release remains at 93d9054. Native Safari verification is outstanding.

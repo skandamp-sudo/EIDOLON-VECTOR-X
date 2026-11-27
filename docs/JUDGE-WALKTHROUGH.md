@@ -54,3 +54,11 @@ For a unit query vector **x**, target direction **d** and signed strength **a**,
 ## Local fallback
 
 From the prepared checkout, run `./scripts/start`, open [Mission Control](http://localhost:5173/#mission-control), and check [API health](http://localhost:8000/api/v1/health). If an optional encoder is unavailable, use the calibration atlas for live inference and Evidence Vault for the archived comparison. The four-encoder local demonstration requires the hash-verified model assets and operational wheel lock described in the [README](../README.md). Use synthetic field notes on the projector. For the hosted demonstration, open [public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control).
+
+## Five-minute ASCENSION path
+
+1. Open #system-flow, choose VECTOR-X and inspect the representability decision and the PCA display branch.
+2. In #retrieval-debugger select 16D LSA, telescope light, relevant ID 6, Ocean target, Botanical protection, strength −1, K=3, drift cap 0.05 and cosine floor 0.8. Compare dense with constrained steering. Top three: 1, 6, 4 → 6, 1, 4. Recall remains 1, nDCG rises from 0.63093 to 1 on this authored task.
+3. In local Data Foundry map the body column of /evidence/judge/vocabulary-gap.csv, then debug xylolith with relevant ID 1. Dense abstains. Fusion retrieves ID 1. Keeping the judgments fixed, requiring geometry blocks the fusion candidate.
+4. Export the report and run .venv/bin/python scripts/replay_focus.py REPORT.json with the verified local model and API.
+5. Open #evidence-vault. Show BM25 nDCG 0.22295, the independent results-section deterioration and the 16/164 SciFact coverage. If local inference is unavailable, identify the downloadable report as archived. Use #guided-demo for the overview or six-workspace tour.

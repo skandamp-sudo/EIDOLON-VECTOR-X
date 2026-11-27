@@ -4,12 +4,12 @@ import {hosted} from './apiOrigin'
 import type {Foundation} from './runtime'
 
 const groups = [
-  {label:'Workspaces', links:[['Mission Control',Compass],['Retrieval Debugger',SlidersHorizontal],['VECTOR-X',Hexagon]]},
+  {label:'Workspaces', links:[['Mission Control',Compass],['Retrieval Debugger',SlidersHorizontal],['VECTOR-X',Hexagon],['System Flow',Network],['Guided Demo',Compass]]},
   {label:'Application demos', links:[['CORTEX',Network],['SUPPLY',Boxes],['SYMBIOSIS',GitBranch],['MORPH',SlidersHorizontal],['CLARITY',ScanText]]},
   {label:'Research', links:[['Data Foundry',Database],['Research Lab',FlaskConical],['Evidence Vault',Archive]]},
   {label:'Tools and reference', links:[['Atlas',Hexagon],['Intelligence',Layers3],['Applications',Workflow],['Overview',Activity],['Architecture',Network],['Protocol',BookOpen]]},
 ] as const
-const shortcuts=['Mission Control','Retrieval Debugger','Atlas','Data Foundry','Intelligence','Research Lab','Applications','Overview','Architecture','Protocol']
+const shortcuts=['Mission Control','Retrieval Debugger','System Flow','Guided Demo','Atlas','Data Foundry','Intelligence','Research Lab','Applications','Overview','Architecture','Protocol']
 const route=(name:string)=>'#'+name.toLowerCase().replaceAll(' ','-')
 export default function WorkspaceShell({page,status,data}:{page:string;status:string;data:Foundation|null}){
   const [compact,collapse]=useState(false)

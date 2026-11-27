@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import {takeReview,sameDirection} from './reviewDraft'
 import { exportEvidence,record } from './convergence/session'
 import { fmt, labRequest } from './labTypes'
 import type { Workspace } from './labTypes'
@@ -6,6 +7,8 @@ import type { Workspace } from './labTypes'
 type Point = {method:string; requested:number; applied:number|null; gain:number|null; drift:number|null; cosine:number|null; ndcg:number|null; feasible:boolean; frontier:boolean; top:number[]}
 const names:Record<string,string> = {original:'Original', naive:'Naive centroid', learned:'Learned ridge', locked:'Semantic Lock', ungoverned:'Lock without governor'}
 export default function Frontier() {
+  const [draft]=useState(takeReview)
+  const initialized=useRef(false)
   const [space,setSpace]=useState<Workspace|null>(null), [query,setQuery]=useState('forest canopy gathers distant light')
   const [direction,setDirection]=useState(0), [protection,setProtection]=useState(1)
   const [strength,setStrength]=useState(1.5), [drift,setDrift]=useState(.035), [cos,setCos]=useState(.65)
@@ -21,7 +24,14 @@ export default function Frontier() {
   const automatic=useRef<Point[]|null>(null)
   function log(action:string){setTimeline(v=>[...v.slice(-127),{time:Date.now(),action}])}
   useEffect(()=>{const c=new AbortController()
-    labRequest<Workspace>('workspace',{},c.signal).then(w=>{if(!c.signal.aborted)setSpace(w)}).catch(e=>{if(!c.signal.aborted)setStatus(e.message)})
+    labRequest<Workspace>('workspace',{},c.signal).then(w=>{if(c.signal.aborted)return
+      if(draft&&!initialized.current){
+        const t=w.presets.findIndex(p=>sameDirection(p.direction,draft.target)),b=w.presets.findIndex(p=>sameDirection(p.direction,draft.protection))
+        if(w.model_id!==draft.model||t<0||b<0)throw Error('This review requires the original calibration model and supported preset directions. Return to the debugger to select a compatible task.')
+        setQuery(draft.query);setLabels(draft.relevant.join(','));setDirection(t);setProtection(b)
+        setStrength(draft.strength);setDrift(draft.drift);setCos(draft.cosine);initialized.current=true
+      }
+      setSpace(w)}).catch(e=>{if(!c.signal.aborted)setStatus(e.message)})
     return ()=>c.abort()
   },[retry])
   useEffect(()=>{if(!space||paused)return
@@ -55,7 +65,7 @@ export default function Frontier() {
   const current=points[selected]
   const maxD=Math.max(.01,...points.map(p=>p.drift??0)), minG=Math.min(0,...points.map(p=>p.gain??0)), maxG=Math.max(.01,...points.map(p=>p.gain??0))
   function choose(i:number){if(paused)return;setPrevious(selected);select(i);log('Selected feasible point '+i)}
-  return <section className="panel foundry-panel"><p className="kicker">{paused?'Paused':mode}</p><h2>Semantic Pareto frontier</h2>
+  return <section className="panel foundry-panel"><p className="kicker">{paused?'Paused':mode}</p><h2>Semantic Pareto frontier</h2>{draft&&<p className="studio-hash">Explicit local handoff from the Retrieval Debugger · dataset {draft.dataset} · model {draft.model}. The frontier recalculates alternatives for this calibration task.</p>}
     <div className="rank-pair"><label>Agent interaction mode<select value={mode} onChange={e=>{modeTo(e.target.value);log('Mode '+e.target.value)}}>{['Approval required','Suggestion only','Automatic preview','Sequential form'].map(s=><option key={s}>{s}</option>)}</select></label>
     <label>Task objective<select value={goal} disabled={paused} onChange={e=>{goalTo(e.target.value);log('Goal changed')}}><option>Maximize gain</option><option>Minimize drift</option></select></label></div>
     {current && <figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">

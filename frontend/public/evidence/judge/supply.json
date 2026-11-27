@@ -1,0 +1,12 @@
+{
+  "snapshot": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "browser": "Chrome 158.0.8127.37",
+  "workspace": "PS02",
+  "observations": [
+    "The initial simulated ledger shows booked quantities allocated to stock and incoming lots.",
+    "Delaying lot P1 changes O1 from zero to four units short on its request date. Both columns use the same simulation day.",
+    "In the reset scenario, a simulated purchase approval clears the shortage under the fixture arrival assumption.",
+    "The ledger records the approval and its quantity. No external supplier action occurred."
+  ],
+  "scope": "Scripted engineering demonstration. No participant outcomes."
+}

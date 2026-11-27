@@ -11,3 +11,7 @@ The after capture covers the same sixteen routes at four sizes. No horizontal pa
 A 360-pixel header overflow and two ambiguous accessible control names surfaced during testing. The revised header stacks the model readout under the current workspace. Each control has a distinct name. Native desktop Safari rendered the local stock flow, delivery timeline, connected API and approval control. Physical mobile devices and comprehensive assistive-technology testing remain unverified.
 
 The interactive research chart compares one retrieval metric at a time. Geometric, latency, violation and projection measurements remain individually labeled in tables and readouts. Scientific conclusions, evidence hashes and backend endpoints retain their released definitions.
+
+## Continuation 016 · Chrome
+
+55 original captures cover 11 routes at five sizes. The [after capture manifest](ascension/after/captures.json) adds System Flow and Guided Demo for 65 images at the same viewport sizes, with reduced motion and no measured horizontal document overflow. [Desktop flow](ascension/after/1440-system-flow.jpg) · [Phone flow](ascension/after/360-system-flow.jpg) · [Original CORTEX](ascension/before/1440-cortex.jpg) · [Revised CORTEX](ascension/after/1440-cortex.jpg). The workflow decision panel, source inspector, same-day order table and proposal deltas are functional evidence. Screenshots alone do not measure usability. Safari WebDriver could not create a native session.

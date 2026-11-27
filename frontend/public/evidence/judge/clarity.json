@@ -1,0 +1,12 @@
+{
+  "snapshot": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "browser": "Chrome 158.0.8127.37",
+  "workspace": "PS06",
+  "observations": [
+    "The instruction \u201cSend it\u201d has an unresolved reference. The simulated action is deferred.",
+    "The operator supplies an explicit referent before confirming the interpretation.",
+    "After confirmation, the rule-based simulation proceeds. This screen does not send anything.",
+    "The encoder returns ranked passages for the resolved reading. The direct reading can abstain."
+  ],
+  "scope": "Scripted engineering demonstration. No participant outcomes."
+}

@@ -38,3 +38,14 @@ Line numbers refer to NEON_RED_TEAM_FINDINGS.md. Recurring claims in judge quest
 | 230–234 | PARTIALLY CONFIRMED | README contains a stale planned Phase 3 entry. Six PS demonstrations and a separate debugger coexist. QASPER does not establish semantic preservation. CLARITY weights and the six SUPPLY snapshots are authored controls. No participant or commercial validation is recorded. |
 | 237–241, 247–266 | PARTIALLY CONFIRMED | Judge objections restate the evidence above. Sub-2ms production inference is UNVERIFIED. MiniLM performance is configuration-specific. No permission to relax limits follows from an incomplete scaling study. The exact floating-point and shared-semaphore claims are corrected above. |
 | 270–330 | UNVERIFIED | The hypothetical 61/100, relative selling strength, pitch allocation and audience response have no official score or participant evidence. Source-grounded demonstrations are reproducible exercises; literal measurement values depend on the selected model, settings and identity. |
+
+## Verified candidate extensions
+
+| Requirement | Implemented path and measured acceptance | Remaining limitation |
+|---|---|---|
+| PS-01 | Chrome followed an indexed, highlighted pressure passage and checked its reader assessment against source provenance. | Understanding and cognitive effort require independent participants. |
+| PS-02 | Same-day comparison exposed O1 changing from zero to four missing units at its request date after a supplier delay. | An authored single-warehouse simulation cannot establish field forecasting accuracy. |
+| PS-03 | Chrome checked proposal deltas, explicit approval and undo. A compatible FOCUS task preserves query, labels, limits and basis through the handoff. | No participant trust or control results. |
+| PS-04 | Opted-in preferences produced a real shortcut and observed decision counts. Undo restored the preceding layout. | Causal navigation improvement remains unmeasured. |
+| PS-05 | Four encoders replayed exactly. On the fixed 16D task, gold ID 6 moved from second to first. The external QASPER BM25 baseline remained strongest. | Same-environment engineering evidence. No general relevance guarantee. |
+| PS-06 | Chrome confirmed the referent in “Send it”, transferred the interpretation to the Atlas and returned. Isolated reading errors can be retried while retaining successful responses. | Grammar and calibration vocabulary are bounded. Independent resolution accuracy remains open. |

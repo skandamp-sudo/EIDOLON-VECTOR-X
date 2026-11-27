@@ -8,6 +8,10 @@ const dir=new URL('../docs/ascension/'+phase+'/',import.meta.url)
 await mkdir(dir,{recursive:true})
 const routes=['mission-control','retrieval-debugger','cortex','supply','symbiosis','morph','vector-x','clarity','data-foundry','research-lab','evidence-vault']
 const ready=['.probe-chart polyline','form .studio-grid','.relation-graph','.flow-list svg','.pareto-figure circle','.layout-study','.star','.reading-tree','input[type=file]','.retrieval-chart','text=Scientific review paused.']
+if(phase==='after'){
+ routes.push('system-flow?view=workflows&ps=PS05','guided-demo')
+ ready.push('.node-inspector','text=Presentation mode')
+}
 const browser=await chromium.launch({channel:'chrome'})
 const records=[]
 try {
@@ -20,7 +24,7 @@ try {
    const title=await page.locator('main h1').first().innerText()
    await page.evaluate(()=>document.fonts.ready)
    const excess=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)
-   const file=width+'-'+route+'.jpg'
+   const file=width+'-'+route.split('?')[0]+'.jpg'
    await page.screenshot({path:new URL(file,dir).pathname,type:'jpeg',quality:72})
    records.push({width,height,route,title,excess,file})
    if(phase==='after')assert.ok(excess<=1,route+' overflows by '+excess)

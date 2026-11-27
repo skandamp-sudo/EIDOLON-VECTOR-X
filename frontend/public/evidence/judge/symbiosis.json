@@ -1,0 +1,12 @@
+{
+  "snapshot": "66b02ed446b20adb6eb9cebb152f730adee28c49",
+  "browser": "Chrome 158.0.8127.37",
+  "workspace": "PS03",
+  "observations": [
+    "The operator sets an objective and sees feasible operating points in the calibration model.",
+    "The solver proposes a feasible point under the current drift and cosine limits. Human approval is available.",
+    "Approval selects the proposed method and strength. The display shows measured gain, drift, cosine and resulting documents.",
+    "The local decision timeline records proposal, approval and rollback. Trust and control ratings remain unmeasured."
+  ],
+  "scope": "Scripted engineering demonstration. No participant outcomes."
+}
