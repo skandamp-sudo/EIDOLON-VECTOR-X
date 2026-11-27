@@ -21,3 +21,7 @@ Entry gate verified public main and review-phase-1 at b73c164. Added model-bound
 ## Phase 2 review · 27 November 2026
 
 Engine milestone 5f4ea84 was verified on public main. Added SHA-256 dataset identity, two-dataset session selection, one model-bound mapped index per dataset, a quality report and cancellable batch export of original and steered vectors. Chrome verified cache reuse without another embedding request, mapping restoration, exact export fingerprint and removal. The source-only gate passed 35 Python tests, TypeScript, Vite and desktop/mobile Chrome. The build emitted a chunk-size warning. Phase 3 remains planned.
+
+## Phase 3 protocol freeze
+
+Verified clean HEAD and public review-phase-2 at 295123814d855e6cabd2b8727fa8e709f0d81ec4. Verified the published SciFact archive checksum. Chose independent external relevance labels and a second calibration-only 16D LSA fit. The frozen selection and scoring rules are in docs/EVALUATION.md. No held-out outcomes were inspected before this checkpoint.

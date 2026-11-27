@@ -40,7 +40,7 @@ class Direction(Strict):
 
 def model_id(atlas):
     # Bind directions to the actual fitted basis as well as the training recipe.
-    h = sha256(f"tfidf-sublinear-english/lsa-{DIMENSIONS}/{SEED}/{sklearn.__version__}/{atlas.model.digest}".encode())
+    h = sha256(f"tfidf-sublinear-english/lsa-{atlas.model.svd.n_components}/{SEED}/{sklearn.__version__}/{atlas.model.digest}".encode())
     h.update(atlas.model.svd.components_.astype("<f8").tobytes())
     h.update(atlas.model.vectorizer.idf_.astype("<f8").tobytes())
     return h.hexdigest()
@@ -89,8 +89,7 @@ def learn(atlas, form):
     confusion = {name: int(np.sum((actual == a) & (predictions == b)))
                  for name, a, b in [("tp", 1, 1), ("tn", -1, -1), ("fp", -1, 1), ("fn", 1, -1)]}
     balanced = np.mean([np.mean(predictions[actual == v] == v) for v in (-1, 1)])
-    return {"direction": Direction(name=form.name, model_id=model_id(atlas), linear=linear.tolist(),
-                                   centroid=centroid.tolist()).model_dump(),
+    return {"direction": {"name": form.name, "model_id": model_id(atlas), "linear": linear.tolist(), "centroid": centroid.tolist()},
             "validation": {"fit": int(sum(fit)), "held_out": int(sum(~fit)), "balanced_accuracy": float(balanced),
                            "confusion": confusion, "threshold": float(-classifier.intercept_ / np.linalg.norm(classifier.coef_))}}
 

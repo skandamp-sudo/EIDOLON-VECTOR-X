@@ -18,7 +18,7 @@ SEED = 17
 
 
 class Backbone:
-    def __init__(self):
+    def __init__(self, dimensions=DIMENSIONS):
         raw = CORPUS.read_bytes()
         documents = raw.decode("utf-8").splitlines()
         self.documents = tuple(documents)
@@ -26,7 +26,7 @@ class Backbone:
         self.count = len(documents)
         self.vectorizer = TfidfVectorizer(stop_words="english", sublinear_tf=True)
         features = self.vectorizer.fit_transform(documents)
-        self.svd = TruncatedSVD(n_components=DIMENSIONS, random_state=SEED)
+        self.svd = TruncatedSVD(n_components=dimensions, random_state=SEED)
         self.svd.fit(features)
 
     def encode(self, sentence: str) -> list[float]:

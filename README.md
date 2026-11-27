@@ -91,3 +91,5 @@ Concept DNA accepts source-grouped positive and negative examples with separate 
 The 24 authored English sentences serve as fit data and retrieval candidates. Shared vocabulary can dominate results. Unknown-only queries are rejected. The model is a lexical LSA baseline. Three-dimensional proximity is approximate. Generalization, neutral preservation and deployment remain unverified.
 
 The evaluation protocol groups source families before splitting, fits transforms on training only, selects thresholds on validation and freezes settings before held-out evaluation. [Research design](docs/RESEARCH.md) · [Build record](BUILD_STATE.md)
+
+Phase 3 validation uses a precommitted external-holdout protocol. [Evaluation protocol](docs/EVALUATION.md)
