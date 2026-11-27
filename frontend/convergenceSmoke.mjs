@@ -21,6 +21,11 @@ try {
   await page.getByText('Duplicate event ID.').waitFor()
   await page.getByRole('button',{name:'Approve simulated PO'}).click()
   await page.getByText(/0 at-risk orders · 0 open proposals/).waitFor()
+  await step.selectOption('1')
+  await step.selectOption('2')
+  await page.getByText(/0 at-risk orders · 0 open proposals/).waitFor()
+  await page.getByRole('button',{name:'Reset simulated ledger'}).click()
+  await page.getByText(/1 at-risk orders · 1 open proposals/).waitFor()
  }
  if(check==='all'||check==='symbiosis'){
   await step.selectOption('4')
@@ -64,6 +69,14 @@ try {
   await page.getByText('PROCEED',{exact:true}).waitFor()
   await page.getByRole('button',{name:'Compare interpretation retrieval'}).click()
   await page.getByText(/top passages/).first().waitFor()
+  await page.getByLabel('Instruction to interpret').fill('Inspect it')
+  await page.getByRole('button',{name:'Inspect language'}).click()
+  await page.getByText('CLARIFY',{exact:true}).waitFor()
+  await page.getByLabel('Instruction to interpret').fill('Send it')
+  await page.getByRole('button',{name:'Inspect language'}).click()
+  await page.getByText('PROCEED',{exact:true}).waitFor()
+  await page.getByRole('button',{name:'Clear clarification context'}).click()
+  await page.getByText('DEFER',{exact:true}).waitFor()
  }
  if(check==='all'||check==='core'){
   await step.selectOption('0')

@@ -6,6 +6,13 @@ import type {Run} from '../explore'
 import {inspect,verdict} from './ambiguity'
 import {exportEvidence} from './session'
 
+// Exact-instruction scope prevents a resolved pronoun from binding an unrelated request.
+const remembered=new Map<string,Record<string,string>>()
+function remember(query:string,answers:Record<string,string>){
+ remembered.delete(query)
+ if(remembered.size===8){const oldest=remembered.keys().next().value;if(oldest!==undefined)remembered.delete(oldest)}
+ remembered.set(query,answers)
+}
 type Meaning={text:string;run:Run|null;error:string}
 async function encode(text:string,signal:AbortSignal):Promise<Meaning>{
  if(text.length>400)return {text,run:null,error:'Interpretation exceeds the 400-character encoder limit. Shorten the instruction.'}
@@ -21,7 +28,7 @@ function similarity(a:number[],b:number[]){
  return norms?a.reduce((s,n,i)=>s+n*b[i],0)/norms:null
 }
 export default function Clarity(){
- const [draft,edit]=useState('Compare waves near the bank'),[query,setQuery]=useState(draft),[answers,answer]=useState<Record<string,string>>({}),[custom,setCustom]=useState('')
+ const [draft,edit]=useState('Compare waves near the bank'),[query,setQuery]=useState(draft),[answers,answer]=useState<Record<string,string>>(()=>remembered.get(draft)??{}),[custom,setCustom]=useState('')
  const [comparison,compare]=useState<string[]>([]),[vectors,show]=useState<Meaning[]>([]),[busy,loading]=useState(false)
  const issues=inspect(query),pending=issues.filter(i=>!answers[i.key]),issue=pending[0],decision=verdict(query,pending.length)
  const resolved=(extra='')=>[query,...Object.values(answers),extra].filter(Boolean).join(' · ')
@@ -35,11 +42,11 @@ export default function Clarity(){
   })()
   return ()=>{active=false;clearTimeout(timer);c.abort()}
  },[comparison])
- const choose=(meaning:string)=>{if(!issue||!meaning.trim())return;answer({...answers,[issue.key]:meaning.trim()});setCustom('');compare([])}
+ const choose=(meaning:string)=>{if(!issue||!meaning.trim())return;const next={...answers,[issue.key]:meaning.trim()};remember(query,next);answer(next);setCustom('');compare([])}
  const needsDetail=issue&&['referential','contextual'].includes(issue.kind)
  return <section className="panel foundry-panel"><h2>Ambiguity X-Ray</h2>
- <form onSubmit={e=>{e.preventDefault();const value=draft.trim();if(query!==value)answer({});setQuery(value);setCustom('');compare([])}}><label>Instruction to interpret<input value={draft} onChange={e=>edit(e.target.value)} required maxLength={240}/></label><button disabled={!draft.trim()}>Inspect language</button></form>
- <p role="status"><strong>{decision}</strong> · {pending.length} unresolved cues · simulation only. The detector recognizes a bounded set of English constructions and can miss other readings.</p>
+ <form onSubmit={e=>{e.preventDefault();const value=draft.trim();if(query!==value)answer(remembered.get(value)??{});setQuery(value);setCustom('');compare([])}}><label>Instruction to interpret<input value={draft} onChange={e=>edit(e.target.value)} required maxLength={240}/></label><button disabled={!draft.trim()}>Inspect language</button></form>
+ <p role="status"><strong>{decision}</strong> · {pending.length} unresolved cues · simulation only. Clarifications are recalled for up to eight identical instructions in this tab. The detector recognizes a bounded set of English constructions and can miss other readings.</p>
  {issues.map(i=><p key={i.key}><mark>{query.slice(i.start,i.end)}</mark> · {i.kind} · characters {i.start+1}–{i.end} · {answers[i.key]??'unresolved'}</p>)}
  {issue&&<><h3>{issue.question}</h3><p>Question priority {issue.utility.toFixed(2)} bits per effort unit. Entropy {issue.entropy.toFixed(2)} bits assumes a response distinguishes both meanings. Weights use surrounding word overlap and have no probability calibration.</p>
  {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>needsDetail?setCustom(''):choose(m)} disabled={!!needsDetail}>{m} ({w.toFixed(2)})</button>)}
@@ -50,6 +57,6 @@ export default function Clarity(){
  {vectors.map((v,i)=><div key={v.text}><strong>{i===0?'Direct interpretation':v.text}</strong>{v.run?<><p>{v.run.model} · top passages {v.run.before.map(n=>n+1).join(', ')}</p><ol>{v.run.before.map(n=><li key={n}>{v.run!.documents[n].text}</li>)}</ol></>:<p>{v.error}</p>}</div>)}
  {vectors.map((a,i)=>vectors.slice(i+1).map((b,j)=>{const value=a.run&&b.run?similarity(a.run.original,b.run.original):null
  return <p key={i+'-'+j}>Readings {i+1} and {i+j+2} · cosine {value===null?'unavailable':value.toFixed(3)} {value!==null&&<meter aria-label="Interpretation cosine" min="-1" max="1" value={value}/>}</p>}))}
- <button onClick={()=>{answer({});compare([])}}>Clear clarification context</button><button onClick={()=>exportEvidence('clarification',{query,issues,answers,decision,turns:Object.keys(answers).length,comparisons:vectors.map(v=>({reading:v.text,model:v.run?.model??null,ids:v.run?.before??null,error:v.error||null}))})}>Export clarification</button>
+ <button onClick={()=>{remembered.clear();answer({});compare([])}}>Clear clarification context</button><button onClick={()=>exportEvidence('clarification',{query,issues,answers,decision,turns:Object.keys(answers).length,comparisons:vectors.map(v=>({reading:v.text,model:v.run?.model??null,ids:v.run?.before??null,error:v.error||null}))})}>Export clarification</button>
  </section>
 }
