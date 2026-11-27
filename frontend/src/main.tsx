@@ -5,11 +5,12 @@ import { Activity, Layers3, Cpu, ChevronDown, ChevronRight, Fingerprint, X, Book
 import Viewport from './Viewport'
 import Atlas from './Atlas'
 import Foundry from './Foundry'
+import Intelligence from './Intelligence'
 import { useRuntime } from './runtime'
 import { modules, protocol } from './content'
 import './style.css'
 
-const pages = ['Atlas', 'Data Foundry', 'Overview', 'Architecture', 'Protocol'] as const
+const pages = ['Atlas', 'Data Foundry', 'Intelligence', 'Overview', 'Architecture', 'Protocol'] as const
 type Page = typeof pages[number]
 const pageFromHash = (): Page => pages.find(p => '#' + p.toLowerCase().replace(' ', '-') === location.hash) ?? 'Atlas'
 function App() {
@@ -30,9 +31,9 @@ function App() {
   </button>)}</div>
   return <MotionConfig reducedMotion="user"><a className="skip" href="#workspace" onClick={e => { e.preventDefault(); document.getElementById('workspace')?.focus() }}>Skip to workspace</a>
     <header><div className="topbar"><div className="brand"><img src="/mark.svg" alt=""/><b>EIDOLON</b><span className="brand-divider"/><span>VECTOR-X</span></div>
-      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [Hexagon, Database, LayoutGrid, Workflow, BookOpen][i]; return <a key={p} href={'#'+p.toLowerCase().replace(' ', '-')} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
+      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [Hexagon, Database, Layers3, LayoutGrid, Workflow, BookOpen][i]; return <a key={p} href={'#'+p.toLowerCase().replace(' ', '-')} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
       <div role="status" className={'connection '+status.toLowerCase()}><i/> API {status.toLowerCase()}</div></div></header>
-    <main id="workspace" tabIndex={-1}>{page==='Data Foundry'?<Foundry digest={data?.corpus_sha256}/>:page==='Atlas'?<Atlas online={status==='Connected'}/>:<><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Phase 1</span></div>
+    <main id="workspace" tabIndex={-1}>{page==='Intelligence'?(data?<Intelligence/>:<p role="status">Waiting for embedding runtime</p>):page==='Data Foundry'?<Foundry digest={data?.model_id}/>:page==='Atlas'?<Atlas online={status==='Connected'}/>:<><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Phase 1</span></div>
     <div className="intro"><div><h1>{page === 'Overview' ? 'Mission Control' : page === 'Protocol' ? 'Evaluation protocol' : 'System architecture'}</h1>
       <p>{page === 'Overview' ? 'Inspect the embedding backbone and explore its vector signatures.' : page === 'Protocol' ? 'The evaluation design for held-out steering experiments.' : 'The local runtime, active baselines and planned research modules.'}</p></div>
       <span className="mission"><span/> Foundation</span></div>

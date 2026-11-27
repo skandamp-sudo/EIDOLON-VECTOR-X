@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Database, Upload } from 'lucide-react'
+import Intelligence from './Intelligence'
 import FoundryMap from './FoundryMap'
 import type { FoundryPoint } from './FoundryMap'
 import { topics } from './explore'
@@ -8,8 +9,8 @@ import { exportNeighbors, nearest, quality, requestData } from './foundryData'
 import type { Dataset } from './foundryData'
 import './foundry.css'
 
-type Batch = { model: string; corpus_sha256: string; points: (Omit<FoundryPoint, 'row'> | null)[] }
-type Steering = { original: number[]; steered: number[]; trajectory: XYZ[]; corpus_sha256: string }
+type Batch = { model: string; model_id: string; points: (Omit<FoundryPoint, 'row'> | null)[] }
+type Steering = { original: number[]; steered: number[]; trajectory: XYZ[]; model_id: string }
 const finite = (values: unknown, count: number) => Array.isArray(values) && values.length === count && values.every(Number.isFinite)
 const message = (e: unknown) => e instanceof Error ? e.message : 'The local operation failed.'
 
@@ -21,13 +22,16 @@ function Retrieval({ data, points, column, metadata, digest }: {
   const [strength, setStrength] = useState(1)
   const [run, setRun] = useState<Steering | null>(null)
   const [status, setStatus] = useState('')
+  const [lab, setLab] = useState(false)
+  const imported = useMemo(() => ({modelId:digest, texts:points.map(p => data.rows[p.row][column]), points,
+    categories: metadata.length ? points.map(p => data.rows[p.row][metadata[0]]) : undefined}), [digest,data,points,column,metadata])
   useEffect(() => {
     const controller = new AbortController()
     setRun(null); setStatus('Computing retrieval…')
     const timer = setTimeout(async () => {
       try {
         const result = await requestData<Steering>('steer', JSON.stringify({ text: data.rows[row][column], target, strength }), controller.signal)
-        if (result.corpus_sha256 !== digest || !finite(result.original, 8) || !finite(result.steered, 8) ||
+        if (result.model_id !== digest || !finite(result.original, 8) || !finite(result.steered, 8) ||
             result.trajectory.length !== 25 || !result.trajectory.every(p => finite(p, 3))) throw new Error('Unexpected model response.')
         if (!controller.signal.aborted) { setRun(result); setStatus('') }
       } catch (e) { if (!controller.signal.aborted) setStatus(message(e)) }
@@ -53,7 +57,8 @@ function Retrieval({ data, points, column, metadata, digest }: {
       <p>Top three by eight-dimensional cosine. The selected record is included in the index.</p>
       <div className="rank-pair">{ranks.map((list, side) => <div key={side}><h3>{side ? 'Steered' : 'Original'}</h3>
         <ol>{list.map(r => <li key={r.row}>Row {r.row + 1} · {data.rows[r.row][column]} <b>{r.score.toFixed(3)}</b></li>)}</ol></div>)}</div>
-    </section></>
+    </section><button onClick={() => setLab(!lab)}>{lab ? 'Close dataset intelligence' : 'Open dataset intelligence'}</button>
+    {lab && <Intelligence imported={imported}/>}</>
 }
 
 export default function Foundry({ digest }: { digest?: string }) {
@@ -112,7 +117,7 @@ export default function Foundry({ digest }: { digest?: string }) {
         const batch = stats.indices.slice(i, i + 64)
         const result = await requestData<Batch>('embed', JSON.stringify(batch.map(r => data.rows[r][column])), controller.signal)
         if (controller.signal.aborted) return
-        if (result.corpus_sha256 !== digest || result.model !== 'TF–IDF / LSA' || result.points.length !== batch.length) {
+        if (result.model_id !== digest || result.model !== 'TF–IDF / LSA' || result.points.length !== batch.length) {
           throw new Error('Model or batch identity changed. Retry the import.')
         }
         result.points.forEach((point, j) => {

@@ -1,17 +1,10 @@
+import { localRequest } from './localRequest'
 import type { FoundryPoint } from './FoundryMap'
 
 export type Dataset = { columns: string[]; rows: string[][] }
 export type Neighbor = { row: number; score: number }
 export async function requestData<T>(operation: string, body: BodyInit, signal: AbortSignal): Promise<T> {
-  const response = await fetch('/api/v1/foundry/' + operation, {
-    method: 'POST', body, signal, cache: 'no-store', redirect: 'error',
-    headers: { 'X-Vector-X-Client': 'foundry' },
-  })
-  if (!response.ok) {
-    const message = await response.json().catch(() => ({}))
-    throw new Error(typeof message.detail === 'string' ? message.detail : 'Local request failed.')
-  }
-  return response.json()
+  return localRequest<T>('foundry/'+operation, body, signal)
 }
 
 export function quality(data: Dataset, column: number) {

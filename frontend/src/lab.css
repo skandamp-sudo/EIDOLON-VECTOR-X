@@ -1,0 +1,17 @@
+.intelligence { margin-block: 22px; }
+.intelligence input:not([type=checkbox]), .intelligence textarea { display: block; width: 100%; margin-block: 5px; padding: 8px; border-radius: 4px; background: #0c141b; border: 1px solid #42515e; color: inherit; font: inherit; }
+.intelligence textarea { resize: vertical; }
+.intelligence .foundry-panel { margin-block: 14px; }
+.intelligence summary { cursor: pointer; color: #b1e3dc; }
+.concept-editor .encode { margin-top: 10px; }
+.universes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin-block: 14px; }
+.universes ol { padding-left: 23px; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+.universes .plot-foot { flex-wrap: wrap; gap: 6px; }
+.lab-results td { font-family: var(--mono); }
+.lab-results th { white-space: normal; }
+.lab-results select { max-width: 640px; display: block; margin-top: 6px; }
+@media(max-width:800px) { .universes { grid-template-columns: 1fr; } }
+
+.damage-plot { margin: 12px 0; }
+.damage-plot svg { display: block; width: min(100%, 350px); margin: auto; }
+.damage-plot figcaption { text-align: center; color: var(--muted); font-size: .82rem; }

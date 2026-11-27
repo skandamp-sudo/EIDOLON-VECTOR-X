@@ -21,3 +21,23 @@ For each concept, estimate an oriented mean difference between matched positive 
 ## Deployment boundary
 
 A future Vercel static build can use `frontend/dist`. A future Railway ASGI service will need a production server command, explicit trusted hosts, dependency setup, health checks and a same-origin API rewrite. Local development enables reload and loopback binding. Remote deployment is outside Mission 001.
+
+## Phase 2 implemented experiment
+
+The frozen word-level LSA encoder is shared by both phases. For each concept, balance positive and negative sample weights to equal total mass. Fit ridge least squares with an intercept and fixed alpha 0.25 against labels ±1. Orient the unit direction with the fitted coefficient sign. Validate the original classifier threshold on separately supplied examples. Reject source families spanning splits, duplicate normalized text or numerically identical embeddings, unrepresentable text, degenerate directions and validation overlap with encoder calibration. Each class needs at least two fit and two validation examples. An operator must identify related source families. The save action keeps only a name, basis identity and the two direction vectors in browser storage.
+
+For protected unit directions stacked in P, obtain a numerical row-space basis from SVD. Subtract the projection of the target direction onto that basis. For each candidate signed strength, normalize the shifted query and measure the maximum absolute change across protected dot-product readouts and the cosine to the original. Test strengths from the requested magnitude down to zero in 1% steps. Select the largest sampled magnitude meeting both endpoint limits with positive signed target gain. Reject paths that cross an undefined vector. Identity is always available. This is a discrete feasible solution with proxy constraints. Feasible strengths between grid points and changes to unmeasured attributes remain possible.
+
+The damage report gives signed readout changes, stable full-dimensional rankings, gained/lost neighbors and optional binary nDCG@3. The debugger flags supplied-label mismatches, large rank changes and misleading projected neighbors. In the fixed calibration PCA frame, fidelity compares cosine neighbors against Euclidean 3D neighbors, plus Spearman correlation of pairwise distances. At most 128 evenly spaced input rows enter these quadratic diagnostics. Per-point distortion is one minus overlap@k within that sample. Small or constant geometries report unavailable. PCA variance always refers to the calibration fit.
+
+## Local integration contract
+
+POST JSON through the loopback proxy with the X-Vector-X-Client header set to foundry. All operations are stateless. The bounded request definitions are in backend/concepts.py and backend/intelligence.py.
+
+| Consumer | Endpoint | Fields for integration |
+| --- | --- | --- |
+| CORTEX research exploration | /api/v1/intelligence/workspace and /compare under the same prefix | Model identity, shared PCA points, fidelity, attributes and all four transformations |
+| CLARITY ambiguity-aware retrieval | /api/v1/intelligence/compare | Optional relevance IDs and expected category, ranked neighbors, suspected anomalies, nullable nDCG |
+| SYMBIOSIS collaborative steering | /api/v1/intelligence/learn and /compare under the same prefix | Labeled source groups, target and protected directions, requested/applied strength and reason |
+
+These are integration points in VECTOR-X. External applications and user studies are future work.

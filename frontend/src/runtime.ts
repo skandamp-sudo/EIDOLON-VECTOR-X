@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 
 export type Sample = { id: string; text: string; vector: number[] }
 export type Foundation = {
-  backbone: string; dimensions: number; documents: number; seed: number;
+  backbone: string; model_id: string; dimensions: number; documents: number; seed: number;
   corpus_sha256: string; samples: Sample[]
 }
 function valid(value: Foundation) {
-  return value && typeof value.backbone === 'string' && value.dimensions === 8 &&
+  return value && typeof value.backbone === 'string' && value.dimensions === 8 && /^[a-f0-9]{64}$/.test(value.model_id) &&
     Number.isInteger(value.documents) && value.documents > 0 && Number.isInteger(value.seed) &&
     typeof value.corpus_sha256 === 'string' && /^[a-f0-9]{64}$/.test(value.corpus_sha256) &&
     Array.isArray(value.samples) && value.samples.length > 0 && value.samples.length <= 32 &&

@@ -12,6 +12,7 @@ from pydantic import Field, ValidationError
 from starlette.concurrency import run_in_threadpool
 from starlette.responses import JSONResponse
 
+from .concepts import model_id
 from .atlas import Query
 
 router = APIRouter(prefix="/api/v1/foundry")
@@ -149,7 +150,7 @@ def embed(raw, atlas):
     valid = np.isfinite(norms) & (norms >= 1e-12)
     vectors[valid] /= norms[valid, None]
     xyz = atlas.pca.transform(vectors)
-    return {"model": "TF–IDF / LSA", "corpus_sha256": atlas.model.digest,
+    return {"model": "TF–IDF / LSA", "model_id": model_id(atlas), "corpus_sha256": atlas.model.digest,
             "points": [{"vector": vector.tolist(), "xyz": point.tolist()} if ok else None
                        for ok, vector, point in zip(valid, vectors, xyz)]}
 
@@ -166,18 +167,14 @@ def steer(raw, atlas):
     original = np.array(atlas.model.encode(query.text))
     path = atlas.steering_path(original, query.target, query.strength)
     return {"original": original.tolist(), "steered": path[-1].tolist(),
-            "trajectory": atlas.pca.transform(path).tolist(), "corpus_sha256": atlas.model.digest}
+            "trajectory": atlas.pca.transform(path).tolist(), "model_id": model_id(atlas), "corpus_sha256": atlas.model.digest}
 
 
-@router.post("/{operation}")
-async def foundry(operation: str, request: Request):
-    if operation not in {"csv", "json", "jsonl", "txt", "embed", "steer"}:
-        raise HTTPException(404, "Unknown Foundry operation.")
+async def local_operation(request, limit, process_body):
     if request.headers.get("x-vector-x-client") != "foundry" or request.headers.get("origin") not in LOCAL_ORIGINS | {None}:
         raise HTTPException(403, "Use the local Data Foundry.")
     if not slot.acquire(blocking=False):
         raise HTTPException(429, "Another Foundry operation is running. Try again.")
-    limit = {"embed": 2_000_000, "steer": 32_768}.get(operation, MAX_BYTES)
     try:
         body = bytearray()
         async with asyncio.timeout(30):
@@ -187,12 +184,7 @@ async def foundry(operation: str, request: Request):
                 body.extend(chunk)
 
         def process():
-            if operation == "embed":
-                result = embed(body, request.app.state.atlas)
-            elif operation == "steer":
-                result = steer(body, request.app.state.atlas)
-            else:
-                result = parse(body, operation)
+            result = process_body(body)
             return JSONResponse(result, headers={"Cache-Control": "no-store"})
 
         return await run_in_threadpool(process)
@@ -210,3 +202,17 @@ async def foundry(operation: str, request: Request):
         raise HTTPException(422, detail) from None
     finally:
         slot.release()
+
+@router.post("/{operation}")
+async def foundry(operation: str, request: Request):
+    if operation not in {"csv", "json", "jsonl", "txt", "embed", "steer"}:
+        raise HTTPException(404, "Unknown Foundry operation.")
+
+    def process(body):
+        if operation == "embed":
+            return embed(body, request.app.state.atlas)
+        if operation == "steer":
+            return steer(body, request.app.state.atlas)
+        return parse(body, operation)
+
+    return await local_operation(request, {"embed": 2_000_000, "steer": 32_768}.get(operation, MAX_BYTES), process)

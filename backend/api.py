@@ -8,6 +8,8 @@ from pydantic import BaseModel, ValidationError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from .model import Backbone, DIMENSIONS, PROBES, SEED
+from .concepts import model_id
+from .lab_api import router as lab_router
 from .foundry import router as foundry_router
 from .atlas import Atlas, Query, Result
 
@@ -26,6 +28,7 @@ class Sample(BaseModel):
 
 class Foundation(BaseModel):
     backbone: str
+    model_id: str
     dimensions: int
     documents: int
     seed: int
@@ -38,7 +41,7 @@ async def lifespan(app: FastAPI):
     model = Backbone()
     app.state.atlas = Atlas(model)
     app.state.foundation = Foundation(
-        backbone="TF–IDF / LSA", dimensions=DIMENSIONS, documents=model.count,
+        backbone="TF–IDF / LSA", model_id=model_id(app.state.atlas), dimensions=DIMENSIONS, documents=model.count,
         seed=SEED, corpus_sha256=model.digest,
         samples=[Sample(id=key, text=text, vector=model.encode(text)) for key, text in PROBES.items()],
     )
@@ -50,6 +53,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="EIDOLON VECTOR-X", version="0.1.0", lifespan=lifespan,
               docs_url=None, redoc_url=None)
 app.include_router(foundry_router)
+app.include_router(lab_router)
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1"])
 
 

@@ -1,14 +1,18 @@
 import { useMemo, useRef, useState } from 'react'
 import { Euler, Vector3 } from 'three'
+import type { Dispatch, SetStateAction } from 'react'
 import type { XYZ } from './explore'
 
 export type FoundryPoint = { row: number; xyz: XYZ; vector: number[] }
-type Props = { points: FoundryPoint[]; selected: number; select: (row: number) => void; path: XYZ[] }
+export type Camera = { yaw: number; pitch: number; zoom: number }
+type Props = { title?: string; camera?: Camera; changeCamera?: Dispatch<SetStateAction<Camera>>; points: FoundryPoint[]; selected: number; select: (row: number) => void; path: XYZ[] }
 const home = { yaw: .45, pitch: -.22, zoom: 1 }
 
-export default function FoundryMap({ points, selected, select, path }: Props) {
+export default function FoundryMap({ points, selected, select, path, title = "Dataset point cloud", camera, changeCamera }: Props) {
   const drag = useRef<{ x: number; y: number; moved: boolean } | null>(null)
-  const [view, setView] = useState(home)
+  const [localView, setLocalView] = useState(home)
+  const view = camera ?? localView
+  const setView = changeCamera ?? setLocalView
   const project = useMemo(() => {
     const rotation = new Euler(view.pitch, view.yaw, 0, 'YXZ')
     return (xyz: XYZ) => {
@@ -24,8 +28,8 @@ export default function FoundryMap({ points, selected, select, path }: Props) {
   function rotate(dx: number, dy: number) {
     setView(v => ({ ...v, yaw: v.yaw + dx, pitch: Math.max(-1.5, Math.min(1.5, v.pitch + dy)) }))
   }
-  return <section className="panel foundry-cloud"><div className="panel-head"><h2>Dataset point cloud</h2><small>Fixed PCA · 3D</small></div>
-    <svg viewBox="0 0 640 350" role="group" tabIndex={0} aria-label="Imported points. Drag or use arrow keys to orbit. Select a point to inspect its row."
+  return <section className="panel foundry-cloud"><div className="panel-head"><h2>{title}</h2><small>Fixed PCA · 3D</small></div>
+    <svg viewBox="0 0 640 350" role="group" tabIndex={0} aria-label={title + '. Drag or use arrow keys to orbit. Select a point to inspect its row.'}
       onKeyDown={e => {
         const shifts: Record<string, [number, number]> = { ArrowLeft: [-.2, 0], ArrowRight: [.2, 0], ArrowUp: [0, -.2], ArrowDown: [0, .2] }
         if (shifts[e.key]) { e.preventDefault(); rotate(...shifts[e.key]) }

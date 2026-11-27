@@ -13,3 +13,7 @@ Recovered the uncommitted atlas on top of 49b4e48. The named public GitHub repos
 ## Phase 1 review · 27 November 2026
 
 Recovery commit fc61b4f was verified on public main. Added searchable corpus points, full-dimensional inspection, displacement and a reproducible timing command. Added Data Foundry with local transient imports, mapped fields, batch cancellation, fixed-frame PCA, imported retrieval and CSV export. Reused the existing model, dependencies and loopback services. Passed 27 Python tests, TypeScript, Vite and Chrome desktop/mobile coverage. Browser checks covered actual file selection and drop, quality counts, signed steering, partial-batch cancellation, deletion and formula-escaped export. No external HTTP origin appeared during the Foundry smoke. The 10,000,001-byte request returned 413. The source-only publication excludes runtime state. See REVIEW_PHASE_1.md for measurements and limits.
+
+## Phase 2 · semantic intelligence engine
+
+Entry gate verified public main and review-phase-1 at b73c164. Added model-bound concept training, split validation, SVD-projected controls, a measured endpoint governor, synchronized comparison views and bounded projection fidelity diagnostics. Integrated the lab with the imported index. The gate passed 34 Python tests, TypeScript, Vite and Chrome. Fixed a local-worker contention race found during browser testing. Six development cases and effectiveness-matched comparisons are summarized in REVIEW_PHASE_2.md. No second compatible backend in the project environment. No final-test access or model downloads.

@@ -70,8 +70,14 @@ Start installs missing locked dependencies, fits the local model and enables Vit
 ## Three-phase roadmap
 
 1. **VERIFIED · Interactive baseline.** 27 model, parser and HTTP tests passed, plus TypeScript, Vite build and desktop/mobile Chrome smoke. [Phase 1 evidence and demonstration](REVIEW_PHASE_1.md)
-2. **PLANNED · Learned control.** Trainable directions, Semantic Lock, constrained and multi-concept steering, Drift Guardian and Parallel Universes. Foundry roadmap includes dataset fingerprints, model-keyed caching, dataset management, quality reports, learned concepts, multi-model comparison and vector export.
+2. **IMPLEMENTED · Learned control.** Class-balanced ridge directions, Semantic Lock, a measured strength governor, change analysis, projection diagnostics and synchronized Parallel Universes. [Phase 2 evidence and demo](REVIEW_PHASE_2.md) Foundry roadmap includes dataset fingerprints, model-keyed caching, dataset management, quality reports, learned concepts, multi-model comparison and vector export.
 3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration. Foundry adds split management and reproducible experiment exports. PDF/NPY imports are optional.
+
+## Semantic intelligence
+
+Open **Intelligence** to compare identity, centroid addition, learned addition and protected steering. Choose a target and up to four protected readouts. The governor checks the actual normalized endpoint against the requested drift and cosine limits. Its report gives applied strength, target gain, neighborhood changes and the reason for any reduction. All views share camera, selection and PCA coordinates.
+
+Concept DNA accepts source-grouped positive and negative examples with separate validation families. Custom directions can be saved explicitly to this browser. Data Foundry opens the same lab against its active index. The debugger exposes suspected anomalies and optional relevance-based retrieval scores. The projection diagnostics reveal which neighbors change when reduced to three dimensions.
 
 ## Scientific limits
 
