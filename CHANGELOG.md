@@ -1,9 +1,5 @@
 # Changelog
 
-## FOCUS · feature branch
-
-Added a Mission Control entry point for retrieval debugging. Operators can compare five ranking methods on calibration or locally imported text, define labeled suites and per-query release criteria, inspect missed documents and replay the exported JSON report. The six OBSIDIAN workspaces remain available.
-
 ## 2026-11-27 · Obsidian production release
 
 Released the responsive sidebar, six workspace layouts and four-view steering comparison in PR #2. Verified the public domain against localhost, exercised the six applications on desktop and mobile emulation, and confirmed the hosted upload and training restrictions. Updated the walkthrough for the deployed controls. [Production verification](BUILD_STATE.md#obsidian-production-release)

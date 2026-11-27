@@ -28,12 +28,3 @@ body{background:var(--void)}#root{--rail:224px}#root:has(.compact){--rail:72px}
 @media(max-width:690px){#workspace .universes,.branches{grid-template-columns:1fr}.branches section{display:flex;flex-wrap:wrap}.branches small{width:100%}.retrieval-chart>div{grid-template-columns:6rem 1fr 3rem}}
 
 @media(max-width:410px){.command{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:0 8px;min-height:54px}.command .drawer-toggle{grid-row:1/3;padding:6px}.command .breadcrumb{align-self:end;white-space:normal}.command .breadcrumb span{padding:0}.command small{grid-column:2;grid-row:2;margin:0;align-self:start}.command .connection{grid-column:3;grid-row:1/3}.probe-chart figcaption{flex-wrap:wrap;gap:4px}}
-
-.hero-actions .studio-primary{background:#91e2d0;color:#102020;padding:.65rem 1rem;border-radius:5px;font-weight:650}
-.studio-fields{border:0;padding:0;margin:0;min-width:0;display:grid;gap:1rem}
-.studio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:.5rem 1rem}
-.studio-judgments{max-height:18rem;overflow:auto}
-.studio label:has(input[type=checkbox]){display:flex;align-items:baseline;gap:.6rem}
-.studio-hash,.studio td{overflow-wrap:anywhere}
-.studio .preview-scroll{margin-block:1rem;overflow-x:auto}
-.studio table caption{text-align:left;margin-bottom:.5rem}

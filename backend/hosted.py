@@ -26,7 +26,7 @@ def create():
 
     @app.post("/api/v1/intelligence/{operation}")
     async def public_lab(operation: str, request: Request):
-        if operation not in {"workspace","compare","frontier","applications","debug"}:
+        if operation not in {"workspace","compare","frontier","applications"}:
             raise HTTPException(403,"Training and dataset uploads are available locally.")
         return await intelligence(operation,request)
 

@@ -6,19 +6,6 @@ RESURRECT 2026 | Problem Statement 05
 
 Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
-## Semantic Search Engineering and Debugging Studio
-
-On the FOCUS branch, Mission Control opens the retrieval debugging workflow. Choose **Open Retrieval Debugger** for the calibration collection. For a private dataset, open local Data Foundry, import a supported file, map its text column and select **Debug this dataset**. Source row numbers remain stable across methods, including rows outside the dense vocabulary.
-
-1. Enter a search query. Run a comparison to inspect rankings. Mark the documents you expected under **Expected relevant documents**.
-2. Choose the baseline, candidate, cutoff, target and protected direction. Compare BM25, dense cosine, reciprocal rank fusion, unconstrained steering and Semantic Lock. Add up to 16 search tasks for the same index. Locally trained, saved directions can be selected in the matching model basis.
-3. Set release criteria and run the comparison. Inspect each missed ID, rank change, abstention, retrieval score and measured endpoint violation. An unlabeled preview blocks the gate.
-4. Select **Export reproducible report**. With the local service running, use `python3 scripts/replay_focus.py /path/to/report.json` to verify the result. The report contains query text, judgments and, for imports, the mapped document texts. Keep private reports local.
-
-**Try a known pass and a known miss.** Search for `telescope light` with dense cosine and K=3. Document #6 ranks first. Change only the expected document to #24 and require Recall@3 of 1. The same ranking puts #24 eighth and the gate blocks. The [judge walkthrough](docs/JUDGE-WALKTHROUGH.md#one-minute-with-the-retrieval-debugger) shows how to inspect and replay both cases in the [local debugger](http://localhost:5173/#retrieval-debugger).
-
-The live debugger uses the 8D encoder and accepts up to 256 eligible source rows per suite. The existing comparison of four research encoders remains in Research Lab. Reports describe engineering checks on operator judgments. Customer demand and retrieval performance on unseen tasks remain unvalidated. [Scoring and scope](docs/FOCUS-PROTOCOL.md) · [Customer discovery questions](docs/CUSTOMER-DISCOVERY.md)
-
 ## Obsidian production release
 
 Open [public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) to explore all six workspaces. The [Railway health endpoint](https://vector-x-backend-production.up.railway.app/api/v1/health) reports service readiness. Public inference uses the 8D calibration encoder. Use the [local workspace](http://localhost:5173/#mission-control) for private dataset imports, concept training and the four research encoders.
