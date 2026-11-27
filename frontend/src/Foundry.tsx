@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Database, Upload } from 'lucide-react'
+import CorpusExplorer from './CorpusExplorer'
 import Intelligence from './Intelligence'
 import FoundryMap from './FoundryMap'
 import type { FoundryPoint } from './FoundryMap'
@@ -49,6 +50,7 @@ function Retrieval({ data, points, column, metadata, digest, fingerprint }: {
     } catch(e) { if (!controller.signal.aborted) setExportStatus(message(e)) }
     finally { if (exporting.current === controller) exporting.current = null }
   }
+  const [exploring,setExploring] = useState(false)
   const [lab, setLab] = useState(false)
   const imported = useMemo(() => ({modelId:digest, datasetHash:fingerprint, texts:points.map(p => data.rows[p.row][column]), points,
     categories: metadata.length ? points.map(p => data.rows[p.row][metadata[0]]) : undefined}), [fingerprint,digest,data,points,column,metadata])
@@ -88,6 +90,8 @@ function Retrieval({ data, points, column, metadata, digest, fingerprint }: {
         {exporting.current && <button onClick={() => { exporting.current?.abort(); exporting.current=null; setExportStatus('Export cancelled.') }}>Cancel vector export</button>}
         <span role="status">{exportStatus}</span></div>
     </section><button onClick={() => setLab(!lab)}>{lab ? 'Close dataset intelligence' : 'Open dataset intelligence'}</button>
+    <button onClick={()=>setExploring(!exploring)}>{exploring?'Close document exploration':'Explore document groups'}</button>
+    {exploring && <CorpusExplorer data={data} column={column} points={points} row={row} select={setRow} target={target} strength={strength} model={digest}/>}
     {lab && <Intelligence imported={imported}/>}</>
 }
 

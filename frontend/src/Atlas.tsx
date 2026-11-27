@@ -1,3 +1,4 @@
+import { apiOrigin } from './apiOrigin'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, AudioLines, ChevronDown, Crosshair, Layers3, SlidersHorizontal } from 'lucide-react'
 import Galaxy from './Galaxy'
@@ -27,7 +28,7 @@ export default function Atlas({ online }: { online: boolean }) {
     const timer=setTimeout(async()=>{
       const timeout=setTimeout(()=>controller.abort(),6000)
       try {
-        const response=await fetch('/api/v1/explore',{method:'POST',headers:{'Content-Type':'application/json'},
+        const response=await fetch(apiOrigin+'/api/v1/explore',{method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({text:query,target,strength}),signal:controller.signal,cache:'no-store'})
         if(!response.ok){
           const problem=await response.json().catch(()=>null)

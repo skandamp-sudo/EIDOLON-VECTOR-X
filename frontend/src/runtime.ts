@@ -1,3 +1,4 @@
+import { apiOrigin } from './apiOrigin'
 import { useEffect, useState } from 'react'
 
 export type Sample = { id: string; text: string; vector: number[] }
@@ -26,7 +27,7 @@ export function useRuntime() {
       const deadline = setTimeout(() => request.abort(), 3500)
       try {
         const [health, snapshot] = await Promise.all(['health', 'foundation'].map(async route => {
-          const response = await fetch('/api/v1/' + route, { signal: request.signal, cache: 'no-store' })
+          const response = await fetch(apiOrigin+'/api/v1/' + route, { signal: request.signal, cache: 'no-store' })
           if (!response.ok) throw new Error('Request failed')
           return response.json()
         }))

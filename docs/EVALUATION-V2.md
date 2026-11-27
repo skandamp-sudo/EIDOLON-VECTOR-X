@@ -1,0 +1,23 @@
+# Recovery protocol v2.0
+
+Freeze this protocol, runner, dependencies and artifact identities before calculating evaluation outcomes. Report every selected family and every unavailable measure. SciFact remains a historical diagnosis. The evaluation below uses a public split and cannot establish absence from MiniLM pretraining.
+
+Use Dasigi et al., QASPER v0.3, dataset card CC BY 4.0. Read the pinned train/dev archive a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a. Keep raw source material local. [Dataset](https://huggingface.co/datasets/allenai/qasper) · [Paper](https://aclanthology.org/2021.naacl-main.365/)
+
+Sort paper IDs within each split lexically. Fit a sublinear English TF–IDF / randomized SVD (128 dimensions, 8192 features, seed 17) to the first 384 nonempty training abstracts among the first 384 training papers. Fit concept directions and a 3D PCA frame on separate training papers 385–480. Development latency probe uses the first three nonempty abstracts from papers 481–483. Check disjoint paper IDs and normalized titles with evaluation. Legacy 8/16 use the frozen calibration fits. MiniLM uses the pinned AVX2 graph, one CPU thread, one text per call, max 256 tokens, masked mean and binary64 unit normalization. No evaluation-driven tuning.
+
+Use the first 16 published dev papers, first question in original order per paper. Retrieve paragraphs within that paper, excluding empty paragraphs. IDs are SHA-256 of whitespace-normalized text, deduplicated within paper, first section wins. Gold is the union of independent annotators' evidence strings, including missing items in recall and ideal DCG denominators. Questions without gold have null retrieval metrics and remain counted. Empty rankings earn zero on labeled questions. Report Recall@3 and binary nDCG@3. BM25 uses lowercase word tokens, k1=1.2, b=.75, positive Robertson IDF and ID tie breaks.
+
+Domain labels use the author's section heading. Target is a heading containing the English word method, methods, or methodology. Protected is result or results. These are explicit section-type proxies, not expert assessments of passage content. Use only paragraph text for embedding. Per attribute take the first 32 distinct training paragraphs per class, fit positive-minus-negative unit centroid from represented examples. If any class is missing, report steering unavailable. Assess independent outcomes as change in top-three target-section fraction and absolute change in result-section fraction. Also report learned-axis gain, absolute protected-axis drift, constraint violations and unsteered versus steered retrieval. Steering geometry and PCA belong to the selected model.
+
+Compare original, unconstrained and governed projected directions at requested +1.5, drift cap .035, cosine floor .65. Match unconstrained to governed target gain on the 101 evenly spaced strengths [0,1.5], accepting absolute error ≤.01 and governed gain >.01. Count all unmatched/abstaining cases. Use identical query subsets in matched comparisons. Report model-specific PCA trustworthiness and neighbor overlap, sampled deterministically per paper. Report elapsed encoding on the development probe, peak process RSS and coverage. No claim of fresh blind human evaluation.
+
+Ranking v2 uses deterministic binary64 normalization and math.fsum of binary64 products. For unit vectors of dimension ≤384 the usual sequential dot-product error bound is approximately 384 × 2^-53; choose a 2^-40 grid (>20 such bounds) independently of relevance. Round to nearest, ties to even, then ascending canonical document ID. A grid boundary can separate nearby scores. Reproducibility assumes identical model outputs/artifacts and a pinned runtime.
+
+The registered local environment is Intel macOS 26.7.1, CPython 3.12.14, NumPy 2.5.2, SciPy 1.18.1 and scikit-learn 1.9.0. Use the project uv.lock plus requirements/research-macos-x86_64.txt for the optional CPU stack. Set VECLIB_MAXIMUM_THREADS, OPENBLAS_NUM_THREADS and OMP_NUM_THREADS to 1. MiniLM assets are pinned in backend/data/minilm-v2.json. Record the actual fitted basis identity in each run. Retrieve the release under .runtime/recovery-v2/qasper.tgz and the six verified model files under .runtime/recovery-v2/minilm, retaining their official relative paths.
+
+For each of legacy8, legacy16, expanded and minilm, run the following command with a new output filename. Per-family rows preserve denominators, abstentions and matched controls. Only IDs and measurements are published. Timings and RSS are descriptive of individual processes.
+
+```sh
+VECLIB_MAXIMUM_THREADS=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m scripts.recovery_v2 expanded /tmp/expanded-v2-new.json
+```

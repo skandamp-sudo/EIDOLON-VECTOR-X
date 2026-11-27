@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+exec .venv/bin/python -m uvicorn backend.hosted:create --factory --host 0.0.0.0 --port "${PORT:?Railway PORT required}" --workers 1 --limit-concurrency 12 --backlog 16 --timeout-keep-alive 5 --no-access-log --no-proxy-headers

@@ -193,7 +193,12 @@ def export_vectors(raw, atlas):
 
 
 async def local_operation(request, limit, process_body):
-    if request.headers.get("x-vector-x-client") != "foundry" or request.headers.get("origin") not in LOCAL_ORIGINS | {None}:
+    app = request.scope.get("app")
+    hosted_origin = getattr(app.state, "hosted_origin", None) if app is not None else None
+    allowed = {hosted_origin} if hosted_origin else LOCAL_ORIGINS | {None}
+    if hosted_origin:
+        limit = min(limit, 32_768)
+    if request.headers.get("x-vector-x-client") != "foundry" or request.headers.get("origin") not in allowed:
         raise HTTPException(403, "Use the local Data Foundry.")
     if not slot.acquire(blocking=False):
         raise HTTPException(429, "Another Foundry operation is running. Try again.")

@@ -25,3 +25,11 @@ Engine milestone 5f4ea84 was verified on public main. Added SHA-256 dataset iden
 ## Phase 3 protocol freeze
 
 Verified clean HEAD and public review-phase-2 at 295123814d855e6cabd2b8727fa8e709f0d81ec4. Verified the published SciFact archive checksum. Chose independent external relevance labels and a second calibration-only 16D LSA fit. The frozen selection and scoring rules are in docs/EVALUATION.md. No held-out outcomes were inspected before this checkpoint.
+
+## Phase 3 scientific stop · 27 November 2026, 12:12 IST
+
+The independent process reproduction changed three 16D third-place document IDs on claims 589 and 1107. Stopped at the required scientific gate. Both snapshots, checksums and affected comparisons are recorded in REVIEW_PHASE_3.md. An exact floating-point equality assertion also failed; the discrete document-ID differences independently establish the reproducibility issue. The first run remains intact. No ranking rule or frozen evaluation parameter was changed after scoring. The live frontier, evidence viewer, restricted hosting entry point and local document tools are working-tree changes. The Phase 3 release and hosted verification are pending.
+
+### Recovery v2 protocol freeze
+
+On Intel AVX2, all four CPU encoders ran before evaluation. Three disjoint development abstracts took 94–127 ms each through MiniLM and 2.9–4.5 ms through expanded LSA. Each produced three finite unit embeddings. Both legacy variants abstained once. These timings include first inference and exclude model construction. CPU dependencies are optional. Both SciFact originals and the diagnosis are archived. Evaluation and release status follow separately.

@@ -1,0 +1,10 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "uv sync --frozen --no-dev"
+
+[deploy]
+startCommand = "sh scripts/start-hosted"
+healthcheckPath = "/api/v1/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 2

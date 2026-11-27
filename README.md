@@ -93,3 +93,9 @@ The 24 authored English sentences serve as fit data and retrieval candidates. Sh
 The evaluation protocol groups source families before splitting, fits transforms on training only, selects thresholds on validation and freezes settings before held-out evaluation. [Research design](docs/RESEARCH.md) · [Build record](BUILD_STATE.md)
 
 Phase 3 validation uses a precommitted external-holdout protocol. [Evaluation protocol](docs/EVALUATION.md)
+
+**Phase 3 review is blocked.** Independent processes returned different third-place document IDs in three 16D comparisons. [Scientific stop and preserved evidence](REVIEW_PHASE_3.md)
+
+## Recovery encoders
+
+The independent recovery protocol preserves the historical 8D and 16D calibration models and adds 128D QASPER LSA and a local quantized 384D MiniLM research encoder. The application can still run with its original dependencies. [Recovery protocol](docs/EVALUATION-V2.md) · [Frozen SciFact evidence and reproduction](evidence/scifact-v1/README.md)

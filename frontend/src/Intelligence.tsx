@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import type { Camera } from './FoundryMap'
 import FoundryMap from './FoundryMap'
+import { hosted } from './apiOrigin'
 import ConceptEditor from './ConceptEditor'
 import { fmt, labRequest, title } from './labTypes'
 import type { Analysis, Concept, Direction, ImportIndex, Mode, Workspace } from './labTypes'
@@ -134,7 +135,7 @@ function Lab({workspace, imported}: {workspace: Workspace; imported?: ImportInde
     } catch { setNotice('Local removal failed.') }
   }
   const custom = !workspace.presets.some(p=>p.direction.name===target)
-  return <><ConceptEditor workspace={workspace} imported={imported?.texts} add={add}/>
+  return <>{!hosted && <ConceptEditor workspace={workspace} imported={imported?.texts} add={add}/>}
     <section className="panel foundry-panel lab-controls"><h2>Semantic Lock</h2>
     <div className="rank-pair"><div><label>Query text for comparison<textarea maxLength={4096} rows={2} value={text} onChange={e=>setText(e.target.value)}/></label>
     {imported && <label>Use an imported query<select defaultValue="" onChange={e=>setText(documents[Number(e.target.value)])}>

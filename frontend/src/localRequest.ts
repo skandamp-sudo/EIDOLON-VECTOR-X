@@ -1,3 +1,4 @@
+import { apiOrigin } from './apiOrigin'
 // Requests are stateless. Retry transient contention for a bounded interval.
 export async function localRequest<T>(path: string, body: BodyInit, signal: AbortSignal): Promise<T> {
   for (const delay of [0, 100, 250, 500]) {
@@ -7,7 +8,7 @@ export async function localRequest<T>(path: string, body: BodyInit, signal: Abor
       const timer = setTimeout(() => { signal.removeEventListener('abort', abort); resolve() }, delay)
       signal.addEventListener('abort', abort, {once:true})
     })
-    const response = await fetch('/api/v1/' + path, {method:'POST', body, signal, cache:'no-store',
+    const response = await fetch(apiOrigin+'/api/v1/' + path, {method:'POST', body, signal, cache:'no-store',
       redirect:'error', headers:{'X-Vector-X-Client':'foundry'}})
     if (response.status === 429 && delay !== 500) { await response.body?.cancel(); continue }
     const value = await response.json()

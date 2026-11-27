@@ -15,3 +15,8 @@
 .damage-plot { margin: 12px 0; }
 .damage-plot svg { display: block; width: min(100%, 350px); margin: auto; }
 .damage-plot figcaption { text-align: center; color: var(--muted); font-size: .82rem; }
+
+.frontier-controls { display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px }
+.pareto-figure {margin:14px 0;padding:12px;background:#0c141b}
+.pareto-figure svg {width:100%;max-height:240px}.pareto-figure text {font:11px monospace;fill:#aabfc9}
+.pareto-figure figcaption {font-size:.82rem;color:var(--muted)}

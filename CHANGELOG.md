@@ -18,3 +18,8 @@ Added bounded session dataset management, content fingerprints, fitted-model cac
 
 ## 2026-11-27 12:04:28 IST · External evaluation freeze
 Added source-group selection, abstention-aware retrieval metrics and a second LSA configuration. Exercised the runner with engineering fixtures before scoring SciFact.
+
+## 2026-11-27 12:13:34 IST · Scientific stop
+Preserved two independent held-out runs and documented three nonreproducing 16D third-place IDs. Withheld deployment and the final review tag.
+
+- Archived both original SciFact runs and their one-ULP diagnosis. Added a separate deterministic ranking policy, four-encoder recovery runner and a pre-outcome QASPER protocol.

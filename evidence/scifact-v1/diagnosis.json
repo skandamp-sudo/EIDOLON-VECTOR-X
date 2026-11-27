@@ -1,0 +1,4596 @@
+{
+  "comparison": {
+    "source": "8080490377411e7b51b44861d5d3b16d7a6a16c6",
+    "models": {
+      "8": "d9107d9413a0f13e3efb87d8a303384e3c9e4634aaa9e9b1bef398ae0fec08f6",
+      "16": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "hashes": {
+      ".runtime/phase3-stop/first.json": "0bec8f1aad44be2520b470541d01c96510abf3ae62cbb8a365649606abef3310",
+      ".runtime/phase3-stop/reproduction.json": "7d6331ec742537df52e701173ac3d020092e632f7111984f39449c0db7dbda69",
+      "frontend/public/evidence/phase3.json": "0bec8f1aad44be2520b470541d01c96510abf3ae62cbb8a365649606abef3310",
+      ".runtime/reproduction-phase3.json": "7d6331ec742537df52e701173ac3d020092e632f7111984f39449c0db7dbda69",
+      ".runtime/scifact-data.tar.gz": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be"
+    },
+    "frozen_files": {
+      "docs/EVALUATION.md": "9b921bed839f70b38431e01a5beb3178bae081d97f6364c788a3aa3eb668fbfc",
+      "scripts/phase3_evidence.py": "44e378ad658a0e9ce84c2c338bbaee4cd848b3c4f28eab63afe8982db76a218e",
+      "backend/atlas.py": "6331565e390cc815cf4823ca8da5d30655a31ff6f4817bcdc17d37c10dbd7f03",
+      "backend/model.py": "e940082bd23c611ee13b06f83a4995e0322bcf34a74eec7e28df6a389a27be2f",
+      "backend/concepts.py": "f496dda81e16d9f1d2ddcdc54faf9e5d9b57b3570c84b0fe09320500131d7298",
+      "backend/intelligence.py": "87d41ca95cf08ee3a6eaa650e439191cbb3af7aa35f03eefdda4315dad1ff4f9",
+      "backend/fidelity.py": "04893984977215ec3bca7ae88c4ff298db2b6bb52ea1d563ef87b50178b20851",
+      "scripts/phase2_evidence.py": "57e862abcb8239acecc9eacc690d54f2ae450b1467a58fd927bdad546c1b1c77",
+      "backend/data/calibration.txt": "4534b34b8dd78f0fb10ff4374f1db003da3b2277e668c840a056260375a20c77",
+      "uv.lock": "c90b065a15d3a7b09026d7a149cf3def870588bbb9912fec728f4cf8584f8a4b"
+    },
+    "changed_order": [
+      [
+        16,
+        589,
+        "matched",
+        "naive",
+        [
+          12030680,
+          14973286,
+          2359152
+        ],
+        [
+          12030680,
+          14973286,
+          13732033
+        ]
+      ],
+      [
+        16,
+        1107,
+        "methods",
+        "ridge",
+        [
+          12030680,
+          14973286,
+          13732033
+        ],
+        [
+          12030680,
+          14973286,
+          2359152
+        ]
+      ],
+      [
+        16,
+        1107,
+        "matched",
+        "ridge",
+        [
+          12030680,
+          14973286,
+          2359152
+        ],
+        [
+          12030680,
+          14973286,
+          13732033
+        ]
+      ]
+    ],
+    "scientific_numeric_delta_by_field": {
+      "gain": 2.220446049250313e-16,
+      "drift": 5.551115123125783e-17,
+      "cosine": 2.220446049250313e-16,
+      "gap": 3.3306690738754696e-16
+    },
+    "aggregate_delta_by_field": {
+      "gain": 1.1102230246251565e-16,
+      "drift": 2.7755575615628914e-17,
+      "cosine": 2.220446049250313e-16
+    },
+    "source_and_evidence_manifest_equal": true
+  },
+  "coverage": {
+    "training_documents": 24,
+    "calibration_sha256": "4534b34b8dd78f0fb10ff4374f1db003da3b2277e668c840a056260375a20c77",
+    "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+    "member_sha256": {
+      "corpus": "b8d6c89624cb2ed74dee8938effc4f5d8bd2086887880af8110d64be4ceade62",
+      "claims_dev": "86f0435d08fdb65d1aa41d1472684f57e6e71930626497bdf4d7a9ec1a632217"
+    },
+    "vocabulary": 82,
+    "queries": {
+      "tokens": 1430,
+      "oov_tokens": 1414,
+      "types": 1013,
+      "oov_types": 1002,
+      "empty_tfidf": 148,
+      "svd_only_abstentions": 0,
+      "represented": 16
+    },
+    "documents": {
+      "tokens": 719641,
+      "oov_tokens": 710339,
+      "types": 35617,
+      "oov_types": 35553,
+      "empty_tfidf": 1649,
+      "svd_only_abstentions": 0,
+      "represented": 3534
+    },
+    "unique_gold_count": 182,
+    "unique_gold_indexed": 118,
+    "claims_with_any_gold_indexed": 112,
+    "claims_with_all_gold_indexed": 106,
+    "represented_claims_with_any_gold_indexed": 12,
+    "represented_claims_with_all_gold_indexed": 12,
+    "pair_recognized_terms": {
+      "2359152": [
+        "deep"
+      ],
+      "13732033": [
+        "current",
+        "pressure"
+      ]
+    },
+    "pair_gold_for_affected": {
+      "589": [
+        10984005
+      ],
+      "1107": [
+        20532591
+      ]
+    }
+  },
+  "normalization_control": {
+    "environment": {
+      "system": "macOS-26.7.1-x86_64-i386-64bit",
+      "python": "3.12.14",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.18.1",
+        "scikit-learn": "1.9.0",
+        "threadpoolctl": "3.6.0"
+      },
+      "blas": {
+        "name": "accelerate",
+        "found": true,
+        "version": "unknown",
+        "detection method": "system",
+        "include directory": "unknown",
+        "lib directory": "unknown",
+        "openblas configuration": "unknown",
+        "pc file directory": "unknown"
+      },
+      "threads": {
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": null
+      },
+      "pools": [
+        {
+          "user_api": "openmp",
+          "internal_api": "openmp",
+          "num_threads": 1,
+          "prefix": "libomp",
+          "version": null
+        }
+      ]
+    },
+    "cases": {
+      "589-matched-naive": {
+        "scores": [
+          0.784830821261022,
+          0.7848308212610221
+        ],
+        "hex": [
+          "0x1.91d5586c6af66p-1",
+          "0x1.91d5586c6af67p-1"
+        ],
+        "delta": -1.1102230246251565e-16,
+        "ulps": -1.0,
+        "doc_ids": [
+          2359152,
+          13732033
+        ],
+        "top": [
+          12030680,
+          14973286,
+          13732033
+        ],
+        "ranks": [
+          4,
+          3
+        ],
+        "exact_dot_delta": "-910319935369023477/41538374868278621028243970633760768",
+        "exact_dot_delta_float": -2.1915155281248194e-17,
+        "exact_dot_rounded": [
+          "0x1.91d5586c6af66p-1",
+          "0x1.91d5586c6af67p-1"
+        ],
+        "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+        "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+        "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+        "alignments": [
+          0,
+          0
+        ],
+        "alignment_experiment": [
+          {
+            "scores": [
+              0.784830821261022,
+              0.7848308212610221
+            ],
+            "hex": [
+              "0x1.91d5586c6af66p-1",
+              "0x1.91d5586c6af67p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0,
+            "alignments": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                32
+              ],
+              [
+                0,
+                48
+              ],
+              [
+                16,
+                0
+              ],
+              [
+                16,
+                16
+              ],
+              [
+                16,
+                32
+              ],
+              [
+                16,
+                48
+              ],
+              [
+                32,
+                0
+              ],
+              [
+                32,
+                16
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                32,
+                48
+              ],
+              [
+                48,
+                0
+              ],
+              [
+                48,
+                16
+              ],
+              [
+                48,
+                32
+              ],
+              [
+                48,
+                48
+              ]
+            ]
+          }
+        ],
+        "normalization_alignment": [
+          {
+            "offset": 0,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 8,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 16,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c684p+0",
+            "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+            "top3": 13732033,
+            "scores": [
+              0.784830821261022,
+              0.7848308212610221
+            ],
+            "hex": [
+              "0x1.91d5586c6af66p-1",
+              "0x1.91d5586c6af67p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 24,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 32,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 40,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 48,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c684p+0",
+            "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+            "top3": 13732033,
+            "scores": [
+              0.784830821261022,
+              0.7848308212610221
+            ],
+            "hex": [
+              "0x1.91d5586c6af66p-1",
+              "0x1.91d5586c6af67p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 56,
+            "raw_hash": "f28a2f6157560b92a59ce90560c679da5530f7f4f87b84009c5a452ac0bb9be9",
+            "norm": "0x1.fcd437077c683p+0",
+            "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+            "top3": 2359152,
+            "scores": [
+              0.7848308212610222,
+              0.7848308212610222
+            ],
+            "hex": [
+              "0x1.91d5586c6af68p-1",
+              "0x1.91d5586c6af68p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          }
+        ]
+      },
+      "1107-requested-ridge": {
+        "scores": [
+          0.7922690466172728,
+          0.7922690466172729
+        ],
+        "hex": [
+          "0x1.95a449d9b5650p-1",
+          "0x1.95a449d9b5651p-1"
+        ],
+        "delta": -1.1102230246251565e-16,
+        "ulps": -1.0,
+        "doc_ids": [
+          2359152,
+          13732033
+        ],
+        "top": [
+          12030680,
+          14973286,
+          13732033
+        ],
+        "ranks": [
+          4,
+          3
+        ],
+        "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+        "exact_dot_delta_float": -2.5228938543129254e-17,
+        "exact_dot_rounded": [
+          "0x1.95a449d9b5651p-1",
+          "0x1.95a449d9b5651p-1"
+        ],
+        "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+        "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+        "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+        "alignments": [
+          0,
+          0
+        ],
+        "alignment_experiment": [
+          {
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0,
+            "alignments": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                32
+              ],
+              [
+                0,
+                48
+              ],
+              [
+                16,
+                0
+              ],
+              [
+                16,
+                16
+              ],
+              [
+                16,
+                32
+              ],
+              [
+                16,
+                48
+              ],
+              [
+                32,
+                0
+              ],
+              [
+                32,
+                16
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                32,
+                48
+              ],
+              [
+                48,
+                0
+              ],
+              [
+                48,
+                16
+              ],
+              [
+                48,
+                32
+              ],
+              [
+                48,
+                48
+              ]
+            ]
+          }
+        ],
+        "normalization_alignment": [
+          {
+            "offset": 0,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce55p+1",
+            "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+            "top3": 13732033,
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 8,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 16,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 24,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 32,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce55p+1",
+            "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+            "top3": 13732033,
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 40,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 48,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 56,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          }
+        ]
+      },
+      "1107-matched-ridge": {
+        "scores": [
+          0.7922690466172728,
+          0.7922690466172729
+        ],
+        "hex": [
+          "0x1.95a449d9b5650p-1",
+          "0x1.95a449d9b5651p-1"
+        ],
+        "delta": -1.1102230246251565e-16,
+        "ulps": -1.0,
+        "doc_ids": [
+          2359152,
+          13732033
+        ],
+        "top": [
+          12030680,
+          14973286,
+          13732033
+        ],
+        "ranks": [
+          4,
+          3
+        ],
+        "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+        "exact_dot_delta_float": -2.5228938543129254e-17,
+        "exact_dot_rounded": [
+          "0x1.95a449d9b5651p-1",
+          "0x1.95a449d9b5651p-1"
+        ],
+        "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+        "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+        "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+        "alignments": [
+          0,
+          16
+        ],
+        "alignment_experiment": [
+          {
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0,
+            "alignments": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                16
+              ],
+              [
+                0,
+                32
+              ],
+              [
+                0,
+                48
+              ],
+              [
+                16,
+                0
+              ],
+              [
+                16,
+                16
+              ],
+              [
+                16,
+                32
+              ],
+              [
+                16,
+                48
+              ],
+              [
+                32,
+                0
+              ],
+              [
+                32,
+                16
+              ],
+              [
+                32,
+                32
+              ],
+              [
+                32,
+                48
+              ],
+              [
+                48,
+                0
+              ],
+              [
+                48,
+                16
+              ],
+              [
+                48,
+                32
+              ],
+              [
+                48,
+                48
+              ]
+            ]
+          }
+        ],
+        "normalization_alignment": [
+          {
+            "offset": 0,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce55p+1",
+            "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+            "top3": 13732033,
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 8,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 16,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 24,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 32,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce55p+1",
+            "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+            "top3": 13732033,
+            "scores": [
+              0.7922690466172728,
+              0.7922690466172729
+            ],
+            "hex": [
+              "0x1.95a449d9b5650p-1",
+              "0x1.95a449d9b5651p-1"
+            ],
+            "delta": -1.1102230246251565e-16,
+            "ulps": -1.0
+          },
+          {
+            "offset": 40,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 48,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          },
+          {
+            "offset": 56,
+            "raw_hash": "e1dd37b797bff3add41946db5d69d9f7323996b376c4cff9e6c0f4aab76ec38a",
+            "norm": "0x1.0fc8343d1ce54p+1",
+            "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+            "top3": 2359152,
+            "scores": [
+              0.792269046617273,
+              0.792269046617273
+            ],
+            "hex": [
+              "0x1.95a449d9b5652p-1",
+              "0x1.95a449d9b5652p-1"
+            ],
+            "delta": 0.0,
+            "ulps": 0.0
+          }
+        ]
+      }
+    },
+    "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+    "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+    "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+    "doc_order_ascending": true,
+    "max_doc_coordinate_difference": 4.631711680858075e-16,
+    "exchanged_row_hashes": [
+      "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+      "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+    ],
+    "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+  },
+  "replays": {
+    "native1": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 16,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511473/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248182e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "0956a93b3e248fee71fb87fc98fcd4be4700ac760172b10ec0fefcfdb234a775",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "c7cd31374d095a4d0fe6a9b4d5f15b4a4e216b862ccb5dbb7db44f01132fc78d",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "native2": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 16,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511473/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248182e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "0956a93b3e248fee71fb87fc98fcd4be4700ac760172b10ec0fefcfdb234a775",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "c7cd31374d095a4d0fe6a9b4d5f15b4a4e216b862ccb5dbb7db44f01132fc78d",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "native3": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 16,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511473/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248182e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "0956a93b3e248fee71fb87fc98fcd4be4700ac760172b10ec0fefcfdb234a775",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "c7cd31374d095a4d0fe6a9b4d5f15b4a4e216b862ccb5dbb7db44f01132fc78d",
+          "alignments": [
+            0,
+            16
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            16
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "native4": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 16,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511473/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248182e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "0956a93b3e248fee71fb87fc98fcd4be4700ac760172b10ec0fefcfdb234a775",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "c7cd31374d095a4d0fe6a9b4d5f15b4a4e216b862ccb5dbb7db44f01132fc78d",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "one1": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511789/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248197e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+          "alignments": [
+            0,
+            16
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "one2": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.7848308212610222,
+            0.7848308212610222
+          ],
+          "hex": [
+            "0x1.91d5586c6af68p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-455159967684511789/20769187434139310514121985316880384",
+          "exact_dot_delta_float": -2.1915155281248197e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af67p-1",
+            "0x1.91d5586c6af68p-1"
+          ],
+          "endpoint_hash": "03e6d9f514481ffdd346732215e87fd2203f856bfe4aa434e0b5fdd37f9ecebc",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7848308212610222,
+                0.7848308212610222
+              ],
+              "hex": [
+                "0x1.91d5586c6af68p-1",
+                "0x1.91d5586c6af68p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "one3": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.784830821261022,
+            0.7848308212610221
+          ],
+          "hex": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-910319935369023477/41538374868278621028243970633760768",
+          "exact_dot_delta_float": -2.1915155281248194e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+          "alignments": [
+            0,
+            16
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.784830821261022,
+                0.7848308212610221
+              ],
+              "hex": [
+                "0x1.91d5586c6af66p-1",
+                "0x1.91d5586c6af67p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            16
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "one4": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 1,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.784830821261022,
+            0.7848308212610221
+          ],
+          "hex": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-910319935369023477/41538374868278621028243970633760768",
+          "exact_dot_delta_float": -2.1915155281248194e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+          "alignments": [
+            0,
+            0
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.784830821261022,
+                0.7848308212610221
+              ],
+              "hex": [
+                "0x1.91d5586c6af66p-1",
+                "0x1.91d5586c6af67p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    },
+    "two1": {
+      "environment": {
+        "system": "macOS-26.7.1-x86_64-i386-64bit",
+        "python": "3.12.14",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.0",
+          "threadpoolctl": "3.6.0"
+        },
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "threads": {
+          "VECLIB_MAXIMUM_THREADS": "2",
+          "OMP_NUM_THREADS": "2",
+          "OPENBLAS_NUM_THREADS": "2",
+          "MKL_NUM_THREADS": null
+        },
+        "pools": [
+          {
+            "user_api": "openmp",
+            "internal_api": "openmp",
+            "num_threads": 2,
+            "prefix": "libomp",
+            "version": null
+          }
+        ]
+      },
+      "cases": {
+        "589-matched-naive": {
+          "scores": [
+            0.784830821261022,
+            0.7848308212610221
+          ],
+          "hex": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-910319935369023477/41538374868278621028243970633760768",
+          "exact_dot_delta_float": -2.1915155281248194e-17,
+          "exact_dot_rounded": [
+            "0x1.91d5586c6af66p-1",
+            "0x1.91d5586c6af67p-1"
+          ],
+          "endpoint_hash": "e74a4281fa45d5afbcbc1a9d667bc82c3e0014986a957b5e3b75b95bbb54e073",
+          "input_hash": "c04d7f7da73243dbbc0bd2be4d3cf27ff5725671daa449ef86ce004bab37ace7",
+          "axis_hash": "82fdde033d6627e9c7f131240637eabc070ad092f2a41903b3dd6f89adf293ca",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.784830821261022,
+                0.7848308212610221
+              ],
+              "hex": [
+                "0x1.91d5586c6af66p-1",
+                "0x1.91d5586c6af67p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-requested-ridge": {
+          "scores": [
+            0.7922690466172728,
+            0.7922690466172729
+          ],
+          "hex": [
+            "0x1.95a449d9b5650p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "delta": -1.1102230246251565e-16,
+          "ulps": -1.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            13732033
+          ],
+          "ranks": [
+            4,
+            3
+          ],
+          "exact_dot_delta": "-16767505707732257673/664613997892457936451903530140172288",
+          "exact_dot_delta_float": -2.5228938543129254e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5651p-1",
+            "0x1.95a449d9b5651p-1"
+          ],
+          "endpoint_hash": "4fc03e6af3eb86e07e156807b5f9b332543842facc5c6b4c6ab8c9bbaba9ab7b",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            48
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.7922690466172728,
+                0.7922690466172729
+              ],
+              "hex": [
+                "0x1.95a449d9b5650p-1",
+                "0x1.95a449d9b5651p-1"
+              ],
+              "delta": -1.1102230246251565e-16,
+              "ulps": -1.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        "1107-matched-ridge": {
+          "scores": [
+            0.792269046617273,
+            0.792269046617273
+          ],
+          "hex": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "delta": 0.0,
+          "ulps": 0.0,
+          "doc_ids": [
+            2359152,
+            13732033
+          ],
+          "top": [
+            12030680,
+            14973286,
+            2359152
+          ],
+          "ranks": [
+            3,
+            5
+          ],
+          "exact_dot_delta": "-8383752853866130151/332306998946228968225951765070086144",
+          "exact_dot_delta_float": -2.522893854312926e-17,
+          "exact_dot_rounded": [
+            "0x1.95a449d9b5652p-1",
+            "0x1.95a449d9b5652p-1"
+          ],
+          "endpoint_hash": "692533ad423c4b7dcc64dd8c99d8366e36bc00bc0869c9356db14ec03cd91a58",
+          "input_hash": "cd725bc3681de3aa9d5bbfd05d430a30bbe7c465980bce3cb36d8c1247af368b",
+          "axis_hash": "0b73dbe35475bbe4699a69e3738a7ec23c61e447be81bdb39e1425bc2a69e028",
+          "alignments": [
+            0,
+            32
+          ],
+          "alignment_experiment": [
+            {
+              "scores": [
+                0.792269046617273,
+                0.792269046617273
+              ],
+              "hex": [
+                "0x1.95a449d9b5652p-1",
+                "0x1.95a449d9b5652p-1"
+              ],
+              "delta": 0.0,
+              "ulps": 0.0,
+              "alignments": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  48
+                ],
+                [
+                  16,
+                  0
+                ],
+                [
+                  16,
+                  16
+                ],
+                [
+                  16,
+                  32
+                ],
+                [
+                  16,
+                  48
+                ],
+                [
+                  32,
+                  0
+                ],
+                [
+                  32,
+                  16
+                ],
+                [
+                  32,
+                  32
+                ],
+                [
+                  32,
+                  48
+                ],
+                [
+                  48,
+                  0
+                ],
+                [
+                  48,
+                  16
+                ],
+                [
+                  48,
+                  32
+                ],
+                [
+                  48,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "basis_hash": "e9661559230cbeaa363aba59ac276669766748c1d9b9293b7f288b0e781a9bd7",
+      "indexed_matrix_hash": "199fa02a135fbcaf3326137bd343e852fdcee6b72fdb97e4423bd2fc1c67cd71",
+      "doc_order_hash": "38002713aceb69fc0c1369acfb449a25b46d27fabbc5470a0d4661af28adcc99",
+      "doc_order_ascending": true,
+      "max_doc_coordinate_difference": 4.631711680858075e-16,
+      "exchanged_row_hashes": [
+        "a42febd6fd20bfeb8a50db6bc7d50ae6b8e8b20742668dce8f6d56632ffd0ce7",
+        "ceb10cd73d47600d92dc202bc5a0fb60549edc428d9a3afd1582d47bc84b8bd2"
+      ],
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2"
+    }
+  },
+  "verification": {
+    "python_tests_passed": 41,
+    "typecheck": "passed",
+    "vite_local": "passed",
+    "vite_hosted_fixture_origin": "passed",
+    "chrome_smoke": "passed",
+    "worktree_diff_checks": "passed",
+    "deployed": false
+  }
+}
