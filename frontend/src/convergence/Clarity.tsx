@@ -1,4 +1,6 @@
 import {useEffect,useRef,useState} from 'react'
+import GraphCanvas,{type GraphNode,type GraphEdge} from '../GraphCanvas'
+import {tourAction} from '../tourState'
 import {openAtlasDraft} from './atlasDraft'
 import {apiOrigin,hosted} from '../apiOrigin'
 import {validRun} from '../explore'
@@ -49,26 +51,35 @@ export default function Clarity(){
      next.push(previous.find(v=>v.text===text)??await encode(text,c.signal))
      if(active)show(comparison.flatMap(s=>next.find(v=>v.text===s)??previous.find(v=>v.text===s)??[]))
    }
-   if(active){show(next);loading(false)}
+   if(active){show(next);loading(false);if(next.some(v=>v.run))tourAction("clarify-compare")}
   })()
   return ()=>{active=false;c.abort()}
  },[comparison])
- const choose=(meaning:string)=>{if(!issue||!meaning.trim())return;const next={...answers,[issue.key]:meaning.trim()};remember(query,next);answer(next);setCustom('');compare([])}
+ const [cue,setCue]=useState('')
+ const choose=(meaning:string)=>{if(!issue||!meaning.trim())return;const next={...answers,[issue.key]:meaning.trim()};remember(query,next);answer(next);tourAction('clarify-answer');setCustom('');compare([])}
  const needsDetail=issue&&['referential','contextual'].includes(issue.kind)
- return <section className="panel foundry-panel"><h2>Ambiguity X-Ray</h2>
- <label>Example instruction<select value="" onChange={e=>edit(e.target.value)}><option disabled value="">Choose an example</option>{['Compare waves near the bank','Send it','Inspect the telescope'].map(t=><option key={t}>{t}</option>)}</select></label>
- <form onSubmit={e=>{e.preventDefault();const value=draft.trim();if(query!==value)answer(remembered.get(value)??{});setQuery(value);setCustom('');compare([])}}><label>Instruction to interpret<input value={draft} onChange={e=>edit(e.target.value)} required maxLength={240}/></label><button disabled={!draft.trim()}>Inspect language</button></form>
+ const activeCue=issues.find(i=>i.key===cue)??issue??issues[0]
+ const graphNodes:GraphNode[]=[{title:'Your sentence',x:85,y:Math.max(105,issues.length*64),kind:'start'}],graphEdges:GraphEdge[]=[]
+ const graphTasks:(()=>void)[]=[()=>setCue('')]
+ const [selectedReading,selectReading]=useState('')
+ const segments:{text:string;key?:string}[]=[];let at=0
+ for(const i of [...issues].sort((a,b)=>a.start-b.start)){if(i.start<at)continue;segments.push({text:query.slice(at,i.start)},{text:query.slice(i.start,i.end),key:i.key});at=i.end}
+ segments.push({text:query.slice(at)})
+ issues.forEach((it,j)=>{const idx=graphNodes.length,y=80+j*128;graphNodes.push({title:it.span,x:280,y,kind:'decision'});graphTasks.push(()=>{setCue(it.key);selectReading('')});graphEdges.push({src:0,dst:idx})
+ const readings=[...new Set([...it.meanings,...(answers[it.key]?[answers[it.key]]:[])])]
+ readings.forEach((m,k)=>{const n=graphNodes.length;graphNodes.push({title:m,x:510,y:y+(k-(readings.length-1)/2)*48,kind:answers[it.key]===m?'end':undefined});graphTasks.push(()=>{setCue(it.key);selectReading(m)});graphEdges.push({src:idx,dst:n,accent:answers[it.key]===m,label:answers[it.key]===m?'confirmed':''})})})
+ return <section className="workbench clarity-studio"><small>Language studio</small><h2>What would you like me to understand?</h2><div className="pill-row">{['Compare waves near the bank','Send it','Inspect the telescope'].map(t=><button key={t} onClick={()=>edit(t)}>{t}</button>)}</div>
+ <details className="expert-settings"><summary>Example instruction selector</summary><label>Example instruction<select value="" onChange={e=>edit(e.target.value)}><option disabled value="">Choose an example</option>{['Compare waves near the bank','Send it','Inspect the telescope'].map(t=><option key={t}>{t}</option>)}</select></label></details>
+ <form className="prompt-line" onSubmit={e=>{e.preventDefault();const value=draft.trim();if(query!==value)answer(remembered.get(value)??{});setQuery(value);setCue('');selectReading('');setCustom('');compare([]);tourAction('clarify-inspect')}}><label>Instruction to interpret<input value={draft} onChange={e=>edit(e.target.value)} required maxLength={240}/></label><button data-tour="clarify-inspect" disabled={!draft.trim()}>Inspect language</button></form>
  <p role="status" className="shield" data-state={decision}><strong>{decision}</strong> · {pending.length} unresolved cues · simulation only. Clarifications are recalled for up to eight identical instructions in this tab. The detector recognizes a bounded set of English constructions and can miss other readings.</p>
- <figure className="reading-tree"><figcaption>Interpretation tree</figcaption><blockquote>{query.split('').map((c,n)=>issues.some(i=>n>=i.start&&n<i.end)?<mark key={n}>{c}</mark>:c)}</blockquote>
- {issues.map(i=><div key={i.key}><strong>{i.span}</strong><span>{answers[i.key]??i.meanings.join(' / ')}</span></div>)}{!issues.length&&<p>No rule matched this instruction.</p>}</figure>
- {issues.map(i=><p key={i.key}><mark>{query.slice(i.start,i.end)}</mark> · {i.kind} · characters {i.start+1}–{i.end} · {answers[i.key]??'unresolved'}</p>)}
- {issue&&<><h3>{issue.question}</h3><p>Heuristic question priority {issue.utility.toFixed(2)}. Word overlap weights the two readings. Only your answer confirms the intended meaning.</p>
- {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>choose(m)} disabled={!!needsDetail}>{m} ({w.toFixed(2)})</button>)}
+ <section className="clarify-grid"><figure className="reading-tree" data-tour="clarify-tree"><h3>Ambiguity X-Ray</h3><blockquote>{segments.map((seg,i)=>seg.key?<button aria-pressed={activeCue?.key===seg.key} key={i} onClick={()=>{setCue(seg.key!);selectReading('')}}>{seg.text}</button>:seg.text)}</blockquote>{issues.length?<GraphCanvas title="Interpretation tree" nodes={graphNodes} edges={graphEdges} selected={Math.max(0,graphNodes.findIndex(n=>n.title===(selectedReading||activeCue?.span)))} onSelect={i=>graphTasks[i]()} color="#75d9ae"/>:<p>No rule matched this instruction.</p>}{activeCue&&<p>{activeCue.span} · {answers[activeCue.key]??(selectedReading?selectedReading+" (possible reading)":"Awaiting your clarification")}</p>}</figure><section className="question-pane" data-tour="clarify-answer"><small>{pending.length?'Next clarification':'Clarification result'}</small>{!issue&&<><h3>{issues.length?'Meaning confirmed':'No clarification required'}</h3><p>{resolved()}</p></>}
+ {issue&&<><h3>{issue.question}</h3><details className="expert-settings"><summary>How this question was chosen</summary><p>Heuristic question priority {issue.utility.toFixed(2)}. Word overlap weights the two readings. Only your answer confirms the intended meaning.</p></details>
+ {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>choose(m)} disabled={!!needsDetail}>{m} <small className="expert-number">({w.toFixed(2)})</small></button>)}
  <label>{needsDetail?'Enter the entity or reference frame':'Specify another meaning'}<input maxLength={60} value={custom} onChange={e=>setCustom(e.target.value)}/></label><button disabled={!custom.trim()} onClick={()=>choose(custom)}>Use my interpretation</button></>}
  {!hosted&&issues.length>0&&!pending.length&&<button onClick={()=>{returningQuery=query;openAtlasDraft(resolved(),'CLARITY interpretation')}}>Open interpretation in Vector Warp</button>}
  {Object.keys(answers).length>0&&<section aria-label="Resolution history"><h3>Confirmed interpretations</h3><ol>{Object.entries(answers).map(([key,value])=><li key={key}>{issues.find(i=>i.key===key)?.span} → {value}</li>)}</ol>
  <button onClick={()=>{const prior=Object.fromEntries(Object.entries(answers).slice(0,-1));remember(query,prior);answer(prior);compare([]);setCustom('')}}>Undo last clarification</button></section>}
- <h3>Semantic comparison</h3><button onClick={()=>compare(Array.from(new Set([query,...(issue?issue.meanings.map(m=>resolved(m)):[resolved()])])))}>Compare interpretation retrieval</button>
+ </section></section><h3>Semantic comparison</h3><button data-tour="clarify-compare" onClick={()=>compare(Array.from(new Set([query,...(issue?issue.meanings.map(m=>resolved(m)):[resolved()])])))}>Compare interpretation retrieval</button>
  {busy&&<p role="status">Encoding the interpretations… <button onClick={()=>compare([])}>Cancel comparison</button></p>}
  {!busy&&vectors.some(v=>!v.run&&v.error!=='No representable signal')&&<button onClick={()=>retryReadings()}>Retry comparison</button>}
  {vectors.map((v,i)=><div key={v.text}><strong>{i===0?'Direct interpretation':v.text}</strong>{v.run?<><p>{v.run.model} · top passages {v.run.before.map(n=>n+1).join(', ')}</p>{v.run.omitted_terms?.length ? <p>Outside the fitted vocabulary: {v.run.omitted_terms.join(', ')}. These terms did not influence the ranking.</p> : null}{i>0&&vectors[0]?.run&&<p>{v.run.before.filter(id=>!vectors[0].run!.before.includes(id)).length} new documents among the top {v.run.before.length} compared with the direct reading.</p>}<ol>{v.run.before.map(n=><li key={n}>{v.run!.documents[n].text}</li>)}</ol></>:<p>{v.error} {!busy&&v.error!=='No representable signal'&&<button onClick={()=>retryReadings(v.text)}>Retry this reading</button>}</p>}</div>)}

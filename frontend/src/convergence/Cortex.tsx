@@ -1,4 +1,6 @@
 import {useMemo,useState} from 'react'
+import GraphCanvas,{type GraphNode,type GraphEdge} from '../GraphCanvas'
+import {tourAction} from '../tourState'
 import {hosted} from '../apiOrigin'
 import {openAtlasDraft} from './atlasDraft'
 import {exportEvidence,record} from './session'
@@ -52,26 +54,30 @@ export default function Cortex({rows=sample,source='Illustrative field notebook'
  const current=passages[sel]
  const peers=current?passages.map((p,id)=>({id,score:[...current.weights].reduce((s,[t,n])=>s+n*(p.weights.get(t)??0),0)})).filter(r=>r.id!==sel&&r.score>0).sort((a,b)=>b.score-a.score).slice(0,3):[]
  const ref=(id:number)=>'Row '+passages[id].row+' · offset '+passages[id].offset
- return <section className="panel foundry-panel"><h2>CORTEX research reader</h2><p>{source} · {passages.length} passages · first 128 nonblank chunks of up to 600 UTF-16 units. Local Data Foundry opens this reader on the mapped text column.</p>
- <div className={focus?'reader-desk focused':'reader-desk'}><section aria-label="Collection"><h3>Collection</h3>
- <label>Research priority<input value={q} maxLength={300} onChange={e=>query(e.target.value)}/></label>
- <label>Reading workflow<select disabled={start!==null} value={mode} onChange={e=>setMode(e.target.value)}>{['Weighted concepts','Keyword','Source order'].map(s=><option key={s}>{s}</option>)}</select></label>
- <label><input type="checkbox" checked={focus} onChange={e=>setFocus(e.target.checked)}/> Focus on selected passage</label>
- {!focus&&branch&&<details><summary>Explore topic and passage relationships</summary><p>Select a top-weighted term, then follow a linked source. Edges indicate term membership. Neighboring passages below use vector similarity.</p>
- <label>Research scope<select value={branch[0]} onChange={e=>setTopic(e.target.value)}>{hierarchy.map(([t,ids])=><option key={t} value={t}>{t} · {ids.length} passages</option>)}</select></label>
- <ul>{branch[1].slice(0,12).map(id=><li key={id}><button onClick={()=>{select(id);query(branch[0])}}>{branch[0]} → {ref(id)}</button> · {passages[id].concepts.filter(t=>t!==branch[0]).slice(0,3).join(', ')}</li>)}</ul></details>}
- {!focus&&<ol>{ranked.slice(0,8).map(r=><li key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {passages[r.id].concepts.slice(0,3).join(', ')} · {r.score.toFixed(2)}</li>)}</ol>}
- {!ranked.some(r=>r.score>0)&&<p>No query vocabulary overlaps the indexed passages.</p>}
-</section>
- {!focus&&<section aria-label="Passage relationships"><h3>Relationships</h3><p>Links show shared weighted terms. Open a source to assess its claim.</p> {!focus&&current&&<figure className="relation-graph"><figcaption>Selected passage relationships</figcaption><div className="branches"><section><small>Term membership</small>{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</section><b>{ref(sel)}</b><section><small>TF–IDF cosine</small>{peers.length?peers.map(r=><button key={r.id} onClick={()=>select(r.id)}>{ref(r.id)} · {r.score.toFixed(3)}</button>):<p>No positive edges</p>}</section></div></figure>}
-</section>}
- <section aria-label="Source inspector"> {current&&<><h3>{source} · {ref(sel)}</h3><blockquote>{current.text.split(/([\p{L}\p{N}]+)/u).map((part,i)=>queryWords.has(part.toLowerCase())?<mark key={i}>{part}</mark>:part)}</blockquote>{!hosted&&<button onClick={()=>openAtlasDraft(current.text,ref(sel))}>Open passage in Vector Warp</button>}
- <div className="foundry-actions">{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</div>
- <details><summary>Related passages by TF–IDF cosine</summary>{peers.map(r=><p key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {r.score.toFixed(3)} · {passages[r.id].text}</p>)}</details>
- <label>Evidence assessment<select value={marks[sel]??''} onChange={e=>mark({...marks,[sel]:e.target.value})}><option value="">Unassessed</option><option>Supports</option><option>Conflicts</option><option>Open question</option></select></label>
- <button onClick={()=>select(ranked[(ranked.findIndex(r=>r.id===sel)+1)%ranked.length].id)}>Next in reading sequence</button>
- <details><summary>Evidence comparison</summary>{Object.entries(marks).filter(([,v])=>v).map(([id,v])=><p key={id}>{v} (reader assessment) · {ref(+id)} · {passages[+id].text}</p>)}</details></>}
- </section></div>
+ const [task,setTask]=useState('connections')
+ const [filter,setFilter]=useState('')
+ const [activeTerm,setActiveTerm]=useState('')
+ const visible=ranked.filter(r=>passages[r.id].text.toLowerCase().includes(filter.toLowerCase()))
+ const linked=peers.slice(0,3)
+ const shared=current?[...current.weights.keys()].map(t=>({t,weight:linked.reduce((sum,r)=>sum+current.weights.get(t)!*(passages[r.id].weights.get(t)??0),0)})).filter(x=>x.weight>0).sort((a,b)=>b.weight-a.weight).slice(0,4).map(x=>x.t):[]
+ const graphTerms=shared.length?shared:current?.concepts.slice(0,3)??[]
+ const targets=[sel,...linked.map(r=>r.id)]
+ const nodes:GraphNode[]=current?[{title:'Passage '+(sel+1),x:85,y:190},...graphTerms.map((t,i)=>({title:t,x:280,y:65+i*88,kind:'term' as const})),...linked.map((r,i)=>({title:'Passage '+(r.id+1),x:490,y:82+i*120,detail:'Passage similarity '+r.score.toFixed(3)}))]:[]
+ const edges:GraphEdge[]=[]
+ if(current)graphTerms.forEach((t,i)=>targets.forEach((id,j)=>{const w=passages[id].weights.get(t);if(w)edges.push({src:j?i+1:0,dst:j?graphTerms.length+j:i+1,label:w.toFixed(2),accent:t===activeTerm})}))
+ function pick(id:number){select(id);setActiveTerm('');tourAction('passage')}
+ return <section className="workbench cortex-desk"><header className="desk-head"><div><small>CORTEX / Research library</small><h2>Explore research and documents</h2><p>Follow a shared word to a second source, then assess what the passages support.</p></div></header>
+ <nav className="desk-tabs" aria-label="Research tasks">{[['Library','library'],['Explore connections','connections'],['Assess evidence','assessment']].map(([label,id])=><button key={id} aria-pressed={task===id} onClick={e=>{setTask(id);const panel=e.currentTarget.closest('.workbench')?.querySelector<HTMLElement>('[data-anchor="'+id+'"]');(panel?.querySelector<HTMLElement>(id==='library'?'input':id==='assessment'?'select':'svg[tabindex]')??panel)?.focus()}}>{label}</button>)}</nav>
+ <div className={focus?"notebook-grid read-focus":"notebook-grid"}><section data-anchor="library" tabIndex={-1} aria-label="Collection" className="library-pane"><small>Collection</small><h3>Research library</h3><p>{source} · {passages.length} passages</p><label>Find a passage<input type="search" value={filter} maxLength={100} onChange={e=>setFilter(e.target.value)} placeholder="Search text in this collection"/></label>
+ <label>Research priority<input value={q} maxLength={300} onChange={e=>query(e.target.value)}/></label><div className="source-list" data-tour="passage">{visible.slice(0,128).map(r=><button key={r.id} aria-pressed={sel===r.id} aria-label={ref(r.id)} onClick={()=>pick(r.id)}><small>Passage {r.id+1}</small><span>{passages[r.id].text.slice(0,94)}</span></button>)}{!visible.length&&<p>No passages match. Clear the search to see the collection.</p>}</div>
+ {!ranked.some(r=>r.score>0)&&<p>No query vocabulary overlaps the indexed passages.</p>}</section>
+ <section tabIndex={-1} data-anchor="connections" className="relation-graph" data-tour="connections"><GraphCanvas title="Passage network" nodes={nodes} edges={edges} selected={activeTerm&&graphTerms.includes(activeTerm)?graphTerms.indexOf(activeTerm)+1:0} onSelect={i=>{if(i>0&&i<=graphTerms.length){setActiveTerm(graphTerms[i-1]);query(graphTerms[i-1]);tourAction('connection')}else{pick(i?linked[i-graphTerms.length-1].id:sel);tourAction('connection')}}}/><p className="map-key">▭ Passage　 ○ Weighted word　 ·　 Edge labels show word weight in each passage.</p>{!linked.length&&<p>No shared vocabulary with another indexed passage.</p>}</section>
+ <section tabIndex={-1} data-anchor="assessment" aria-label="Source inspector" className="source-pane">{current&&<><small>Selected source</small><h3>Passage {sel+1}</h3><blockquote>{current.text.split(/([\p{L}\p{N}]+)/u).map((part,i)=>queryWords.has(part.toLowerCase())?<mark key={i}>{part}</mark>:part)}</blockquote>
+ <label data-tour="assessment">Evidence assessment<select value={marks[sel]??''} onChange={e=>{mark({...marks,[sel]:e.target.value});if(e.target.value)tourAction('assessment')}}><option value="">Unassessed</option><option>Supports</option><option>Conflicts</option><option>Open question</option></select></label>
+ {!hosted&&<button onClick={()=>openAtlasDraft(current.text,ref(sel))}>Open passage in Vector Warp</button>}
+ <details><summary>Evidence comparison</summary>{Object.entries(marks).filter(([,v])=>v).map(([id,v])=><p key={id}>{v} (reader assessment) · {ref(+id)} · {passages[+id].text}</p>)}</details>
+ <details open={focus}><summary>Source details and similarity</summary><p>{source} · {ref(sel)}</p>{peers.map(r=><button key={r.id} onClick={()=>pick(r.id)}>{ref(r.id)} · {r.score.toFixed(3)}</button>)}</details></>}</section></div>
+ <details className="expert-settings"><summary>Reading settings</summary><label>Reading workflow<select disabled={start!==null} value={mode} onChange={e=>setMode(e.target.value)}>{['Weighted concepts','Keyword','Source order'].map(s=><option key={s}>{s}</option>)}</select></label><label><input type="checkbox" checked={focus} onChange={e=>setFocus(e.target.checked)}/> Focus on selected passage</label>{branch&&<><label>Research scope<select value={branch[0]} onChange={e=>setTopic(e.target.value)}>{hierarchy.map(([t,ids])=><option key={t} value={t}>{t} · {ids.length} passages</option>)}</select></label>{branch[1].slice(0,12).map(id=><button key={id} onClick={()=>{pick(id);query(branch[0])}}>{branch[0]} → {ref(id)}</button>)}</>}<button disabled={!ranked.length} onClick={()=>pick(ranked[(ranked.findIndex(r=>r.id===sel)+1)%ranked.length].id)}>Next in reading sequence</button></details>
  {rows===sample&&<details><summary>Timed comprehension and decision task</summary><p>Identify the row reporting increased pressure. Decide whether the two water records establish a contradiction.</p>
  <button disabled={start!==null} onClick={()=>{setStudy(null);setStart(performance.now());setEffort(null);setAnswer('');setDecision('')}}>Start reading task</button>
  {start!==null&&<><label>Evidence row<input value={answer} onChange={e=>setAnswer(e.target.value)} maxLength={3}/></label><label><span id="reader-decision-label">Decision</span><select aria-labelledby="reader-decision-label" value={decision} onChange={e=>setDecision(e.target.value)}><option value="">Choose</option><option>Contradiction established</option><option>Sites and times need alignment</option></select></label>

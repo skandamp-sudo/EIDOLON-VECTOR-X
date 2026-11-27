@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import {tourAction} from './tourState'
 import {takeReview,sameDirection} from './reviewDraft'
 import { exportEvidence,record } from './convergence/session'
 import { fmt, labRequest } from './labTypes'
@@ -65,15 +66,20 @@ export default function Frontier() {
   const current=points[selected]
   const maxD=Math.max(.01,...points.map(p=>p.drift??0)), minG=Math.min(0,...points.map(p=>p.gain??0)), maxG=Math.max(.01,...points.map(p=>p.gain??0))
   function choose(i:number){if(paused)return;setPrevious(selected);select(i);log('Selected feasible point '+i)}
-  return <section className="panel foundry-panel"><p className="kicker">{paused?'Paused':mode}</p><h2>Semantic Pareto frontier</h2>{draft&&<p className="studio-hash">Explicit local handoff from the Retrieval Debugger · dataset {draft.dataset} · model {draft.model}. The frontier recalculates alternatives for this calibration task.</p>}
-    <div className="rank-pair"><label>Agent interaction mode<select value={mode} onChange={e=>{modeTo(e.target.value);log('Mode '+e.target.value)}}>{['Approval required','Suggestion only','Automatic preview','Sequential form'].map(s=><option key={s}>{s}</option>)}</select></label>
-    <label>Task objective<select value={goal} disabled={paused} onChange={e=>{goalTo(e.target.value);log('Goal changed')}}><option>Maximize gain</option><option>Minimize drift</option></select></label></div>
-    {current && <figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">
+  return <section className="workbench decision-studio"><p className="kicker">{paused?'Paused':mode}</p><h2>Review a search recommendation</h2><p>Choose the outcome you care about, then compare a proposed change with your current setting.</p>{draft&&<p className="studio-hash">Explicit local handoff from the Retrieval Debugger · dataset {draft.dataset} · model {draft.model}. The frontier recalculates alternatives for this calibration task.</p>}
+    <div className="decision-grid"><section className="brief-pane"><small>Objective</small><h3>What matters most?</h3><div className="goal-options" data-tour="agent-goal">{['Maximize gain','Minimize drift'].map((v,i)=><button key={v} aria-pressed={goal===v} disabled={paused} onClick={()=>{goalTo(v);log('Goal changed');tourAction('agent-goal')}}>{i?'Protect the original direction':'Move toward the target'}</button>)}</div><p>Allow up to {fmt(drift)} protected drift and retain at least {fmt(cos)} cosine.</p><button disabled={paused} onClick={e=>{const input=e.currentTarget.closest('.workbench')?.querySelector<HTMLInputElement>('[data-limit]');const section=input?.closest('details');if(section)section.open=true;input?.focus()}}>Modify constraints</button></section>
+    <section className="proposal-pane" data-tour="agent-options"><small>Calculated recommendation</small>{rec&&current&&mode!=='Sequential form'?<><h3>{names[rec.p.method]}</h3><p>{goal==='Maximize gain'?'Largest target gain':'Smallest drift'} among eligible frontier points under this objective.</p><div className="result-numbers"><div><small>Target gain</small><b>{fmt(rec.p.gain)}</b></div><div><small>Protected drift</small><b>{fmt(rec.p.drift)}</b></div></div><div className="trade-meter"><small>Share of allowed drift</small><meter min={0} max={drift||1} value={rec.p.drift??0}/><span>{drift>0?Math.round((rec.p.drift??0)*100/drift)+'%':rec.p.drift===0?'Zero drift':'Limit exceeded'}</span></div><p>Feasible · proposed strength {fmt(rec.p.applied)} · current {fmt(current.applied)}</p></>:<p>{status?'Waiting for an eligible proposal. See the calculation status below.':'No eligible recommendation for these settings.'}</p>}      <div className="foundry-actions"><button data-tour="agent-approve" disabled={!current||paused||mode==='Suggestion only'||mode==='Sequential form'||!rec||rejected||rec.i===selected} onClick={()=>{if(rec){choose(rec.i);log('Approved');tourAction('agent-approve');record('SYMBIOSIS','approve')}}}>Approve recommendation</button>
+        {mode!=='Sequential form'&&rec&&<button disabled={paused} onClick={()=>{setRejected(!rejected);log(rejected?'Restored':'Rejected');record('SYMBIOSIS','reject')}}>{rejected?'Restore recommendation':'Reject recommendation'}</button>}
+        {rejected&&<span role="status">Recommendation rejected. Current setting retained.</span>}
+        <button data-tour="agent-undo" disabled={previous===null} onClick={()=>{if(previous!==null)select(previous);setPrevious(null);log('Rolled back');tourAction('agent-undo');record('SYMBIOSIS','undo')}}>Undo selection</button></div>
+</section><section className="history-pane"><small>Your decisions</small><h3>Session history</h3>{timeline.length?<ol>{timeline.slice(-4).reverse().map((t,i)=><li key={i}>{t.action}</li>)}</ol>:<p>No decisions yet.</p>}</section></div>
+    {rec&&current&&<details className="alternative-list"><summary>Compare other feasible choices</summary>{feasible.filter(({p,i})=>p.frontier&&i!==rec.i).filter(({p},i,all)=>all.findIndex(other=>other.p.method===p.method)===i).slice(0,3).map(({p,i})=><button disabled={paused||mode==='Suggestion only'} key={i} onClick={()=>choose(i)}><strong>{names[p.method]}</strong> · Gain {fmt(p.gain)} · drift {fmt(p.drift)} · preview</button>)}</details>}
+    {current && <details className="expert-settings"><summary>Advanced · Pareto scatter plot</summary><figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">
       <path d="M45 12V161H583" fill="none" stroke="#65828c"/><text x="45" y="181">0 drift</text><text x="475" y="181">{fmt(maxD)} drift</text>
       <text x="1" y="21">{fmt(maxG)}</text><text x="1" y="158">{fmt(minG)}</text>
       {points.map((p,i)=>p.drift!=null&&p.gain!=null&&<circle key={i} cx={45+535*p.drift/maxD} cy={159-141*(p.gain-minG)/(maxG-minG)}
         r={selected===i?6:p.frontier?4:2.8} fill={p.feasible?(p.frontier?'#8be3d1':'#9caec4'):'#dd9b7d'} stroke={selected===i?'white':'none'}><title>{names[p.method]} · gain {fmt(p.gain)} · drift {fmt(p.drift)}</title></circle>)}</svg>
-      <figcaption>{feasible.length} feasible of {points.length} · {points.filter(p=>p.frontier).length} nondominated candidates (ties retained). The chart shows two of the decision variables.</figcaption></figure>}
+      <figcaption>{feasible.length} feasible of {points.length} · {points.filter(p=>p.frontier).length} nondominated candidates (ties retained). The chart shows two of the decision variables.</figcaption></figure></details>}
     <p>Algorithmic frontier search. Automatic mode may select one reversible local preview per sweep. Constraints apply to the current model and index.</p>
     <button onClick={()=>{pause(!paused);log(paused?'Resumed':'Paused')}}>{paused?'Resume agent':'Pause agent'}</button>
     <button onClick={()=>{pause(true);setPoints([]);setPrevious(null);setStatus('Pending sweep aborted.');log('Aborted')}}>Abort pending action</button>
@@ -83,13 +89,15 @@ export default function Frontier() {
     <button disabled={!current||finished!==null} onClick={()=>{finish(Date.now());log('Task completed by operator')}}>Mark steering task complete</button>
     <button onClick={()=>exportEvidence('agent-session',{mode,goal,completed:finished!==null,completion_ms:finished===null?null:finished-began,retained_events:timeline.length,timeline,control:+rating>=1&&+rating<=7?+rating:null,trust:+trust>=1&&+trust<=7?+trust:null})}>Export interaction record</button></details>
     <p>Live calibration index · 17 requested strengths per steering method from zero to the signed limit. Feasible nondominated points maximize signed gain, cosine and labeled nDCG while minimizing drift.</p>
+    <div className="rank-pair"><label>Agent interaction mode<select value={mode} onChange={e=>{modeTo(e.target.value);log('Mode '+e.target.value)}}>{['Approval required','Suggestion only','Automatic preview','Sequential form'].map(s=><option key={s}>{s}</option>)}</select></label>
+    <label>Task objective<select value={goal} disabled={paused} onChange={e=>{goalTo(e.target.value);log('Goal changed')}}><option>Maximize gain</option><option>Minimize drift</option></select></label></div>
     <fieldset disabled={paused}><div className="rank-pair"><label>Sweep query<input value={query} maxLength={400} onChange={e=>setQuery(e.target.value)}/></label>
     <label>Relevant calibration point IDs<input value={labels} placeholder="Optional, e.g. 7,10" maxLength={90} onChange={e=>setLabels(e.target.value)}/></label></div>
-    <div className="frontier-controls">{['Target concept','Protect concept'].map((label,i)=><label key={i}>{label}
+    <details className="expert-settings"><summary>Target, protection and numerical limits</summary><div className="frontier-controls">{['Target concept','Protect concept'].map((label,i)=><label key={i}>{label}
       <select value={i?protection:direction} onChange={e=>(i?setProtection:setDirection)(Number(e.target.value))}>{space?.presets.map((p,j)=><option value={j} key={j}>{p.direction.name}</option>)}</select></label>)}
-      <label>Sweep limit<input type="number" min="-2" max="2" step=".25" value={strength} onChange={e=>setStrength(Number(e.target.value))}/></label>
+      <label>Sweep limit<input data-limit="" type="number" min="-2" max="2" step=".25" value={strength} onChange={e=>setStrength(Number(e.target.value))}/></label>
       <label>Drift limit<input type="number" min="0" max="2" step=".005" value={drift} onChange={e=>setDrift(Number(e.target.value))}/></label>
-      <label>Cosine floor<input type="number" min="-1" max="1" step=".05" value={cos} onChange={e=>setCos(Number(e.target.value))}/></label></div></fieldset>
+      <label>Cosine floor<input type="number" min="-1" max="1" step=".05" value={cos} onChange={e=>setCos(Number(e.target.value))}/></label></div></details></fieldset>
     {sequential&&<button disabled={paused} onClick={()=>{approvedForm.current=sweepKey;submitForm(n=>n+1);log('Submitted baseline form')}}>Calculate form settings</button>}
     {status && <p role="status">{status} <button onClick={()=>setRetry(v=>v+1)}>Retry sweep</button></p>}
     {current && <>
@@ -103,10 +111,6 @@ export default function Frontier() {
         const before=current[key],after=rec.p[key]
         return <tr key={key}><th>{label}</th><td>{fmt(before)}</td><td>{fmt(after)}</td><td>{fmt(before==null||after==null?null:after-before)}</td></tr>
       })}</tbody></table></div>}
-      <div className="foundry-actions"><button disabled={paused||mode==='Suggestion only'||mode==='Sequential form'||!rec||rejected||rec.i===selected} onClick={()=>{if(rec){choose(rec.i);log('Approved');record('SYMBIOSIS','approve')}}}>Approve recommendation</button>
-        {mode!=='Sequential form'&&rec&&<button disabled={paused} onClick={()=>{setRejected(!rejected);log(rejected?'Restored':'Rejected');record('SYMBIOSIS','reject')}}>{rejected?'Restore recommendation':'Reject recommendation'}</button>}
-        {rejected&&<span role="status">Recommendation rejected. Current setting retained.</span>}
-        <button disabled={previous===null} onClick={()=>{if(previous!==null)select(previous);setPrevious(null);log('Rolled back');record('SYMBIOSIS','undo')}}>Undo selection</button></div>
       <details><summary>Inspect all candidates</summary><div className="preview-scroll"><table><thead><tr>{['Method','Requested','Applied','Gain','Drift','Cosine','nDCG','Status'].map(x=><th key={x}>{x}</th>)}</tr></thead>
       <tbody>{points.map((p,i)=><tr key={i}><th>{names[p.method]}</th>{[p.requested,p.applied,p.gain,p.drift,p.cosine,p.ndcg].map((v,j)=><td key={j}>{fmt(v)}</td>)}<td>{p.frontier?'Frontier':p.feasible?'Feasible':'Infeasible'}</td></tr>)}</tbody></table></div></details></>}
   </section>

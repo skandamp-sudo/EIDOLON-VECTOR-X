@@ -1,5 +1,12 @@
 # EIDOLON VECTOR-X
 
+## INTUITIVE local walkthrough
+
+Open [Mission Control](http://localhost:5173/#mission-control) and choose **Start interactive walkthrough**. In any of the six workspaces, **Walk me through** highlights the next control. Action steps wait for a real input or a successful model response. **Exit** saves the step for this tab. **Skip** records a skipped step. **Advanced** opens the research settings while retaining the working selection.
+
+Start with [CORTEX](http://localhost:5173/#cortex) to follow calculated word weights between actual passages, or [SUPPLY](http://localhost:5173/#supply) to trace a simulated delivery delay. The [system map](http://localhost:5173/#system-flow) distinguishes navigation, explicit transfers and processing engines. The [visual review](docs/intuitive/index.html) includes baseline and candidate screenshots, the recorded SUPPLY walkthrough, and the exact replay results. Open the downloaded HTML locally to browse the gallery.
+
+
 **Engineering the Geometry of Meaning.**
 
 RESURRECT 2026 | Problem Statement 05

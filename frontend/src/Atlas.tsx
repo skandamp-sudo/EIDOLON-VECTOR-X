@@ -1,6 +1,7 @@
+import {tourAction} from './tourState'
 import {readAtlasDraft,forgetAtlasDraft} from './convergence/atlasDraft'
 import { apiOrigin } from './apiOrigin'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, AudioLines, ChevronDown, Crosshair, Layers3, SlidersHorizontal } from 'lucide-react'
 import Galaxy from './Galaxy'
 import { colors, topics, validRun } from './explore'
@@ -13,6 +14,7 @@ export default function Atlas({ online }: { online: boolean }) {
   const [handoff]=useState(readAtlasDraft)
   const [draft,setDraft]=useState(handoff?.text??initialText)
   useEffect(()=>forgetAtlasDraft(),[])
+  const tourRequest=useRef('')
   const [query,setQuery]=useState(initialText)
   const [target,setTarget]=useState<Topic>('Ocean')
   const [strength,setStrength]=useState(1.2)
@@ -39,7 +41,7 @@ export default function Atlas({ online }: { online: boolean }) {
         }
         const run:Run=await response.json()
         if(!validRun(run)||run.target!==target||run.strength!==strength)throw new Error('Unexpected response from the embedding runtime.')
-        if(active)setResult(run)
+        if(active){setResult(run);if(tourRequest.current){tourAction(tourRequest.current);tourRequest.current=''}}
       } catch(e) {
         if(active){setResult(null);setError(e instanceof Error && e.name!=='AbortError'?e.message:'Request timed out. Run the query again.')}
       } finally {clearTimeout(timeout);if(active)setPending(false)}
@@ -54,13 +56,13 @@ export default function Atlas({ online }: { online: boolean }) {
     e.preventDefault()
     const value=draft.trim()
     if(!value)return
-    setQuery(value);setAttempt(a=>a+1);setSelected(null)
+    tourRequest.current="atlas-embed";setQuery(value);setAttempt(a=>a+1);setSelected(null)
   }
   return <>
     <div className="atlas-intro"><div className="crumb"><Layers3 size={14}/> Research workspace <span>/</span> Phase 1</div>
       <h1>Semantic atlas</h1><p>Steer a query toward a topic and see which documents change rank.</p><nav className="hero-actions" aria-label="Retrieval workflow"><a href="#data-foundry">Inspect a dataset</a><a href="#retrieval-debugger">Compare encoders and export a report →</a></nav></div>
-    <div className="atlas-layout"><div className="galaxy-column"><Galaxy run={run} selected={doc?.id??null} select={setSelected}/>
-      <div className="science-strip" aria-label="Measured quantities">
+    <div className="atlas-layout"><div className="galaxy-column" data-tour="atlas-map"><Galaxy run={run} selected={doc?.id??null} select={setSelected}/>
+      <div className="science-strip" data-tour="atlas-result" aria-label="Measured quantities">
         <div><span>Embedding backbone</span><b>{run?.model??'—'} <small>{run?run.dimensions+'D':''}</small></b></div>
         <div title="Fraction of calibration embedding variance retained by three PCA components"><span>PCA variance retained</span><b>{run?(run.explained_variance*100).toFixed(1)+'%':'—'}</b></div>
         <div title="Cosine similarity between the original and steered query"><span>Query cosine</span><b>{run?run.retained_cosine.toFixed(3):'—'}</b></div>
@@ -69,10 +71,10 @@ export default function Atlas({ online }: { online: boolean }) {
       <aside className="panel steering"><div className="panel-head"><div className="panel-title"><SlidersHorizontal size={18}/><h2>Vector Warp</h2></div></div>
         <div className="steer-body"><form onSubmit={submit}><label htmlFor="query">Query text</label>
           {handoff&&<p>Draft from {handoff.source}. Select Embed query to encode the edited passage. Up to 400 characters are carried over.</p>}
-          <textarea id="query" value={draft} onChange={e=>setDraft(e.target.value)} maxLength={400} rows={2}
+          <textarea data-tour="atlas-query" id="query" value={draft} onChange={e=>setDraft(e.target.value)} maxLength={400} rows={2}
             onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();e.currentTarget.form?.requestSubmit()}}}/>
-          <button className="encode" disabled={!online||!draft.trim()} type="submit"><AudioLines size={15}/> Embed query</button></form>
-          <label htmlFor="target">Concept direction</label><div className="select"><select id="target" value={target} disabled={!online} onChange={e=>setTarget(e.target.value as Topic)}>
+          <button data-tour="atlas-embed" className="encode" disabled={!online||!draft.trim()} type="submit"><AudioLines size={15}/> Embed query</button></form>
+          <label htmlFor="target">Concept direction</label><div className="select"><select data-tour="atlas-target" id="target" value={target} disabled={!online} onChange={e=>{tourRequest.current="atlas-target";setTarget(e.target.value as Topic)}}>
           {topics.map(t=><option key={t}>{t}</option>)}</select><ChevronDown size={14}/></div>
           <div className="strength-head"><label htmlFor="strength">Steering strength</label><output htmlFor="strength">{signed(strength)}</output></div>
           <input id="strength" type="range" min="-2" max="2" step=".05" value={strength} disabled={!online} onChange={e=>setStrength(Number(e.target.value))}/>

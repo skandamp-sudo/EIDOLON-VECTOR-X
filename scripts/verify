@@ -15,5 +15,6 @@ node frontend/sessionSmoke.mjs
 node frontend/obsidianSmoke.mjs
 node frontend/focusSmoke.mjs
 node frontend/ascensionFinal.mjs
+node frontend/intuitiveSmoke.mjs
 git diff --check
 git diff --cached --check

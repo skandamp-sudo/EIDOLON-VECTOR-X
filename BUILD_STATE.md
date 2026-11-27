@@ -1,5 +1,16 @@
 # Build state
 
+## INTUITIVE 017 · local feature candidate · 27 November 2026 IST
+
+Baseline `11ec9f2` on feature/ascension. Production remains on `93d9054`. The approved CORTEX workstation uses the existing normalized term weights, positive cosine neighbors and source passages. SUPPLY traces a simulated lot through allocation to an order. SYMBIOSIS uses the existing feasibility search and reversible proposal decisions. MORPH compares interactive navigation previews with opt-in tab-only learning. CLARITY displays the detected readings and records one confirmation at a time. The Atlas keeps its established search and steering interface.
+
+Beginner and Advanced retain mounted workspace state. Seven real-control walkthroughs support exit, resume, skip, restart and missing-target recovery. System Flow uses the existing 52 stage definitions across six workflows and four graphical views with pointer or keyboard panning, zoom, selection and SVG download. The evidence dashboard identifies the telescope result as an authored fixture.
+
+Chrome 158.0.8127.37 exercised the seven tours, all four map views, pointer and keyboard controls, SVG downloads, local state isolation and error paths. The [visual review](docs/intuitive/index.html) contains 10 baseline and 49 candidate screenshots, including desktop and 390-pixel mobile layouts. The regression command now includes the INTUITIVE browser suite. Run `./scripts/verify` with the loopback services. To capture the visual suite separately use `node frontend/intuitiveSmoke.mjs /path/to/new/capture-folder`.
+
+The Python baseline contained 65 passing tests. All four local encoder exports matched their CLI replays. In the fixed comparison the 8D and 16D configurations passed the release gate, while 128D and 384D blocked. The three-process numerical gate produced one negative-strength 16D digest across 300 reports and verified all 13 archived files. Native Safari WebDriver declined session creation because remote automation was disabled. Human newcomer task success, physical mobile use, and cross-platform numerical determinism remain unmeasured. No credit telemetry was available.
+
+
 ## FOCUS retrieval engineering
 
 The feature branch starts at OBSIDIAN production commit `3356e97e0db83a5f2f689c4b04c48995dc374ee8`. Eight focused backend checks passed for the five-method debugger, missed labels, abstentions, stable ties, replay, per-task gates and hosted dataset restrictions. The scoring rules and engineering evidence boundary are in [FOCUS protocol v1](docs/FOCUS-PROTOCOL.md).
