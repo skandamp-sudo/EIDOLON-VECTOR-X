@@ -96,6 +96,9 @@ try {
   await page.getByLabel('Instruction to interpret').fill('Send it')
   await page.getByRole('button',{name:'Inspect language'}).click()
   await page.getByText('PROCEED',{exact:true}).waitFor()
+  await page.getByLabel('Resolution history').getByText(/ocean waves/).waitFor()
+  await page.getByRole('button',{name:'Undo last clarification'}).click()
+  await page.getByText('DEFER',{exact:true}).waitFor()
   await page.getByRole('button',{name:'Clear clarification context'}).click()
   await page.getByText('DEFER',{exact:true}).waitFor()
  }
