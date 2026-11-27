@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-27 · Obsidian production release
+
+Released the responsive sidebar, six workspace layouts and four-view steering comparison in PR #2. Verified the public domain against localhost, exercised the six applications on desktop and mobile emulation, and confirmed the hosted upload and training restrictions. Updated the walkthrough for the deployed controls. [Production verification](BUILD_STATE.md#obsidian-production-release)
+
 ## 2026-11-27 14:04 IST · Convergence engineering release
 
 PR #1 merged with milestone history preserved. Verified both production deployments, all six public workspaces on desktop and mobile emulation, the hosted API restrictions, four local encoder identities and frozen evidence. See the [release record](BUILD_STATE.md#convergence-production-release).

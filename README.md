@@ -6,11 +6,11 @@ RESURRECT 2026 | Problem Statement 05
 
 Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
-## Convergence production release
+## Obsidian production release
 
 Open [public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) to explore all six workspaces. The [Railway health endpoint](https://vector-x-backend-production.up.railway.app/api/v1/health) reports service readiness. Public inference uses the 8D calibration encoder. Use the [local workspace](http://localhost:5173/#mission-control) for private dataset imports, concept training and the four research encoders.
 
-The engineering release preserves the individual milestones from [PR #1](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/1). See [the release record](BUILD_STATE.md#convergence-production-release) and [the scientific results and limits](docs/CONVERGENCE.md).
+Obsidian shipped in merge commit `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`. The desktop sidebar and mobile workspace menu open the same six applications. Intelligence shows four synchronized steering views. [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2) · [Production verification](BUILD_STATE.md#obsidian-production-release) · [Scientific results and limits](docs/CONVERGENCE.md)
 
 [Judge walkthrough and local fallback](docs/JUDGE-WALKTHROUGH.md) · [Independent evaluation instructions](docs/INDEPENDENT-EVALUATION.md)
 
@@ -154,6 +154,6 @@ Production serves live calibration inference and the recorded four-encoder evide
 
 - The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
 
-## Obsidian review workspace
+## Obsidian walkthrough
 
-The visual review branch starts at the Convergence engineering tag. Open [local Mission Control](http://localhost:5173/#mission-control) for the guided investigation, live calibration signatures and six workspaces. The rail collapses on desktop. The menu opens the directory on phones. See [visual review](docs/VISUAL-REVIEW.md) and [design specification](DESIGN.md). The public deployment follows main.
+Choose **Start Guided Demo** in Mission Control to follow the investigation or **Explore Semantic Universe** to open VECTOR-X. In Intelligence, focus a view and press an arrow key to rotate all four comparisons together. [Public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) · [Visual review](docs/VISUAL-REVIEW.md) · [Design specification](DESIGN.md)

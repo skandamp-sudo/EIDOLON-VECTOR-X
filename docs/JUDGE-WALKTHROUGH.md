@@ -2,9 +2,9 @@
 
 ## Choose the demonstration build
 
-The [public walkthrough](https://eidolon-vector-x.vercel.app/#mission-control) uses engineering release `43e8830fa94a1169af20de33bb1b2df54d491873`. The [local Obsidian walkthrough](http://localhost:5173/#mission-control) was reviewed at application commit `9c4a54d2206610e1484f1bef2a4fca3e768bb6d6`. The visual changes are on [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2).
+The public and local workstations share the Obsidian interface released in commit `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`. Open the sidebar on desktop or **Open workspace menu** on a phone to reach all six workspaces. [Public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) · [Local Mission Control](http://localhost:5173/#mission-control)
 
-In local Mission Control, choose **Start Guided Demo** for the staged tour or **Explore Semantic Universe** for PS-05. In SUPPLY, **Delay supplier** changes the dated lot in the delivery timeline. In Intelligence, original, naive, learned and locked views share one camera. In Research Lab, **Ranking metric** switches the retrieval chart between Recall@3 and nDCG@3. **Inspect a QASPER paper** shows individual family coverage and retrieval. The production interface uses the earlier navigation and three synchronized camera panes, with all four methods in its results table.
+Choose **Start Guided Demo** for the staged tour or **Explore Semantic Universe** for PS-05. In SUPPLY, **Delay supplier** changes the dated lot in the delivery timeline. In Intelligence, focus a view and press Right Arrow to rotate original, naive, learned and locked views together. In Research Lab, **Ranking metric** switches the archived retrieval chart between Recall@3 and nDCG@3. **Inspect a QASPER paper** shows family-level coverage and retrieval.
 
 For a private local import, use only the loopback Data Foundry. For an offline presentation, use a previously generated local study portal or PDF and label screenshots and benchmark tables as recorded observations. If a live query fails, state the error before switching to the recorded result.
 

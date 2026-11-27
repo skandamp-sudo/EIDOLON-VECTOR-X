@@ -1,5 +1,18 @@
 # Build state
 
+## Obsidian production release
+
+On 27 November 2026, PR #2 merged approved head `135f6777bb25eb0ddf5b3feb1080b3ef168ac25e` into main at `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`, retaining its milestone commits. GitHub reported both PR checks successful. Vercel and Railway reported successful deployments for the merge. Verification used the stable public domain. [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2) · [Mission Control](https://eidolon-vector-x.vercel.app/#mission-control)
+
+| Gate | Observed result |
+| --- | --- |
+| Pre-merge regression | The candidate passed 49 Python tests, the fixture checks, TypeScript, the Vite build and four Chrome suites. A separate hosted build passed. The visual review recorded 64 route and viewport combinations at 360, 390, 1280 and 1440 pixels. |
+| Public workspaces | Desktop Chrome and Pixel 7 Chrome emulation each exercised CORTEX assessment, SUPPLY simulated approval, SYMBIOSIS approval and undo, MORPH shortcut learning and reset, VECTOR-X steering and CLARITY interpretation retrieval. Both opened Data Foundry, Research Lab and Evidence Vault. All 18 route checks passed without uncaught page errors or horizontal overflow. |
+| Navigation and visualization | Desktop sidebar collapse and expand, mobile drawer and Escape, Mission Control calibration plots and keyboard rotation of four synchronized Intelligence views passed. Captured 21 production screenshots across both viewports, including the mobile menu. |
+| Local comparison | Nine workspace headings matched across localhost and the public site. Shared visual element counts matched on eight routes. Local Data Foundry exposed file selection and public Data Foundry displayed the hosted restriction. |
+| Public API | Health and foundation returned 200. Production-origin preflight returned 200 with its exact origin. Foreign-origin preflight returned 400 without an allow-origin header. On the public 8D model, Ocean steering changed the top three IDs from [5, 0, 1] to [6, 7, 10]. Hosted CSV import returned 404 and training returned 403. [Railway health](https://vector-x-backend-production.up.railway.app/api/v1/health) |
+| Scientific preservation | The five SciFact manifest entries and eight QASPER first/repeat hashes matched. The release retained the frozen evidence and the Phase 3 scientific stop. |
+
 ## Convergence production release
 
 On 27 November 2026, PR #1 merged reviewed head `3cc11e925cba63eb5ec25c165a115f9dd150e8fe` into main with merge commit `9a5f246c98ecf883ac24a68ccf7cfc33a3e76e26`. The first parent is the previous production source, `f5fc5ee3c963289628a22c0442a743eaf683ac0e`. Vercel and Railway reported successful production deployments of the merge.
