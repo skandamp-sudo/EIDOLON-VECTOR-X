@@ -7,7 +7,7 @@ export const colors: Record<Topic,string> = {
 export type Doc = { id: number; topic: Topic; text: string; xyz: XYZ; before: number; after: number }
 export type Run = {
   model: string; dimensions: number; target: Topic; strength: number; documents: Doc[];
-  original: number[]; steered: number[]; trajectory: XYZ[]; before: number[]; after: number[];
+  omitted_terms?: string[]; original: number[]; steered: number[]; trajectory: XYZ[]; before: number[]; after: number[];
   retained_cosine: number; displacement: number; explained_variance: number; neighbor_overlap: number
 }
 const numbers = (v: unknown, length: number) => Array.isArray(v) && v.length === length && v.every(Number.isFinite)

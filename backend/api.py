@@ -91,6 +91,10 @@ async def explore(request: Request):
     except ValidationError:
         raise HTTPException(422, "Use 1–400 characters, a known target and strength from −2 to +2")
     try:
-        return request.app.state.atlas.explore(query)
+        result = request.app.state.atlas.explore(query)
+        vectorizer = request.app.state.atlas.model.vectorizer
+        tokens = vectorizer.build_tokenizer()(vectorizer.build_preprocessor()(query.text))
+        result.omitted_terms = sorted({t for t in tokens if t not in vectorizer.vocabulary_})
+        return result
     except ValueError as error:
         raise HTTPException(422, str(error)) from error

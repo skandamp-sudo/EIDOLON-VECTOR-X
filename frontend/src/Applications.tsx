@@ -80,6 +80,7 @@ function Explorer({step}:{step:number}) {
 export default function Applications({online,initialStep=0,direct=false}:{online:boolean;initialStep?:number;direct?:boolean}){
   const [step,setLocalStep]=useState(initialStep)
   const setStep=(value:number)=>{if(direct)location.hash=value===5?'evidence-vault':steps[value].toLowerCase();else setLocalStep(value)}
+  const [inspectRelated,setInspectRelated]=useState(false)
   const domain=step===5?null:steps[step] as Domain
   useEffect(()=>{if(domain)visit(domain)},[domain])
   const navigate=(d:Domain)=>{if(d==='VECTOR-X'){location.hash='vector-x';return}setStep(steps.indexOf(d))}
@@ -89,7 +90,7 @@ export default function Applications({online,initialStep=0,direct=false}:{online
     {!direct&&walkthrough}
     {domain&&(!direct||step===3)&&<details open={step===3}><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
     {step===0&&<Cortex/>}{step===2&&<Supply/>}{step===1&&<Clarity/>}
-    {step===5?<><Recovery online={online}/><p>BM25 led unsteered retrieval. Neither new encoder increased the fraction of methodology-labeled paragraphs in the governed top three. Only three evaluation paragraphs carried that label.</p><a href="#research-lab">Open full Evidence Vault</a></>:!online?<p role="status">Waiting for the model service.</p>:step===4?<Frontier/>:<Explorer key={step<2?'knowledge':'inventory'} step={step}/>}
+    {step===5?<><Recovery online={online}/><p>BM25 led unsteered retrieval. Neither new encoder increased the fraction of methodology-labeled paragraphs in the governed top three. Only three evaluation paragraphs carried that label.</p><a href="#research-lab">Open full Evidence Vault</a></>:!online?<p role="status">Waiting for the model service.</p>:step===4?<Frontier/>:direct&&step===1&&!inspectRelated?<button onClick={()=>setInspectRelated(true)}>Explore related calibration documents</button>:<Explorer key={step<2?'knowledge':'inventory'} step={step}/>}
     {direct&&domain&&step!==3&&<details><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
     {direct&&walkthrough}
   </section>

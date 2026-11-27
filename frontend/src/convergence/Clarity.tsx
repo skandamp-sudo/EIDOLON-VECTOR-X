@@ -17,11 +17,13 @@ type Meaning={text:string;run:Run|null;error:string}
 async function encode(text:string,signal:AbortSignal):Promise<Meaning>{
  if(text.length>400)return {text,run:null,error:'Interpretation exceeds the 400-character encoder limit. Shorten the instruction.'}
  try{
-  const res=await fetch(apiOrigin+'/api/v1/explore',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,strength:0,target:'Ocean'}),signal,cache:'no-store'})
+  const deadline=AbortSignal.any([signal,AbortSignal.timeout(6500)])
+  const res=await fetch(apiOrigin+'/api/v1/explore',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,strength:0,target:'Ocean'}),signal:deadline,cache:'no-store'})
+  if(res.status===503||res.status===429)return {text,run:null,error:'Service busy (HTTP '+res.status+'). Retry comparison when ready.'}
   const run=await res.json()
   if(!res.ok||!validRun(run))return {text,run:null,error:typeof run.detail==='string'?run.detail:'Encoder unavailable'}
   return {text,run,error:''}
- }catch{return {text,run:null,error:'Encoder unavailable or request timed out'}}
+ }catch{return {text,run:null,error:'The encoder did not respond. Retry comparison.'}}
 }
 function similarity(a:number[],b:number[]){
  const norms=Math.hypot(...a)*Math.hypot(...b)
@@ -34,13 +36,17 @@ export default function Clarity(){
  const resolved=(extra='')=>[query,...Object.values(answers),extra].filter(Boolean).join(' · ')
  useEffect(()=>{
   show([]);if(!comparison.length){loading(false);return}
-  const c=new AbortController(),timer=setTimeout(()=>c.abort(),12000)
+  const c=new AbortController()
   let active=true;loading(true)
   ;(async()=>{const next:Meaning[]=[]
-   for(const text of comparison)next.push(await encode(text,c.signal))
+   for(const text of comparison){
+     if(!active)break
+     next.push(await encode(text,c.signal))
+     if(active)show([...next])
+   }
    if(active){show(next);loading(false)}
   })()
-  return ()=>{active=false;clearTimeout(timer);c.abort()}
+  return ()=>{active=false;c.abort()}
  },[comparison])
  const choose=(meaning:string)=>{if(!issue||!meaning.trim())return;const next={...answers,[issue.key]:meaning.trim()};remember(query,next);answer(next);setCustom('');compare([])}
  const needsDetail=issue&&['referential','contextual'].includes(issue.kind)
@@ -51,13 +57,14 @@ export default function Clarity(){
  <figure className="reading-tree"><figcaption>Interpretation tree</figcaption><blockquote>{query.split('').map((c,n)=>issues.some(i=>n>=i.start&&n<i.end)?<mark key={n}>{c}</mark>:c)}</blockquote>
  {issues.map(i=><div key={i.key}><strong>{i.span}</strong><span>{answers[i.key]??i.meanings.join(' / ')}</span></div>)}{!issues.length&&<p>No rule matched this instruction.</p>}</figure>
  {issues.map(i=><p key={i.key}><mark>{query.slice(i.start,i.end)}</mark> · {i.kind} · characters {i.start+1}–{i.end} · {answers[i.key]??'unresolved'}</p>)}
- {issue&&<><h3>{issue.question}</h3><p>Question priority {issue.utility.toFixed(2)} bits per effort unit. Entropy {issue.entropy.toFixed(2)} bits assumes a response distinguishes both meanings. Weights use surrounding word overlap and have no probability calibration.</p>
- {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>needsDetail?setCustom(''):choose(m)} disabled={!!needsDetail}>{m} ({w.toFixed(2)})</button>)}
+ {issue&&<><h3>{issue.question}</h3><p>Heuristic question priority {issue.utility.toFixed(2)}. Word overlap weights the two readings. Only your answer confirms the intended meaning.</p>
+ {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>choose(m)} disabled={!!needsDetail}>{m} ({w.toFixed(2)})</button>)}
  <label>{needsDetail?'Enter the entity or reference frame':'Specify another meaning'}<input maxLength={60} value={custom} onChange={e=>setCustom(e.target.value)}/></label><button disabled={!custom.trim()} onClick={()=>choose(custom)}>Use my interpretation</button></>}
  {!hosted&&issues.length>0&&!pending.length&&<button onClick={()=>openAtlasDraft(resolved(),'CLARITY interpretation')}>Open interpretation in Vector Warp</button>}
  <h3>Semantic comparison</h3><button onClick={()=>compare(Array.from(new Set([query,...(issue?issue.meanings.map(m=>resolved(m)):[resolved()])])))}>Compare interpretation retrieval</button>
- {busy&&<p role="status">Encoding the interpretations…</p>}
- {vectors.map((v,i)=><div key={v.text}><strong>{i===0?'Direct interpretation':v.text}</strong>{v.run?<><p>{v.run.model} · top passages {v.run.before.map(n=>n+1).join(', ')}</p><ol>{v.run.before.map(n=><li key={n}>{v.run!.documents[n].text}</li>)}</ol></>:<p>{v.error}</p>}</div>)}
+ {busy&&<p role="status">Encoding the interpretations… <button onClick={()=>compare([])}>Cancel comparison</button></p>}
+ {!busy&&vectors.some(v=>!v.run&&v.error!=='No representable signal')&&<button onClick={()=>compare([...comparison])}>Retry comparison</button>}
+ {vectors.map((v,i)=><div key={v.text}><strong>{i===0?'Direct interpretation':v.text}</strong>{v.run?<><p>{v.run.model} · top passages {v.run.before.map(n=>n+1).join(', ')}</p>{v.run.omitted_terms?.length ? <p>Outside the fitted vocabulary: {v.run.omitted_terms.join(', ')}. These terms did not influence the ranking.</p> : null}<ol>{v.run.before.map(n=><li key={n}>{v.run!.documents[n].text}</li>)}</ol></>:<p>{v.error}</p>}</div>)}
  {vectors.map((a,i)=>vectors.slice(i+1).map((b,j)=>{const value=a.run&&b.run?similarity(a.run.original,b.run.original):null
  return <p key={i+'-'+j}>Readings {i+1} and {i+j+2} · cosine {value===null?'unavailable':value.toFixed(3)} {value!==null&&<meter aria-label="Interpretation cosine" min="-1" max="1" value={value}/>}</p>}))}
  <button onClick={()=>{remembered.clear();answer({});compare([])}}>Clear clarification context</button><button onClick={()=>exportEvidence('clarification',{query,issues,answers,decision,turns:Object.keys(answers).length,comparisons:vectors.map(v=>({reading:v.text,model:v.run?.model??null,ids:v.run?.before??null,error:v.error||null}))})}>Export clarification</button>

@@ -44,6 +44,7 @@ class Result(BaseModel):
     displacement: float
     explained_variance: float
     neighbor_overlap: float
+    omitted_terms: list[str] = Field(default_factory=list)
 
 
 class Atlas:
@@ -62,6 +63,10 @@ class Atlas:
             self.directions[topic] = delta / np.linalg.norm(delta)
 
     def steering_path(self, original: np.ndarray, target: Topic, strength: float) -> np.ndarray:
+        step = strength * self.directions[target]
+        squared = float(step @ step)
+        if squared and np.linalg.norm(original + np.clip(-(original @ step) / squared, 0, 1) * step) < 1e-10:
+            raise ValueError("The requested path crosses an undefined vector")
         steps = np.linspace(0, strength, 25)[:, None]
         path = original + steps * self.directions[target]
         norms = np.linalg.norm(path, axis=1, keepdims=True)

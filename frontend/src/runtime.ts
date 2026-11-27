@@ -1,5 +1,5 @@
 import { apiOrigin } from './apiOrigin'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export type Sample = { id: string; text: string; vector: number[] }
 export type Foundation = {
@@ -18,7 +18,11 @@ function valid(value: Foundation) {
 export function useRuntime() {
   const [data, setData] = useState<Foundation | null>(null)
   const [status, setStatus] = useState<'Checking' | 'Connected' | 'Unavailable'>('Checking')
+  const last = useRef<Foundation | null>(null)
+  const [attempt, setAttempt] = useState(0)
   useEffect(() => {
+    let refresh = true
+    let polls = 0
     let closed = false
     let timer: ReturnType<typeof setTimeout>
     let request: AbortController
@@ -26,16 +30,28 @@ export function useRuntime() {
       request = new AbortController()
       const deadline = setTimeout(() => request.abort(), 3500)
       try {
-        const [health, snapshot] = await Promise.all(['health', 'foundation'].map(async route => {
-          const response = await fetch(apiOrigin+'/api/v1/' + route, { signal: request.signal, cache: 'no-store' })
-          if (!response.ok) throw new Error('Request failed')
+        async function read(route: string) {
+          const response = await fetch(apiOrigin+'/api/v1/'+route, {signal:request.signal,cache:'no-store'})
+          if (!response.ok) throw new Error('Runtime unavailable')
           return response.json()
-        }))
-        if (health.service !== 'eidolon-vector-x' || health.status !== 'ready' ||
-            health.version !== '0.1.0' || !valid(snapshot)) throw new Error('Invalid response')
-        if (!closed) { setData(previous => previous && JSON.stringify(previous) === JSON.stringify(snapshot) ? previous : snapshot); setStatus('Connected') }
+        }
+        const health = await read('health')
+        if (health.service !== 'eidolon-vector-x' || health.status !== 'ready' || health.version !== '0.1.0') throw new Error('Unexpected service')
+        if (refresh || ++polls >= 12) {
+          const snapshot = await read('foundation')
+          if (!valid(snapshot)) throw new Error('Invalid model snapshot')
+          if (closed) return
+          if (JSON.stringify(last.current) !== JSON.stringify(snapshot)) {
+            last.current = snapshot
+            setData(snapshot)
+          }
+          refresh = false
+          polls = 0
+        }
+        if (!closed) setStatus('Connected')
       } catch {
-        if (!closed) { setData(null); setStatus('Unavailable') }
+        refresh = true
+        if (!closed) setStatus('Unavailable')
       } finally {
         clearTimeout(deadline)
         if (!closed) timer = setTimeout(poll, 5000)
@@ -43,6 +59,6 @@ export function useRuntime() {
     }
     void poll()
     return () => { closed = true; clearTimeout(timer); request.abort() }
-  }, [])
-  return { data, status }
+  }, [attempt])
+  return { data, status, retry: () => { setStatus('Checking'); setAttempt(n => n + 1) } }
 }

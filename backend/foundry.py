@@ -23,6 +23,7 @@ MAX_FIELD = 4096
 BATCH_SIZE = 64
 # A request owns this slot through parsing/inference and response serialization.
 slot = BoundedSemaphore(1)
+readers = BoundedSemaphore(2)
 LOCAL_ORIGINS = {f"http://{host}:{port}" for host in ("localhost", "127.0.0.1") for port in (5173, 8000)}
 
 
@@ -99,6 +100,28 @@ def objects_as_rows(records):
     return list(columns), rows
 
 
+def check_csv_width(text):
+    # csv.reader materializes a whole row before returning it. Count only
+    # separators outside quoted fields, including across physical lines.
+    quoted = False
+    field_start = True
+    width = 1
+    for char in text:
+        if char == '"' and (field_start or quoted):
+            quoted = not quoted
+            field_start = not quoted
+        elif not quoted and char == ",":
+            width += 1
+            if width > MAX_COLUMNS:
+                raise ValueError("CSV exceeds the column limit.")
+            field_start = True
+        elif not quoted and char in "\r\n":
+            width = 1
+            field_start = True
+        else:
+            field_start = False
+
+
 def parse(raw, kind):
     if len(raw) > MAX_BYTES:
         raise ValueError("The limit is 10 MB.")
@@ -108,8 +131,7 @@ def parse(raw, kind):
     stream = io.StringIO(text, newline=None)
     if kind == "csv":
         # Bound delimiter amplification before invoking the C reader.
-        if text.count(",") > (MAX_ROWS + 1) * MAX_COLUMNS:
-            raise ValueError("CSV exceeds the delimiter limit.")
+        check_csv_width(text)
         reader = csv.reader(stream, strict=True)
         columns = column_names(next(reader, []))
         rows = []
@@ -200,8 +222,14 @@ async def local_operation(request, limit, process_body):
         limit = min(limit, 32_768)
     if request.headers.get("x-vector-x-client") != "foundry" or request.headers.get("origin") not in allowed:
         raise HTTPException(403, "Use the local Data Foundry.")
+    # Fail fast when computation is already occupied. Stream at most two
+    # bounded bodies; a waiting network peer never owns the computation slot.
     if not slot.acquire(blocking=False):
         raise HTTPException(429, "Another Foundry operation is running. Try again.")
+    slot.release()
+    if not readers.acquire(blocking=False):
+        raise HTTPException(429, "Upload capacity is busy. Try again.")
+    computing = False
     try:
         body = bytearray()
         async with asyncio.timeout(30):
@@ -209,6 +237,9 @@ async def local_operation(request, limit, process_body):
                 if len(body) + len(chunk) > limit:
                     raise HTTPException(413, "Request exceeds the size limit.")
                 body.extend(chunk)
+        computing = slot.acquire(blocking=False)
+        if not computing:
+            raise HTTPException(429, "Another Foundry operation is running. Try again.")
 
         def process():
             result = process_body(body)
@@ -228,7 +259,9 @@ async def local_operation(request, limit, process_body):
             detail = "Invalid record content."
         raise HTTPException(422, detail) from None
     finally:
-        slot.release()
+        if computing:
+            slot.release()
+        readers.release()
 
 @router.post("/{operation}")
 async def foundry(operation: str, request: Request):

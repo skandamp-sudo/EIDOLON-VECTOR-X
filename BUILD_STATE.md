@@ -143,3 +143,7 @@ Mastery documentation reviewed against application commit 9c4a54d2206610e1484f1b
 ## ASCENSION baseline · 27 November 2026 IST
 
 The isolated worktree starts at fc762db. Captured 55 local Chrome views. Production rollback 93d9054 remains the reviewed tree. The [registered plan](ASCENSION_PLAN.md) records acceptance gates and the engineering fixture before implementation.
+
+## ASCENSION reliability candidate · 27 November 2026 IST
+
+The runtime retains its verified foundation across failed polls. Each CLARITY reading has its own deadline and reports omitted terms. Two bounded request bodies can stream independently of the single compute slot. The Atlas validates continuous paths and quoted CSV punctuation is distinguished from column delimiters. The six official requirements and Neon dispositions are tracked in docs/ASCENSION-TRACEABILITY.md. The production 503 cause remains unknown.

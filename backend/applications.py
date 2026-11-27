@@ -43,6 +43,8 @@ def explore(atlas, form):
     ids = list(range(len(records)))
     index = Index(identity, ids, vectors)
     meanings = sorted(TOPICS, key=lambda t: -float(query.values @ atlas.directions[t]))[:2]
+    if form.interpretation and np.linalg.norm(query.values + atlas.directions[form.interpretation]) < 1e-12:
+        raise ValueError("Interpretation cancels the query vector.")
     directed = Point(identity, unit(query.values + atlas.directions[form.interpretation])) if form.interpretation else query
     items = []
     for i, (name, category, text) in enumerate(records):

@@ -58,6 +58,13 @@ class AtlasTests(unittest.TestCase):
             v = r["original"] + a * self.atlas.directions["Ocean"]
             np.testing.assert_allclose(xyz, self.atlas.pca.transform([v / np.linalg.norm(v)])[0], atol=1e-9)
 
+    def test_unsampled_singularity(self):
+        from backend.atlas import Atlas
+        from backend.model import Backbone
+        atlas = Atlas(Backbone())
+        with self.assertRaisesRegex(ValueError, "undefined vector"):
+            atlas.steering_path(-atlas.directions["Ocean"], "Ocean", 1.4)
+
     def test_new_text_changes_original(self):
         self.assertNotEqual(post()["original"], post(text="forest roots in cold soil")["original"])
 

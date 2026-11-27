@@ -45,6 +45,12 @@ class FoundryTests(unittest.TestCase):
                 api(kind, raw)
             self.assertEqual(caught.exception.code, 422)
 
+    def test_quoted_csv_punctuation(self):
+        data = 'text\n' + ('"' + ',' * 3500 + '"\n') * 50
+        self.assertEqual(len(parse(data.encode(), 'csv')["rows"]), 50)
+        with self.assertRaises(ValueError):
+            parse(('col\n' + ',' * 33).encode(), 'csv')
+
     def test_size_record_and_batch_limits(self):
         self.assertEqual(len(parse(b"ocean\n" * 5000, "txt")["rows"]), 5000)
         for kind, raw, status in [("txt", b"x\n"*5001, 422), ("txt", b"a"*10_000_001, 413),
@@ -115,17 +121,28 @@ class FoundryTests(unittest.TestCase):
                 return await local_operation(request(body, wait), 100, lambda raw: parse(raw, "txt"))
 
             first = asyncio.create_task(parse_client(b"first client", True))
+            await asyncio.wait_for(started.wait(), 2)
+            second = await parse_client(b"second client")
+            self.assertEqual(json.loads(second.body)["rows"], [["second client"]])
+            started.clear()
+            waiting = asyncio.create_task(parse_client(b"waiting client", True))
             try:
                 await asyncio.wait_for(started.wait(), 2)
                 with self.assertRaises(HTTPException) as err:
-                    await parse_client(b"second client")
+                    await parse_client(b"third client")
                 self.assertEqual(err.exception.status_code, 429)
             finally:
                 release.set()
-                first_response = await first
-            second_response = await parse_client(b"second client")
-            self.assertEqual(json.loads(first_response.body)["rows"], [["first client"]])
-            self.assertEqual(json.loads(second_response.body)["rows"], [["second client"]])
+                await asyncio.gather(first, waiting, return_exceptions=True)
+            successful = [t.result() for t in (first, waiting) if not t.exception()]
+            self.assertTrue(successful)
+            for task, body in ((first, "first client"), (waiting, "waiting client")):
+                if task.exception():
+                    self.assertEqual(task.exception().status_code, 429)
+                else:
+                    self.assertEqual(json.loads(task.result().body)["rows"], [[body]])
+            retry = await parse_client(b"third client")
+            self.assertEqual(json.loads(retry.body)["rows"], [["third client"]])
 
         asyncio.run(exercise())
 
