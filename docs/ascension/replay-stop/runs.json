@@ -1,0 +1,85 @@
+{
+  "environment": {
+    "machine": "Intel x86_64",
+    "python": "3.12.14",
+    "numpy": "2.5.2",
+    "sklearn": "1.9.0",
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "VECLIB_MAXIMUM_THREADS": 1
+  },
+  "runs": [
+    {
+      "run": 1,
+      "sha256": "172462f14e7de1cad2eb89043e5c2ec078d34992274bb67fadffe8ea325ced5f"
+    },
+    {
+      "run": 2,
+      "sha256": "3f8aebce3e930efd446fa0f0640bd05e2f7f252484ffd73d48261bcfec3bcd7b"
+    },
+    {
+      "run": 3,
+      "sha256": "85e612bf8634ec45078d222923b687220548601cb2aa16944cf084c67603a57a"
+    },
+    {
+      "run": 4,
+      "sha256": "a6637d2b0298a9fa469055b54011a7157eaae6e49b1ab18dac8b21e78707532e"
+    },
+    {
+      "run": 5,
+      "sha256": "9856699e0607e0a14030bcefa1fc6907a61a1653f072c3f05078ad309eea0bac"
+    },
+    {
+      "run": 6,
+      "sha256": "3a2336694cda2b608116d89c3512f1c43904389b104d9a8627b452aac3c342a3"
+    },
+    {
+      "run": 7,
+      "sha256": "cdf743b6ca00a799627a3b97b49e62f2fd807b34b38c281cd31ded296e9ecc3a"
+    },
+    {
+      "run": 8,
+      "sha256": "a6637d2b0298a9fa469055b54011a7157eaae6e49b1ab18dac8b21e78707532e"
+    },
+    {
+      "run": 9,
+      "sha256": "cdf743b6ca00a799627a3b97b49e62f2fd807b34b38c281cd31ded296e9ecc3a"
+    },
+    {
+      "run": 10,
+      "sha256": "cde0051d31d2cb785d77118c6db5b05b35503ce8235f9d6ebf2d0ca499789bd0"
+    },
+    {
+      "run": 11,
+      "sha256": "cdf743b6ca00a799627a3b97b49e62f2fd807b34b38c281cd31ded296e9ecc3a"
+    },
+    {
+      "run": 12,
+      "sha256": "cde0051d31d2cb785d77118c6db5b05b35503ce8235f9d6ebf2d0ca499789bd0"
+    },
+    {
+      "run": 13,
+      "sha256": "2e7197b7b76eb901deeb495ba841c997c7c08612b6df1b78414d43fb9ba0fd03"
+    },
+    {
+      "run": 14,
+      "sha256": "cde0051d31d2cb785d77118c6db5b05b35503ce8235f9d6ebf2d0ca499789bd0"
+    },
+    {
+      "run": 15,
+      "sha256": "db14e7984565daba32dc7fb40e2695f2079f6bc8351d3d688eebc3f6c3634d32"
+    },
+    {
+      "run": 16,
+      "sha256": "cde0051d31d2cb785d77118c6db5b05b35503ce8235f9d6ebf2d0ca499789bd0"
+    }
+  ],
+  "max_absolute_difference_from_first": {
+    "/tasks/0/methods/locked/geometry/drift": 8.326672684688674e-17,
+    "/tasks/0/methods/spherical/geometry/cosine": 1.1102230246251565e-16,
+    "/tasks/0/methods/spherical/geometry/drift": 5.551115123125783e-17,
+    "/tasks/0/methods/unconstrained/geometry/drift": 2.7755575615628914e-17,
+    "/tasks/0/methods/locked/geometry/cosine": 1.1102230246251565e-16,
+    "/tasks/0/methods/unconstrained/geometry/cosine": 2.220446049250313e-16
+  }
+}

@@ -17,3 +17,15 @@ Baseline Chrome captures and route measurements are in [the screenshot index](do
 Use the original 24 calibration sentences and three fixed query/expected-row tasks: telescope light (6), ocean waves (9), and xylolith (24, deliberate vocabulary gap). Run all four encoders with K=3, strength 1, minimum cosine 0.8, maximum drift 0.05. Use Ocean versus Botanical directions derived in each model basis from those labeled source groups. Compare BM25, dense, RRF, unconstrained, existing governor and spherical candidate. Report representation, abstentions, Recall@3, nDCG@3, endpoint drift, cosine, signed gain, violations, and wall time. Match positive spherical gains to observed existing-governor gains within 0.01 on a fixed grid of 101 strength values in [0,2]; report unmatched counts. No parameter selection from outcomes. These are engineering fixtures, not independent data.
 
 The official PDF and Neon report are now available. The [six-problem traceability matrix and finding dispositions](docs/ASCENSION-TRACEABILITY.md) supersede the initial source-availability note. Highest-priority corrections are preserving state during connectivity loss, separating body and compute admission, reporting unknown words and comparing model-bound retrieval against explicit controls. Keep claims about planner outcomes, user effort, trust, causal UX improvement and general semantic preservation open pending appropriate evidence.
+
+### Spherical construction
+
+For an orthonormal row-space basis, write x = p + r u, with p fixed and u a unit complement vector. Project the signed target into the complement and remove its component along u to get the unit improving tangent v when it exists. The endpoint p + r (u cos θ + v sin θ) has unit norm and retains the protected coordinates in real arithmetic. Its retained cosine is 1 − r²(1 − cos θ). Limit θ to the requested angular budget, the cosine floor and the first maximum of the signed objective along this arc. Zero radius, unavailable tangent (including an antipode), or negligible signed gain return the original point and a reason. Endpoint checks use a tolerance of 1e−10. The previous governor uses a different strength parameterization; matched-gain comparisons use the declared grid. Neither geometry establishes human meaning preservation.
+
+## Scientific stop
+
+Exact replay failed for the 16D negative-strength ASCENSION fixture. See [BUILD_STATE](BUILD_STATE.md#scientific-stop--27-november-2026-ist) and [the 16-run record](docs/ascension/replay-stop/runs.json). Preserve the registered protocol, original measurements and failing test. Resume numerical diagnosis and any separately versioned scoring revision only with explicit authorization. Do not infer independent effectiveness from the provisional fixture.
+
+## Recovery gate outcome
+
+The authorized recovery passed the 16D gate and the four-model controls on the recorded Intel Mac. The fixture and negative outcomes remain archived. Resume the six workspace milestones on the feature branch. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).

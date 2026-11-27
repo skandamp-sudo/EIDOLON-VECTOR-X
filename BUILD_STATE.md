@@ -147,3 +147,19 @@ The isolated worktree starts at fc762db. Captured 55 local Chrome views. Product
 ## ASCENSION reliability candidate · 27 November 2026 IST
 
 The runtime retains its verified foundation across failed polls. Each CLARITY reading has its own deadline and reports omitted terms. Two bounded request bodies can stream independently of the single compute slot. The Atlas validates continuous paths and quoted CSV punctuation is distinguished from column delimiters. The six official requirements and Neon dispositions are tracked in docs/ASCENSION-TRACEABILITY.md. The production 503 cause remains unknown.
+
+## ASCENSION multi-encoder debugger · 27 November 2026 IST
+
+The local research debugger compares six methods with each of four hash-verified CPU bases. The FOCUS v1 path remains available for existing saved directions and report replay. Spherical rotation passed the known-angle control, degeneracies and 432 randomized comparisons before integration. See the [registered fixture results](docs/ascension/exploratory.json). On the three authored queries, 8D spherical Recall@3 was 0.333 versus 0.667 for dense. Eight of twelve model–query pairs had a matched positive governor gain within 0.01. None of the represented spherical endpoints violated the configured geometry. These measurements do not validate search quality on independent data.
+
+### Scientific stop · 27 November 2026 IST
+
+The multi-encoder milestone above is an **uncommitted candidate**. Its full gate ran 65 Python tests with 64 passes and one failure in test_identity_and_direction_do_not_cross_models. The new 16D exact-replay assertion failed for negative steering. The standalone TypeScript/production build succeeded. Four positive-strength Chrome export/replay paths passed once, including two legitimate blocked retrieval gates. Those successes do not satisfy reproducibility.
+
+A targeted diagnosis ran the same 16D model, calibration collection and serialized request 16 times inside one single-thread-configured Python process. Ten distinct canonical JSON hashes were observed. Fifteen reports differed from the first. Only six scalar paths in locked, unconstrained and spherical cosine/drift fields differed. Rank lists, gate outcomes, Recall@3, nDCG@3, input, model ID and dataset fingerprint matched. One spherical cosine was 0.8 and another 0.7999999999999999. The root cause within the numerical stack is unconfirmed. The report hashes, all distinct full reports and per-field differences are in [the stop record](docs/ascension/replay-stop/runs.json).
+
+No scoring or tolerance adjustment followed the failure. This gate blocks release readiness. No new scientific milestone was pushed. The last verified feature milestone is 6cacb2d. Historical protocols and all 13 archive checksums remain intact. The shared visual system, remaining workspace improvements, after captures and Safari acceptance are pending. Production received no changes.
+
+## Numerical recovery · 27 November 2026 IST
+
+65/65 Python tests. Three fresh processes each repeated the original case 100 times, producing SHA-256 8b6ef4fff543b87a28aed85a6a10d62188676476c2386cb681d71e243bb3230e. All four real Chrome exports passed exact CLI replay, including two blocked configurations. All 13 frozen checksums and all 16 original reports verified. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).

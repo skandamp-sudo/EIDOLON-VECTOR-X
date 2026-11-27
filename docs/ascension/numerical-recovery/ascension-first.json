@@ -1,0 +1,353 @@
+{
+  "query": {
+    "variants": 1,
+    "binary64_examples": [
+      [
+        "0x1.2fe0f4010bd83p-2",
+        "0x1.42db92a76d2dcp-1",
+        "0x1.af8d78d792723p-4",
+        "-0x1.514797d4d0f52p-3",
+        "-0x1.2ebaf0116a4dap-3",
+        "0x1.29de806360338p-2",
+        "0x1.4ddbd1e0407d5p-5",
+        "0x1.770940ce71cd0p-6",
+        "-0x1.7a27f1a663317p-3",
+        "0x1.1e51a9af090a7p-3",
+        "-0x1.4177e6560ceb9p-3",
+        "-0x1.ad2ae32fc3465p-3",
+        "-0x1.bb598eb0881a3p-2",
+        "-0x1.c0bda3c84f761p-3",
+        "-0x1.8daf83c495ca2p-4",
+        "0x1.31b62c5ce6c55p-6"
+      ]
+    ]
+  },
+  "svd": {
+    "variants": 1,
+    "binary64_examples": [
+      [
+        "-0x1.33892f9638cb0p-3",
+        "-0x1.5af0ce1ea4211p-4",
+        "0x1.ab55f9c4e37cbp-1",
+        "-0x1.8f66252353e5cp-2",
+        "-0x1.11c299370d0fdp-2",
+        "-0x1.fc35169430ce4p-8",
+        "0x1.66dc902a4670dp-5",
+        "-0x1.ff3e856dff151p-4",
+        "0x1.932e4c715ebf3p-4",
+        "-0x1.9d8e3702790f5p-5",
+        "0x1.0138018697715p-4",
+        "-0x1.b8c79460bd0dbp-4",
+        "-0x1.4f55e3c5bbeedp-7",
+        "-0x1.f9102c6a026bbp-5",
+        "0x1.d5418fdb00fcbp-6",
+        "0x1.f8a29f6c564cap-10"
+      ]
+    ]
+  },
+  "safe coefficient": {
+    "variants": 3,
+    "binary64_examples": [
+      [
+        "0x1.1e983f6c475b4p-2"
+      ],
+      [
+        "0x1.1e983f6c475b5p-2"
+      ]
+    ]
+  },
+  "fixed coefficient": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.7d1b5afe6e4bcp-4"
+      ],
+      [
+        "0x1.7d1b5afe6e4bep-4"
+      ]
+    ]
+  },
+  "projected coefficient": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "-0x1.1e983f6c475b5p-2"
+      ],
+      [
+        "-0x1.1e983f6c475b6p-2"
+      ]
+    ]
+  },
+  "unconstrained numerator": {
+    "variants": 1,
+    "binary64_examples": [
+      [
+        "0x1.6a8e8e7775ea0p-5",
+        "0x1.5812285286462p+0",
+        "0x1.23c650df57301p-3",
+        "0x1.988f5145bfbf4p-3",
+        "0x1.315a9541d0197p-2",
+        "0x1.3d9123b2b4d2dp-2",
+        "0x1.2dfb91d664736p-3",
+        "-0x1.965f39964b8d8p-5",
+        "-0x1.06567728faf10p-2",
+        "0x1.f245e0a8dbb18p-3",
+        "-0x1.c387632db9c76p-3",
+        "-0x1.9e8f79e26534bp-4",
+        "-0x1.9b50c8c97ee65p-2",
+        "-0x1.978a09d0338d0p-5",
+        "-0x1.4300ad0811a93p-3",
+        "-0x1.7ae97215f83e6p-4"
+      ]
+    ]
+  },
+  "unconstrained norm": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.9169dd122476dp+0"
+      ],
+      [
+        "0x1.9169dd122476ep+0"
+      ]
+    ]
+  },
+  "govern safe": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.2d98674bfa796p-2",
+        "-0x1.61258323fa69fp-1",
+        "-0x1.1533e3345c6ebp-2",
+        "-0x1.05230b47a2c94p-2",
+        "-0x1.7c197fa83b677p-2",
+        "-0x1.179b1c2ada434p-6",
+        "-0x1.e741355a45336p-4",
+        "0x1.b807e634f13a0p-4",
+        "0x1.6865324aced05p-5",
+        "-0x1.6e0913685a5d6p-4",
+        "0x1.78432e074708ap-5",
+        "-0x1.4069059f3309dp-4",
+        "-0x1.d19f321f4f7a3p-6",
+        "-0x1.37845a4eac0ffp-3",
+        "0x1.aef8e25a64d09p-5",
+        "0x1.c5220b6182c87p-4"
+      ],
+      [
+        "0x1.2d98674bfa796p-2",
+        "-0x1.61258323fa69fp-1",
+        "-0x1.1533e3345c6ecp-2",
+        "-0x1.05230b47a2c94p-2",
+        "-0x1.7c197fa83b677p-2",
+        "-0x1.179b1c2ada434p-6",
+        "-0x1.e741355a45336p-4",
+        "0x1.b807e634f13a0p-4",
+        "0x1.6865324aced04p-5",
+        "-0x1.6e0913685a5d5p-4",
+        "0x1.78432e0747089p-5",
+        "-0x1.4069059f3309cp-4",
+        "-0x1.d19f321f4f7a3p-6",
+        "-0x1.37845a4eac0ffp-3",
+        "0x1.aef8e25a64d09p-5",
+        "0x1.c5220b6182c87p-4"
+      ]
+    ]
+  },
+  "govern step": {
+    "variants": 1,
+    "binary64_examples": [
+      [
+        "-0x1.0000000000000p+0"
+      ]
+    ]
+  },
+  "unconstrained endpoint": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.ce70487b85f46p-6",
+        "0x1.b6dc24a029a7ap-1",
+        "0x1.74280cbabd95fp-4",
+        "0x1.048eba3d158ebp-3",
+        "0x1.857a00ba086f9p-3",
+        "0x1.950de70ad0cfbp-3",
+        "0x1.812d3c5412b37p-4",
+        "-0x1.032987d24516fp-5",
+        "-0x1.4e9c20c4a4e67p-3",
+        "0x1.3dc5910d97234p-3",
+        "-0x1.1ff5fb495a4d4p-3",
+        "-0x1.08626831c6b62p-4",
+        "-0x1.0650a2e9f5512p-2",
+        "-0x1.03e8190204567p-5",
+        "-0x1.9bfccc08f3442p-4",
+        "-0x1.e34ca11f91b1ap-5"
+      ],
+      [
+        "0x1.ce70487b85f47p-6",
+        "0x1.b6dc24a029a7bp-1",
+        "0x1.74280cbabd95fp-4",
+        "0x1.048eba3d158ecp-3",
+        "0x1.857a00ba086fap-3",
+        "0x1.950de70ad0cfcp-3",
+        "0x1.812d3c5412b38p-4",
+        "-0x1.032987d24516fp-5",
+        "-0x1.4e9c20c4a4e68p-3",
+        "0x1.3dc5910d97235p-3",
+        "-0x1.1ff5fb495a4d5p-3",
+        "-0x1.08626831c6b63p-4",
+        "-0x1.0650a2e9f5513p-2",
+        "-0x1.03e8190204568p-5",
+        "-0x1.9bfccc08f3443p-4",
+        "-0x1.e34ca11f91b1bp-5"
+      ]
+    ]
+  },
+  "unconstrained final cosine": {
+    "variants": 3,
+    "binary64_examples": [
+      [
+        "0x1.9169dd122476cp-1"
+      ],
+      [
+        "0x1.9169dd122476ep-1"
+      ]
+    ]
+  },
+  "unconstrained final drift": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.b29400817a097p-3"
+      ],
+      [
+        "0x1.b29400817a098p-3"
+      ]
+    ]
+  },
+  "locked endpoint": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.76cced402caf4p-10",
+        "0x1.b1706ef769420p-1",
+        "0x1.edd2df4943d4fp-3",
+        "0x1.da74f11aa089ap-5",
+        "0x1.2551b39fa4e0ap-3",
+        "0x1.94625252a5e35p-3",
+        "0x1.a372d54da63f0p-4",
+        "-0x1.bc0b3cd8931b1p-5",
+        "-0x1.2c3c1cc474e0ep-3",
+        "0x1.2cedb10cbc078p-3",
+        "-0x1.0a6e6b676b0a6p-3",
+        "-0x1.58e7da51eb9d6p-4",
+        "-0x1.099b6a852ee1fp-2",
+        "-0x1.5ff088dabac58p-5",
+        "-0x1.8926ffe27887cp-4",
+        "-0x1.e311f7c827ab5p-5"
+      ],
+      [
+        "0x1.76cced402caf4p-10",
+        "0x1.b1706ef769420p-1",
+        "0x1.edd2df4943d51p-3",
+        "0x1.da74f11aa089ap-5",
+        "0x1.2551b39fa4e0ap-3",
+        "0x1.94625252a5e35p-3",
+        "0x1.a372d54da63f0p-4",
+        "-0x1.bc0b3cd8931b1p-5",
+        "-0x1.2c3c1cc474e0ep-3",
+        "0x1.2cedb10cbc078p-3",
+        "-0x1.0a6e6b676b0a6p-3",
+        "-0x1.58e7da51eb9d8p-4",
+        "-0x1.099b6a852ee1fp-2",
+        "-0x1.5ff088dabac58p-5",
+        "-0x1.8926ffe27887cp-4",
+        "-0x1.e311f7c827ab5p-5"
+      ]
+    ]
+  },
+  "locked final cosine": {
+    "variants": 2,
+    "binary64_examples": [
+      [
+        "0x1.9c1f575b7b34ap-1"
+      ],
+      [
+        "0x1.9c1f575b7b34bp-1"
+      ]
+    ]
+  },
+  "locked final drift": {
+    "variants": 4,
+    "binary64_examples": [
+      [
+        "0x1.117fb6d01ed00p-5"
+      ],
+      [
+        "0x1.117fb6d01ed02p-5"
+      ]
+    ]
+  },
+  "spherical endpoint": {
+    "variants": 6,
+    "binary64_examples": [
+      [
+        "-0x1.1e98127aadc8ep-7",
+        "0x1.af3dc19f7faecp-1",
+        "0x1.151f28983c434p-2",
+        "0x1.88f7c46c0e0c5p-5",
+        "0x1.1ae7b4fc73bc7p-3",
+        "0x1.8e2ccf23a555fp-3",
+        "0x1.ab637da08e7e4p-4",
+        "-0x1.e732e81d1539dp-5",
+        "-0x1.2233d46697478p-3",
+        "0x1.27d5256543712p-3",
+        "-0x1.037e4ce3b1086p-3",
+        "-0x1.5d3ff8707df00p-4",
+        "-0x1.055cbc12395bfp-2",
+        "-0x1.56a91d4d68941p-5",
+        "-0x1.82b3f51ae4183p-4",
+        "-0x1.ea71c0dcc3faep-5"
+      ],
+      [
+        "-0x1.1e98127aadc8ep-7",
+        "0x1.af3dc19f7faecp-1",
+        "0x1.151f28983c435p-2",
+        "0x1.88f7c46c0e0c5p-5",
+        "0x1.1ae7b4fc73bc7p-3",
+        "0x1.8e2ccf23a555fp-3",
+        "0x1.ab637da08e7e4p-4",
+        "-0x1.e732e81d1539dp-5",
+        "-0x1.2233d46697478p-3",
+        "0x1.27d5256543712p-3",
+        "-0x1.037e4ce3b1085p-3",
+        "-0x1.5d3ff8707df02p-4",
+        "-0x1.055cbc12395bfp-2",
+        "-0x1.56a91d4d68941p-5",
+        "-0x1.82b3f51ae4183p-4",
+        "-0x1.ea71c0dcc3faep-5"
+      ]
+    ]
+  },
+  "spherical final cosine": {
+    "variants": 3,
+    "binary64_examples": [
+      [
+        "0x1.9999999999999p-1"
+      ],
+      [
+        "0x1.999999999999ap-1"
+      ]
+    ]
+  },
+  "spherical final drift": {
+    "variants": 4,
+    "binary64_examples": [
+      [
+        "0x1.2000000000000p-53"
+      ],
+      [
+        "0x1.4000000000000p-53"
+      ]
+    ]
+  }
+}

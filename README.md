@@ -170,3 +170,7 @@ Production serves live calibration inference and the recorded four-encoder evide
 ## Obsidian walkthrough
 
 Choose **Start Guided Demo** in Mission Control to follow the investigation or **Explore Semantic Universe** to open VECTOR-X. In Intelligence, focus a view and press an arrow key to rotate all four comparisons together. [Public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) · [Visual review](docs/VISUAL-REVIEW.md) · [Design specification](DESIGN.md)
+
+## Local ASCENSION engineering candidate
+
+The local Retrieval Debugger compares six methods in four model-bound workspaces. Choose a research encoder and protected-sphere rotation, run a labeled task, inspect the release decision and export its reproducible JSON. Historical research and the local calibration comparisons have separate evidence scopes. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).

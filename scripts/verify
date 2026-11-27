@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+export VECLIB_MAXIMUM_THREADS=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 cd "$(dirname "$0")/.."
 ./scripts/start
 .venv/bin/python -m unittest discover -s tests -v

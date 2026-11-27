@@ -1,0 +1,3587 @@
+{
+  "legacy8": {
+    "warm_suite_ms": 8.725027997570578,
+    "matched": [
+      {
+        "gap": 0.0005535638728854098,
+        "angle": 0.6466494134484655,
+        "gain": 0.6083933885727212,
+        "locked_gain": 0.6078398246998358,
+        "locked_drift": 0.0048229711278025,
+        "sphere_drift": 2.7755575615628914e-17
+      },
+      {
+        "gap": 0.003672876851165713,
+        "angle": 0.26,
+        "gain": 0.1786245316328237,
+        "locked_gain": 0.18229740848398943,
+        "locked_drift": 0.04925664754527576,
+        "sphere_drift": 1.3877787807814457e-17
+      },
+      null
+    ],
+    "report": {
+      "protocol": "ascension-retrieval-v1",
+      "evidence_scope": "Exploratory operator labels / engineering verification",
+      "limitations": [
+        "Calibration-derived directions; authored or operator relevance judgments.",
+        "Binary relevance labels",
+        "Geometric limits measure model directions",
+        "Operator release gate only; independent retrieval effectiveness and commercial demand unvalidated"
+      ],
+      "dataset_sha256": "a6b7412f43927d3192a24a1ea911ca3d427579ad110d8a0bce41fd9f2586c0e3",
+      "model_id": "d9107d9413a0f13e3efb87d8a303384e3c9e4634aaa9e9b1bef398ae0fec08f6",
+      "documents": 24,
+      "represented": 24,
+      "ranking_policy": "cosine-fsum-rne-q40-id-v2",
+      "rrf_constant": 60,
+      "bm25": {
+        "k1": 1.2,
+        "b": 0.75,
+        "positive_matches_only": true
+      },
+      "changes": {
+        "unchanged": 2,
+        "regressed": 1
+      },
+      "gate": "BLOCK",
+      "summary": {
+        "bm25": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "dense": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.6666666666666666,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        },
+        "fusion": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "unconstrained": {
+          "labeled": 3,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.2103099178571525,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 2
+        },
+        "locked": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.6666666666666666,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        },
+        "spherical": {
+          "labeled": 3,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.3333333333333333,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        }
+      },
+      "tasks": [
+        {
+          "query": "telescope light",
+          "relevant": [
+            6
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                1,
+                6,
+                20,
+                4
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                6,
+                1,
+                2,
+                4,
+                20,
+                3,
+                5,
+                24,
+                16,
+                10,
+                7,
+                18,
+                19,
+                23,
+                21,
+                15,
+                13,
+                14,
+                9,
+                22,
+                12,
+                17,
+                11,
+                8
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                1,
+                6,
+                20,
+                4,
+                2,
+                3,
+                5,
+                24,
+                16,
+                10,
+                7,
+                18,
+                19,
+                23,
+                21,
+                15,
+                13,
+                14,
+                9,
+                22,
+                12,
+                17,
+                11,
+                8
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                7,
+                8,
+                11,
+                6,
+                1,
+                2,
+                12,
+                24,
+                10,
+                9,
+                4,
+                20,
+                3,
+                5,
+                21,
+                16,
+                18,
+                17,
+                22,
+                15,
+                14,
+                23,
+                13,
+                19
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.21843159310300608,
+                "cosine": 0.5725077934749581,
+                "target_gain": 0.9169774462958274,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.9169774462958274
+              }
+            },
+            "locked": {
+              "order": [
+                6,
+                1,
+                2,
+                24,
+                7,
+                20,
+                8,
+                11,
+                4,
+                10,
+                12,
+                9,
+                3,
+                21,
+                5,
+                16,
+                18,
+                22,
+                19,
+                23,
+                17,
+                15,
+                14,
+                13
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0048229711278025,
+                "cosine": 0.8011824200311202,
+                "target_gain": 0.6078398246998358,
+                "applied": 0.64,
+                "violated": false,
+                "signed_gain": 0.6078398246998358
+              }
+            },
+            "spherical": {
+              "order": [
+                6,
+                1,
+                2,
+                24,
+                7,
+                20,
+                8,
+                11,
+                4,
+                10,
+                12,
+                9,
+                21,
+                3,
+                5,
+                16,
+                18,
+                22,
+                19,
+                23,
+                17,
+                15,
+                14,
+                13
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 4.163336342344337e-17,
+                "cosine": 0.8,
+                "target_gain": 0.6083933885727211,
+                "applied": 0.6466494134484655,
+                "violated": false,
+                "signed_gain": 0.6083933885727211
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "unchanged",
+          "rank_changes": [
+            {
+              "id": 3,
+              "baseline": 6,
+              "candidate": 14
+            },
+            {
+              "id": 4,
+              "baseline": 4,
+              "candidate": 9
+            },
+            {
+              "id": 5,
+              "baseline": 7,
+              "candidate": 15
+            },
+            {
+              "id": 7,
+              "baseline": 11,
+              "candidate": 5
+            },
+            {
+              "id": 8,
+              "baseline": 24,
+              "candidate": 7
+            },
+            {
+              "id": 9,
+              "baseline": 19,
+              "candidate": 12
+            },
+            {
+              "id": 11,
+              "baseline": 23,
+              "candidate": 8
+            },
+            {
+              "id": 12,
+              "baseline": 21,
+              "candidate": 11
+            },
+            {
+              "id": 13,
+              "baseline": 17,
+              "candidate": 24
+            },
+            {
+              "id": 14,
+              "baseline": 18,
+              "candidate": 23
+            },
+            {
+              "id": 15,
+              "baseline": 16,
+              "candidate": 22
+            },
+            {
+              "id": 16,
+              "baseline": 9,
+              "candidate": 16
+            },
+            {
+              "id": 17,
+              "baseline": 22,
+              "candidate": 21
+            },
+            {
+              "id": 18,
+              "baseline": 12,
+              "candidate": 17
+            },
+            {
+              "id": 19,
+              "baseline": 13,
+              "candidate": 19
+            },
+            {
+              "id": 20,
+              "baseline": 5,
+              "candidate": 6
+            },
+            {
+              "id": 21,
+              "baseline": 15,
+              "candidate": 13
+            },
+            {
+              "id": 22,
+              "baseline": 20,
+              "candidate": 18
+            },
+            {
+              "id": 23,
+              "baseline": 14,
+              "candidate": 20
+            },
+            {
+              "id": 24,
+              "baseline": 8,
+              "candidate": 4
+            }
+          ]
+        },
+        {
+          "query": "ocean waves",
+          "relevant": [
+            9
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                9,
+                17,
+                11,
+                8,
+                7,
+                22,
+                10,
+                14,
+                21,
+                12,
+                2,
+                5,
+                18,
+                4,
+                3,
+                6,
+                16,
+                19,
+                24,
+                23,
+                1,
+                13,
+                15,
+                20
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                9,
+                17,
+                8,
+                11,
+                7,
+                22,
+                10,
+                14,
+                21,
+                12,
+                2,
+                5,
+                18,
+                4,
+                3,
+                6,
+                16,
+                19,
+                24,
+                23,
+                1,
+                13,
+                15,
+                20
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                8,
+                9,
+                11,
+                7,
+                12,
+                10,
+                17,
+                22,
+                24,
+                21,
+                18,
+                14,
+                2,
+                5,
+                16,
+                4,
+                3,
+                6,
+                15,
+                1,
+                13,
+                23,
+                19,
+                20
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.05034164449947165,
+                "cosine": 0.8955819656588604,
+                "target_gain": 0.2914478512320844,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.2914478512320844
+              }
+            },
+            "locked": {
+              "order": [
+                9,
+                8,
+                11,
+                7,
+                17,
+                22,
+                10,
+                12,
+                21,
+                24,
+                14,
+                18,
+                2,
+                5,
+                19,
+                4,
+                16,
+                6,
+                23,
+                3,
+                15,
+                1,
+                13,
+                20
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.04925664754527576,
+                "cosine": 0.9624512980970144,
+                "target_gain": 0.18229740848398943,
+                "applied": 0.43999999999999995,
+                "violated": false,
+                "signed_gain": 0.18229740848398943
+              }
+            },
+            "spherical": {
+              "order": [
+                8,
+                11,
+                7,
+                9,
+                12,
+                10,
+                17,
+                24,
+                22,
+                21,
+                18,
+                2,
+                5,
+                14,
+                16,
+                4,
+                6,
+                3,
+                15,
+                1,
+                23,
+                19,
+                13,
+                20
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                9
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 5.551115123125783e-17,
+                "cosine": 0.8000000000000003,
+                "target_gain": 0.3551693648533937,
+                "applied": 0.6602529937341756,
+                "violated": false,
+                "signed_gain": 0.3551693648533937
+              }
+            }
+          },
+          "delta": {
+            "recall": -1.0,
+            "ndcg": -1.0
+          },
+          "gate_reasons": [
+            "Ranking metric regressed"
+          ],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "regressed",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 21,
+              "candidate": 20
+            },
+            {
+              "id": 2,
+              "baseline": 11,
+              "candidate": 12
+            },
+            {
+              "id": 3,
+              "baseline": 15,
+              "candidate": 18
+            },
+            {
+              "id": 4,
+              "baseline": 14,
+              "candidate": 16
+            },
+            {
+              "id": 5,
+              "baseline": 12,
+              "candidate": 13
+            },
+            {
+              "id": 6,
+              "baseline": 16,
+              "candidate": 17
+            },
+            {
+              "id": 7,
+              "baseline": 5,
+              "candidate": 3
+            },
+            {
+              "id": 8,
+              "baseline": 4,
+              "candidate": 1
+            },
+            {
+              "id": 9,
+              "baseline": 1,
+              "candidate": 4
+            },
+            {
+              "id": 10,
+              "baseline": 7,
+              "candidate": 6
+            },
+            {
+              "id": 11,
+              "baseline": 3,
+              "candidate": 2
+            },
+            {
+              "id": 12,
+              "baseline": 10,
+              "candidate": 5
+            },
+            {
+              "id": 13,
+              "baseline": 22,
+              "candidate": 23
+            },
+            {
+              "id": 14,
+              "baseline": 8,
+              "candidate": 14
+            },
+            {
+              "id": 15,
+              "baseline": 23,
+              "candidate": 19
+            },
+            {
+              "id": 16,
+              "baseline": 17,
+              "candidate": 15
+            },
+            {
+              "id": 17,
+              "baseline": 2,
+              "candidate": 7
+            },
+            {
+              "id": 18,
+              "baseline": 13,
+              "candidate": 11
+            },
+            {
+              "id": 19,
+              "baseline": 18,
+              "candidate": 22
+            },
+            {
+              "id": 21,
+              "baseline": 9,
+              "candidate": 10
+            },
+            {
+              "id": 22,
+              "baseline": 6,
+              "candidate": 9
+            },
+            {
+              "id": 23,
+              "baseline": 20,
+              "candidate": 21
+            },
+            {
+              "id": 24,
+              "baseline": 19,
+              "candidate": 8
+            }
+          ]
+        },
+        {
+          "query": "xylolith",
+          "relevant": [
+            24
+          ],
+          "methods": {
+            "bm25": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "dense": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "fusion": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "locked": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "spherical": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [
+            "Candidate abstained",
+            "Required geometry unavailable"
+          ],
+          "governor_reason": "No representable signal",
+          "sphere_reason": null,
+          "change": "unchanged",
+          "rank_changes": []
+        }
+      ],
+      "replay": {
+        "encoder": "legacy8",
+        "model_id": "d9107d9413a0f13e3efb87d8a303384e3c9e4634aaa9e9b1bef398ae0fec08f6",
+        "target": "Ocean affinity",
+        "protection": "Botanical affinity",
+        "documents": null,
+        "tasks": [
+          {
+            "query": "telescope light",
+            "relevant": [
+              6
+            ]
+          },
+          {
+            "query": "ocean waves",
+            "relevant": [
+              9
+            ]
+          },
+          {
+            "query": "xylolith",
+            "relevant": [
+              24
+            ]
+          }
+        ],
+        "settings": {
+          "baseline": "dense",
+          "candidate": "spherical",
+          "k": 3,
+          "strength": 1,
+          "max_drift": 0.05,
+          "min_cosine": 0.8,
+          "min_recall": 0,
+          "min_ndcg": 0,
+          "block_regressions": true,
+          "block_abstentions": true,
+          "require_geometry": true
+        }
+      },
+      "encoder": "legacy8",
+      "dimensions": 8,
+      "direction_recipe": "calibration-group-centroid-difference-v1",
+      "geometry_tolerance": 1e-10
+    }
+  },
+  "legacy16": {
+    "warm_suite_ms": 8.209785002691206,
+    "matched": [
+      {
+        "gap": 0.0019957186007981687,
+        "angle": 0.6464063938018686,
+        "gain": 0.6063356028895386,
+        "locked_gain": 0.6043398842887404,
+        "locked_drift": 0.0031587293079921724,
+        "sphere_drift": 4.163336342344337e-17
+      },
+      {
+        "gap": 0.005111753800191493,
+        "angle": 0.28,
+        "gain": 0.1966923803900099,
+        "locked_gain": 0.19158062658981842,
+        "locked_drift": 0.04931457238880101,
+        "sphere_drift": 2.0816681711721685e-17
+      },
+      null
+    ],
+    "report": {
+      "protocol": "ascension-retrieval-v1",
+      "evidence_scope": "Exploratory operator labels / engineering verification",
+      "limitations": [
+        "Calibration-derived directions; authored or operator relevance judgments.",
+        "Binary relevance labels",
+        "Geometric limits measure model directions",
+        "Operator release gate only; independent retrieval effectiveness and commercial demand unvalidated"
+      ],
+      "dataset_sha256": "a6b7412f43927d3192a24a1ea911ca3d427579ad110d8a0bce41fd9f2586c0e3",
+      "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2",
+      "documents": 24,
+      "represented": 24,
+      "ranking_policy": "cosine-fsum-rne-q40-id-v2",
+      "rrf_constant": 60,
+      "bm25": {
+        "k1": 1.2,
+        "b": 0.75,
+        "positive_matches_only": true
+      },
+      "changes": {
+        "unchanged": 3
+      },
+      "gate": "BLOCK",
+      "summary": {
+        "bm25": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "dense": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        },
+        "fusion": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "unconstrained": {
+          "labeled": 3,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.3333333333333333,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 2
+        },
+        "locked": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        },
+        "spherical": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 2,
+          "violations": 0
+        }
+      },
+      "tasks": [
+        {
+          "query": "telescope light",
+          "relevant": [
+            6
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                1,
+                6,
+                20,
+                4
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                1,
+                6,
+                4,
+                20,
+                16,
+                5,
+                2,
+                18,
+                11,
+                10,
+                12,
+                9,
+                17,
+                8,
+                21,
+                23,
+                19,
+                24,
+                22,
+                15,
+                3,
+                14,
+                13,
+                7
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                1,
+                6,
+                4,
+                20,
+                16,
+                5,
+                2,
+                18,
+                11,
+                10,
+                12,
+                9,
+                17,
+                8,
+                21,
+                23,
+                19,
+                24,
+                22,
+                15,
+                3,
+                14,
+                13,
+                7
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                11,
+                8,
+                1,
+                6,
+                9,
+                10,
+                7,
+                12,
+                4,
+                20,
+                24,
+                18,
+                16,
+                17,
+                21,
+                5,
+                2,
+                22,
+                23,
+                3,
+                19,
+                15,
+                13,
+                14
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.20733733446952426,
+                "cosine": 0.6207471834143585,
+                "target_gain": 0.85009305198064,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.85009305198064
+              }
+            },
+            "locked": {
+              "order": [
+                1,
+                6,
+                11,
+                8,
+                20,
+                9,
+                4,
+                10,
+                12,
+                7,
+                24,
+                21,
+                23,
+                18,
+                22,
+                16,
+                5,
+                19,
+                2,
+                17,
+                3,
+                15,
+                13,
+                14
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0031587293079921724,
+                "cosine": 0.8007509760938878,
+                "target_gain": 0.6043398842887404,
+                "applied": 0.6699999999999999,
+                "violated": false,
+                "signed_gain": 0.6043398842887404
+              }
+            },
+            "spherical": {
+              "order": [
+                1,
+                6,
+                11,
+                8,
+                20,
+                9,
+                4,
+                10,
+                12,
+                7,
+                24,
+                21,
+                23,
+                18,
+                22,
+                16,
+                5,
+                19,
+                2,
+                17,
+                3,
+                15,
+                13,
+                14
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 5.551115123125783e-17,
+                "cosine": 0.8000000000000003,
+                "target_gain": 0.6063356028895386,
+                "applied": 0.6464063938018686,
+                "violated": false,
+                "signed_gain": 0.6063356028895386
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "unchanged",
+          "rank_changes": [
+            {
+              "id": 2,
+              "baseline": 7,
+              "candidate": 19
+            },
+            {
+              "id": 4,
+              "baseline": 3,
+              "candidate": 7
+            },
+            {
+              "id": 5,
+              "baseline": 6,
+              "candidate": 17
+            },
+            {
+              "id": 7,
+              "baseline": 24,
+              "candidate": 10
+            },
+            {
+              "id": 8,
+              "baseline": 14,
+              "candidate": 4
+            },
+            {
+              "id": 9,
+              "baseline": 12,
+              "candidate": 6
+            },
+            {
+              "id": 10,
+              "baseline": 10,
+              "candidate": 8
+            },
+            {
+              "id": 11,
+              "baseline": 9,
+              "candidate": 3
+            },
+            {
+              "id": 12,
+              "baseline": 11,
+              "candidate": 9
+            },
+            {
+              "id": 14,
+              "baseline": 22,
+              "candidate": 24
+            },
+            {
+              "id": 15,
+              "baseline": 20,
+              "candidate": 22
+            },
+            {
+              "id": 16,
+              "baseline": 5,
+              "candidate": 16
+            },
+            {
+              "id": 17,
+              "baseline": 13,
+              "candidate": 20
+            },
+            {
+              "id": 18,
+              "baseline": 8,
+              "candidate": 14
+            },
+            {
+              "id": 19,
+              "baseline": 17,
+              "candidate": 18
+            },
+            {
+              "id": 20,
+              "baseline": 4,
+              "candidate": 5
+            },
+            {
+              "id": 21,
+              "baseline": 15,
+              "candidate": 12
+            },
+            {
+              "id": 22,
+              "baseline": 19,
+              "candidate": 15
+            },
+            {
+              "id": 23,
+              "baseline": 16,
+              "candidate": 13
+            },
+            {
+              "id": 24,
+              "baseline": 18,
+              "candidate": 11
+            }
+          ]
+        },
+        {
+          "query": "ocean waves",
+          "relevant": [
+            9
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                9,
+                17,
+                8,
+                11,
+                7,
+                10,
+                22,
+                14,
+                20,
+                5,
+                23,
+                13,
+                24,
+                18,
+                12,
+                6,
+                4,
+                3,
+                15,
+                2,
+                19,
+                1,
+                21,
+                16
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11,
+                10,
+                22,
+                14,
+                20,
+                5,
+                23,
+                13,
+                24,
+                18,
+                12,
+                6,
+                4,
+                3,
+                15,
+                2,
+                19,
+                1,
+                21,
+                16
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                9,
+                8,
+                11,
+                7,
+                10,
+                17,
+                12,
+                24,
+                22,
+                18,
+                23,
+                5,
+                21,
+                4,
+                2,
+                3,
+                13,
+                14,
+                6,
+                15,
+                20,
+                1,
+                19,
+                16
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.055919031435684705,
+                "cosine": 0.8868913815751066,
+                "target_gain": 0.3137387361507039,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.3137387361507039
+              }
+            },
+            "locked": {
+              "order": [
+                9,
+                8,
+                11,
+                7,
+                17,
+                10,
+                12,
+                22,
+                24,
+                23,
+                20,
+                5,
+                18,
+                21,
+                14,
+                19,
+                4,
+                13,
+                2,
+                3,
+                6,
+                15,
+                1,
+                16
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.04931457238880101,
+                "cosine": 0.9610558510298937,
+                "target_gain": 0.19158062658981842,
+                "applied": 0.42999999999999994,
+                "violated": false,
+                "signed_gain": 0.19158062658981842
+              }
+            },
+            "spherical": {
+              "order": [
+                9,
+                8,
+                11,
+                7,
+                10,
+                12,
+                17,
+                24,
+                22,
+                21,
+                23,
+                18,
+                5,
+                4,
+                2,
+                3,
+                19,
+                20,
+                13,
+                1,
+                15,
+                6,
+                14,
+                16
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 1.3877787807814457e-17,
+                "cosine": 0.8000000000000002,
+                "target_gain": 0.3743725227355639,
+                "applied": 0.6624865866896373,
+                "violated": false,
+                "signed_gain": 0.3743725227355639
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "unchanged",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 22,
+              "candidate": 20
+            },
+            {
+              "id": 2,
+              "baseline": 20,
+              "candidate": 15
+            },
+            {
+              "id": 3,
+              "baseline": 18,
+              "candidate": 16
+            },
+            {
+              "id": 4,
+              "baseline": 17,
+              "candidate": 14
+            },
+            {
+              "id": 5,
+              "baseline": 10,
+              "candidate": 13
+            },
+            {
+              "id": 6,
+              "baseline": 16,
+              "candidate": 22
+            },
+            {
+              "id": 7,
+              "baseline": 5,
+              "candidate": 4
+            },
+            {
+              "id": 8,
+              "baseline": 3,
+              "candidate": 2
+            },
+            {
+              "id": 10,
+              "baseline": 6,
+              "candidate": 5
+            },
+            {
+              "id": 11,
+              "baseline": 4,
+              "candidate": 3
+            },
+            {
+              "id": 12,
+              "baseline": 15,
+              "candidate": 6
+            },
+            {
+              "id": 13,
+              "baseline": 12,
+              "candidate": 19
+            },
+            {
+              "id": 14,
+              "baseline": 8,
+              "candidate": 23
+            },
+            {
+              "id": 15,
+              "baseline": 19,
+              "candidate": 21
+            },
+            {
+              "id": 17,
+              "baseline": 2,
+              "candidate": 7
+            },
+            {
+              "id": 18,
+              "baseline": 14,
+              "candidate": 12
+            },
+            {
+              "id": 19,
+              "baseline": 21,
+              "candidate": 17
+            },
+            {
+              "id": 20,
+              "baseline": 9,
+              "candidate": 18
+            },
+            {
+              "id": 21,
+              "baseline": 23,
+              "candidate": 10
+            },
+            {
+              "id": 22,
+              "baseline": 7,
+              "candidate": 9
+            },
+            {
+              "id": 24,
+              "baseline": 13,
+              "candidate": 8
+            }
+          ]
+        },
+        {
+          "query": "xylolith",
+          "relevant": [
+            24
+          ],
+          "methods": {
+            "bm25": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "dense": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "fusion": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "locked": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "spherical": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [
+            "Candidate abstained",
+            "Required geometry unavailable"
+          ],
+          "governor_reason": "No representable signal",
+          "sphere_reason": null,
+          "change": "unchanged",
+          "rank_changes": []
+        }
+      ],
+      "replay": {
+        "encoder": "legacy16",
+        "model_id": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2",
+        "target": "Ocean affinity",
+        "protection": "Botanical affinity",
+        "documents": null,
+        "tasks": [
+          {
+            "query": "telescope light",
+            "relevant": [
+              6
+            ]
+          },
+          {
+            "query": "ocean waves",
+            "relevant": [
+              9
+            ]
+          },
+          {
+            "query": "xylolith",
+            "relevant": [
+              24
+            ]
+          }
+        ],
+        "settings": {
+          "baseline": "dense",
+          "candidate": "spherical",
+          "k": 3,
+          "strength": 1,
+          "max_drift": 0.05,
+          "min_cosine": 0.8,
+          "min_recall": 0,
+          "min_ndcg": 0,
+          "block_regressions": true,
+          "block_abstentions": true,
+          "require_geometry": true
+        }
+      },
+      "encoder": "legacy16",
+      "dimensions": 16,
+      "direction_recipe": "calibration-group-centroid-difference-v1",
+      "geometry_tolerance": 1e-10
+    }
+  },
+  "expanded": {
+    "warm_suite_ms": 7.084851000399794,
+    "matched": [
+      {
+        "gap": 4.014324028833727e-05,
+        "angle": 0.6441288997199065,
+        "gain": 0.5973849327955549,
+        "locked_gain": 0.5973447895552666,
+        "locked_drift": 0.0026163667074027477,
+        "sphere_drift": 1.3877787807814457e-17
+      },
+      null,
+      null
+    ],
+    "report": {
+      "protocol": "ascension-retrieval-v1",
+      "evidence_scope": "Exploratory operator labels / engineering verification",
+      "limitations": [
+        "Calibration-derived directions; authored or operator relevance judgments.",
+        "Binary relevance labels",
+        "Geometric limits measure model directions",
+        "Operator release gate only; independent retrieval effectiveness and commercial demand unvalidated"
+      ],
+      "dataset_sha256": "a6b7412f43927d3192a24a1ea911ca3d427579ad110d8a0bce41fd9f2586c0e3",
+      "model_id": "37f04c3ee5fde0d3b03fdb1563f9a172e82eb602e0a4df0f66f02a6a5a7768be",
+      "documents": 24,
+      "represented": 23,
+      "ranking_policy": "cosine-fsum-rne-q40-id-v2",
+      "rrf_constant": 60,
+      "bm25": {
+        "k1": 1.2,
+        "b": 0.75,
+        "positive_matches_only": true
+      },
+      "changes": {
+        "regressed": 1,
+        "unchanged": 2
+      },
+      "gate": "BLOCK",
+      "summary": {
+        "bm25": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "dense": {
+          "labeled": 3,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.2103099178571525,
+          "abstentions": 2,
+          "geometry_measured": 1,
+          "violations": 0
+        },
+        "fusion": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "unconstrained": {
+          "labeled": 3,
+          "recall": 0.0,
+          "ndcg": 0.0,
+          "abstentions": 2,
+          "geometry_measured": 1,
+          "violations": 1
+        },
+        "locked": {
+          "labeled": 3,
+          "recall": 0.0,
+          "ndcg": 0.0,
+          "abstentions": 2,
+          "geometry_measured": 1,
+          "violations": 0
+        },
+        "spherical": {
+          "labeled": 3,
+          "recall": 0.0,
+          "ndcg": 0.0,
+          "abstentions": 2,
+          "geometry_measured": 1,
+          "violations": 0
+        }
+      },
+      "tasks": [
+        {
+          "query": "telescope light",
+          "relevant": [
+            6
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                1,
+                6,
+                20,
+                4
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                4,
+                6,
+                1,
+                20,
+                24,
+                8,
+                7,
+                23,
+                12,
+                17,
+                13,
+                21,
+                10,
+                11,
+                18,
+                19,
+                3,
+                15,
+                16,
+                2,
+                5,
+                9,
+                22
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                1,
+                6,
+                4,
+                20,
+                24,
+                8,
+                7,
+                23,
+                12,
+                17,
+                13,
+                21,
+                10,
+                11,
+                18,
+                19,
+                3,
+                15,
+                16,
+                2,
+                5,
+                9,
+                22
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                8,
+                11,
+                12,
+                4,
+                20,
+                24,
+                1,
+                6,
+                7,
+                10,
+                9,
+                17,
+                16,
+                22,
+                3,
+                13,
+                23,
+                18,
+                15,
+                2,
+                5,
+                19,
+                21
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.2629010722966154,
+                "cosine": 0.6212112704389859,
+                "target_gain": 0.849404385398148,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.849404385398148
+              }
+            },
+            "locked": {
+              "order": [
+                4,
+                20,
+                8,
+                6,
+                1,
+                24,
+                12,
+                11,
+                7,
+                9,
+                10,
+                23,
+                17,
+                22,
+                16,
+                19,
+                21,
+                3,
+                13,
+                18,
+                15,
+                2,
+                5
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0026163667074027477,
+                "cosine": 0.8006026232984463,
+                "target_gain": 0.5973447895552666,
+                "applied": 0.69,
+                "violated": false,
+                "signed_gain": 0.5973447895552666
+              }
+            },
+            "spherical": {
+              "order": [
+                4,
+                20,
+                8,
+                6,
+                1,
+                24,
+                12,
+                11,
+                7,
+                9,
+                10,
+                23,
+                17,
+                22,
+                16,
+                19,
+                21,
+                3,
+                13,
+                18,
+                15,
+                2,
+                5
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 1.3877787807814457e-17,
+                "cosine": 0.8000000000000002,
+                "target_gain": 0.5973849327955549,
+                "applied": 0.6441288997199065,
+                "violated": false,
+                "signed_gain": 0.5973849327955549
+              }
+            }
+          },
+          "delta": {
+            "recall": -1.0,
+            "ndcg": -0.6309297535714575
+          },
+          "gate_reasons": [
+            "Ranking metric regressed"
+          ],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "regressed",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 3,
+              "candidate": 5
+            },
+            {
+              "id": 2,
+              "baseline": 20,
+              "candidate": 22
+            },
+            {
+              "id": 3,
+              "baseline": 17,
+              "candidate": 18
+            },
+            {
+              "id": 5,
+              "baseline": 21,
+              "candidate": 23
+            },
+            {
+              "id": 6,
+              "baseline": 2,
+              "candidate": 4
+            },
+            {
+              "id": 7,
+              "baseline": 7,
+              "candidate": 9
+            },
+            {
+              "id": 8,
+              "baseline": 6,
+              "candidate": 3
+            },
+            {
+              "id": 9,
+              "baseline": 22,
+              "candidate": 10
+            },
+            {
+              "id": 10,
+              "baseline": 13,
+              "candidate": 11
+            },
+            {
+              "id": 11,
+              "baseline": 14,
+              "candidate": 8
+            },
+            {
+              "id": 12,
+              "baseline": 9,
+              "candidate": 7
+            },
+            {
+              "id": 13,
+              "baseline": 11,
+              "candidate": 19
+            },
+            {
+              "id": 15,
+              "baseline": 18,
+              "candidate": 21
+            },
+            {
+              "id": 16,
+              "baseline": 19,
+              "candidate": 15
+            },
+            {
+              "id": 17,
+              "baseline": 10,
+              "candidate": 13
+            },
+            {
+              "id": 18,
+              "baseline": 15,
+              "candidate": 20
+            },
+            {
+              "id": 20,
+              "baseline": 4,
+              "candidate": 2
+            },
+            {
+              "id": 21,
+              "baseline": 12,
+              "candidate": 17
+            },
+            {
+              "id": 22,
+              "baseline": 23,
+              "candidate": 14
+            },
+            {
+              "id": 23,
+              "baseline": 8,
+              "candidate": 12
+            },
+            {
+              "id": 24,
+              "baseline": 5,
+              "candidate": 6
+            }
+          ]
+        },
+        {
+          "query": "ocean waves",
+          "relevant": [
+            9
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                9
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "fusion": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                9
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "locked": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                9
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "spherical": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                9
+              ],
+              "abstained": true,
+              "geometry": null
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [
+            "Candidate abstained",
+            "Required geometry unavailable"
+          ],
+          "governor_reason": "No representable signal",
+          "sphere_reason": null,
+          "change": "unchanged",
+          "rank_changes": []
+        },
+        {
+          "query": "xylolith",
+          "relevant": [
+            24
+          ],
+          "methods": {
+            "bm25": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "dense": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "fusion": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "locked": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "spherical": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [
+            "Candidate abstained",
+            "Required geometry unavailable"
+          ],
+          "governor_reason": "No representable signal",
+          "sphere_reason": null,
+          "change": "unchanged",
+          "rank_changes": []
+        }
+      ],
+      "replay": {
+        "encoder": "expanded",
+        "model_id": "37f04c3ee5fde0d3b03fdb1563f9a172e82eb602e0a4df0f66f02a6a5a7768be",
+        "target": "Ocean affinity",
+        "protection": "Botanical affinity",
+        "documents": null,
+        "tasks": [
+          {
+            "query": "telescope light",
+            "relevant": [
+              6
+            ]
+          },
+          {
+            "query": "ocean waves",
+            "relevant": [
+              9
+            ]
+          },
+          {
+            "query": "xylolith",
+            "relevant": [
+              24
+            ]
+          }
+        ],
+        "settings": {
+          "baseline": "dense",
+          "candidate": "spherical",
+          "k": 3,
+          "strength": 1,
+          "max_drift": 0.05,
+          "min_cosine": 0.8,
+          "min_recall": 0,
+          "min_ndcg": 0,
+          "block_regressions": true,
+          "block_abstentions": true,
+          "require_geometry": true
+        }
+      },
+      "encoder": "expanded",
+      "dimensions": 128,
+      "direction_recipe": "calibration-group-centroid-difference-v1",
+      "geometry_tolerance": 1e-10
+    }
+  },
+  "minilm": {
+    "warm_suite_ms": 26.719804998720065,
+    "matched": [
+      {
+        "gap": 0.003623330956444626,
+        "angle": 0.6580714193971756,
+        "gain": 0.6111105915044919,
+        "locked_gain": 0.6074872605480472,
+        "locked_drift": 0.0003608245996738098,
+        "sphere_drift": 6.591949208711867e-17
+      },
+      {
+        "gap": 0.0008013890891547804,
+        "angle": 0.28,
+        "gain": 0.21498216523415653,
+        "locked_gain": 0.2157835543233113,
+        "locked_drift": 0.04937018464306403,
+        "sphere_drift": 1.9949319973733282e-17
+      },
+      {
+        "gap": 0.001074885961894978,
+        "angle": 0.64,
+        "gain": 0.5866840001232656,
+        "locked_gain": 0.5877588860851606,
+        "locked_drift": 0.004592504638759081,
+        "sphere_drift": 5.898059818321144e-17
+      }
+    ],
+    "report": {
+      "protocol": "ascension-retrieval-v1",
+      "evidence_scope": "Exploratory operator labels / engineering verification",
+      "limitations": [
+        "Calibration-derived directions; authored or operator relevance judgments.",
+        "Binary relevance labels",
+        "Geometric limits measure model directions",
+        "Operator release gate only; independent retrieval effectiveness and commercial demand unvalidated"
+      ],
+      "dataset_sha256": "a6b7412f43927d3192a24a1ea911ca3d427579ad110d8a0bce41fd9f2586c0e3",
+      "model_id": "9ded29effabd22cc64df85126378fdf3a1515ef2fc523edb76b62754f796d4ba",
+      "documents": 24,
+      "represented": 24,
+      "ranking_policy": "cosine-fsum-rne-q40-id-v2",
+      "rrf_constant": 60,
+      "bm25": {
+        "k1": 1.2,
+        "b": 0.75,
+        "positive_matches_only": true
+      },
+      "changes": {
+        "regressed": 1,
+        "unchanged": 2
+      },
+      "gate": "BLOCK",
+      "summary": {
+        "bm25": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 1,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "dense": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.6666666666666666,
+          "abstentions": 0,
+          "geometry_measured": 3,
+          "violations": 0
+        },
+        "fusion": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 0,
+          "geometry_measured": 0,
+          "violations": null
+        },
+        "unconstrained": {
+          "labeled": 3,
+          "recall": 0.3333333333333333,
+          "ndcg": 0.3333333333333333,
+          "abstentions": 0,
+          "geometry_measured": 3,
+          "violations": 2
+        },
+        "locked": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 0,
+          "geometry_measured": 3,
+          "violations": 0
+        },
+        "spherical": {
+          "labeled": 3,
+          "recall": 0.6666666666666666,
+          "ndcg": 0.5436432511904858,
+          "abstentions": 0,
+          "geometry_measured": 3,
+          "violations": 0
+        }
+      },
+      "tasks": [
+        {
+          "query": "telescope light",
+          "relevant": [
+            6
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                1,
+                6,
+                20,
+                4
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                6,
+                1,
+                4,
+                2,
+                5,
+                20,
+                18,
+                3,
+                17,
+                13,
+                11,
+                16,
+                7,
+                15,
+                10,
+                24,
+                14,
+                21,
+                22,
+                9,
+                19,
+                8,
+                12,
+                23
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                1,
+                6,
+                4,
+                20,
+                2,
+                5,
+                18,
+                3,
+                17,
+                13,
+                11,
+                16,
+                7,
+                15,
+                10,
+                24,
+                14,
+                21,
+                22,
+                9,
+                19,
+                8,
+                12,
+                23
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                11,
+                7,
+                8,
+                10,
+                9,
+                12,
+                1,
+                6,
+                2,
+                4,
+                5,
+                18,
+                24,
+                17,
+                20,
+                21,
+                13,
+                16,
+                15,
+                3,
+                23,
+                14,
+                22,
+                19
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                6
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.17340533097402755,
+                "cosine": 0.611079014975306,
+                "target_gain": 0.8642438898889255,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.8642438898889255
+              }
+            },
+            "locked": {
+              "order": [
+                1,
+                6,
+                11,
+                7,
+                8,
+                10,
+                2,
+                4,
+                9,
+                12,
+                20,
+                5,
+                24,
+                21,
+                18,
+                17,
+                23,
+                3,
+                13,
+                22,
+                16,
+                19,
+                15,
+                14
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0003608245996738098,
+                "cosine": 0.8024237752540794,
+                "target_gain": 0.6074872605480472,
+                "applied": 0.6499999999999999,
+                "violated": false,
+                "signed_gain": 0.6074872605480472
+              }
+            },
+            "spherical": {
+              "order": [
+                1,
+                6,
+                11,
+                7,
+                8,
+                10,
+                2,
+                4,
+                9,
+                12,
+                20,
+                5,
+                24,
+                21,
+                18,
+                17,
+                23,
+                3,
+                13,
+                22,
+                16,
+                19,
+                15,
+                14
+              ],
+              "recall": 1.0,
+              "ndcg": 0.6309297535714575,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 6.591949208711867e-17,
+                "cosine": 0.8,
+                "target_gain": 0.6111105915044919,
+                "applied": 0.6580714193971756,
+                "violated": false,
+                "signed_gain": 0.6111105915044919
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": -0.36907024642854247
+          },
+          "gate_reasons": [
+            "Ranking metric regressed"
+          ],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "regressed",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 2,
+              "candidate": 1
+            },
+            {
+              "id": 2,
+              "baseline": 4,
+              "candidate": 7
+            },
+            {
+              "id": 3,
+              "baseline": 8,
+              "candidate": 18
+            },
+            {
+              "id": 4,
+              "baseline": 3,
+              "candidate": 8
+            },
+            {
+              "id": 5,
+              "baseline": 5,
+              "candidate": 12
+            },
+            {
+              "id": 6,
+              "baseline": 1,
+              "candidate": 2
+            },
+            {
+              "id": 7,
+              "baseline": 13,
+              "candidate": 4
+            },
+            {
+              "id": 8,
+              "baseline": 22,
+              "candidate": 5
+            },
+            {
+              "id": 9,
+              "baseline": 20,
+              "candidate": 9
+            },
+            {
+              "id": 10,
+              "baseline": 15,
+              "candidate": 6
+            },
+            {
+              "id": 11,
+              "baseline": 11,
+              "candidate": 3
+            },
+            {
+              "id": 12,
+              "baseline": 23,
+              "candidate": 10
+            },
+            {
+              "id": 13,
+              "baseline": 10,
+              "candidate": 19
+            },
+            {
+              "id": 14,
+              "baseline": 17,
+              "candidate": 24
+            },
+            {
+              "id": 15,
+              "baseline": 14,
+              "candidate": 23
+            },
+            {
+              "id": 16,
+              "baseline": 12,
+              "candidate": 21
+            },
+            {
+              "id": 17,
+              "baseline": 9,
+              "candidate": 16
+            },
+            {
+              "id": 18,
+              "baseline": 7,
+              "candidate": 15
+            },
+            {
+              "id": 19,
+              "baseline": 21,
+              "candidate": 22
+            },
+            {
+              "id": 20,
+              "baseline": 6,
+              "candidate": 11
+            },
+            {
+              "id": 21,
+              "baseline": 18,
+              "candidate": 14
+            },
+            {
+              "id": 22,
+              "baseline": 19,
+              "candidate": 20
+            },
+            {
+              "id": 23,
+              "baseline": 24,
+              "candidate": 17
+            },
+            {
+              "id": 24,
+              "baseline": 16,
+              "candidate": 13
+            }
+          ]
+        },
+        {
+          "query": "ocean waves",
+          "relevant": [
+            9
+          ],
+          "methods": {
+            "bm25": {
+              "order": [
+                9,
+                17,
+                8,
+                7,
+                11
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                9,
+                12,
+                11,
+                8,
+                10,
+                7,
+                15,
+                13,
+                17,
+                18,
+                16,
+                14,
+                4,
+                5,
+                1,
+                2,
+                6,
+                21,
+                24,
+                20,
+                3,
+                19,
+                22,
+                23
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                9,
+                8,
+                11,
+                7,
+                17,
+                12,
+                10,
+                15,
+                13,
+                18,
+                16,
+                14,
+                4,
+                5,
+                1,
+                2,
+                6,
+                21,
+                24,
+                20,
+                3,
+                19,
+                22,
+                23
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                9,
+                8,
+                12,
+                11,
+                10,
+                7,
+                15,
+                18,
+                24,
+                17,
+                13,
+                21,
+                16,
+                14,
+                5,
+                2,
+                1,
+                23,
+                4,
+                6,
+                19,
+                3,
+                20,
+                22
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.021348605650551977,
+                "cosine": 0.8567638612098928,
+                "target_gain": 0.3886752334593242,
+                "applied": 1,
+                "violated": false,
+                "signed_gain": 0.3886752334593242
+              }
+            },
+            "locked": {
+              "order": [
+                9,
+                12,
+                8,
+                11,
+                10,
+                7,
+                15,
+                18,
+                17,
+                13,
+                24,
+                21,
+                16,
+                14,
+                5,
+                2,
+                1,
+                4,
+                19,
+                6,
+                20,
+                23,
+                22,
+                3
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.04937018464306403,
+                "cosine": 0.961387714043859,
+                "target_gain": 0.2157835543233113,
+                "applied": 0.37,
+                "violated": false,
+                "signed_gain": 0.2157835543233113
+              }
+            },
+            "spherical": {
+              "order": [
+                9,
+                8,
+                12,
+                10,
+                11,
+                7,
+                24,
+                15,
+                18,
+                21,
+                17,
+                13,
+                16,
+                23,
+                5,
+                14,
+                2,
+                1,
+                4,
+                6,
+                19,
+                3,
+                22,
+                20
+              ],
+              "recall": 1.0,
+              "ndcg": 1.0,
+              "missed": [],
+              "abstained": false,
+              "geometry": {
+                "drift": 4.336808689942018e-17,
+                "cosine": 0.8,
+                "target_gain": 0.43641720695847563,
+                "applied": 0.6780885801484279,
+                "violated": false,
+                "signed_gain": 0.43641720695847563
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "unchanged",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 15,
+              "candidate": 18
+            },
+            {
+              "id": 2,
+              "baseline": 16,
+              "candidate": 17
+            },
+            {
+              "id": 3,
+              "baseline": 21,
+              "candidate": 22
+            },
+            {
+              "id": 4,
+              "baseline": 13,
+              "candidate": 19
+            },
+            {
+              "id": 5,
+              "baseline": 14,
+              "candidate": 15
+            },
+            {
+              "id": 6,
+              "baseline": 17,
+              "candidate": 20
+            },
+            {
+              "id": 8,
+              "baseline": 4,
+              "candidate": 2
+            },
+            {
+              "id": 10,
+              "baseline": 5,
+              "candidate": 4
+            },
+            {
+              "id": 11,
+              "baseline": 3,
+              "candidate": 5
+            },
+            {
+              "id": 12,
+              "baseline": 2,
+              "candidate": 3
+            },
+            {
+              "id": 13,
+              "baseline": 8,
+              "candidate": 12
+            },
+            {
+              "id": 14,
+              "baseline": 12,
+              "candidate": 16
+            },
+            {
+              "id": 15,
+              "baseline": 7,
+              "candidate": 8
+            },
+            {
+              "id": 16,
+              "baseline": 11,
+              "candidate": 13
+            },
+            {
+              "id": 17,
+              "baseline": 9,
+              "candidate": 11
+            },
+            {
+              "id": 18,
+              "baseline": 10,
+              "candidate": 9
+            },
+            {
+              "id": 19,
+              "baseline": 22,
+              "candidate": 21
+            },
+            {
+              "id": 20,
+              "baseline": 20,
+              "candidate": 24
+            },
+            {
+              "id": 21,
+              "baseline": 18,
+              "candidate": 10
+            },
+            {
+              "id": 23,
+              "baseline": 24,
+              "candidate": 14
+            },
+            {
+              "id": 24,
+              "baseline": 19,
+              "candidate": 7
+            }
+          ]
+        },
+        {
+          "query": "xylolith",
+          "relevant": [
+            24
+          ],
+          "methods": {
+            "bm25": {
+              "order": [],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": true,
+              "geometry": null
+            },
+            "dense": {
+              "order": [
+                21,
+                1,
+                15,
+                13,
+                3,
+                23,
+                22,
+                6,
+                5,
+                19,
+                9,
+                4,
+                2,
+                11,
+                17,
+                8,
+                18,
+                20,
+                10,
+                16,
+                12,
+                14,
+                24,
+                7
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.0,
+                "cosine": 1.0,
+                "target_gain": 0.0,
+                "applied": 0,
+                "violated": false,
+                "signed_gain": 0.0
+              }
+            },
+            "fusion": {
+              "order": [
+                21,
+                1,
+                15,
+                13,
+                3,
+                23,
+                22,
+                6,
+                5,
+                19,
+                9,
+                4,
+                2,
+                11,
+                17,
+                8,
+                18,
+                20,
+                10,
+                16,
+                12,
+                14,
+                24,
+                7
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": false,
+              "geometry": null
+            },
+            "unconstrained": {
+              "order": [
+                8,
+                9,
+                10,
+                12,
+                11,
+                7,
+                21,
+                24,
+                23,
+                15,
+                18,
+                13,
+                1,
+                17,
+                5,
+                16,
+                2,
+                22,
+                19,
+                3,
+                6,
+                14,
+                4,
+                20
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.19561416429506828,
+                "cosine": 0.6849322303061496,
+                "target_gain": 0.7466679100818371,
+                "applied": 1,
+                "violated": true,
+                "signed_gain": 0.7466679100818371
+              }
+            },
+            "locked": {
+              "order": [
+                8,
+                9,
+                10,
+                12,
+                11,
+                7,
+                21,
+                23,
+                24,
+                19,
+                22,
+                15,
+                1,
+                18,
+                5,
+                13,
+                20,
+                2,
+                17,
+                3,
+                16,
+                6,
+                4,
+                14
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 0.004592504638759081,
+                "cosine": 0.8023437736514127,
+                "target_gain": 0.5877588860851606,
+                "applied": 0.74,
+                "violated": false,
+                "signed_gain": 0.5877588860851606
+              }
+            },
+            "spherical": {
+              "order": [
+                8,
+                9,
+                10,
+                12,
+                11,
+                7,
+                21,
+                23,
+                24,
+                19,
+                22,
+                15,
+                1,
+                18,
+                5,
+                13,
+                20,
+                2,
+                17,
+                3,
+                16,
+                6,
+                4,
+                14
+              ],
+              "recall": 0.0,
+              "ndcg": 0.0,
+              "missed": [
+                24
+              ],
+              "abstained": false,
+              "geometry": {
+                "drift": 4.336808689942018e-17,
+                "cosine": 0.8000000000000002,
+                "target_gain": 0.5897132880609609,
+                "applied": 0.643762896213252,
+                "violated": false,
+                "signed_gain": 0.5897132880609609
+              }
+            }
+          },
+          "delta": {
+            "recall": 0.0,
+            "ndcg": 0.0
+          },
+          "gate_reasons": [],
+          "governor_reason": "Reduced to satisfy measured endpoint constraints and signed target gain.",
+          "sphere_reason": "Rotated within the protected complement.",
+          "change": "unchanged",
+          "rank_changes": [
+            {
+              "id": 1,
+              "baseline": 2,
+              "candidate": 13
+            },
+            {
+              "id": 2,
+              "baseline": 13,
+              "candidate": 18
+            },
+            {
+              "id": 3,
+              "baseline": 5,
+              "candidate": 20
+            },
+            {
+              "id": 4,
+              "baseline": 12,
+              "candidate": 23
+            },
+            {
+              "id": 5,
+              "baseline": 9,
+              "candidate": 15
+            },
+            {
+              "id": 6,
+              "baseline": 8,
+              "candidate": 22
+            },
+            {
+              "id": 7,
+              "baseline": 24,
+              "candidate": 6
+            },
+            {
+              "id": 8,
+              "baseline": 16,
+              "candidate": 1
+            },
+            {
+              "id": 9,
+              "baseline": 11,
+              "candidate": 2
+            },
+            {
+              "id": 10,
+              "baseline": 19,
+              "candidate": 3
+            },
+            {
+              "id": 11,
+              "baseline": 14,
+              "candidate": 5
+            },
+            {
+              "id": 12,
+              "baseline": 21,
+              "candidate": 4
+            },
+            {
+              "id": 13,
+              "baseline": 4,
+              "candidate": 16
+            },
+            {
+              "id": 14,
+              "baseline": 22,
+              "candidate": 24
+            },
+            {
+              "id": 15,
+              "baseline": 3,
+              "candidate": 12
+            },
+            {
+              "id": 16,
+              "baseline": 20,
+              "candidate": 21
+            },
+            {
+              "id": 17,
+              "baseline": 15,
+              "candidate": 19
+            },
+            {
+              "id": 18,
+              "baseline": 17,
+              "candidate": 14
+            },
+            {
+              "id": 20,
+              "baseline": 18,
+              "candidate": 17
+            },
+            {
+              "id": 21,
+              "baseline": 1,
+              "candidate": 7
+            },
+            {
+              "id": 22,
+              "baseline": 7,
+              "candidate": 11
+            },
+            {
+              "id": 23,
+              "baseline": 6,
+              "candidate": 8
+            },
+            {
+              "id": 24,
+              "baseline": 23,
+              "candidate": 9
+            }
+          ]
+        }
+      ],
+      "replay": {
+        "encoder": "minilm",
+        "model_id": "9ded29effabd22cc64df85126378fdf3a1515ef2fc523edb76b62754f796d4ba",
+        "target": "Ocean affinity",
+        "protection": "Botanical affinity",
+        "documents": null,
+        "tasks": [
+          {
+            "query": "telescope light",
+            "relevant": [
+              6
+            ]
+          },
+          {
+            "query": "ocean waves",
+            "relevant": [
+              9
+            ]
+          },
+          {
+            "query": "xylolith",
+            "relevant": [
+              24
+            ]
+          }
+        ],
+        "settings": {
+          "baseline": "dense",
+          "candidate": "spherical",
+          "k": 3,
+          "strength": 1,
+          "max_drift": 0.05,
+          "min_cosine": 0.8,
+          "min_recall": 0,
+          "min_ndcg": 0,
+          "block_regressions": true,
+          "block_abstentions": true,
+          "require_geometry": true
+        }
+      },
+      "encoder": "minilm",
+      "dimensions": 384,
+      "direction_recipe": "calibration-group-centroid-difference-v1",
+      "geometry_tolerance": 1e-10
+    }
+  }
+}

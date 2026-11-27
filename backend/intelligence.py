@@ -1,5 +1,6 @@
 """Measured post-normalization constraints and comparison in one reference frame."""
 import numpy as np
+from .reductions import ArrayReductions
 from pydantic import Field
 
 from .concepts import Direction, Name, Strict, Text, Unit, model_id
@@ -39,44 +40,44 @@ def checked_index(atlas, index):
     return vectors, index.categories
 
 
-def candidate(x, direction, alpha):
+def candidate(x, direction, alpha, ops=ArrayReductions):
     # Check the closest point on the entire unnormalized segment to avoid a
     # discontinuous trajectory even when the singularity falls between samples.
     step = alpha * direction
-    denom = step @ step
-    if denom > 0 and np.linalg.norm(x + np.clip(-(x @ step) / denom, 0, 1) * step) < 1e-9:
+    denom = ops.dot(step, step)
+    if denom > 0 and ops.norm(x + np.clip(-ops.dot(x, step) / denom, 0, 1) * step) < 1e-9:
         return None
     if alpha == 0:
         return x.copy()
     y = x + step
-    return y / np.linalg.norm(y)
+    return y / ops.norm(y)
 
 
-def metrics(x, y, protected):
-    drift = np.max(np.abs(protected @ (y - x)), initial=0.)
-    cosine = 1. if np.array_equal(x, y) else float(np.clip(x @ y, -1, 1))
+def metrics(x, y, protected, ops=ArrayReductions):
+    drift = ops.drift(protected, y - x)
+    cosine = 1. if np.array_equal(x, y) else float(np.clip(ops.dot(x, y), -1, 1))
     return float(drift), cosine
 
 
-def govern(x, target, protected, request, max_drift, min_cosine):
+def govern(x, target, protected, request, max_drift, min_cosine, ops=ArrayReductions):
     safe = target.copy()
     if len(protected):
         _, singular, vh = np.linalg.svd(protected, full_matrices=False)
         basis = vh[singular > singular[0] * max(protected.shape) * np.finfo(float).eps]
-        safe -= basis.T @ (basis @ safe)
+        safe -= ops.projection(basis, safe)
     if not request:
         return safe, 0., "Zero strength requested."
-    if np.linalg.norm(safe) < 1e-9:
+    if ops.norm(safe) < 1e-9:
         return safe, 0., "Target lies in the protected subspace."
     reason = "No sampled nonzero strength met the constraints and improved the signed target score."
     # Descending grid finds the largest admissible magnitude on this grid,
     # including disconnected feasible intervals. No monotonicity assumption.
     for a in np.linspace(request, 0, GRID + 1)[:-1]:
-        y = candidate(x, safe, a)
+        y = candidate(x, safe, a, ops)
         if y is None:
             continue
-        drift, cosine = metrics(x, y, protected)
-        if drift <= max_drift and cosine >= min_cosine and np.sign(request) * (target @ (y - x)) > 1e-12:
+        drift, cosine = metrics(x, y, protected, ops)
+        if drift <= max_drift and cosine >= min_cosine and np.sign(request) * ops.dot(target, y - x) > 1e-12:
             return safe, float(a), "Requested strength accepted." if a == request else "Reduced to satisfy measured endpoint constraints and signed target gain."
     return safe, 0., reason
 

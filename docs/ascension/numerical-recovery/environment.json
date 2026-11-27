@@ -1,0 +1,63 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:22) [Clang 22.1.3 ]",
+  "cpu": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
+  "os": "macOS-26.7.1-x86_64-i386-64bit",
+  "mac": [
+    "26.7.1",
+    [
+      "",
+      "",
+      ""
+    ],
+    "x86_64"
+  ],
+  "threadpools": [],
+  "packages": {
+    "uvicorn": "0.54.0",
+    "threadpoolctl": "3.6.0",
+    "coloredlogs": "15.0.1",
+    "humanfriendly": "10.0",
+    "cloudpickle": "3.1.2",
+    "starlette": "1.10.0",
+    "joblib": "1.6.0",
+    "huggingface-hub": "0.25.2",
+    "pydantic_core": "2.50.5",
+    "annotated-doc": "0.0.7",
+    "requests": "2.34.2",
+    "fastapi": "0.165.0",
+    "pydantic": "2.14.4",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.5.2",
+    "filelock": "4.3.1",
+    "click": "8.5.1",
+    "tqdm": "4.67.1",
+    "flatbuffers": "25.9.23",
+    "charset-normalizer": "3.4.4",
+    "sympy": "1.14.0",
+    "narwhals": "2.25.0",
+    "opentelemetry-api": "1.45.2",
+    "typing-inspection": "0.4.5",
+    "protobuf": "5.29.6",
+    "tokenizers": "0.21.4",
+    "urllib3": "2.8.0",
+    "h11": "0.16.0",
+    "mpmath": "1.3.0",
+    "PyYAML": "6.0.3",
+    "fsspec": "2026.9.0",
+    "certifi": "2026.11.20",
+    "packaging": "25.0",
+    "annotated-types": "0.8.0",
+    "anyio": "4.16.0",
+    "onnxruntime": "1.20.1",
+    "typing_extensions": "4.16.0",
+    "scipy": "1.18.1",
+    "idna": "3.20"
+  },
+  "test_sha256": "6ea49159950d859d47bec2f762b6a97f556b05db8471e1a806429003d20b1432",
+  "blas": "Apple Accelerate, version unreported by NumPy",
+  "thread_limits": {
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "VECLIB_MAXIMUM_THREADS": 1
+  }
+}

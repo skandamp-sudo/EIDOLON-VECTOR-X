@@ -12,6 +12,8 @@ from pydantic import Field
 from .concepts import Direction, Strict, model_id
 from .foundry import embed
 from .intelligence import candidate, govern, metrics
+from .reductions import ArrayReductions, OrderedReductions
+from .sphere import rotate
 from .ranking_v2 import Index, Point, POLICY
 
 Method = Literal["bm25", "dense", "fusion", "unconstrained", "locked"]
@@ -107,30 +109,38 @@ def build_index(atlas, rows, imported):
     return Index(model_id(atlas), ids, vectors)
 
 
-def score_task(atlas, idx, lexical, task, form):
+def score_task(model, idx, lexical, task, form, target, protected, methods):
     cfg = form.settings
-    orders = {method: [] for method in METHODS}
-    geometry = dict.fromkeys(METHODS)
+    ops = OrderedReductions if "spherical" in methods else ArrayReductions
+    orders = {method: [] for method in methods}
+    geometry = dict.fromkeys(methods)
     orders["bm25"] = lexical.rank(task.query)
     reason = None
+    sphere_reason = None
     try:
-        x = np.array(atlas.model.encode(task.query))
+        x = np.array(model.encode(task.query))
     except ValueError as error:
         if str(error) != "No representable signal":
             raise
         reason = str(error)
     else:
-        target = np.array(form.target.linear)
-        protected = np.array([form.protection.linear])
-        axis, applied, reason = govern(x, target, protected, cfg.strength, cfg.max_drift, cfg.min_cosine)
-        for name, y, strength in [("dense", x, 0), ("unconstrained", candidate(x, target, cfg.strength), cfg.strength),
-                                  ("locked", candidate(x, axis, applied), applied)]:
+        axis, applied, reason = govern(x, target, protected, cfg.strength, cfg.max_drift, cfg.min_cosine, ops)
+        endpoints = [("dense", x, 0), ("unconstrained", candidate(x, target, cfg.strength, ops), cfg.strength),
+                                  ("locked", candidate(x, axis, applied, ops), applied)]
+        if "spherical" in methods:
+            y, angle, sphere_reason = rotate(x, target, protected, cfg.strength, cfg.min_cosine)
+            endpoints.append(("spherical", y, angle))
+        for name, y, strength in endpoints:
             if y is None:
                 continue
             orders[name] = idx.rank(Point(form.model_id, y), len(idx.ids))
-            drift, cosine = metrics(x, y, protected)
-            geometry[name] = dict(drift=drift, cosine=cosine, target_gain=float(target @ (y-x)), applied=strength,
+            drift, cosine = metrics(x, y, protected, ops)
+            geometry[name] = dict(drift=drift, cosine=cosine, target_gain=float(ops.dot(target, y-x)), applied=strength,
                                   violated=drift>cfg.max_drift or cosine<cfg.min_cosine)
+            if "spherical" in methods:
+                tolerance = 1e-10
+                geometry[name]["signed_gain"] = float(np.sign(cfg.strength) * ops.dot(target, y-x))
+                geometry[name]["violated"] = drift > cfg.max_drift+tolerance or cosine < cfg.min_cosine-tolerance
     orders["fusion"] = fuse(orders["bm25"], orders["dense"])
     methods = {m: {**measure(order, task.relevant, cfg.k), "geometry": geometry[m]} for m, order in orders.items()}
     base, cand = methods[cfg.baseline], methods[cfg.candidate]
@@ -159,7 +169,7 @@ def score_task(atlas, idx, lexical, task, form):
         elif cand["geometry"]["violated"]:
             reasons.append("Endpoint violates a geometric limit")
     return dict(query=task.query, relevant=task.relevant, methods=methods, delta=delta, gate_reasons=reasons,
-                governor_reason=reason, change=change, rank_changes=movements)
+                governor_reason=reason, **({"sphere_reason":sphere_reason} if "spherical" in methods else {}), change=change, rank_changes=movements)
 
 
 def run(atlas, form):
@@ -168,8 +178,14 @@ def run(atlas, form):
     for d in (form.target, form.protection):
         if d.model_id != form.model_id or any(abs(np.linalg.norm(v)-1)>1e-8 for v in (d.linear, d.centroid)):
             raise ValueError("Direction is incompatible with this encoder.")
+    rows = validated_rows(form, atlas.model.documents)
+    idx = build_index(atlas, rows, form.documents is not None)
+    return comparison(atlas.model, form, rows, idx, form.target.linear, form.protection.linear, METHODS)
+
+
+def validated_rows(form, default_documents):
     docs = form.documents
-    rows = {d.id: d.text for d in docs} if docs else dict(enumerate(atlas.model.documents, 1))
+    rows = {d.id: d.text for d in docs} if docs else dict(enumerate(default_documents, 1))
     if docs and (len(rows) != len(docs) or any(not t.strip() for t in rows.values())):
         raise ValueError("Use distinct document IDs and nonempty texts.")
     for task in form.tasks:
@@ -177,12 +193,15 @@ def run(atlas, form):
             raise ValueError("Each query requires distinct relevant IDs in the selected corpus.")
     if len({task.query.strip() for task in form.tasks}) != len(form.tasks):
         raise ValueError("Keep one judgment set per query.")
-    idx = build_index(atlas, rows, docs is not None)
+    return rows
+
+
+def comparison(model, form, rows, idx, target, protection, method_names):
     lexical = LexicalIndex(rows)
-    tasks = [score_task(atlas, idx, lexical, task, form) for task in form.tasks]
+    tasks = [score_task(model, idx, lexical, task, form, np.asarray(target), np.asarray([protection]), method_names) for task in form.tasks]
     fingerprint = sha256(json.dumps(sorted(rows.items()), ensure_ascii=False, separators=(",",":")).encode()).hexdigest()
     summary = {}
-    for method in METHODS:
+    for method in method_names:
         results = [t["methods"][method] for t in tasks]
         measured = [r["geometry"] for r in results if r["geometry"] is not None]
         labeled = [r for r in results if r["recall"] is not None]

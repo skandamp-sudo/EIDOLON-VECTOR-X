@@ -68,3 +68,7 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 ## Obsidian visual review
 
 Added responsive workspace navigation, a calibration signature chart, a stock allocation and delivery display, shared four-way steering comparisons, reading relationships, clarification trees, adaptive layout comparison and paper-level benchmark inspection. Offline evidence and live model probes retain distinct labels.
+
+## 27 November 2026 IST · ASCENSION numerical recovery
+
+Scoped controlled reductions to research steering. Preserved signed-zero values in browser downloads and verified exact local replay in all four bases. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).
