@@ -87,6 +87,12 @@ export default function Frontier() {
       <p>Applied {fmt(current.applied)} · gain {fmt(current.gain)} · drift {fmt(current.drift)} · cosine {fmt(current.cosine)} · nDCG@3 {fmt(current.ndcg)}.</p>
       <ol>{current.top.map(i=><li key={i}>{space?.documents[i]}</li>)}</ol><h3>SYMBIOSIS recommendation</h3>
       {mode==='Sequential form'?<p>Choose a feasible setting manually in this baseline.</p>:rec ? <p>{names[rec.p.method]} at {fmt(rec.p.requested)} gives gain {fmt(rec.p.gain)} with drift {fmt(rec.p.drift)}. Objective: {goal}. Ties favor labeled retrieval, then gain, among feasible frontier points.</p>:<p>No sampled feasible configuration increases the signed target score.</p>}
+      {rec&&mode!=='Sequential form'&&<div className="preview-scroll"><table><caption>Current selection and agent proposal</caption>
+      <thead><tr><th>Measurement</th><th>Current</th><th>Proposed</th><th>Change</th></tr></thead><tbody>
+      {([['gain','Signed target gain'],['drift','Protected drift'],['cosine','Retained cosine'],['ndcg','Labeled nDCG@3']] as const).map(([key,label])=>{
+        const before=current[key],after=rec.p[key]
+        return <tr key={key}><th>{label}</th><td>{fmt(before)}</td><td>{fmt(after)}</td><td>{fmt(before==null||after==null?null:after-before)}</td></tr>
+      })}</tbody></table></div>}
       <div className="foundry-actions"><button disabled={paused||mode==='Suggestion only'||mode==='Sequential form'||!rec||rejected||rec.i===selected} onClick={()=>{if(rec){choose(rec.i);log('Approved');record('SYMBIOSIS','approve')}}}>Approve recommendation</button>
         {mode!=='Sequential form'&&rec&&<button disabled={paused} onClick={()=>{setRejected(!rejected);log(rejected?'Restored':'Rejected');record('SYMBIOSIS','reject')}}>{rejected?'Restore recommendation':'Reject recommendation'}</button>}
         {rejected&&<span role="status">Recommendation rejected. Current setting retained.</span>}
