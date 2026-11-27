@@ -1,5 +1,9 @@
 # Build state
 
+## FOCUS retrieval engineering
+
+The feature branch starts at OBSIDIAN production commit `3356e97e0db83a5f2f689c4b04c48995dc374ee8`. Eight focused backend checks passed for the five-method debugger, missed labels, abstentions, stable ties, replay, per-task gates and hosted dataset restrictions. The scoring rules and engineering evidence boundary are in [FOCUS protocol v1](docs/FOCUS-PROTOCOL.md).
+
 ## Obsidian production release
 
 On 27 November 2026, PR #2 merged approved head `135f6777bb25eb0ddf5b3feb1080b3ef168ac25e` into main at `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`, retaining its milestone commits. GitHub reported both PR checks successful. Vercel and Railway reported successful deployments for the merge. Verification used the stable public domain. [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2) · [Mission Control](https://eidolon-vector-x.vercel.app/#mission-control)
