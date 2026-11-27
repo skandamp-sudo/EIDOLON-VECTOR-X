@@ -14,6 +14,12 @@ try {
   await page.getByLabel('Evidence assessment').selectOption('Supports')
   await page.getByText('Evidence comparison',{exact:true}).click()
   await page.getByText(/Supports \(reader assessment\)/).waitFor()
+  await page.getByText('Timed comprehension and decision task',{exact:true}).click()
+  await page.getByRole('button',{name:'Start reading task'}).click()
+  await page.getByLabel('Evidence row').fill('1')
+  await page.getByLabel('Decision',{exact:true}).selectOption('Sites and times need alignment')
+  await page.getByRole('button',{name:'Score my response'}).click()
+  await page.getByText(/"effort":null/).waitFor()
  }
  if(check==='all'||check==='supply'){
   await step.selectOption('2')
@@ -54,7 +60,10 @@ try {
   await page.getByRole('button',{name:'Record preference'}).click()
   await page.getByRole('button',{name:'Accept shortcut'}).click()
   await page.getByRole('button',{name:'Shortcut to CORTEX'}).waitFor()
+  await page.getByRole('button',{name:'Restore static layout'}).click()
   await page.getByRole('button',{name:'Undo adaptation'}).click()
+  await page.getByRole('button',{name:'Shortcut to CORTEX'}).waitFor()
+  await page.getByRole('button',{name:'Restore static layout'}).click()
   assert.equal(await page.getByRole('button',{name:'Shortcut to CORTEX'}).count(),0)
   await page.getByRole('button',{name:'Delete history and reset learning'}).click()
   assert.equal(await opt.isChecked(),false)
@@ -102,7 +111,22 @@ try {
    }
   }
  }
- // Additional module checks
+ if(check==='all'||check==='hardening'){
+  await page.goto('http://localhost:5173/#symbiosis')
+  await page.route('**/api/v1/intelligence/frontier',route=>route.fulfill({json:{model_id:'other',points:[]}}))
+  await page.getByLabel('Sweep query').fill('ocean tide')
+  await page.getByText(/Model identity changed/).waitFor()
+  assert.equal(await page.getByLabel('Feasible operating point').count(),0)
+  await page.unroute('**/api/v1/intelligence/frontier')
+  await page.getByLabel('Sweep query').fill('   ')
+  await page.getByText(/Enter a nonempty sweep query/).waitFor()
+  await page.goto('http://localhost:5173/#research-lab')
+  await page.getByLabel('Research query').fill('ocean tide')
+  await page.route('**/api/v1/research-v2/probe',route=>route.fulfill({json:{model:'other',dimensions:128,variants:{}}}))
+  await page.getByRole('button',{name:'Run local probe'}).click()
+  await page.getByText('Live probe identity differs from the selected evidence.').waitFor()
+  await page.unroute('**/api/v1/research-v2/probe')
+ }
  assert.deepEqual(faults,[])
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}

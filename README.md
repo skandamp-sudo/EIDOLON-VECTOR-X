@@ -108,7 +108,7 @@ For optional recovery inference on CPython 3.12 / Intel AVX2 macOS, first instal
 
 ```sh
 .venv/bin/python -m scripts.fetch_recovery
-uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require-hashes -r requirements/research-macos-x86_64.txt
+uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require-hashes -r requirements/runtime-macos-x86_64.txt
 ./scripts/start
 ```
 
@@ -145,3 +145,5 @@ Production serves live calibration inference and the recorded four-encoder evide
 - The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
 
 - The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+
+- Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.

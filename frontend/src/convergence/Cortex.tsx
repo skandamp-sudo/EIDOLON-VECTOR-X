@@ -44,7 +44,7 @@ export default function Cortex({rows=sample,source='Illustrative field notebook'
  const [topic,setTopic]=useState('')
  const branch=hierarchy.find(([term])=>term===topic)??hierarchy[0]
  const [q,query]=useState('water levels'),[mode,setMode]=useState('Weighted concepts'),[sel,select]=useState(0),[focus,setFocus]=useState(false)
- const [marks,mark]=useState<Record<number,string>>({}),[start,setStart]=useState<number|null>(null),[answer,setAnswer]=useState(''),[decision,setDecision]=useState(''),[effort,setEffort]=useState(4)
+ const [marks,mark]=useState<Record<number,string>>({}),[start,setStart]=useState<number|null>(null),[answer,setAnswer]=useState(''),[decision,setDecision]=useState(''),[effort,setEffort]=useState<number|null>(null)
  const [study,setStudy]=useState<Record<string,unknown>|null>(null)
  const ranked=passages.map((p,id)=>({id,score:terms(q).reduce((s,t)=>s+(mode==='Keyword' ? Number(p.words.includes(t)):p.weights.get(t)??0),0)}))
  if(mode!=='Source order')ranked.sort((a,b)=>b.score-a.score||a.id-b.id)
@@ -67,9 +67,9 @@ export default function Cortex({rows=sample,source='Illustrative field notebook'
  <button onClick={()=>select(ranked[(ranked.findIndex(r=>r.id===sel)+1)%ranked.length].id)}>Next in reading sequence</button>
  <details><summary>Evidence comparison</summary>{Object.entries(marks).filter(([,v])=>v).map(([id,v])=><p key={id}>{v} (reader assessment) · {ref(+id)} · {passages[+id].text}</p>)}</details></>}
  {rows===sample&&<details><summary>Timed comprehension and decision task</summary><p>Identify the row reporting increased pressure. Decide whether the two water records establish a contradiction.</p>
- <button disabled={start!==null} onClick={()=>{setStudy(null);setStart(performance.now());setAnswer('');setDecision('')}}>Start reading task</button>
- {start!==null&&<><label>Evidence row<input value={answer} onChange={e=>setAnswer(e.target.value)} maxLength={3}/></label><label>Decision<select value={decision} onChange={e=>setDecision(e.target.value)}><option value="">Choose</option><option>Contradiction established</option><option>Sites and times need alignment</option></select></label>
- <label>Mental effort (1–7)<input type="range" min="1" max="7" value={effort} onChange={e=>setEffort(+e.target.value)}/>{effort}</label>
+ <button disabled={start!==null} onClick={()=>{setStudy(null);setStart(performance.now());setEffort(null);setAnswer('');setDecision('')}}>Start reading task</button>
+ {start!==null&&<><label>Evidence row<input value={answer} onChange={e=>setAnswer(e.target.value)} maxLength={3}/></label><label><span id="reader-decision-label">Decision</span><select aria-labelledby="reader-decision-label" value={decision} onChange={e=>setDecision(e.target.value)}><option value="">Choose</option><option>Contradiction established</option><option>Sites and times need alignment</option></select></label>
+ <label>Mental effort (1–7)<select value={effort??''} onChange={e=>setEffort(e.target.value?Number(e.target.value):null)}><option value="">Unrated</option>{[1,2,3,4,5,6,7].map(n=><option key={n}>{n}</option>)}</select></label>
  <button disabled={!answer||!decision} onClick={()=>{setStudy({mode,comprehension:Number(answer==='1'),decision:Number(decision==='Sites and times need alignment'),elapsed_ms:Math.round(performance.now()-start),effort,reciprocal_rank:1/(ranked.findIndex(r=>r.id===0)+1)});setStart(null);record('CORTEX','complete')}}>Score my response</button></>}
  {study&&<><p>Evidence row 1. Row 4 calls for aligned locations and times. This attempt: {JSON.stringify(study)}</p><button onClick={()=>exportEvidence('reader-attempt',study)}>Export attempt</button></>}</details>}</section>
 }

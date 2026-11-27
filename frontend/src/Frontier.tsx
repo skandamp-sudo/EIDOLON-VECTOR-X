@@ -25,14 +25,16 @@ export default function Frontier() {
     return ()=>c.abort()
   },[retry])
   useEffect(()=>{if(!space||paused)return
+    if(!query.trim()){setPoints([]);setStatus('Enter a nonempty sweep query.');return}
     if(sequential&&approvedForm.current!==sweepKey){setPoints([]);setStatus('Edit constraints and submit the form.');return}
     const c=new AbortController()
     log('Sweep requested · target '+direction+', protect '+protection+', strength '+strength+', drift '+drift+', cosine '+cos);setPoints([]); select(0); setPrevious(null); setStatus('Computing operating points…')
     const timer=setTimeout(async()=>{
       try {
         const relevant=labels.trim()?labels.split(',').map(s=>{if(!/^\d+$/.test(s.trim()))throw Error('Use numeric document IDs separated by commas.');return Number(s)-1}):null
-        const r=await labRequest<{points:Point[]}>('frontier',{text:query,target:space.presets[direction].direction,
+        const r=await labRequest<{points:Point[];model_id:string}>('frontier',{text:query,target:space.presets[direction].direction,
           protected:[space.presets[protection].direction],strength,max_drift:drift,min_cosine:cos,relevant},c.signal)
+        if(r.model_id!==space.model_id)throw Error('Model identity changed. Retry the sweep to reload the workspace.')
         if(!c.signal.aborted){setPoints(r.points);setStatus('')}
       }catch(e){if(!c.signal.aborted)setStatus(e instanceof Error?e.message:'Calculation failed.')}
     },200)

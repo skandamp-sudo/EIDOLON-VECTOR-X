@@ -47,3 +47,5 @@ Open [local Mission Control](http://localhost:5173/#mission-control). The top-le
 - **Remaining effort.** Allow roughly one to two engineering days for additional browser, accessibility and load checks. Independent domain labels and participant studies have separate recruitment and review dependencies. This planning estimate does not measure runtime or credit usage.
 
 - The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+
+- Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.

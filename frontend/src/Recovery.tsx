@@ -31,12 +31,16 @@ function ModelPanel({name,online}:{name:Encoder;online:boolean}){
     return ()=>{c.abort();pending.current?.abort()}
   },[name])
   async function run(){
-    pending.current?.abort()
+    if(!record||pending.current||!text.trim())return
     const c=new AbortController();pending.current=c
     setBusy(true);setProblem('');setResult(null)
-    try{setResult(await localRequest<Probe>('research-v2/probe',JSON.stringify({encoder:name,expected_model:record?.model,text,strength}),c.signal))}
+    try{
+      const probe=await localRequest<Probe>('research-v2/probe',JSON.stringify({encoder:name,expected_model:record.model,text,strength}),c.signal)
+      if(probe.model!==record.model||probe.dimensions!==record.dimensions)throw Error('Live probe identity differs from the selected evidence.')
+      if(!c.signal.aborted)setResult(probe)
+    }
     catch(e){if(!c.signal.aborted)setProblem(e instanceof Error?e.message:'Local encoder unavailable.')}
-    finally{if(!c.signal.aborted)setBusy(false)}
+    finally{if(pending.current===c)pending.current=null;if(!c.signal.aborted)setBusy(false)}
   }
   if(!record)return <p role="status">{error||'Loading measured outcomes…'}</p>
   const rows=record.rows
