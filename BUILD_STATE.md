@@ -33,3 +33,11 @@ The independent process reproduction changed three 16D third-place document IDs 
 ### Recovery v2 protocol freeze
 
 On Intel AVX2, all four CPU encoders ran before evaluation. Three disjoint development abstracts took 94–127 ms each through MiniLM and 2.9–4.5 ms through expanded LSA. Each produced three finite unit embeddings. Both legacy variants abstained once. These timings include first inference and exclude model construction. CPU dependencies are optional. Both SciFact originals and the diagnosis are archived. Evaluation and release status follow separately.
+
+### Recovery v2 measured outcomes
+
+Protocol commit 0f3aa419443fe698e4c084876880a379e8e8f27c preceded scoring. Expanded LSA represented 16/16 questions and 826/839 paragraphs. MiniLM represented 16/16 and 839/839. Both legacy models abstained on every question. Among 15 questions with evidence, unsteered nDCG@3 was .22295 BM25, .14355 expanded LSA and .02044 MiniLM. The independent target-section change was zero for both new models. All measured comparisons and limitations are in REVIEW_PHASE_3.md. Optional CPU wheels totaled 42,829,163 bytes. No raw QASPER text, weights or user imports are staged for publication.
+
+Independent reruns reproduced all four model hashes and all 64 per-family result rows exactly. The initial live 128D fit used a different Accelerate thread setting. The launcher now pins it and the live endpoint checks the selected evidence hash. Through the local proxy, all four models matched their recorded basis, returned three neighbors per variant, and rejected a mismatched identity. Dataset, model/configs and wheels totaled 77,179,260 artifact bytes. Credit telemetry is unavailable.
+
+The release checks exercised 46 Python tests, TypeScript, Vite, Chrome model switching, the live 128D before/after probe, historical evidence export and mobile layout. The hosted-mode build passed with a fixture Railway origin. The read-only hosted service rejected imports and live research probes. The local fallback is http://localhost:5173. Public URLs and account-specific trial capacity are unverified. Phase 3 remains untagged.

@@ -10,6 +10,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from .model import Backbone, DIMENSIONS, PROBES, SEED
 from .concepts import model_id
 from .lab_api import router as lab_router
+from .recovery_api import router as recovery_router
 from .foundry import router as foundry_router
 from .atlas import Atlas, Query, Result
 
@@ -52,6 +53,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="EIDOLON VECTOR-X", version="0.1.0", lifespan=lifespan,
               docs_url=None, redoc_url=None)
+app.include_router(recovery_router)
 app.include_router(foundry_router)
 app.include_router(lab_router)
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1"])

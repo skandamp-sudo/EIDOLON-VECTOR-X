@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { chromium } from 'playwright-core'
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true })
@@ -243,6 +244,21 @@ try {
   await page.screenshot({path:'../.runtime/intelligence.png', fullPage:true})
   await page.getByRole('link',{name:'Research Lab'}).click()
   await page.getByRole('heading',{name:'Evidence Vault'}).waitFor()
+  const research = page.getByLabel('Research encoder')
+  for (const name of ['legacy8','legacy16','minilm','expanded']) {
+    await research.selectOption(name)
+    await page.getByText('Encoder identity and per-family measurements').click()
+    await page.locator('a[download][href="/evidence/recovery-v2/'+name+'.json"]').waitFor()
+  }
+  await page.getByLabel('Research query').fill('experimental methods for language models')
+  await page.getByRole('button',{name:'Run local probe'}).click()
+  if (existsSync('../.runtime/recovery-v2/qasper.tgz')) {
+    await page.getByText(/Live 128D model/).waitFor()
+    await page.getByText(/^Semantic Lock · applied/).click()
+    await page.locator('details[open] li').filter({hasText:'Paper'}).first().waitFor()
+  } else {
+    await page.getByText('Install the pinned QASPER archive.').waitFor()
+  }
   await page.getByLabel('Encoder configuration').selectOption('1')
   const evidence = await readDownload('Export evidence JSON')
   assert.equal(evidence.models[1].dimensions,16)

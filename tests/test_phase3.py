@@ -87,7 +87,7 @@ class HostedTests(unittest.TestCase):
         self.assertEqual(err.exception.code,403)
 
     def test_no_hosted_imports_or_training_and_bounded_body(self):
-        for route,body,code in [("/foundry/csv",b"private",404),("/intelligence/learn",b"{}",403),
+        for route,body,code in [("/foundry/csv",b"private",404),("/research-v2/probe",b"{}",404),("/intelligence/learn",b"{}",403),
                                 ("/intelligence/compare",b" "*32769,413)]:
             with self.assertRaises(HTTPError) as err:self.request(route,body)
             self.assertEqual(err.exception.code,code)

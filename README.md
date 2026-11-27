@@ -99,3 +99,15 @@ Phase 3 validation uses a precommitted external-holdout protocol. [Evaluation pr
 ## Recovery encoders
 
 The independent recovery protocol preserves the historical 8D and 16D calibration models and adds 128D QASPER LSA and a local quantized 384D MiniLM research encoder. The application can still run with its original dependencies. [Recovery protocol](docs/EVALUATION-V2.md) · [Frozen SciFact evidence and reproduction](evidence/scifact-v1/README.md)
+
+For optional recovery inference on CPython 3.12 / Intel AVX2 macOS, first install the locked application environment. Fetch the pinned QASPER and MiniLM artifacts and install the CPU wheels into that environment. The hash-locked wheel list supplements the base environment. Run these steps after any exact dependency sync that removes optional packages. Downloads contain public research material. Local prompts stay on the local service.
+
+```sh
+.venv/bin/python -m scripts.fetch_recovery
+uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require-hashes -r requirements/research-macos-x86_64.txt
+./scripts/start
+```
+
+Open Research Lab → Recovery experiment. The selector switches recorded evidence and the live local encoder. A probe compares unsteered, unconstrained and governed retrieval on training reference paragraphs. The published evidence uses separate paper families. The hosted configuration serves recorded recovery measurements and disables live recovery probes and uploads.
+
+On 15 QASPER questions with evidence, unsteered nDCG@3 was 0.223 for BM25, 0.144 for expanded LSA and 0.020 for MiniLM. Both new encoders represented 16/16 questions. Neither improved the fraction of methodology-labeled retrieved paragraphs in this sample. [Measured comparisons](REVIEW_PHASE_3.md) · [Limitations](docs/LIMITATIONS.md)

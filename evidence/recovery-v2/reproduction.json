@@ -1,0 +1,29 @@
+{
+  "protocol_commit": "0f3aa419443fe698e4c084876880a379e8e8f27c",
+  "models": {
+    "legacy16": {
+      "first_file_sha256": "a22bbc16dd431960ebe4fe447f11d1bc6647dcc30c9a6ff92f988efe9473ab37",
+      "repeat_file_sha256": "d53ce22d6c22bad40622d18dce9a0cfad9d227043bc4182b2415a4a8b7c96bb1",
+      "model_sha256": "d2b9e4b0cd69489def93db36f3d8d97fbe87f2b5d6a39c94c7083d86783444f2",
+      "per_family_rows_sha256": "f9f5e9b0509c0812317439d7b5489046ffa37ceea630a449a1062b5d37102e33"
+    },
+    "expanded": {
+      "first_file_sha256": "de5b50e0615b90a2094618d915b44804dac711c9c108b6010cb6eab63294cc11",
+      "repeat_file_sha256": "51624cc193780fa263db89384fb600c30bbb881fd6a785bba8a58f7808cb4dab",
+      "model_sha256": "37f04c3ee5fde0d3b03fdb1563f9a172e82eb602e0a4df0f66f02a6a5a7768be",
+      "per_family_rows_sha256": "125add066f984557f643b26e61aff5a250abea9e9040ed92b448a406e84b425f"
+    },
+    "minilm": {
+      "first_file_sha256": "94e4262faa648fcda49cb7c23b25e69bb50a4805069652455054d0d71e9ca438",
+      "repeat_file_sha256": "1206b43bc9135e830a902621ae0df37ac38d2ff3f31702aedda8032a714becda",
+      "model_sha256": "9ded29effabd22cc64df85126378fdf3a1515ef2fc523edb76b62754f796d4ba",
+      "per_family_rows_sha256": "f84274f0dc0dc30156492ce2cea51329307e6cff853cd14680d96b3ecaf9a6e8"
+    },
+    "legacy8": {
+      "first_file_sha256": "deb6ea767598e40fb99c497306c9b3034090bb6162d83c231c05fcd8ad60aaef",
+      "repeat_file_sha256": "8624c0803380069b6ee19852c9cb657fbc5c7969843882f43dbe9ea163af172e",
+      "model_sha256": "d9107d9413a0f13e3efb87d8a303384e3c9e4634aaa9e9b1bef398ae0fec08f6",
+      "per_family_rows_sha256": "6b2d7fbdbf15f841122addba969d193995e296529ad302e3ead1267f46898ec3"
+    }
+  }
+}

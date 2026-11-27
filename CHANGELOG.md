@@ -23,3 +23,4 @@ Added source-group selection, abstention-aware retrieval metrics and a second LS
 Preserved two independent held-out runs and documented three nonreproducing 16D third-place IDs. Withheld deployment and the final review tag.
 
 - Archived both original SciFact runs and their one-ULP diagnosis. Added a separate deterministic ranking policy, four-encoder recovery runner and a pre-outcome QASPER protocol.
+- Integrated actual per-family QASPER evidence and local probes for all four encoders into Research Lab. Published equal-strength and matched-gain comparisons, independent section-label outcomes and unavailable measurements.

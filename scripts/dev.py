@@ -76,7 +76,7 @@ def supervise():
                 child = subprocess.Popen(args, cwd=cwd, stdin=subprocess.DEVNULL,
                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT, start_new_session=True,
                     env={**os.environ, "VECTOR_X_VITE_CACHE": cache,
-                         "OPENBLAS_NUM_THREADS": "1", "OMP_NUM_THREADS": "1"})
+                         "VECLIB_MAXIMUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "OMP_NUM_THREADS": "1"})
                 children.append(child)
                 thread = threading.Thread(target=relay, args=(child.stdout, name), daemon=True)
                 thread.start()

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { downloadFile } from './foundryData'
 import { fmt } from './labTypes'
 import Frontier from './Frontier'
+import Recovery from './Recovery'
 
 type Stat={n:number;mean:number|null;ci95:[number,number]|null}
 type Outcome={gain:number|null;drift:number|null;cosine:number|null;violation:number|null;top:number[];recall:number;ndcg:number;applied:number|null;latency_ms:number|null;monotonicity:number|null;stability:number|null}
@@ -48,6 +49,7 @@ export default function Research({online}:{online:boolean}){
     return ()=>c.abort()
   },[])
   return <section className="foundry intelligence"><div className="atlas-intro"><h1>Research Lab</h1><p>Inspect independent retrieval judgments and test the cost of steering on the calibration index.</p></div>
+    <Recovery online={online}/>
     {record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}
     {online?<Frontier/>:<p role="status">The live frontier needs an available model service.</p>}</section>
 }
