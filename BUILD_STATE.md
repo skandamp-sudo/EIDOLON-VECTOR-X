@@ -94,3 +94,15 @@ Release 6094410d2238a5bd29f78578d8c6231a2c2ed19e passed 48 Python tests, TypeScr
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
 
 - The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
+
+## Obsidian visual branch
+
+Tagged engineering base 43e8830. Captured baseline on sixteen routes at four viewports. The shell and guided Mission Control use existing routes and live coefficient samples. TypeScript and Vite build passed.
+
+Inventory and vector checkpoint: ledger-derived quantity bands and dated order timeline passed duplicate, approval and reset checks. All four parallel comparison views use the shared geometry and camera. Local Chrome passed synchronized rotation and imported dataset operations.
+
+Reader, clarification, adaptive layout and scientific inspection checkpoint: measured all 64 route and viewport combinations without horizontal overflow. Native Safari opened the local inventory desk. All four live encoder probes and thirteen archived checksums matched. Hosted-mode production build passed.
+
+Final combined regression passed: 49 Python tests, TypeScript, production Vite build, inventory and language fixtures, five private-scorer engineering checks and four Chrome suites. The two-context suite exercised 32 route changes and retained 256 of 270 preference actions.
+
+Mastery documentation reviewed against application commit 9c4a54d2206610e1484f1bef2a4fca3e768bb6d6. Verified the supplied local CSV through capture of four embeddings and an explicit abstention. The local study kit contains 14 Markdown chapters, six PDFs and an offline portal with 107 Q&A entries and four annotated screenshot plates. PDF checks covered 73 rendered pages across the six files. Only public walkthrough and build documentation are staged.

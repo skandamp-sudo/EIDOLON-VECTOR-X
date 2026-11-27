@@ -153,3 +153,7 @@ Production serves live calibration inference and the recorded four-encoder evide
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
 
 - The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
+
+## Obsidian review workspace
+
+The visual review branch starts at the Convergence engineering tag. Open [local Mission Control](http://localhost:5173/#mission-control) for the guided investigation, live calibration signatures and six workspaces. The rail collapses on desktop. The menu opens the directory on phones. See [visual review](docs/VISUAL-REVIEW.md) and [design specification](DESIGN.md). The public deployment follows main.

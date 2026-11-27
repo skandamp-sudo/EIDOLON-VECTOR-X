@@ -11,5 +11,6 @@ node frontend/independent.test.mjs
 npm --prefix frontend run smoke
 node frontend/convergenceSmoke.mjs
 node frontend/sessionSmoke.mjs
+node frontend/obsidianSmoke.mjs
 git diff --check
 git diff --cached --check

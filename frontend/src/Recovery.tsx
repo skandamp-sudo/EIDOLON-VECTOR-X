@@ -19,6 +19,8 @@ function ModelPanel({name,online}:{name:Encoder;online:boolean}){
   const [record,setRecord]=useState<RecordV2|null>(null),[error,setError]=useState('')
   const [text,setText]=useState(''),[strength,setStrength]=useState(1.5),[busy,setBusy]=useState(false)
   const [result,setResult]=useState<Probe|null>(null),[problem,setProblem]=useState('')
+  const [metric,setMetric]=useState<'ndcg'|'recall'>('ndcg')
+  const [family,setFamily]=useState(0)
   const pending=useRef<AbortController|null>(null)
   useEffect(()=>{
     const c=new AbortController()
@@ -49,6 +51,7 @@ function ModelPanel({name,online}:{name:Encoder;online:boolean}){
     <div className="foundry-stats"><span><b>{rows.filter(r=>r.represented).length}/{rows.length}</b> queries represented</span>
       <span><b>{rows.reduce((n,r)=>n+r.indexed,0)}/{rows.reduce((n,r)=>n+r.documents,0)}</b> paragraphs indexed</span>
       <span><b>{fmt(average(record.development.map(r=>r.ms)))} ms</b> mean development encoding</span></div>
+    <figure className="retrieval-chart"><figcaption>Evidence retrieval</figcaption><label>Ranking metric<select value={metric} onChange={e=>setMetric(e.target.value as 'ndcg'|'recall')}><option value="ndcg">nDCG@3</option><option value="recall">Recall@3</option></select></label>{(['bm25','original','locked'] as const).map(key=>{const value=average(rows.map(r=>r.methods[key]?.[metric]));return <div key={key}><span>{methods[key]}</span>{value!==null?<meter min="0" max="1" value={value} aria-label={methods[key]+' '+metric+' at three'}/>:<span/>}<b>{fmt(value)}</b></div>})}<small>Scale 0–1 · averaged over families with measured judgments</small></figure>
     <div className="preview-scroll"><table><caption>Within-encoder comparison at requested strength +1.5</caption><thead><tr>
       {['Method','Recall@3','nDCG@3','Axis gain','Protected drift','Violations / measured','Target section Δ','Results section |Δ|','Families'].map(s=><th key={s}>{s}</th>)}</tr></thead><tbody>
       {Object.entries(methods).map(([key,label])=>{
@@ -59,6 +62,7 @@ function ModelPanel({name,online}:{name:Encoder;online:boolean}){
           <td>{fmt(average(entries.map(v=>v.target_change)))}</td><td>{fmt(average(entries.map(v=>v.protected_change)))}</td><td>{entries.length}</td></tr>
       })}</tbody></table></div>
     <p>Mean PCA trustworthiness {fmt(average(rows.map(r=>r.fidelity?.trustworthiness)))} · neighbor overlap {fmt(average(rows.map(r=>r.fidelity?.overlap)))} · process peak {fmt(record.peak_rss_mib)} MiB.</p>
+    <details><summary>Inspect a QASPER paper</summary><label>Paper family<select value={family} onChange={e=>setFamily(Number(e.target.value))}>{rows.map((r,i)=><option value={i} key={r.family}>{r.family}</option>)}</select></label><p>{rows[family].indexed} of {rows[family].documents} paragraphs indexed · {rows[family].gold.length} gold IDs. Original Recall@3 {fmt(rows[family].methods.original?.recall)}, locked Recall@3 {fmt(rows[family].methods.locked?.recall)}.</p></details>
     <details><summary>Encoder identity and per-family measurements</summary><p style={{overflowWrap:'anywhere'}}>{record.model} · {record.ranking}</p>
       <a href={'/evidence/recovery-v2/'+name+'.json'} download>Download measured outcomes</a></details>
     {!hosted&&online&&<form onSubmit={e=>{e.preventDefault();void run()}}><h3>Probe the local encoder</h3>

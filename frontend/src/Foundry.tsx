@@ -217,10 +217,10 @@ export default function Foundry({ digest }: { digest?: string }) {
     {!data && <div className={'drop-zone' + (over ? ' over' : '')}
       onDragOver={e => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
       onDrop={e => { e.preventDefault(); setOver(false); if (e.dataTransfer.files.length === 1) void load(e.dataTransfer.files[0]); else setNote('Choose one dataset at a time.') }}>
-      <Upload size={32}/><h2>Drop a dataset here</h2><p>UTF-8 CSV, JSON, JSONL or TXT · 10 MB · 5,000 records</p>
+      <p className="kicker">Local import</p><Upload size={32}/><h2>Drop a dataset here</h2><p>UTF-8 CSV, JSON, JSONL or TXT · 10 MB · 5,000 records</p>
       <button className="encode" disabled={!!busy || !digest} onClick={() => fileInput.current?.click()}>Choose file</button>
       <input ref={fileInput} aria-label="Dataset file" hidden type="file" accept=".csv,.json,.jsonl,.txt" onChange={e => { void load(e.target.files?.[0]); e.target.value = '' }}/>
-      <small>Processed on this computer. Leaving Data Foundry clears the imported dataset.</small>
+      <small>Encoder · {digest?'8D calibration LSA':'Unavailable'}</small><small>Processed on this computer. Leaving Data Foundry clears the imported dataset.</small>
     </div>}
     {data && stats && <><section className="panel foundry-panel"><div className="section-title"><div><Database size={18}/><h2>{name}</h2></div>
       <button onClick={remove}>Delete dataset</button></div>

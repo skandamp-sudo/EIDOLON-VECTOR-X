@@ -76,6 +76,7 @@ export default function Atlas({ online }: { online: boolean }) {
           {topics.map(t=><option key={t}>{t}</option>)}</select><ChevronDown size={14}/></div>
           <div className="strength-head"><label htmlFor="strength">Steering strength</label><output htmlFor="strength">{signed(strength)}</output></div>
           <input id="strength" type="range" min="-2" max="2" step=".05" value={strength} disabled={!online} onChange={e=>setStrength(Number(e.target.value))}/>
+          <label htmlFor="exact-strength">Signed numeric value</label><input id="exact-strength" type="number" step=".05" min="-2" max="2" value={strength} onChange={e=>{const v=e.currentTarget.valueAsNumber;if(Number.isFinite(v)&&Math.abs(v)<=2)setStrength(v)}}/>
           <div className="scale"><span>−2 · Away</span><button onClick={()=>setStrength(0)}>Zero</button><span>+2 · Toward</span></div>
           <div className={'run-status '+(error?'error':'')} role="status">{!online?'Waiting for runtime':error|| (pending?'Computing embeddings…':draft.trim()!==query?'Edit ready to embed':run?'Applied '+signed(run.strength)+' toward '+run.target:'Waiting for query')}</div>
         </div></aside>
@@ -107,7 +108,7 @@ export default function Atlas({ online }: { online: boolean }) {
       <div className="rank-pair">{(['before','after'] as const).map(side=><div key={side} className={'rank-panel '+side}><div className="rank-head"><span className={side==='before'?'query-dot':'steered-dot'}/><h3>{side==='before'?'Original query':'Steered query'}</h3>{side==='after'&&run&&<small>{Math.round(run.neighbor_overlap*3)}/3 neighbors retained</small>}</div>
       <ol>{run?.[side].map((id,i)=>{const d=run.documents[id];return <li key={id}><button onClick={()=>setSelected(id)} aria-pressed={doc?.id===id} title={'Inspect '+d.text}>
         <span className="rank-num">{i+1}</span><i style={{background:colors[d.topic]}}/><span>{d.text}</span><b>{d[side].toFixed(3)}</b><ArrowUpRight size={12}/></button></li>})}</ol></div>)}</div>
-      <details className="method"><summary>Concept DNA · how steering works</summary><p>Each point is one calibration document. Lines connect nearest same-topic neighbors in PCA space. For each direction, the model subtracts the mean of the other 18 embeddings from the mean of six topic examples, then normalizes the difference. The slider adds a signed multiple of that direction and normalizes the query again. Retrieval scores use all eight dimensions. Phase 2 will evaluate a trainable adapter.</p></details>
+      <details className="method"><summary>Concept DNA · how steering works</summary><p>Each point is one calibration document. Lines connect nearest same-topic neighbors in PCA space. For each direction, the model subtracts the mean of the other 18 embeddings from the mean of six topic examples, then normalizes the difference. The slider adds a signed multiple of that direction and normalizes the query again. Retrieval scores use all eight dimensions. Open Intelligence for the separately learned ridge direction and its validation results.</p></details>
     </section>
   </>
 }

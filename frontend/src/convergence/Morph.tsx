@@ -46,7 +46,8 @@ export default function Morph({context,onNavigate}:{context:Domain;onNavigate:(d
  const useShortcut=enabled&&(!trial||trial.end!==null||trial.condition==='adaptive')?layout:null
  return <section className="panel foundry-panel"><h2>Adaptive navigation</h2>
  <label><input type="checkbox" checked={enabled} onChange={e=>{configureLearning(e.target.checked);if(!e.target.checked){trial=null;layout=null;previous=null;undoAvailable=false}update()}}/> Learn from this tab</label>
- <p>Opt-in records up to 256 module names, actions and timestamps in memory. A smoothed reward estimate ranks shortcuts using explicit preference and completion as positive signals, retries and backtracks as negative signals. Query and document text are excluded.</p>
+ <div className="layout-study"><section><h3>Static layout</h3><p>Workspace directory · fixed order</p><ol>{domains.map(d=><li key={d}>{d}</li>)}</ol></section><section><h3>Adaptive layout</h3><p>{useShortcut?'Pinned shortcut: '+useShortcut.shortcut:enabled?'No accepted shortcut':'Learning is off'}</p><small>{events.length} opted-in interactions · {backs} backtracks</small></section></div>
+ <p>Human evaluation pending.</p><p>Opt-in records up to 256 module names, actions and timestamps in memory. A smoothed reward estimate ranks shortcuts using explicit preference and completion as positive signals, retries and backtracks as negative signals. Query and document text are excluded.</p>
  {enabled&&<><label>Preferred destination<select value={pref} onChange={e=>setPref(e.target.value as Domain)}>{domains.map(d=><option key={d}>{d}</option>)}</select></label>
  <button onClick={()=>{record(pref,'prefer',context)}}>Record preference</button>
  <p>{events.length} recorded interactions · {backs} observed backtracks. Repeated navigation can indicate extra steps. Intent and frustration are unmeasured.</p>

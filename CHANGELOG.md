@@ -56,3 +56,7 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - 2026-11-27 13:52 IST · Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
 
 - 2026-11-27 13:57 IST · The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
+
+## Obsidian visual review
+
+Added responsive workspace navigation, a calibration signature chart, a stock allocation and delivery display, shared four-way steering comparisons, reading relationships, clarification trees, adaptive layout comparison and paper-level benchmark inspection. Offline evidence and live model probes retain distinct labels.
