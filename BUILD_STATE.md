@@ -1,5 +1,9 @@
 # Build state
 
+## Current Convergence verification
+
+The source checkpoint `d04e3a7` passed the full local gate on Intel macOS. Vite HMR and Uvicorn's reload supervisor serve ports 5173 and 8000 on loopback. All four existing local research encoder identities matched on an interactive probe. The production frontend and backend passed the previous release walkthrough in desktop Chrome and Pixel 7 emulation. GitHub main remains at `f5fc5ee3c963289628a22c0442a743eaf683ac0e`. The final source and scientific review matrix is in [docs/CONVERGENCE.md](docs/CONVERGENCE.md).
+
 ## Mission 001 • 27 November 2026
 
 Verified on macOS x86_64, Intel i9-9880H, eight physical cores and 16 GiB RAM. Project Python 3.12.14, Node 24.22.1, Vite 7.3.6. Standalone Codex thread metadata reported GPT-6.2 Astra.
@@ -67,3 +71,5 @@ Release 6094410d2238a5bd29f78578d8c6231a2c2ed19e passed 48 Python tests, TypeScr
 - The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
 
 - The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
+
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.

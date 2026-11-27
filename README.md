@@ -6,6 +6,10 @@ RESURRECT 2026 | Problem Statement 05
 
 Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
+## Convergence preview
+
+Open [Mission Control on localhost](http://localhost:5173/#mission-control) on the `feature/convergence` branch to enter any of the six workspaces. The existing public release remains available on [Vercel](https://eidolon-vector-x.vercel.app). Implementation coverage, reproducible tests and the scientific review queue are in [the Convergence report](docs/CONVERGENCE.md).
+
 ## Research question
 
 How does moving a query toward a concept change what it retrieves? VECTOR-X embeds a sentence, ranks a fixed corpus, then lets the operator steer the same query and inspect which documents move up or down.
@@ -139,3 +143,5 @@ Production serves live calibration inference and the recorded four-encoder evide
 - The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
 
 - The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
+
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
