@@ -76,12 +76,13 @@ function Explorer({step}:{step:number}) {
     </>}</section>
 }
 
-export default function Applications({online}:{online:boolean}){
-  const [step,setStep]=useState(0)
+export default function Applications({online,initialStep=0,direct=false}:{online:boolean;initialStep?:number;direct?:boolean}){
+  const [step,setLocalStep]=useState(initialStep)
+  const setStep=(value:number)=>{if(direct)location.hash=value===5?'evidence-vault':steps[value].toLowerCase();else setLocalStep(value)}
   const domain:Domain=step===5?'VECTOR-X':steps[step] as Domain
   useEffect(()=>visit(domain),[domain])
-  const navigate=(d:Domain)=>setStep(d==='VECTOR-X'?5:steps.indexOf(d))
-  return <section className="foundry intelligence"><div className="atlas-intro"><h1>Application demonstrations</h1><p>Judge walkthrough · five uses of the calibration model and a review of the independent evidence.</p></div>
+  const navigate=(d:Domain)=>{if(d==='VECTOR-X'){location.hash='vector-x';return}setStep(steps.indexOf(d))}
+  return <section className="foundry intelligence"><div className="atlas-intro"><h1>{direct?steps[step]:'Application demonstrations'}</h1><p>Judge walkthrough · five uses of the calibration model and a review of the independent evidence.</p></div>
     <section className="panel foundry-panel"><label>Walkthrough step<select value={step} onChange={e=>setStep(Number(e.target.value))}>{steps.map((s,i)=><option value={i} key={s}>{i+1}. {s}</option>)}</select></label>
     <p>{instructions[step]}</p><div className="foundry-actions"><button disabled={!step} onClick={()=>{navigateBack(domain);setStep(step-1)}}>Previous step</button><button disabled={step===5} onClick={()=>setStep(step+1)}>Next step</button></div></section>
     <details open={step===3}><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>

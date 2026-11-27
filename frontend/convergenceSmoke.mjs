@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { chromium } from 'playwright-core'
-const browser=await chromium.launch({channel:'chrome',headless:true})
+const browser=await chromium.launch({channel:'chrome',headless:true,timeout:30000})
 try {
  const page=await browser.newPage()
  await page.goto('http://localhost:5173/#applications')
@@ -67,6 +67,22 @@ try {
   await page.getByRole('button',{name:'Embed query'}).click()
   await page.getByText(/Draft from Row/).waitFor()
   assert.equal(new URL(page.url()).hash,'#atlas')
+ }
+ if(check==='all'||check==='platform'){
+  for(const width of [1400,390]){
+   await page.setViewportSize({width,height:850})
+   await page.goto('http://localhost:5173/#mission-control')
+   const destinations=page.getByRole('navigation',{name:'Mission destinations'})
+   await destinations.waitFor()
+   assert.equal(await destinations.getByRole('link').count(),10)
+   for(const name of ['CORTEX','SUPPLY','SYMBIOSIS','MORPH','VECTOR-X','CLARITY','Data Foundry','Research Lab','Evidence Vault']){
+    await destinations.getByRole('link',{name,exact:true}).click()
+    await page.getByRole('heading',{level:1,name:name==='VECTOR-X'?'Semantic atlas':name,exact:true}).waitFor()
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)
+    assert.equal(overflow,false,name+' overflows at '+width)
+    await page.getByRole('navigation',{name:'Workspace',exact:true}).getByRole('link',{name:'Mission Control',exact:true}).click()
+   }
+  }
  }
  // Additional module checks
  console.log('Convergence browser checks passed:',check)

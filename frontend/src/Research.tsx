@@ -41,13 +41,14 @@ function Vault({r}:{r:Evidence}){
       <p>{r.host} · evaluation process peak {fmt(r.peak_rss_mib)} MiB. Run <code>OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m scripts.phase3_evidence</code> after fetching the pinned archive.</p></details>
   </section>
 }
-export default function Research({online}:{online:boolean}){
+export default function Research({online,vaultOnly=false}:{online:boolean;vaultOnly?:boolean}){
   const [record,setRecord]=useState<Evidence|null>(null),[error,setError]=useState('')
   useEffect(()=>{const c=new AbortController()
     fetch('/evidence/phase3.json',{signal:c.signal}).then(async res=>{if(!res.ok)throw Error('Evidence unavailable.');const value=await res.json();if(!value.models?.length)throw Error('Evidence unavailable.');setRecord(value)})
       .catch(()=>{if(!c.signal.aborted)setError('The published evaluation record could not be loaded.')})
     return ()=>c.abort()
   },[])
+  if(vaultOnly)return <section className="foundry intelligence"><div className="atlas-intro"><h1>Evidence Vault</h1><p>Frozen SciFact comparisons and independent QASPER outcomes.</p></div>{record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}<Recovery online={online}/></section>
   return <section className="foundry intelligence"><div className="atlas-intro"><h1>Research Lab</h1><p>Inspect independent retrieval judgments and test the cost of steering on the calibration index.</p></div>
     <Recovery online={online}/>
     {record?<Vault r={record}/>:<p role="status">{error||'Loading public evidence…'}</p>}

@@ -40,3 +40,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - 2026-11-27 13:24 IST · CLARITY ranks six kinds of linguistic cue by entropy per effort unit, requests explicit referents, compares live 8D readings and gates simulated decisions. Six authored positives localized correctly and two negative controls passed. A bank-only baseline detected one positive. Independent resolution accuracy and generalization are unmeasured.
 
 - 2026-11-27 13:25 IST · The CORTEX reader and resolved CLARITY interpretations can populate a 400-character Vector Warp draft in memory on loopback. The operator edits or encodes it explicitly. The original 8D atlas, four research encoders and frozen evidence remain available through their existing entry points.
+
+- 2026-11-27 13:32 IST · Mission Control provides ten direct destinations, a six-stage coastal investigation and measured limits for each application. Desktop and 390px Chrome checks visit every destination and check horizontal overflow. Production remains on its existing release.
