@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+if [ ! -x .venv/bin/uvicorn ]; then
+  uv sync --frozen --python 3.12
+fi
+if [ ! -f frontend/node_modules/vite/bin/vite.js ]; then
+  npm ci --prefix frontend --ignore-scripts --no-audit --no-fund
+fi
+exec .venv/bin/python scripts/dev.py start
