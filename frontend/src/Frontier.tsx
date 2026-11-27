@@ -55,13 +55,19 @@ export default function Frontier() {
   const current=points[selected]
   const maxD=Math.max(.01,...points.map(p=>p.drift??0)), minG=Math.min(0,...points.map(p=>p.gain??0)), maxG=Math.max(.01,...points.map(p=>p.gain??0))
   function choose(i:number){if(paused)return;setPrevious(selected);select(i);log('Selected feasible point '+i)}
-  return <section className="panel foundry-panel"><h2>Semantic Pareto frontier</h2>
+  return <section className="panel foundry-panel"><p className="kicker">{paused?'Paused':mode}</p><h2>Semantic Pareto frontier</h2>
     <div className="rank-pair"><label>Agent interaction mode<select value={mode} onChange={e=>{modeTo(e.target.value);log('Mode '+e.target.value)}}>{['Approval required','Suggestion only','Automatic preview','Sequential form'].map(s=><option key={s}>{s}</option>)}</select></label>
     <label>Task objective<select value={goal} disabled={paused} onChange={e=>{goalTo(e.target.value);log('Goal changed')}}><option>Maximize gain</option><option>Minimize drift</option></select></label></div>
+    {current && <figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">
+      <path d="M45 12V161H583" fill="none" stroke="#65828c"/><text x="45" y="181">0 drift</text><text x="475" y="181">{fmt(maxD)} drift</text>
+      <text x="1" y="21">{fmt(maxG)}</text><text x="1" y="158">{fmt(minG)}</text>
+      {points.map((p,i)=>p.drift!=null&&p.gain!=null&&<circle key={i} cx={45+535*p.drift/maxD} cy={159-141*(p.gain-minG)/(maxG-minG)}
+        r={selected===i?6:p.frontier?4:2.8} fill={p.feasible?(p.frontier?'#8be3d1':'#9caec4'):'#dd9b7d'} stroke={selected===i?'white':'none'}><title>{names[p.method]} · gain {fmt(p.gain)} · drift {fmt(p.drift)}</title></circle>)}</svg>
+      <figcaption>{feasible.length} feasible of {points.length} · {points.filter(p=>p.frontier).length} nondominated candidates (ties retained). The chart shows two of the decision variables.</figcaption></figure>}
     <p>Algorithmic frontier search. Automatic mode may select one reversible local preview per sweep. Constraints apply to the current model and index.</p>
     <button onClick={()=>{pause(!paused);log(paused?'Resumed':'Paused')}}>{paused?'Resume agent':'Pause agent'}</button>
     <button onClick={()=>{pause(true);setPoints([]);setPrevious(null);setStatus('Pending sweep aborted.');log('Aborted')}}>Abort pending action</button>
-    <details><summary>Decision timeline and session measures</summary><ol>{timeline.map((t,i)=><li key={i}>{new Date(t.time).toLocaleTimeString()} · {t.action}</li>)}</ol>
+    <details><summary>Decision timeline and session measures</summary><ol className="decision-log">{timeline.map((t,i)=><li key={i}>{new Date(t.time).toLocaleTimeString()} · {t.action}</li>)}</ol>
     <label>Perceived control (1–7)<input type="number" min="1" max="7" value={rating} onChange={e=>rate(e.target.value)}/></label>
     <label>Trust (1–7)<input type="number" min="1" max="7" value={trust} onChange={e=>setTrust(e.target.value)}/></label>
     <button disabled={!current||finished!==null} onClick={()=>{finish(Date.now());log('Task completed by operator')}}>Mark steering task complete</button>
@@ -76,12 +82,7 @@ export default function Frontier() {
       <label>Cosine floor<input type="number" min="-1" max="1" step=".05" value={cos} onChange={e=>setCos(Number(e.target.value))}/></label></div></fieldset>
     {sequential&&<button disabled={paused} onClick={()=>{approvedForm.current=sweepKey;submitForm(n=>n+1);log('Submitted baseline form')}}>Calculate form settings</button>}
     {status && <p role="status">{status} <button onClick={()=>setRetry(v=>v+1)}>Retry sweep</button></p>}
-    {current && <><figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">
-      <path d="M45 12V161H583" fill="none" stroke="#65828c"/><text x="45" y="181">0 drift</text><text x="475" y="181">{fmt(maxD)} drift</text>
-      <text x="1" y="21">{fmt(maxG)}</text><text x="1" y="158">{fmt(minG)}</text>
-      {points.map((p,i)=>p.drift!=null&&p.gain!=null&&<circle key={i} cx={45+535*p.drift/maxD} cy={159-141*(p.gain-minG)/(maxG-minG)}
-        r={selected===i?6:p.frontier?4:2.8} fill={p.feasible?(p.frontier?'#8be3d1':'#9caec4'):'#dd9b7d'} stroke={selected===i?'white':'none'}><title>{names[p.method]} · gain {fmt(p.gain)} · drift {fmt(p.drift)}</title></circle>)}</svg>
-      <figcaption>{feasible.length} feasible of {points.length} · {points.filter(p=>p.frontier).length} nondominated candidates (ties retained). The chart shows two of the decision variables.</figcaption></figure>
+    {current && <>
       <label>Feasible operating point<select disabled={paused} value={selected} onChange={e=>choose(Number(e.target.value))}>{feasible.map(({p,i})=><option key={i} value={i}>{names[p.method]} · requested {fmt(p.requested)} · gain {fmt(p.gain)}{p.frontier?' · frontier':''}</option>)}</select></label>
       <p>Applied {fmt(current.applied)} · gain {fmt(current.gain)} · drift {fmt(current.drift)} · cosine {fmt(current.cosine)} · nDCG@3 {fmt(current.ndcg)}.</p>
       <ol>{current.top.map(i=><li key={i}>{space?.documents[i]}</li>)}</ol><h3>SYMBIOSIS recommendation</h3>

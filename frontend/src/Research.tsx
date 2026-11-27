@@ -23,7 +23,7 @@ function Vault({r}:{r:Evidence}){
   }
   return <section className="panel foundry-panel"><div className="section-title"><h2>Evidence Vault</h2><div className="foundry-actions">
     <button onClick={csv}>Export outcomes CSV</button><button onClick={()=>downloadFile('vector-x-evidence.json','application/json',JSON.stringify(r))}>Export evidence JSON</button></div></div>
-    <p role="status"><strong>Scientific review paused.</strong> The 16D reproduction changed three third-place IDs for claims 589 and 1107. These are provisional first-run outcomes.</p>
+    <p role="status" className="shield"><strong>Scientific review paused.</strong> The 16D reproduction changed three third-place IDs for claims 589 and 1107. These are provisional first-run outcomes.</p>
     <p>{r.dataset}. Retrieval includes abstentions. Gain, drift and violations use represented queries only.</p>
     <label>Encoder configuration<select value={dimension} onChange={e=>setDimension(Number(e.target.value))}>{r.models.map((m,i)=><option key={i} value={i}>{m.dimensions}D calibration TF–IDF / LSA</option>)}</select></label>
     <div className="foundry-stats"><span><b>{m.represented} / {m.query_count}</b> queries represented</span><span><b>{m.indexed} / {m.corpus_count}</b> documents indexed</span><span><b>{fmt(m.encoding_ms.mean)} ms</b> mean query encoding</span></div>
@@ -37,7 +37,7 @@ function Vault({r}:{r:Evidence}){
     <label>Inspect held-out claim<select value={claim} onChange={e=>setClaim(Number(e.target.value))}>{m.queries.map((q,i)=><option key={q.id} value={i}>{q.id} · {q.represented?'represented':'abstained'}</option>)}</select></label>
     <p>Independent evidence IDs · {q.gold.join(', ')}. {q.represented?'':'The frozen vocabulary produced no query vector.'}</p>
     {Object.entries(q.methods).map(([k,v])=><p key={k}><b>{names[k]}</b> · retrieved {v.top.join(', ')||'none'} · Recall@3 {fmt(v.recall)} · gain {fmt(v.gain)}.</p>)}
-    <details><summary>Provenance and reproduction</summary><p>Source commit {r.source_commit} · seed {r.seed} · model {m.model_id}</p><p>Archive SHA-256 {r.archive_sha256} · protocol SHA-256 {r.protocol_sha256}</p>
+    <details open><summary>Provenance and reproduction</summary><p>Source commit {r.source_commit} · seed {r.seed} · model {m.model_id}</p><p>Archive SHA-256 {r.archive_sha256} · protocol SHA-256 {r.protocol_sha256}</p>
       <p>{r.host} · evaluation process peak {fmt(r.peak_rss_mib)} MiB. Run <code>OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m scripts.phase3_evidence</code> after fetching the pinned archive.</p></details>
   </section>
 }
