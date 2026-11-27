@@ -11,32 +11,43 @@ import { useRuntime } from './runtime'
 import { modules, protocol } from './content'
 import './style.css'
 
+const AtlasPreferences = lazy(() => import('./convergence/Morph').then(mod=>({default:mod.AtlasPreferences})))
+const Mission = lazy(() => import('./convergence/Mission'))
 const Applications = lazy(() => import('./Applications'))
 const Research = lazy(() => import('./Research'))
-const pages = ['Atlas', 'Data Foundry', 'Intelligence', 'Research Lab', 'Applications', 'Overview', 'Architecture', 'Protocol'] as const
-type Page = typeof pages[number]
-const pageFromHash = (): Page => pages.find(p => '#' + p.toLowerCase().replace(' ', '-') === location.hash) ?? 'Atlas'
+const pages = ['Atlas', 'Data Foundry', 'Intelligence', 'Research Lab', 'Applications', 'Overview', 'Architecture', 'Protocol', 'Mission Control'] as const
+const domains = ['CORTEX','CLARITY','SUPPLY','MORPH','SYMBIOSIS'] as const
+const routes = [...pages,...domains,'VECTOR-X','Evidence Vault'] as const
+type Page = typeof routes[number]
+const pageFromHash = (): Page => routes.find(p => '#' + p.toLowerCase().replace(' ', '-') === location.hash) ?? 'Atlas'
 function App() {
   const { data, status } = useRuntime()
   const [page, setPage] = useState<Page>(pageFromHash)
+  const directStep=domains.findIndex(d=>d===page)
   const [index, setIndex] = useState(0)
   const [detail, setDetail] = useState<number | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
+  const previousPage = useRef(page)
   const sample = data?.samples[index] ?? data?.samples[0]
   useEffect(() => {
     const update = () => setPage(pageFromHash())
     window.addEventListener('hashchange',update)
     return () => window.removeEventListener('hashchange',update)
   }, [])
+  useEffect(() => {
+    document.title = page + ' · EIDOLON VECTOR-X'
+    if (previousPage.current !== page) document.getElementById('workspace')?.focus()
+    previousPage.current = page
+  }, [page])
   useEffect(() => { if (detail !== null) dialog.current?.showModal() }, [detail])
   const moduleList = <div className="module-grid">{modules.map((m,i) => <button className="module" key={m.name} onClick={() => setDetail(i)}>
     <span className={'module-icon tint'+i}><m.icon size={19}/></span><span><strong>{m.name}</strong><small>{m.brief}</small></span><ChevronRight className="disclose" size={15}/>
   </button>)}</div>
   return <MotionConfig reducedMotion="user"><a className="skip" href="#workspace" onClick={e => { e.preventDefault(); document.getElementById('workspace')?.focus() }}>Skip to workspace</a>
-    <header><div className="topbar"><div className="brand"><img src="/mark.svg" alt=""/><b>EIDOLON</b><span className="brand-divider"/><span>VECTOR-X</span></div>
-      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [Hexagon, Database, Layers3, Activity, Workflow, LayoutGrid, Workflow, BookOpen][i]; return <a key={p} href={'#'+p.toLowerCase().replace(' ', '-')} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
+    <header><div className="topbar"><a className="brand" href="#mission-control" aria-label="Open Mission Control"><img src="/mark.svg" alt=""/><b>EIDOLON</b><span className="brand-divider"/><span>VECTOR-X</span></a>
+      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [Hexagon, Database, Layers3, Activity, Workflow, LayoutGrid, Workflow, BookOpen, LayoutGrid][i]; return <a key={p} href={'#'+p.toLowerCase().replace(' ', '-')} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
       <div role="status" className={'connection '+status.toLowerCase()}><i/> API {status.toLowerCase()}</div></div></header>
-    <main id="workspace" tabIndex={-1}>{hosted && <p className="hosted-notice">Public research demo · query text is processed on Railway. Use the local workspace for personal datasets.</p>}{page==='Applications'?<Suspense fallback={<p>Loading applications…</p>}><Applications online={!!data}/></Suspense>:page==='Research Lab'?<Suspense fallback={<p>Loading research lab…</p>}><Research online={!!data}/></Suspense>:page==='Intelligence'?(data?<Intelligence/>:<p role="status">Waiting for embedding runtime</p>):page==='Data Foundry'?(hosted?<section><h1>Data Foundry</h1><p>Hosted file imports are disabled. Open the local workspace to process datasets on your computer.</p></section>:<Foundry digest={data?.model_id}/>):page==='Atlas'?<Atlas online={status==='Connected'}/>:<><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Phase 1</span></div>
+    <main id="workspace" tabIndex={-1}>{hosted && <p className="hosted-notice">Public research demo · query text is processed on Railway. Use the local workspace for personal datasets.</p>}{page==='Mission Control'?<Suspense fallback={<p>Loading mission…</p>}><Mission/></Suspense>:page==='Applications'||directStep>=0?<Suspense fallback={<p>Loading applications…</p>}><Applications key={page} online={!!data} initialStep={Math.max(0,directStep)} direct={directStep>=0}/></Suspense>:page==='Research Lab'||page==='Evidence Vault'?<Suspense fallback={<p>Loading research lab…</p>}><Research online={!!data} vaultOnly={page==='Evidence Vault'}/></Suspense>:page==='Intelligence'?(data?<Intelligence/>:<p role="status">Waiting for embedding runtime</p>):page==='Data Foundry'?(hosted?<section><h1>Data Foundry</h1><p>Hosted file imports are disabled. Open the local workspace to process datasets on your computer.</p></section>:<Foundry digest={data?.model_id}/>):page==='Atlas'||page==='VECTOR-X'?<>{page==='VECTOR-X'&&<nav className="suite-nav" aria-label="Semantic tools"><a href="#intelligence">Concepts and Semantic Lock</a><a href="#data-foundry">Imported dataset steering</a><a href="#research-lab">Compare encoders</a><a href="#evidence-vault">Experimental evidence</a></nav>}<Atlas online={status==='Connected'}/>{page==='VECTOR-X'&&<Suspense fallback={null}><AtlasPreferences/></Suspense>}</>:<><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Phase 1</span></div>
     <div className="intro"><div><h1>{page === 'Overview' ? 'Mission Control' : page === 'Protocol' ? 'Evaluation protocol' : 'System architecture'}</h1>
       <p>{page === 'Overview' ? 'Inspect the embedding backbone and explore its vector signatures.' : page === 'Protocol' ? 'The evaluation design for held-out steering experiments.' : 'The local runtime, active baselines and planned research modules.'}</p></div>
       <span className="mission"><span/> Foundation</span></div>

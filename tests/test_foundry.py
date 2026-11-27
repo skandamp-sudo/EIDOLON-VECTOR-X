@@ -7,7 +7,7 @@ from urllib.request import Request, urlopen
 import numpy as np
 
 from backend.atlas import Atlas
-from backend.foundry import foundry, parse, slot
+from backend.foundry import foundry, local_operation, parse, slot
 from fastapi import HTTPException
 from starlette.requests import Request as LocalRequest
 from backend.model import Backbone
@@ -98,6 +98,36 @@ class FoundryTests(unittest.TestCase):
         with self.assertRaises(HTTPError) as caught:
             read(8000, path)
         self.assertEqual(caught.exception.code, 405)
+
+    def test_concurrent_client_retry_has_its_own_body(self):
+        async def exercise():
+            started, release = asyncio.Event(), asyncio.Event()
+
+            def request(body, wait=False):
+                async def receive():
+                    if wait:
+                        started.set()
+                        await release.wait()
+                    return {"type": "http.request", "body": body, "more_body": False}
+                return LocalRequest({"type": "http", "headers": [(b"x-vector-x-client", b"foundry")]}, receive)
+
+            async def parse_client(body, wait=False):
+                return await local_operation(request(body, wait), 100, lambda raw: parse(raw, "txt"))
+
+            first = asyncio.create_task(parse_client(b"first client", True))
+            try:
+                await asyncio.wait_for(started.wait(), 2)
+                with self.assertRaises(HTTPException) as err:
+                    await parse_client(b"second client")
+                self.assertEqual(err.exception.status_code, 429)
+            finally:
+                release.set()
+                first_response = await first
+            second_response = await parse_client(b"second client")
+            self.assertEqual(json.loads(first_response.body)["rows"], [["first client"]])
+            self.assertEqual(json.loads(second_response.body)["rows"], [["second client"]])
+
+        asyncio.run(exercise())
 
     def test_busy_worker_rejects_before_reading_body(self):
         request = LocalRequest({"type": "http", "headers": [(b"x-vector-x-client", b"foundry")]})

@@ -26,3 +26,29 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - Integrated actual per-family QASPER evidence and local probes for all four encoders into Research Lab. Published equal-strength and matched-gain comparisons, independent section-label outcomes and unavailable measurements.
 
 - Published the Vercel/Railway prototype and added a six-step judge walkthrough, directed document and inventory search, clarification, reversible session preferences, and recommendation rejection.
+
+- 2026-11-27 13:11 IST · Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- 2026-11-27 13:14 IST · CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
+
+- 2026-11-27 13:19 IST · SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
+
+- 2026-11-27 13:20 IST · SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
+
+- 2026-11-27 13:22 IST · MORPH ranks optional shortcuts from bounded, opt-in tab interactions. Static and adaptive navigation trials record elapsed time, destination changes, completion and optional mental effort. Chrome exercised learning, acceptance, rollback and deletion. Human usability effects are unmeasured.
+
+- 2026-11-27 13:24 IST · CLARITY ranks six kinds of linguistic cue by entropy per effort unit, requests explicit referents, compares live 8D readings and gates simulated decisions. Six authored positives localized correctly and two negative controls passed. A bank-only baseline detected one positive. Independent resolution accuracy and generalization are unmeasured.
+
+- 2026-11-27 13:25 IST · The CORTEX reader and resolved CLARITY interpretations can populate a 400-character Vector Warp draft in memory on loopback. The operator edits or encodes it explicitly. The original 8D atlas, four research encoders and frozen evidence remain available through their existing entry points.
+
+- 2026-11-27 13:32 IST · Mission Control provides ten direct destinations, a six-stage coastal investigation and measured limits for each application. Desktop and 390px Chrome checks visit every destination and check horizontal overflow. Production remains on its existing release.
+
+- 2026-11-27 13:35 IST · The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
+
+- 2026-11-27 13:37 IST · The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
+
+- 2026-11-27 13:38 IST · The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+
+- 2026-11-27 13:52 IST · Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+- 2026-11-27 13:57 IST · The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.

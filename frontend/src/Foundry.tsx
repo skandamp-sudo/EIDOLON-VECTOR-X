@@ -1,3 +1,4 @@
+import Cortex from './convergence/Cortex'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Database, Upload } from 'lucide-react'
 import CorpusExplorer from './CorpusExplorer'
@@ -197,6 +198,7 @@ export default function Foundry({ digest }: { digest?: string }) {
     } catch (e) { if (!controller.signal.aborted) { resetIndex(); setNote(message(e)) } }
     finally { if (active.current === controller) { active.current = null; setBusy(null) } }
   }
+  const [reader,showReader]=useState(false)
   const fingerprint = library.current.get(datasetKey)?.fingerprint ?? ''
   function exportQuality() {
     if (!stats || !data) return
@@ -241,6 +243,7 @@ export default function Foundry({ digest }: { digest?: string }) {
     </section></>}
     <div className="foundry-feedback" role="status">{!digest ? 'Embedding runtime unavailable.' : note}
       {busy && <button onClick={cancel}>Cancel operation</button>}</div>
+    {data&&<><button onClick={()=>showReader(v=>!v)}>{reader?'Close research reader':'Open research reader'}</button>{reader&&<Cortex key={fingerprint+column} source={name} rows={data.rows.map(r=>r[column])}/>}</>}
     {data && points.length > 0 && digest === completedDigest && <Retrieval key={datasetKey + column + completedDigest} fingerprint={fingerprint} data={data} points={points} column={column} metadata={metadata} digest={completedDigest}/>}
   </section>
 }

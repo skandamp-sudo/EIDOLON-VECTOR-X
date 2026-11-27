@@ -1,5 +1,10 @@
 import {useEffect, useState} from 'react'
 import {fmt, labRequest} from './labTypes'
+import Clarity from './convergence/Clarity'
+import Morph,{navigateBack,visit} from './convergence/Morph'
+import type {Domain} from './convergence/session'
+import Supply from './convergence/SupplyDesk'
+import Cortex from './convergence/Cortex'
 import Frontier from './Frontier'
 import Recovery from './Recovery'
 import type {Topic} from './explore'
@@ -30,6 +35,7 @@ function Explorer({step}:{step:number}) {
       return Array.isArray(values)&&values.length<=20&&values.every(v=>['Marine','Optics','Acoustics'].includes(v))?values:[]
     } catch {return []}
   })
+  useEffect(()=>{const reset=()=>setHistory([]);window.addEventListener('vector-x-reset-preferences',reset);return ()=>window.removeEventListener('vector-x-reset-preferences',reset)},[])
   function updateHistory(next:string[]){
     setHistory(next)
     try {sessionStorage.setItem('vector-x.inventory-saves.v1',JSON.stringify(next))} catch { /* In-memory use remains available. */ }
@@ -71,11 +77,17 @@ function Explorer({step}:{step:number}) {
     </>}</section>
 }
 
-export default function Applications({online}:{online:boolean}){
-  const [step,setStep]=useState(0)
-  return <section className="foundry intelligence"><div className="atlas-intro"><h1>Application demonstrations</h1><p>Judge walkthrough · five uses of the calibration model and a review of the independent evidence.</p></div>
+export default function Applications({online,initialStep=0,direct=false}:{online:boolean;initialStep?:number;direct?:boolean}){
+  const [step,setLocalStep]=useState(initialStep)
+  const setStep=(value:number)=>{if(direct)location.hash=value===5?'evidence-vault':steps[value].toLowerCase();else setLocalStep(value)}
+  const domain=step===5?null:steps[step] as Domain
+  useEffect(()=>{if(domain)visit(domain)},[domain])
+  const navigate=(d:Domain)=>{if(d==='VECTOR-X'){location.hash='vector-x';return}setStep(steps.indexOf(d))}
+  return <section className="foundry intelligence"><div className="atlas-intro"><h1>{direct?steps[step]:'Application demonstrations'}</h1><p>Judge walkthrough · five uses of the calibration model and a review of the independent evidence.</p></div>
     <section className="panel foundry-panel"><label>Walkthrough step<select value={step} onChange={e=>setStep(Number(e.target.value))}>{steps.map((s,i)=><option value={i} key={s}>{i+1}. {s}</option>)}</select></label>
-    <p>{instructions[step]}</p><div className="foundry-actions"><button disabled={!step} onClick={()=>setStep(step-1)}>Previous step</button><button disabled={step===5} onClick={()=>setStep(step+1)}>Next step</button></div></section>
+    <p>{instructions[step]}</p><div className="foundry-actions"><button disabled={!step} onClick={()=>{if(domain)navigateBack(domain);setStep(step-1)}}>Previous step</button><button disabled={step===5} onClick={()=>setStep(step+1)}>Next step</button></div></section>
+    {domain&&<details open={step===3}><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
+    {step===0&&<Cortex/>}{step===2&&<Supply/>}{step===1&&<Clarity/>}
     {step===5?<><Recovery online={online}/><p>BM25 led unsteered retrieval. Neither new encoder increased the fraction of methodology-labeled paragraphs in the governed top three. Only three evaluation paragraphs carried that label.</p><a href="#research-lab">Open full Evidence Vault</a></>:!online?<p role="status">Waiting for the model service.</p>:step===4?<Frontier/>:<Explorer key={step<2?'knowledge':'inventory'} step={step}/>}
   </section>
 }

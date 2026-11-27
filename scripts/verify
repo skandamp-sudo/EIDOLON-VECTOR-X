@@ -4,6 +4,12 @@ cd "$(dirname "$0")/.."
 ./scripts/start
 .venv/bin/python -m unittest discover -s tests -v
 npm --prefix frontend run build
+node frontend/supply.test.mjs
+node frontend/evaluate-supply.mjs
+node frontend/clarity.test.mjs
+node frontend/independent.test.mjs
 npm --prefix frontend run smoke
+node frontend/convergenceSmoke.mjs
+node frontend/sessionSmoke.mjs
 git diff --check
 git diff --cached --check

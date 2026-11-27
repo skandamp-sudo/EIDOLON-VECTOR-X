@@ -64,3 +64,6 @@ dialog{padding:26px;color:#e8edf1;max-width:min(450px,90vw)}dialog::backdrop{bac
 
 .topbar nav {min-width:0; overflow-x:auto; scrollbar-width:thin}
 .topbar nav a {flex-shrink:0; white-space:nowrap}
+
+.suite-nav{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center;padding:.8rem 0;border-block:1px solid var(--line);margin:0 0 1rem}
+.suite-nav a,.suite-link{color:var(--cyan);padding:.45rem 0;text-decoration:underline;text-underline-offset:.22em}

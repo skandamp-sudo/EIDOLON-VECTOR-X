@@ -1,0 +1,65 @@
+# Convergence integration ledger
+
+Base f5fc5ee3c963289628a22c0442a743eaf683ac0e. The six domains share one application. Public calibration inference, local-only Data Foundry imports, the four local encoder identities, static QASPER reports and both SciFact archives retain their original boundaries. Use the Applications walkthrough for the published release. The feature branch is independent of production main.
+
+## Verification ledger
+
+- Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
+
+- SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
+
+- SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
+
+- MORPH ranks optional shortcuts from bounded, opt-in tab interactions. Static and adaptive navigation trials record elapsed time, destination changes, completion and optional mental effort. Chrome exercised learning, acceptance, rollback and deletion. Human usability effects are unmeasured.
+
+- CLARITY ranks six kinds of linguistic cue by entropy per effort unit, requests explicit referents, compares live 8D readings and gates simulated decisions. Six authored positives localized correctly and two negative controls passed. A bank-only baseline detected one positive. Independent resolution accuracy and generalization are unmeasured.
+
+- The CORTEX reader and resolved CLARITY interpretations can populate a 400-character Vector Warp draft in memory on loopback. The operator edits or encodes it explicitly. The original 8D atlas, four research encoders and frozen evidence remain available through their existing entry points.
+
+- Mission Control provides ten direct destinations, a six-stage coastal investigation and measured limits for each application. Desktop and 390px Chrome checks visit every destination and check horizontal overflow. Production remains on its existing release.
+
+- The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
+
+- The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
+
+## Requirement coverage and reproduction
+
+Open [local Mission Control](http://localhost:5173/#mission-control). The top-left brand opens it from every workspace. The published Vercel site serves the earlier release. Run `./scripts/start` to check or start the loopback Vite and FastAPI supervisor. Run `./scripts/verify` with the locked dependencies, local Chrome and Node with native TypeScript stripping, verified on Node 24.
+
+| PS | Success criterion and implementation | Baseline, sample and result | Known limits |
+| --- | --- | --- | --- |
+| 01 CORTEX | Follow a passage or topic edge to its row and offset, compare evidence annotations, then answer a sourced comprehension and decision task. Import mapped text through Data Foundry. | Four authored coastal field notes. The same task captures target reciprocal rank, answer correctness, elapsed time and effort for weighted terms, keyword search or source order. Chrome exercised ranking and annotation. | Topic edges denote term membership and passage links use cosine. Contradictions require reader judgment. Offsets count UTF-16 units. The reader indexes at most 128 chunks. Participant effects and independent relevance are unmeasured. Optional PDF extraction is deferred. |
+| 02 SUPPLY | Replay stock events, allocate units once, project a shipment from its material lines and trace a proposed purchase to source events. | Run `node frontend/supply.test.mjs` and `node frontend/evaluate-supply.mjs`. Six order snapshots from three related simulated streams yielded three true positives, zero false positives and zero false negatives. Reactive recall was 0 on day 1. MAE was 0 days on four dated projections. Warnings led their CRDs by 5, 3 and 5 days. Separate assertions cover stock, duplicate rejection, multi-material lines and approval limits. | One warehouse, discrete days and first-booked allocation. Fully covered late orders receive risk flags. Purchase proposals cover missing units. Arrival dates are scenario assumptions. These snapshots provide no field accuracy estimate. |
+| 03 SYMBIOSIS | Produce a feasible proposal, change objectives and constraints, approve or reject a point and undo its preview. | Chrome covered pause, suggestion-only gating, abort, bounded automatic preview, undo and explicit sequential form submission. The export includes a decision timeline, task completion time and optional operator ratings. | A human comparison with the manual form is outstanding. Successful corrections need task-level outcome labels. Real-world unauthorized-action rates, trust and perceived control are unmeasured. |
+| 04 MORPH | Rank optional shortcuts from contextual rewards, preserve the critical controls and restore the previous layout. | Static and adaptive tasks use the same origin and destination. The first condition is randomized, then reversed for the pair. Export captures intermediate destinations, elapsed time, success, effort, approvals and rejections. Chrome covered opt-in, acceptance, undo and deletion. | The smoothed reward estimate reflects observed interactions. It does not measure frustration. Participant navigation efficiency and causal improvement are unmeasured. |
+| 05 VECTOR-X | Steer a query, inspect full-space rankings and protected drift, and identify the live encoder. Transfer a local passage or clarified interpretation to an editable steering draft. | One engineering query returned original, unconstrained and locked outputs from each of the four local encoders with matching model hashes. Independent frozen QASPER results cover 16 paper families, 15 with relevance labels. Unsteered nDCG@3 was 0.22295 for BM25, 0.14355 for expanded LSA and 0.02044 for MiniLM. | Public live inference uses 8D. Both legacy models abstained on all registered QASPER questions. Neither new encoder improved the methodology-section share. The original SciFact review remains paused. |
+| 06 CLARITY | Locate a linguistic cue, offer candidate readings, select a clarification and compare the resulting retrieval. Consequential unresolved cases defer in the simulation. | Run `node frontend/clarity.test.mjs`. Six authored positives produced the expected cue and exact span. Two unambiguous controls stayed clear. A single-word baseline found one positive. Direct interpretation asks zero questions. Chrome exercised an explicit referent and live retrieval. | Bounded English patterns can miss cues or flag clear speech. Entropy uses heuristic weights and assumed answer partitions. Independent detection, interpretation recall, resolution accuracy and simulated execution error remain unmeasured. |
+
+### Consolidated review queue
+
+- **Runtime and integration.** The local suite exercises desktop and mobile Chrome viewports. Physical mobile devices, Safari and concurrent multi-client sessions remain unverified.
+- **Scientific validity.** Recruit participants for CORTEX, SYMBIOSIS and MORPH. Freeze task scoring, assignment and exclusions before collection. Obtain independently labeled inventory and language cases, preserve failure cases and report uncertainty. Previously inspected SciFact cannot serve as a fresh blind test.
+- **Performance.** Reader, ledger and event-history limits have functional checks. Long-session memory and tail latency under maximum load remain unmeasured.
+- **Privacy and security.** Learning telemetry is opt-in and stays in tab memory. Existing explicit inventory saves use session storage. Local text handoffs use memory and an edit step. User-requested evidence exports can contain source text. Hosted imports remain disabled pending verified isolation and resource limits.
+- **Usability and tests.** Run assisted screen-reader and keyboard studies. Broaden the order-stream and language fixtures before extrapolating beyond the authored tasks. An externally operated inventory feed and independent usability benchmarks remain outside the verified release.
+- **Remaining effort.** Allow roughly one to two engineering days for additional browser, accessibility and load checks. Independent domain labels and participant studies have separate recruitment and review dependencies. This planning estimate does not measure runtime or credit usage.
+
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+
+- Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+## Continuation 009 release review
+
+The browser gate covers route changes, history navigation, page reload, keyboard focus, reduced-motion preference, state rollback, backend outage and recovery, cache identity, malformed files and dataset switching. A separate two-context Chrome check verified simulation isolation and opt-in history retention. In one local development sample, 270 preference actions retained 256 entries. Across 32 route changes, the collected JavaScript heap grew from 10,353,172 to 10,960,928 bytes. DOMContentLoaded took 317 ms on that navigation. These are short-run development measurements. Leak freedom, production load capacity and physical-device performance remain unverified.
+
+Native desktop Safari 27.2 displayed Mission Control with a connected API and opened the SUPPLY desk. Safari WebDriver declined a session because remote automation was disabled. Chrome desktop and narrow-width tests provide the broader automated coverage.
+
+Security review covered rendering of user text, filename handling, bounded parsing, CSP-independent React text escaping, CSV formula protection, the hosted route allowlist, actual CORS controls, simulation-only approvals and storage deletion. A contention regression holds one local parser request open, observes a second client receive 429, then retries and confirms each client receives only its own data. The production backend has no dataset registry or upload routes. No production load test was run.
+
+The current Vite pin and 39 operational Python pins were checked against npm and PyPI advisories on 27 November 2026. The registered historical wheel file still contains five packages with reported advisories. Reproduction retains that file. The interactive installation uses the separate patched operational lock. Evidence review verified five SciFact manifest entries and all eight first/repeat QASPER artifact digests. All four live local probes matched the recorded IDs. Both reviewed release tags and the earlier scientific stop remain in effect.
+
+Use the [evaluation handoff](INDEPENDENT-EVALUATION.md) for independent labels and participant collection. Use the [judge guide](JUDGE-WALKTHROUGH.md) for the timed demos, mathematics and fallback. No independent results were collected in this review.
+
+- The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.

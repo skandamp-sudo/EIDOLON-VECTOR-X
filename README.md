@@ -6,6 +6,12 @@ RESURRECT 2026 | Problem Statement 05
 
 Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
+## Convergence preview
+
+Open [Mission Control on localhost](http://localhost:5173/#mission-control) on the `feature/convergence` branch to enter any of the six workspaces. The existing public release remains available on [Vercel](https://eidolon-vector-x.vercel.app). Implementation coverage, reproducible tests and the scientific review queue are in [the Convergence report](docs/CONVERGENCE.md).
+
+[Judge walkthrough and local fallback](docs/JUDGE-WALKTHROUGH.md) · [Independent evaluation instructions](docs/INDEPENDENT-EVALUATION.md)
+
 ## Research question
 
 How does moving a query toward a concept change what it retrieves? VECTOR-X embeds a sentence, ranks a fixed corpus, then lets the operator steer the same query and inspect which documents move up or down.
@@ -104,7 +110,7 @@ For optional recovery inference on CPython 3.12 / Intel AVX2 macOS, first instal
 
 ```sh
 .venv/bin/python -m scripts.fetch_recovery
-uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require-hashes -r requirements/research-macos-x86_64.txt
+uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require-hashes -r requirements/runtime-macos-x86_64.txt
 ./scripts/start
 ```
 
@@ -119,3 +125,29 @@ On 15 QASPER questions with evidence, unsteered nDCG@3 was 0.223 for BM25, 0.144
 Open **Applications** and use **Next step**. CORTEX follows document neighbors, CLARITY compares two topic readings, and SUPPLY searches a ten-item illustrative inventory. MORPH learns category weights from explicit saves in the current browser tab and supports rollback against a static baseline. SYMBIOSIS recommends a feasible measured setting and supports approval, rejection and undo. The final step opens recorded encoder comparisons including negative results. These are application demonstrations. Catalog similarity and category flags require human review.
 
 Production serves live calibration inference and the recorded four-encoder evidence. Use the local checkout for all four live encoders, private uploads and training. Vercel builds the frontend directory on Hobby. Railway runs one restricted worker with its exact Vercel origin and the /api/v1/health readiness check.
+
+- Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
+
+- SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
+
+- SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
+
+- MORPH ranks optional shortcuts from bounded, opt-in tab interactions. Static and adaptive navigation trials record elapsed time, destination changes, completion and optional mental effort. Chrome exercised learning, acceptance, rollback and deletion. Human usability effects are unmeasured.
+
+- CLARITY ranks six kinds of linguistic cue by entropy per effort unit, requests explicit referents, compares live 8D readings and gates simulated decisions. Six authored positives localized correctly and two negative controls passed. A bank-only baseline detected one positive. Independent resolution accuracy and generalization are unmeasured.
+
+- The CORTEX reader and resolved CLARITY interpretations can populate a 400-character Vector Warp draft in memory on loopback. The operator edits or encodes it explicitly. The original 8D atlas, four research encoders and frozen evidence remain available through their existing entry points.
+
+- Mission Control provides ten direct destinations, a six-stage coastal investigation and measured limits for each application. Desktop and 390px Chrome checks visit every destination and check horizontal overflow. Production remains on its existing release.
+
+- The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
+
+- The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
+
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+
+- Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+- The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
