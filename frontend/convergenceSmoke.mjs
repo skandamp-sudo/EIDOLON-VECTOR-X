@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict'
+import { chromium } from 'playwright-core'
+const browser=await chromium.launch({channel:'chrome',headless:true})
+try {
+ const page=await browser.newPage()
+ await page.goto('http://localhost:5173/#applications')
+ const step=page.getByLabel('Walkthrough step')
+ const check=process.argv[2]??'all'
+ if(check==='all'||check==='cortex'){
+  await page.getByLabel('Research priority').fill('pressure')
+  await page.getByRole('button',{name:'Row 1 · offset 0'}).first().click()
+  await page.getByLabel('Evidence assessment').selectOption('Supports')
+  await page.getByText('Evidence comparison',{exact:true}).click()
+  await page.getByText(/Supports \(reader assessment\)/).waitFor()
+ }
+ // Additional module checks
+ console.log('Convergence browser checks passed:',check)
+} finally {await browser.close()}

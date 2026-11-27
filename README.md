@@ -121,3 +121,5 @@ Open **Applications** and use **Next step**. CORTEX follows document neighbors, 
 Production serves live calibration inference and the recorded four-encoder evidence. Use the local checkout for all four live encoders, private uploads and training. Vercel builds the frontend directory on Hobby. Railway runs one restricted worker with its exact Vercel origin and the /api/v1/health readiness check.
 
 - Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.

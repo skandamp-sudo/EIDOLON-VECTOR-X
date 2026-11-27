@@ -28,3 +28,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - Published the Vercel/Railway prototype and added a six-step judge walkthrough, directed document and inventory search, clarification, reversible session preferences, and recommendation rejection.
 
 - 2026-11-27 13:11 IST · Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- 2026-11-27 13:14 IST · CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.

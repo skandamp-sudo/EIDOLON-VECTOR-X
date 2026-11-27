@@ -49,3 +49,5 @@ Vercel Hobby published https://eidolon-vector-x.vercel.app. EIDOLON-VECTOR-X / v
 Release 6094410d2238a5bd29f78578d8c6231a2c2ed19e passed 48 Python tests, TypeScript, Vite and the local Chrome suite. Vercel and Railway reported successful deployments for that SHA. The public six-step walkthrough passed end to end in desktop Chrome and Pixel 7 mobile emulation, including rollback, clarification, recommendation rejection/approval/undo and evidence selection. Public checks used the Vercel production origin and fresh requests to Railway. Recheck with `cd frontend && node productionSmoke.mjs`. Physical mobile hardware and Safari remain untested. The original scientific gate remains in effect.
 
 - Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
+
+- CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
