@@ -1,5 +1,6 @@
 import {useEffect,useState} from 'react'
-import {apiOrigin} from '../apiOrigin'
+import {openAtlasDraft} from './atlasDraft'
+import {apiOrigin,hosted} from '../apiOrigin'
 import {validRun} from '../explore'
 import type {Run} from '../explore'
 import {inspect,verdict} from './ambiguity'
@@ -42,6 +43,7 @@ export default function Clarity(){
  {issue&&<><h3>{issue.question}</h3><p>Question priority {issue.utility.toFixed(2)} bits per effort unit. Entropy {issue.entropy.toFixed(2)} bits assumes a response distinguishes both meanings. Weights use surrounding word overlap and have no probability calibration.</p>
  {issue.meanings.map((m,i)=>({m,w:issue.weights[i]})).sort((a,b)=>b.w-a.w).map(({m,w})=><button key={m} onClick={()=>needsDetail?setCustom(''):choose(m)} disabled={!!needsDetail}>{m} ({w.toFixed(2)})</button>)}
  <label>{needsDetail?'Enter the entity or reference frame':'Specify another meaning'}<input maxLength={60} value={custom} onChange={e=>setCustom(e.target.value)}/></label><button disabled={!custom.trim()} onClick={()=>choose(custom)}>Use my interpretation</button></>}
+ {!hosted&&issues.length>0&&!pending.length&&<button onClick={()=>openAtlasDraft(resolved(),'CLARITY interpretation')}>Open interpretation in Vector Warp</button>}
  <h3>Semantic comparison</h3><button onClick={()=>compare(Array.from(new Set([query,...(issue?issue.meanings.map(m=>resolved(m)):[resolved()])])))}>Compare interpretation retrieval</button>
  {busy&&<p role="status">Encoding the interpretations…</p>}
  {vectors.map((v,i)=><div key={v.text}><strong>{i===0?'Direct interpretation':v.text}</strong>{v.run?<><p>{v.run.model} · top passages {v.run.before.map(n=>n+1).join(', ')}</p><ol>{v.run.before.map(n=><li key={n}>{v.run!.documents[n].text}</li>)}</ol></>:<p>{v.error}</p>}</div>)}

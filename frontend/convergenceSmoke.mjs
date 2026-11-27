@@ -60,6 +60,14 @@ try {
   await page.getByRole('button',{name:'Compare interpretation retrieval'}).click()
   await page.getByText(/top passages/).first().waitFor()
  }
+ if(check==='all'||check==='core'){
+  await step.selectOption('0')
+  await page.getByRole('button',{name:'Open passage in Vector Warp'}).click()
+  assert.match(await page.getByLabel('Query text').inputValue(),/Field note/)
+  await page.getByRole('button',{name:'Embed query'}).click()
+  await page.getByText(/Draft from Row/).waitFor()
+  assert.equal(new URL(page.url()).hash,'#atlas')
+ }
  // Additional module checks
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}

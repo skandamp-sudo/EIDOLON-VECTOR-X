@@ -1,4 +1,6 @@
 import {useMemo,useState} from 'react'
+import {hosted} from '../apiOrigin'
+import {openAtlasDraft} from './atlasDraft'
 import {exportEvidence,record} from './session'
 
 const sample=[
@@ -48,7 +50,7 @@ export default function Cortex({rows=sample,source='Illustrative field notebook'
  <label><input type="checkbox" checked={focus} onChange={e=>setFocus(e.target.checked)}/> Focus on selected passage</label>
  {!focus&&<ol>{ranked.slice(0,8).map(r=><li key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {passages[r.id].concepts.slice(0,3).join(', ')} · {r.score.toFixed(2)}</li>)}</ol>}
  {!ranked.some(r=>r.score>0)&&<p>No query vocabulary overlaps the indexed passages.</p>}
- {current&&<><h3>{source} · {ref(sel)}</h3><blockquote>{current.text}</blockquote>
+ {current&&<><h3>{source} · {ref(sel)}</h3><blockquote>{current.text}</blockquote>{!hosted&&<button onClick={()=>openAtlasDraft(current.text,ref(sel))}>Open passage in Vector Warp</button>}
  <div className="foundry-actions">{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</div>
  <details><summary>Related passages by TF–IDF cosine</summary>{peers.map(r=><p key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {r.score.toFixed(3)} · {passages[r.id].text}</p>)}</details>
  <label>Evidence assessment<select value={marks[sel]??''} onChange={e=>mark({...marks,[sel]:e.target.value})}><option value="">Unassessed</option><option>Supports</option><option>Conflicts</option><option>Open question</option></select></label>

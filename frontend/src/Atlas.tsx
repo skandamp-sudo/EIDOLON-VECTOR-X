@@ -1,3 +1,4 @@
+import {readAtlasDraft,forgetAtlasDraft} from './convergence/atlasDraft'
 import { apiOrigin } from './apiOrigin'
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, AudioLines, ChevronDown, Crosshair, Layers3, SlidersHorizontal } from 'lucide-react'
@@ -9,7 +10,9 @@ import './atlas.css'
 const initialText = 'A telescope records light from a distant star.'
 const signed = (n:number) => (n>0?'+':'')+n.toFixed(2)
 export default function Atlas({ online }: { online: boolean }) {
-  const [draft,setDraft]=useState(initialText)
+  const [handoff]=useState(readAtlasDraft)
+  const [draft,setDraft]=useState(handoff?.text??initialText)
+  useEffect(()=>forgetAtlasDraft(),[])
   const [query,setQuery]=useState(initialText)
   const [target,setTarget]=useState<Topic>('Ocean')
   const [strength,setStrength]=useState(1.2)
@@ -65,6 +68,7 @@ export default function Atlas({ online }: { online: boolean }) {
       </div></div>
       <aside className="panel steering"><div className="panel-head"><div className="panel-title"><SlidersHorizontal size={18}/><h2>Vector Warp</h2></div></div>
         <div className="steer-body"><form onSubmit={submit}><label htmlFor="query">Query text</label>
+          {handoff&&<p>Draft from {handoff.source}. Select Embed query to encode the edited passage. Up to 400 characters are carried over.</p>}
           <textarea id="query" value={draft} onChange={e=>setDraft(e.target.value)} maxLength={400} rows={2}
             onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();e.currentTarget.form?.requestSubmit()}}}/>
           <button className="encode" disabled={!online||!draft.trim()} type="submit"><AudioLines size={15}/> Embed query</button></form>
