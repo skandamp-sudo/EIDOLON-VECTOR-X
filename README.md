@@ -119,3 +119,5 @@ On 15 QASPER questions with evidence, unsteered nDCG@3 was 0.223 for BM25, 0.144
 Open **Applications** and use **Next step**. CORTEX follows document neighbors, CLARITY compares two topic readings, and SUPPLY searches a ten-item illustrative inventory. MORPH learns category weights from explicit saves in the current browser tab and supports rollback against a static baseline. SYMBIOSIS recommends a feasible measured setting and supports approval, rejection and undo. The final step opens recorded encoder comparisons including negative results. These are application demonstrations. Catalog similarity and category flags require human review.
 
 Production serves live calibration inference and the recorded four-encoder evidence. Use the local checkout for all four live encoders, private uploads and training. Vercel builds the frontend directory on Hobby. Railway runs one restricted worker with its exact Vercel origin and the /api/v1/health readiness check.
+
+- Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.

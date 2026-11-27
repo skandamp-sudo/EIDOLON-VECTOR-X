@@ -26,3 +26,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - Integrated actual per-family QASPER evidence and local probes for all four encoders into Research Lab. Published equal-strength and matched-gain comparisons, independent section-label outcomes and unavailable measurements.
 
 - Published the Vercel/Railway prototype and added a six-step judge walkthrough, directed document and inventory search, clarification, reversible session preferences, and recommendation rejection.
+
+- 2026-11-27 13:11 IST · Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
