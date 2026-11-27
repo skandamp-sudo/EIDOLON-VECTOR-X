@@ -19,6 +19,8 @@ try {
   })
   await page.goto('http://localhost:5173', { waitUntil: 'domcontentloaded' })
   await page.getByText('API connected', { exact: true }).waitFor()
+  await page.getByRole('heading', {name:'Mission Control',exact:true}).waitFor()
+  await page.getByRole('link', {name:'Explore Semantic Universe'}).click()
   await page.getByRole('heading', { name: 'Semantic atlas' }).waitFor()
   await page.locator('.star').first().waitFor()
   assert.equal(await page.locator('.star').count(), 24)
