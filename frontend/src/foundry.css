@@ -28,3 +28,7 @@
 .foundry progress { accent-color: var(--cyan); }
 @media(max-width:800px) { .foundry-grid { grid-template-columns: 1fr; } }
 @media(max-width:680px) { .topbar nav { flex-wrap: wrap; } .foundry .section-title { align-items: flex-start; gap: 8px; } }
+
+.dataset-switch { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-bottom: 14px; }
+.dataset-switch label { margin: 0; }
+.dataset-switch select { display: block; margin-top: 6px; }

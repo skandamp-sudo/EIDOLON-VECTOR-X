@@ -166,5 +166,6 @@ export default function Intelligence({ imported }: { imported?: ImportIndex }) {
   },[retry])
   return <section className="foundry intelligence"><div className="atlas-intro"><div className="crumb">Research workspace / Phase 2</div>
     <h1>Semantic intelligence</h1><p>Choose what to change, protect a second attribute and measure the tradeoff in the same embedding space.</p></div>
+    {imported && <details><summary>Imported index provenance</summary><p>Dataset SHA-256 · {imported.datasetHash}</p><p>Fitted model · {imported.modelId}</p><p>Point IDs follow the embedded-record selector. The first mapped metadata column supplies category labels when selected.</p></details>}
     {workspace ? <Lab workspace={workspace} imported={imported}/> : <p role="status">{error || 'Loading model and development concepts…'} {error && <button onClick={()=>setRetry(n=>n+1)}>Retry</button>}</p>}</section>
 }

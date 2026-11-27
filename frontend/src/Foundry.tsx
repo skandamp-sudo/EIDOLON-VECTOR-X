@@ -5,7 +5,7 @@ import FoundryMap from './FoundryMap'
 import type { FoundryPoint } from './FoundryMap'
 import { topics } from './explore'
 import type { Topic, XYZ } from './explore'
-import { exportNeighbors, nearest, quality, requestData } from './foundryData'
+import { downloadFile, exportNeighbors, nearest, quality, requestData } from './foundryData'
 import type { Dataset } from './foundryData'
 import './foundry.css'
 
@@ -14,17 +14,44 @@ type Steering = { original: number[]; steered: number[]; trajectory: XYZ[]; mode
 const finite = (values: unknown, count: number) => Array.isArray(values) && values.length === count && values.every(Number.isFinite)
 const message = (e: unknown) => e instanceof Error ? e.message : 'The local operation failed.'
 
-function Retrieval({ data, points, column, metadata, digest }: {
-  data: Dataset; points: FoundryPoint[]; column: number; metadata: number[]; digest: string
+function Retrieval({ data, points, column, metadata, digest, fingerprint }: {
+  data: Dataset; points: FoundryPoint[]; column: number; metadata: number[]; digest: string; fingerprint: string
 }) {
   const [row, setRow] = useState(points[0].row)
   const [target, setTarget] = useState<Topic>('Ocean')
   const [strength, setStrength] = useState(1)
   const [run, setRun] = useState<Steering | null>(null)
   const [status, setStatus] = useState('')
+  const exporting = useRef<AbortController | null>(null)
+  const [exportStatus, setExportStatus] = useState('')
+  useEffect(() => () => exporting.current?.abort(), [])
+  async function exportVectors() {
+    if (exporting.current) return
+    const controller = new AbortController()
+    exporting.current = controller; setExportStatus('Preparing vector export…')
+    try {
+      const records = []
+      for (let i = 0; i < points.length; i += 64) {
+        const batch = points.slice(i, i+64)
+        const result = await requestData<{model_id:string; steered:number[][]}>('export', JSON.stringify({
+          model_id:digest, target, strength, vectors:batch.map(p => p.vector)
+        }), controller.signal)
+        if (controller.signal.aborted) return
+        if (result.model_id !== digest || result.steered.length !== batch.length || !result.steered.every(v => finite(v,8))) {
+          throw new Error('Unexpected vector export response.')
+        }
+        records.push(...batch.map((p,j) => ({row:p.row+1, original:p.vector, steered:result.steered[j]})))
+        setExportStatus(records.length + ' / ' + points.length + ' exported')
+      }
+      downloadFile('vector-x-embeddings.json', 'application/json', JSON.stringify({dataset_sha256:fingerprint,
+        model_id:digest, text_column:data.columns[column], method:'normalized topic centroid steering', target, strength, records}))
+      setExportStatus('Vector export ready.')
+    } catch(e) { if (!controller.signal.aborted) setExportStatus(message(e)) }
+    finally { if (exporting.current === controller) exporting.current = null }
+  }
   const [lab, setLab] = useState(false)
-  const imported = useMemo(() => ({modelId:digest, texts:points.map(p => data.rows[p.row][column]), points,
-    categories: metadata.length ? points.map(p => data.rows[p.row][metadata[0]]) : undefined}), [digest,data,points,column,metadata])
+  const imported = useMemo(() => ({modelId:digest, datasetHash:fingerprint, texts:points.map(p => data.rows[p.row][column]), points,
+    categories: metadata.length ? points.map(p => data.rows[p.row][metadata[0]]) : undefined}), [fingerprint,digest,data,points,column,metadata])
   useEffect(() => {
     const controller = new AbortController()
     setRun(null); setStatus('Computing retrieval…')
@@ -57,11 +84,19 @@ function Retrieval({ data, points, column, metadata, digest }: {
       <p>Top three by eight-dimensional cosine. The selected record is included in the index.</p>
       <div className="rank-pair">{ranks.map((list, side) => <div key={side}><h3>{side ? 'Steered' : 'Original'}</h3>
         <ol>{list.map(r => <li key={r.row}>Row {r.row + 1} · {data.rows[r.row][column]} <b>{r.score.toFixed(3)}</b></li>)}</ol></div>)}</div>
+      <div className="foundry-actions"><button disabled={!!exporting.current || !run} onClick={() => void exportVectors()}>Export all embedding pairs</button>
+        {exporting.current && <button onClick={() => { exporting.current?.abort(); exporting.current=null; setExportStatus('Export cancelled.') }}>Cancel vector export</button>}
+        <span role="status">{exportStatus}</span></div>
     </section><button onClick={() => setLab(!lab)}>{lab ? 'Close dataset intelligence' : 'Open dataset intelligence'}</button>
     {lab && <Intelligence imported={imported}/>}</>
 }
 
+type CachedIndex = {model:string; column:number; points:FoundryPoint[]; processed:number; skipped:number}
+type LocalDataset = {name:string; fingerprint:string; data:Dataset; column:number; metadata:number[]; cache?:CachedIndex}
+
 export default function Foundry({ digest }: { digest?: string }) {
+  const library = useRef(new Map<string,LocalDataset>())
+  const [datasetKey,setDatasetKey] = useState('')
   const [data, setData] = useState<Dataset | null>(null)
   const [name, setName] = useState('')
   const [column, setColumn] = useState(0)
@@ -83,8 +118,22 @@ export default function Foundry({ digest }: { digest?: string }) {
   function cancel() {
     active.current?.abort(); active.current = null; setBusy(null); resetIndex(); setNote('Operation cancelled.')
   }
+  function rememberMapping() {
+    const current = library.current.get(datasetKey)
+    if (current) { current.column = column; current.metadata = metadata }
+  }
+  function activate(key: string) {
+    rememberMapping(); resetIndex(); setDatasetKey(key)
+    const stored = library.current.get(key)
+    setData(stored?.data ?? null); setName(stored?.name ?? ''); setColumn(stored?.column ?? 0); setMetadata(stored?.metadata ?? [])
+    if (stored?.cache && stored.cache.model === digest && stored.cache.column === stored.column) restore(stored.cache)
+  }
+  function restore(cache: CachedIndex) {
+    setPoints(cache.points); setCompletedDigest(cache.model); setProgress(cache.processed); setUnrepresented(cache.skipped)
+    setNote('Reused completed local index.')
+  }
   function remove() {
-    cancel(); setData(null); setName(''); setMetadata([]); setColumn(0); setNote('Dataset deleted from this view.')
+    cancel(); library.current.delete(datasetKey); activate(''); setNote('Dataset deleted from this view.')
   }
   async function load(file?: File) {
     if (!file || data || active.current) return
@@ -94,6 +143,13 @@ export default function Foundry({ digest }: { digest?: string }) {
     const controller = new AbortController()
     active.current = controller; setNote('Reading and validating locally…'); setBusy('parse')
     try {
+      const bytes = await file.arrayBuffer()
+      const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))
+      if (controller.signal.aborted) return
+      const fingerprint = Array.from(hash, b => b.toString(16).padStart(2,'0')).join('')
+      const key = kind + ':' + fingerprint
+      if (library.current.has(key)) { activate(key); return }
+      if (library.current.size >= 2) throw new Error('Delete a dataset before adding another.')
       const parsed = await requestData<Dataset>(kind, file, controller.signal)
       if (!Array.isArray(parsed.columns) || !parsed.columns.length || parsed.columns.length > 32 ||
           !parsed.columns.every(c => typeof c === 'string') || !Array.isArray(parsed.rows) || !parsed.rows.length ||
@@ -101,13 +157,17 @@ export default function Foundry({ digest }: { digest?: string }) {
         throw new Error('Unexpected dataset response.')
       }
       if (controller.signal.aborted) return
-      setData(parsed); setName(file.name); setColumn(Math.max(0, parsed.columns.findIndex(c => c.toLowerCase() === 'text')))
+      library.current.set(key, {name:file.name, fingerprint, data:parsed, metadata:[],
+        column:Math.max(0, parsed.columns.findIndex(c => c.toLowerCase() === 'text'))})
+      activate(key)
       setNote('Preview ready. Choose the fields to use.')
     } catch (e) { if (!controller.signal.aborted) setNote(message(e)) }
     finally { if (active.current === controller) { active.current = null; setBusy(null) } }
   }
   async function generate() {
-    if (!data || !stats || !digest || active.current) return
+    const stored = library.current.get(datasetKey)
+    if (!stored || !data || !stats || !digest || active.current) return
+    if (stored.cache?.model === digest && stored.cache.column === column) { restore(stored.cache); return }
     const controller = new AbortController()
     active.current = controller; resetIndex(); setBusy('embed')
     const collected: FoundryPoint[] = []
@@ -127,13 +187,27 @@ export default function Foundry({ digest }: { digest?: string }) {
         })
         setProgress(i + batch.length); setUnrepresented(skipped)
       }
+      stored.cache = {model:digest, column, points:collected, processed:stats.indices.length, skipped}
       setPoints(collected); setCompletedDigest(digest)
       setNote(collected.length ? 'Index ready.' : 'No mapped records contain known model vocabulary.')
     } catch (e) { if (!controller.signal.aborted) { resetIndex(); setNote(message(e)) } }
     finally { if (active.current === controller) { active.current = null; setBusy(null) } }
   }
-  return <section className="foundry"><div className="atlas-intro"><div className="crumb"><Database size={15}/> Research workspace <span>/</span> Phase 1</div>
+  const fingerprint = library.current.get(datasetKey)?.fingerprint ?? ''
+  function exportQuality() {
+    if (!stats || !data) return
+    const measured = !!completedDigest && completedDigest === digest
+    downloadFile('vector-x-quality.json','application/json',JSON.stringify({dataset_sha256:fingerprint, model_id:digest,
+      text_column:data.columns[column], metadata:metadata.map(i=>data.columns[i]), records:data.rows.length,
+      columns:data.columns.map((name,i)=>({name, missing:data.rows.filter(row=>!row[i].trim()).length})),
+      missing_text:stats.missing, duplicate_nonempty_rows:stats.duplicates, eligible:stats.indices.length,
+      represented:measured?points.length:null, unrepresented:measured?unrepresented:null},null,2))
+  }
+  return <section className="foundry"><div className="atlas-intro"><div className="crumb"><Database size={15}/> Research workspace <span>/</span> Local datasets</div>
     <h1>Data Foundry</h1><p>Map a local dataset, inspect its embeddings and steer retrieval across your records.</p></div>
+    {library.current.size > 0 && <div className="dataset-switch"><label>Session dataset<select value={datasetKey} disabled={!!busy} onChange={e=>activate(e.target.value)}>
+      <option value="" disabled>Choose dataset</option>{[...library.current].map(([key,d])=><option key={key} value={key}>{d.name} · {d.fingerprint.slice(0,8)}</option>)}</select></label>
+      {data && library.current.size<2 && <button disabled={!!busy} onClick={()=>activate('')}>Import another dataset</button>}</div>}
     {!data && <div className={'drop-zone' + (over ? ' over' : '')}
       onDragOver={e => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
       onDrop={e => { e.preventDefault(); setOver(false); if (e.dataTransfer.files.length === 1) void load(e.dataTransfer.files[0]); else setNote('Choose one dataset at a time.') }}>
@@ -144,6 +218,8 @@ export default function Foundry({ digest }: { digest?: string }) {
     </div>}
     {data && stats && <><section className="panel foundry-panel"><div className="section-title"><div><Database size={18}/><h2>{name}</h2></div>
       <button onClick={remove}>Delete dataset</button></div>
+      <details><summary>Dataset identity and quality</summary><p>SHA-256 · {fingerprint}</p><p>Model basis · {digest ?? 'Unavailable'}</p>
+        <button onClick={exportQuality}>Export quality report</button></details>
       <div className="foundry-stats"><span><b>{data.rows.length}</b> records</span><span><b>{data.columns.length}</b> columns</span>
         <span><b>{stats.missing}</b> missing text</span><span><b>{stats.duplicates}</b> duplicate records</span></div>
       <div className="foundry-grid"><div><label htmlFor="text-field">Text column</label>
@@ -161,6 +237,6 @@ export default function Foundry({ digest }: { digest?: string }) {
     </section></>}
     <div className="foundry-feedback" role="status">{!digest ? 'Embedding runtime unavailable.' : note}
       {busy && <button onClick={cancel}>Cancel operation</button>}</div>
-    {data && points.length > 0 && digest === completedDigest && <Retrieval data={data} points={points} column={column} metadata={metadata} digest={completedDigest}/>}
+    {data && points.length > 0 && digest === completedDigest && <Retrieval key={datasetKey + column + completedDigest} fingerprint={fingerprint} data={data} points={points} column={column} metadata={metadata} digest={completedDigest}/>}
   </section>
 }

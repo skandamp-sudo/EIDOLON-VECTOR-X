@@ -20,3 +20,5 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m scripts.phase2_evid
 ```
 
 The evidence command prints per-query outcomes, labels, matched strengths and confusion counts. A second compatible encoder was unavailable in the project environment.
+
+The final gate passed 35 Python tests, TypeScript, Vite and desktop/mobile Chrome checks. Vite reported a chunk over 500 kB.

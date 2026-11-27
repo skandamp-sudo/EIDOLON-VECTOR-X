@@ -7,7 +7,7 @@ export type Example = { text: string; family: string; positive: boolean; split: 
 export type Validation = { fit: number; held_out: number; balanced_accuracy: number; confusion: Record<string,number>; threshold: number }
 export type Concept = { direction: Direction; validation: Validation; examples?: Example[] }
 export type Workspace = { model_id: string; presets: Concept[]; documents: string[]; categories: string[] }
-export type ImportIndex = { modelId: string; texts: string[]; points: FoundryPoint[]; categories?: string[] }
+export type ImportIndex = { datasetHash: string; modelId: string; texts: string[]; points: FoundryPoint[]; categories?: string[] }
 export type Mode = 'original' | 'naive' | 'learned' | 'locked'
 export type Variant = {
   vector: number[]; trajectory: XYZ[]; applied: number; target_delta: number; drift: number; cosine: number;

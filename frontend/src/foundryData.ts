@@ -35,9 +35,13 @@ export function exportNeighbors(data: Dataset, textColumn: number, metadata: num
     if (typeof value === 'string' && (/^[\s\uFEFF]*[=+@＝＋＠－-]/u.test(s) || /^[\t\r\n]/.test(s))) s = "'" + s
     return '"' + s.replaceAll('"', '""') + '"'
   }
-  const blob = new Blob([rows.map(row => row.map(csv).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' })
+  downloadFile('vector-x-retrieval.csv', 'text/csv;charset=utf-8', rows.map(row => row.map(csv).join(',')).join('\r\n'))
+}
+
+export function downloadFile(name: string, type: string, content: string) {
+  const blob = new Blob([content], { type })
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
-  link.href = url; link.download = 'vector-x-retrieval.csv'; link.click()
+  link.href = url; link.download = name; link.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }

@@ -12,8 +12,8 @@ from pydantic import Field, ValidationError
 from starlette.concurrency import run_in_threadpool
 from starlette.responses import JSONResponse
 
-from .concepts import model_id
-from .atlas import Query
+from .concepts import Name, Strict, Unit, model_id
+from .atlas import Query, Topic
 
 router = APIRouter(prefix="/api/v1/foundry")
 MAX_BYTES = 10_000_000
@@ -170,6 +170,28 @@ def steer(raw, atlas):
             "trajectory": atlas.pca.transform(path).tolist(), "model_id": model_id(atlas), "corpus_sha256": atlas.model.digest}
 
 
+class ExportBatch(Strict):
+    model_id: Name
+    vectors: list[Unit] = Field(min_length=1, max_length=BATCH_SIZE)
+    target: Topic
+    strength: float = Field(ge=-2, le=2)
+
+
+def export_vectors(raw, atlas):
+    try:
+        batch = ExportBatch.model_validate_json(raw)
+    except ValidationError:
+        raise ValueError("Invalid vector export request.") from None
+    if batch.model_id != model_id(atlas):
+        raise ValueError("Vector export requires the original model basis.")
+    vectors = np.array(batch.vectors)
+    if not np.allclose(np.linalg.norm(vectors, axis=1), 1, rtol=0, atol=1e-8):
+        raise ValueError("Vector export requires normalized inputs.")
+    return {"model_id": batch.model_id, "steered": [
+        atlas.steering_path(v, batch.target, batch.strength)[-1].tolist() for v in vectors
+    ]}
+
+
 async def local_operation(request, limit, process_body):
     if request.headers.get("x-vector-x-client") != "foundry" or request.headers.get("origin") not in LOCAL_ORIGINS | {None}:
         raise HTTPException(403, "Use the local Data Foundry.")
@@ -205,7 +227,7 @@ async def local_operation(request, limit, process_body):
 
 @router.post("/{operation}")
 async def foundry(operation: str, request: Request):
-    if operation not in {"csv", "json", "jsonl", "txt", "embed", "steer"}:
+    if operation not in {"csv", "json", "jsonl", "txt", "embed", "steer", "export"}:
         raise HTTPException(404, "Unknown Foundry operation.")
 
     def process(body):
@@ -213,6 +235,8 @@ async def foundry(operation: str, request: Request):
             return embed(body, request.app.state.atlas)
         if operation == "steer":
             return steer(body, request.app.state.atlas)
+        if operation == "export":
+            return export_vectors(body, request.app.state.atlas)
         return parse(body, operation)
 
-    return await local_operation(request, {"embed": 2_000_000, "steer": 32_768}.get(operation, MAX_BYTES), process)
+    return await local_operation(request, {"embed": 2_000_000, "steer": 32_768, "export": 64_000}.get(operation, MAX_BYTES), process)

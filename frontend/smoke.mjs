@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { chromium } from 'playwright-core'
 
@@ -139,6 +140,43 @@ try {
   await page.getByRole('button',{name:'Add selected record'}).click()
   assert.ok((await page.getByLabel(/Fit positive · family/).inputValue()).includes('ocean deep water'))
   await page.getByRole('button', {name:'Close dataset intelligence'}).click()
+  const readDownload = async label => {
+    const event = page.waitForEvent('download')
+    await page.getByRole('button', {name:label}).click()
+    const artifact = await event
+    const value = JSON.parse(await readFile(await artifact.path(), 'utf8'))
+    await artifact.delete()
+    return value
+  }
+  await page.getByText('Dataset identity and quality').click()
+  const quality = await readDownload('Export quality report')
+  assert.equal(quality.represented,4)
+  assert.equal(quality.missing_text,1)
+  const expectedHash = createHash('sha256').update(records.join('\n')).digest('hex')
+  assert.equal(quality.dataset_sha256,expectedHash)
+  const pairs = await readDownload('Export all embedding pairs')
+  assert.equal(pairs.dataset_sha256,expectedHash)
+  assert.equal(pairs.records.length,4)
+  assert.deepEqual(pairs.records[0].original,pairs.records[0].steered)
+  await page.getByRole('button', {name:'Import another dataset'}).click()
+  await upload.setInputFiles(file('secondary.txt','forest canopy\norchestra hall'))
+  await page.getByRole('heading', {name:'secondary.txt'}).waitFor()
+  const datasetSelect = page.getByLabel('Session dataset')
+  const firstDataset = 'csv:'+expectedHash
+  const secondDataset = await datasetSelect.inputValue()
+  let cacheRequests = 0
+  const countEmbeds = req => { if (new URL(req.url()).pathname === '/api/v1/foundry/embed') cacheRequests++ }
+  page.on('request',countEmbeds)
+  await datasetSelect.selectOption(firstDataset)
+  await page.getByText('Reused completed local index.').waitFor()
+  assert.equal(await page.getByLabel('Text column').inputValue(),'1')
+  await page.getByRole('button',{name:'Generate embeddings'}).click()
+  await page.getByText('4 embedded points',{exact:true}).waitFor()
+  assert.equal(cacheRequests,0)
+  page.off('request',countEmbeds)
+  await datasetSelect.selectOption(secondDataset)
+  await page.getByRole('button',{name:'Delete dataset'}).click()
+  await datasetSelect.selectOption(firstDataset)
   await page.getByRole('button', {name:'Delete dataset'}).click()
   await page.getByText('Dataset deleted from this view.').waitFor()
   assert.equal(await page.getByRole('heading', {name:'Dataset point cloud'}).count(), 0)

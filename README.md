@@ -30,6 +30,11 @@ flowchart LR
     Rank --> UI
     Encode --> Private[Transient imported index]
     Private --> UI
+    Examples[Grouped labeled examples] --> Ridge[Balanced ridge readouts]
+    Ridge --> Lock[Protected subspace and strength governor]
+    Encode --> Lock
+    Lock --> Rank
+    Lock --> PCA
 ```
 
 ## Mathematics
@@ -45,7 +50,9 @@ The trained CPU baseline uses TF–IDF and seeded truncated SVD to produce a uni
 | Semantic X-Ray | VERIFIED | Inspect every query coefficient and compare top-three neighbors |
 | Concept DNA preview | VERIFIED | Steer toward or away from astronomy, ocean, acoustics or botany |
 | Mission Control | VERIFIED | Inspect live model identity, dimensions and API availability |
-| Data Foundry | VERIFIED | Import local files, map columns, inspect fixed PCA coordinates, steer and export retrieval |
+| Data Foundry | VERIFIED | Map and switch local datasets, reuse embeddings, inspect quality, export vectors and retrieval |
+| Concept DNA and Semantic Lock | VERIFIED | Learn a custom direction, choose protected readouts and compare four transformations |
+| Parallel Universes and Semantic Debugger | VERIFIED | Inspect synchronized views, projection distortion, rank changes and suspected anomalies |
 
 ## Import a dataset
 
@@ -53,7 +60,7 @@ Open **Data Foundry** and drop a UTF-8 CSV (header row), JSON (array of flat obj
 
 Imports accept up to 10,000,000 bytes, 5,000 records, 32 columns and 4,096 characters per cell. Empty text and exact duplicate parsed records are skipped. Unknown-only records are counted as unrepresented. The frozen encoder and PCA frame match the calibration atlas. The original and steered rankings include the source row.
 
-Data passes through a loopback API with one active Foundry operation per worker. Only the active view retains the index. Delete, reload or leave the view to release it. Cancelling discards partial results and prevents subsequent batches. An in-flight bounded server operation may finish. CSV export creates a local file and quotes formula-leading text. Delete exported files separately.
+Data passes through a loopback API with one active Foundry operation per worker. The Foundry view holds up to two datasets in memory. Each retains one completed index keyed by file SHA-256, format, mapped text column and fitted model identity. Switch datasets to reuse the index. Delete a dataset to release its parser output and cache. Reloading or leaving Foundry releases both datasets. Cancelling discards partial results and prevents subsequent batches. An in-flight bounded server operation may finish. The quality report records missing fields, duplicates and coverage. The JSON vector export contains original and topic-steered embeddings for every represented row. CSV retrieval export escapes formula-leading cells. Exports are local downloads with independent lifetimes.
 
 ## Run locally
 
@@ -70,7 +77,7 @@ Start installs missing locked dependencies, fits the local model and enables Vit
 ## Three-phase roadmap
 
 1. **VERIFIED · Interactive baseline.** 27 model, parser and HTTP tests passed, plus TypeScript, Vite build and desktop/mobile Chrome smoke. [Phase 1 evidence and demonstration](REVIEW_PHASE_1.md)
-2. **IMPLEMENTED · Learned control.** Class-balanced ridge directions, Semantic Lock, a measured strength governor, change analysis, projection diagnostics and synchronized Parallel Universes. [Phase 2 evidence and demo](REVIEW_PHASE_2.md) Foundry roadmap includes dataset fingerprints, model-keyed caching, dataset management, quality reports, learned concepts, multi-model comparison and vector export.
+2. **VERIFIED · Learned control.** Class-balanced ridge directions, Semantic Lock, a measured strength governor, change analysis, projection diagnostics and synchronized Parallel Universes. [Phase 2 evidence and demo](REVIEW_PHASE_2.md) The review gate passed 35 Python tests, TypeScript, Vite and desktop/mobile Chrome checks. Multi-model comparison is deferred pending a second compatible encoder.
 3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration. Foundry adds split management and reproducible experiment exports. PDF/NPY imports are optional.
 
 ## Semantic intelligence

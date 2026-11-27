@@ -72,6 +72,20 @@ class FoundryTests(unittest.TestCase):
             np.testing.assert_allclose(run["steered"], expected[-1], atol=1e-10)
             np.testing.assert_allclose(run["trajectory"], self.atlas.pca.transform(expected), atol=1e-10)
 
+    def test_export_vectors_match_api_and_reject_wrong_model(self):
+        texts = ["forest canopy records light", "deep ocean records vibration"]
+        batch = json.loads(api("embed", json.dumps(texts).encode()))
+        form = {"model_id":batch["model_id"], "strength":-.6, "target":"Astronomy",
+                "vectors":[p["vector"] for p in batch["points"]]}
+        exported = json.loads(api("export", json.dumps(form).encode()))
+        for vector, text in zip(exported["steered"], texts):
+            query = {"text":text, "target":form["target"], "strength":form["strength"]}
+            single = json.loads(api("steer", json.dumps(query).encode()))
+            np.testing.assert_allclose(vector, single["steered"], atol=1e-10)
+        with self.assertRaises(HTTPError) as error:
+            api("export", json.dumps({**form, "model_id":"unknown"}).encode())
+        self.assertEqual(error.exception.code,422)
+
     def test_origin_header_no_cache_and_no_readback(self):
         path = "/api/v1/foundry/txt"
         for headers in [{}, {"X-Vector-X-Client":"foundry","Origin":"https://example.invalid"}]:
