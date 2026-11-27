@@ -30,3 +30,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - 2026-11-27 13:11 IST · Convergence uses opt-in, bounded tab-memory events and shared evidence export. Existing APIs and frozen encoder research are preserved. No credit meter is available.
 
 - 2026-11-27 13:14 IST · CORTEX indexes mapped Foundry rows or a four-document fixture with source offsets, TF–IDF term links, nearest passages, keyword and source-order controls, evidence annotations and a timed reader task. Browser check passed; participant effects unmeasured.
+
+- 2026-11-27 13:19 IST · SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
