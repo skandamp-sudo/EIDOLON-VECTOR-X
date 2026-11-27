@@ -1,23 +1,67 @@
 # EIDOLON VECTOR-X
 
-A local embedding research workspace for RESURRECT 2026, PS-05. Mission 001 provides the CPU backbone, startup interface, runtime contracts and evaluation design.
+**Engineering the Geometry of Meaning.**
 
-## Local development
+RESURRECT 2026 | Problem Statement 05
 
-From the checkout, run `./scripts/start`. Prerequisites are Node 24, npm, uv and CPython 3.12. The first start installs the locked dependencies in `.venv` and `frontend/node_modules`. No checkpoint download is needed. After editing dependency manifests, refresh using `uv sync --frozen` and `npm ci --prefix frontend --ignore-scripts`.
+Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
-Open [the workspace](http://localhost:5173). The frontend proxies `/api/v1` to the [loopback API](http://localhost:8000/api/v1/health). Vite provides hot replacement and Uvicorn reloads backend Python changes. Restart after editing the calibration text. Run `./scripts/stop` to shut down both process groups. Logs persist under `.runtime/backend.log` and `.runtime/frontend.log`, with two 1 MB backups per service. The latest launcher output is in `.runtime/startup.log`.
+## Research question
 
-Run `./scripts/verify` for the model tests, live HTTP tests, typecheck, build, browser smoke test and Git whitespace checks. The browser test launches installed Google Chrome with a temporary profile and saves desktop and mobile screenshots under `.runtime/`. At an authorized milestone, stage its files and run `./scripts/milestone "commit message"`. A failed check stops the commit.
+How does moving a query toward a concept change what it retrieves? VECTOR-X embeds a sentence, ranks a fixed corpus, then lets the operator steer the same query and inspect which documents move up or down.
 
-## Runtime contract
+```mermaid
+flowchart LR
+    Corpus[24 annotated sentences] --> Fit[TF-IDF + truncated SVD]
+    Fit --> Index[8D unit-vector index]
+    Text[Query text] --> Encode[Frozen encoder]
+    Fit --> Encode
+    Index --> Directions[Four centroid differences]
+    Encode --> Warp[Signed steering]
+    Directions --> Warp
+    Encode --> Rank[Full-space cosine ranking]
+    Warp --> Rank
+    Index --> Rank
+    Index --> PCA[Fixed 3D PCA frame]
+    Warp --> PCA
+    PCA --> UI[Interactive atlas]
+    Rank --> UI
+```
 
-| Method and endpoint | Successful response |
-| --- | --- |
-| GET `/api/v1/health` | Service identifier, version and readiness after a successful model fit and probe encoding |
-| GET `/api/v1/foundation` | Backbone name, dimensions, seed, training document count, SHA-256 of training bytes and probe IDs, text and normalized vectors |
-| GET `/openapi.json` on port 8000 | Machine-readable response schemas |
+## Mathematics
 
-The service fits once per worker startup. Failure prevents startup. There is no database, public inference input or serialized model loader. The viewer polls both endpoints and clears stale readings on failure. Arrow keys and labeled buttons rotate the glyph. The coefficient list gives its numeric equivalent. In each of eight sectors, tube radius encodes the corresponding signed coefficient. Styling has no scientific interpretation.
+The trained CPU baseline uses TF–IDF and seeded truncated SVD to produce a unit query vector $x$. Each topic direction $d$ is the normalized difference between its mean embedding and the mean of the other three topics. The slider computes $y = (x + a d)/\|x + a d\|_2$ for signed strength $a$ between −2 and +2. Scores are dot products against unit document vectors. One centered PCA frame displays the corpus and 25 samples along the normalized steering path.
 
-[Research design](docs/RESEARCH.md) · [Verified build state](BUILD_STATE.md)
+## Review status
+
+| Feature | Status | Operator capability |
+| --- | --- | --- |
+| Semantic Universe | IN PROGRESS | Orbit, zoom, reset and select actual corpus points |
+| Vector Warp | IN PROGRESS | Signed control, animated trajectory and cosine |
+| Semantic X-Ray | IN PROGRESS | Compare full-space top-three neighbors |
+| Concept DNA preview | IMPLEMENTED | Steer toward or away from astronomy, ocean, acoustics or botany |
+| Mission Control | IMPLEMENTED | Inspect live model identity, dimensions and API availability |
+
+## Run locally
+
+Use Python 3.12, uv, Node 24 and npm. Install Google Chrome for browser verification.
+
+```sh
+./scripts/start
+./scripts/verify
+./scripts/stop
+```
+
+Start installs missing locked dependencies, fits the local model and enables Vite hot reload and Uvicorn reload. Open the [atlas](http://localhost:5173) or [API health](http://localhost:8000/api/v1/health). The stack uses React, TypeScript, Three.js, FastAPI, NumPy and scikit-learn. The atlas renders perspective-projected marks in SVG using Three.js camera math. The overview also uses React Three Fiber. Local logs and smoke screenshots live in the ignored runtime directory.
+
+## Three-phase roadmap
+
+1. **IN PROGRESS · Interactive baseline.** Recover and verify the local steering workbench. The recovery run passed 18 model and live HTTP tests.
+2. **PLANNED · Learned control.** Trainable directions, Semantic Lock, constrained and multi-concept steering, Drift Guardian and Parallel Universes.
+3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration.
+
+## Scientific limits
+
+The 24 authored English sentences serve as fit data and retrieval candidates. Shared vocabulary can dominate results. Unknown-only queries are rejected. The model is a lexical LSA baseline. Three-dimensional proximity is approximate. Generalization, neutral preservation and deployment remain unverified.
+
+The evaluation protocol groups source families before splitting, fits transforms on training only, selects thresholds on validation and freezes settings before held-out evaluation. [Research design](docs/RESEARCH.md) · [Build record](BUILD_STATE.md)

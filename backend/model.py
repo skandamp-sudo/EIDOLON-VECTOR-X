@@ -21,6 +21,7 @@ class Backbone:
     def __init__(self):
         raw = CORPUS.read_bytes()
         documents = raw.decode("utf-8").splitlines()
+        self.documents = tuple(documents)
         self.digest = sha256(raw).hexdigest()
         self.count = len(documents)
         self.vectorizer = TfidfVectorizer(stop_words="english", sublinear_tf=True)

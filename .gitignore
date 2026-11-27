@@ -7,3 +7,13 @@ __pycache__/
 .DS_Store
 .env
 .env.*
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+.cache/
+model_cache/
+models/cache/
+.uv-cache/

@@ -3,13 +3,14 @@ import { createRoot } from 'react-dom/client'
 import { MotionConfig, motion } from 'framer-motion'
 import { Activity, Layers3, Cpu, ChevronDown, ChevronRight, Fingerprint, X, BookOpen, Workflow, LayoutGrid, Hexagon } from 'lucide-react'
 import Viewport from './Viewport'
+import Atlas from './Atlas'
 import { useRuntime } from './runtime'
 import { modules, protocol } from './content'
 import './style.css'
 
-const pages = ['Overview', 'Architecture', 'Protocol'] as const
+const pages = ['Atlas', 'Overview', 'Architecture', 'Protocol'] as const
 type Page = typeof pages[number]
-const pageFromHash = (): Page => pages.find(p => '#' + p.toLowerCase() === location.hash) ?? 'Overview'
+const pageFromHash = (): Page => pages.find(p => '#' + p.toLowerCase() === location.hash) ?? 'Atlas'
 function App() {
   const { data, status } = useRuntime()
   const [page, setPage] = useState<Page>(pageFromHash)
@@ -28,9 +29,9 @@ function App() {
   </button>)}</div>
   return <MotionConfig reducedMotion="user"><a className="skip" href="#workspace">Skip to workspace</a>
     <header><div className="topbar"><div className="brand"><img src="/mark.svg" alt=""/><b>EIDOLON</b><span className="brand-divider"/><span>VECTOR-X</span></div>
-      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [LayoutGrid, Workflow, BookOpen][i]; return <a key={p} href={'#'+p.toLowerCase()} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
+      <nav aria-label="Workspace">{pages.map((p,i) => { const Icon = [Hexagon, LayoutGrid, Workflow, BookOpen][i]; return <a key={p} href={'#'+p.toLowerCase()} aria-current={page === p ? 'page' : undefined}><Icon size={15}/>{p}</a> })}</nav>
       <div role="status" className={'connection '+status.toLowerCase()}><i/> API {status.toLowerCase()}</div></div></header>
-    <main id="workspace"><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Mission 001</span></div>
+    <main id="workspace">{page==='Atlas'?<Atlas online={status==='Connected'}/>:<><div className="crumb"><Hexagon size={14}/> Workspace <ChevronRight size={13}/> <span>Mission 001</span></div>
     <div className="intro"><div><h1>{page === 'Overview' ? 'Research overview' : page === 'Protocol' ? 'Evaluation protocol' : 'System architecture'}</h1>
       <p>{page === 'Overview' ? 'Inspect the embedding backbone and explore its vector signatures.' : page === 'Protocol' ? 'The evaluation design for held-out steering experiments.' : 'The foundation runtime and the six planned research modules.'}</p></div>
       <span className="mission"><span/> Foundation</span></div>
@@ -49,7 +50,7 @@ function App() {
     </> : page === 'Architecture' ? <section className="read-page"><h2>Foundation runtime</h2><p>A same-origin Vite proxy connects the workspace to a loopback FastAPI service. At startup, the service fits a seeded latent semantic analysis model on the local calibration corpus and encodes three sample texts.</p>
       <h2>Signature geometry</h2><p>Eight angular sectors correspond to eight signed coefficients. Tube radius interpolates between adjacent coefficients. Color and twist are fixed styling. The surface describes one embedding at a time.</p><h2>Planned modules</h2>{moduleList}</section>
       : <section className="read-page"><p className="protocol-status">Held-out evaluation pending</p>{protocol.map(([title,body]) => <article key={title}><h2>{title}</h2><p>{body}</p></article>)}</section>}
-    <footer><span><img src="/mark.svg" alt=""/> EIDOLON VECTOR-X</span><span>RESURRECT 2026 <i/> PS-05</span></footer></main>
+    </>}<footer><span><img src="/mark.svg" alt=""/> EIDOLON VECTOR-X</span><span>RESURRECT 2026 <i/> PS-05</span></footer></main>
     <dialog ref={dialog} onClose={() => setDetail(null)} aria-labelledby="detail-title" onClick={e => { if (e.target === dialog.current) dialog.current.close() }}>
       {detail !== null && <motion.div initial={{opacity: 0}} animate={{opacity: 1}}><button className="close" aria-label="Close module details" onClick={() => dialog.current?.close()}><X/></button><div className="label">Planned module</div><h2 id="detail-title">{modules[detail].name}</h2><p>{modules[detail].detail}</p></motion.div>}
     </dialog></MotionConfig>
