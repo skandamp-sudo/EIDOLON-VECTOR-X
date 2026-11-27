@@ -48,6 +48,14 @@ function Outcomes({report,docs}:{report:Report;docs:Doc[]}) {
     {after.geometry&&<p>Target-axis change {fmt(after.geometry.target_gain)}{after.geometry.signed_gain!=null && <> · gain in requested direction {fmt(after.geometry.signed_gain)}</>} · protected drift {fmt(after.geometry.drift)} · retained cosine {fmt(after.geometry.cosine)} · {cfg.candidate==='spherical'?'rotation (radians)':'applied strength'} {fmt(after.geometry.applied)}.</p>}
     {task.sphere_reason&&<p>Protected sphere · {task.sphere_reason}</p>}
     {task.governor_reason&&<p>Constrained method · {task.governor_reason}</p>}
+    <details><summary>How to read the measurements</summary><dl>
+      <dt>Recall at K</dt><dd>Fraction of expected documents present in the first K results.</dd>
+      <dt>nDCG at K</dt><dd>Discounts relevant documents at lower ranks and scales by the best ordering of those labels.</dd>
+      <dt>Protected drift</dt><dd>Largest absolute change along a protected model direction. The release gate uses the configured limit.</dd>
+      <dt>Retained cosine</dt><dd>Dot product of original and transformed unit vectors in the full model space.</dd>
+      <dt>Signed gain</dt><dd>Change along the target direction, multiplied by the sign of requested strength. Positive values indicate movement in the requested direction.</dd>
+      <dt>Abstention</dt><dd>The method returned no ranked documents. Unlabeled tasks have unavailable relevance scores.</dd>
+    </dl></details>
     <details><summary>Report identity</summary><p className="studio-hash">Dataset SHA-256 · {report.dataset_sha256}<br/>Model · {report.encoder??'calibration LSA'} · {report.dimensions??8}D · {report.model_id}<br/>Protocol · {report.protocol}</p></details>
   </section>
 }

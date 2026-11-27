@@ -58,7 +58,7 @@ export default function Atlas({ online }: { online: boolean }) {
   }
   return <>
     <div className="atlas-intro"><div className="crumb"><Layers3 size={14}/> Research workspace <span>/</span> Phase 1</div>
-      <h1>Semantic atlas</h1><p>Steer a query toward a topic and see which documents change rank.</p></div>
+      <h1>Semantic atlas</h1><p>Steer a query toward a topic and see which documents change rank.</p><nav className="hero-actions" aria-label="Retrieval workflow"><a href="#data-foundry">Inspect a dataset</a><a href="#retrieval-debugger">Compare encoders and export a report →</a></nav></div>
     <div className="atlas-layout"><div className="galaxy-column"><Galaxy run={run} selected={doc?.id??null} select={setSelected}/>
       <div className="science-strip" aria-label="Measured quantities">
         <div><span>Embedding backbone</span><b>{run?.model??'—'} <small>{run?run.dimensions+'D':''}</small></b></div>

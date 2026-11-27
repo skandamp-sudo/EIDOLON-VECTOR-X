@@ -107,6 +107,13 @@ try {
   await page.getByText(/Draft from Row/).waitFor()
   assert.equal(new URL(page.url()).hash,'#atlas')
  }
+ if(check==='all'||check==='vector-x'){
+  await page.goto('http://localhost:5173/#vector-x')
+  await page.getByLabel('Retrieval workflow').getByRole('link',{name:/Compare encoders/}).click()
+  await page.getByRole('button',{name:'Run comparison'}).click()
+  await page.getByText('How to read the measurements',{exact:true}).click()
+  await page.locator('dd').filter({hasText:/expected documents present/}).waitFor()
+ }
  if(check==='all'||check==='platform'){
   for(const width of [1400,390]){
    await page.setViewportSize({width,height:850})
