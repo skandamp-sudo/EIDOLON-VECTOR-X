@@ -78,7 +78,7 @@ function ModelPanel({name,online}:{name:Encoder;online:boolean}){
 }
 export default function Recovery({online}:{online:boolean}){
   const [name,setName]=useState<Encoder>('expanded')
-  return <section className="panel foundry-panel"><h2>Recovery experiment</h2>
+  return <section className="panel foundry-panel"><h2>Recovery experiment</h2><details><summary>Evidence scope and reproduction</summary><p>The QASPER table reads archived per-family measurements from the frozen protocol. The local probe searches its separate training reference. The Retrieval Debugger accepts operator judgments for exploratory comparisons.</p><p>Download the selected model’s measured outcomes below. Check the file against its first-file SHA-256 in <code>evidence/recovery-v2/reproduction.json</code>. For a new local debugger export, run <code>.venv/bin/python scripts/replay_focus.py REPORT.json</code> with the same installed encoder and loopback service.</p></details>
     <label>Research encoder<select value={name} onChange={e=>setName(e.target.value as Encoder)}>{Object.entries(names).map(([k,n])=><option key={k} value={k}>{n}</option>)}</select></label>
     <ModelPanel key={name} name={name} online={online}/></section>
 }

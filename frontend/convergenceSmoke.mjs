@@ -133,6 +133,16 @@ try {
    }
   }
  }
+ if(check==='all'||check==='evidence'){
+  await page.goto('http://localhost:5173/#mission-control')
+  const guide=page.getByText('First retrieval investigation',{exact:true})
+  await guide.focus()
+  await page.keyboard.press('Enter')
+  await page.getByRole('link',{name:/Start a labeled comparison/}).waitFor()
+  await page.goto('http://localhost:5173/#evidence-vault')
+  await page.getByText('How to reproduce the archive checks',{exact:true}).click()
+  await page.getByText(/shasum -a 256/).first().waitFor()
+ }
  if(check==='all'||check==='hardening'){
   await page.goto('http://localhost:5173/#symbiosis')
   await page.route('**/api/v1/intelligence/frontier',route=>route.fulfill({json:{model_id:'other',points:[]}}))

@@ -23,6 +23,7 @@ function Vault({r}:{r:Evidence}){
   }
   return <section className="panel foundry-panel"><div className="section-title"><h2>Evidence Vault</h2><div className="foundry-actions">
     <button onClick={csv}>Export outcomes CSV</button><button onClick={()=>downloadFile('vector-x-evidence.json','application/json',JSON.stringify(r))}>Export evidence JSON</button></div></div>
+    <details><summary>How to reproduce the archive checks</summary><p>From the feature checkout, verify the five SciFact files with <code>(cd evidence/scifact-v1 &amp;&amp; shasum -a 256 -c SHA256SUMS)</code>. The local numerical gate also checks the eight archived QASPER first and repeat files when installed. Live comparisons are exported separately.</p></details>
     <p role="status" className="shield"><strong>Scientific review paused.</strong> The 16D reproduction changed three third-place IDs for claims 589 and 1107. These are provisional first-run outcomes.</p>
     <p>{r.dataset}. Retrieval includes abstentions. Gain, drift and violations use represented queries only.</p>
     <label>Encoder configuration<select value={dimension} onChange={e=>setDimension(Number(e.target.value))}>{r.models.map((m,i)=><option key={i} value={i}>{m.dimensions}D calibration TF–IDF / LSA</option>)}</select></label>
