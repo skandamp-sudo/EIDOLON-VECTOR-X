@@ -2,11 +2,20 @@
 
 ## Choose the demonstration build
 
-The public and local workstations share the Obsidian interface released in commit `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`. Open the sidebar on desktop or **Open workspace menu** on a phone to reach all six workspaces. [Public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) · [Local Mission Control](http://localhost:5173/#mission-control)
+Use the local FOCUS candidate for the Retrieval Debugger. Public Mission Control serves the released workspaces. Open the sidebar on desktop or **Open workspace menu** on a phone to reach all six workspaces. [Public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) · [Local Mission Control](http://localhost:5173/#mission-control)
 
 Choose **Start Guided Demo** for the staged tour or **Explore Semantic Universe** for PS-05. In SUPPLY, **Delay supplier** changes the dated lot in the delivery timeline. In Intelligence, focus a view and press Right Arrow to rotate original, naive, learned and locked views together. In Research Lab, **Ranking metric** switches the archived retrieval chart between Recall@3 and nDCG@3. **Inspect a QASPER paper** shows family-level coverage and retrieval.
 
 For a private local import, use only the loopback Data Foundry. For an offline presentation, use a previously generated local study portal or PDF and label screenshots and benchmark tables as recorded observations. If a live query fails, state the error before switching to the recorded result.
+
+## One minute with the Retrieval Debugger
+
+1. Open **Open Retrieval Debugger** in local Mission Control. Use the calibration collection and the query `telescope light`. Under **Expected relevant documents**, leave #6 selected. It describes a telescope mirror gathering light from the night sky.
+2. Choose **Dense cosine** for both baseline and candidate. Keep K=3 and select **Run comparison**. Row #6 ranks first, Recall@3 and nDCG@3 are both 1, and the gate shows **PASS**.
+3. Clear #6 and mark #24, the forest water-level record, as the only expected document. This deliberately tests how a missed judgment appears. Set **Minimum candidate Recall@K** to 1 and run again. The ranking stays the same. Row #24 ranks eighth, both metrics fall to 0, and **BLOCK** identifies the failed recall threshold.
+4. Expand **Report identity** and select **Export reproducible report**. With the local service running, replay the downloaded file from the repository root using `python3 scripts/replay_focus.py /path/to/report.json`. An exact replay confirms the recorded calculation. Private-dataset exports contain the mapped text and judgments.
+
+To investigate a real retrieval failure, keep the judgments fixed while changing the candidate method. Inspect the missed IDs, rank changes, protected-direction drift and abstentions together. This demonstration uses authored judgments on calibration sentences. Independent retrieval quality remains unmeasured.
 
 ## Three minutes with PS-05
 

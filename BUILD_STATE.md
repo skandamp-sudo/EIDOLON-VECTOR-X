@@ -8,6 +8,18 @@ The engine milestone is `bbaa35be97efe4f09f9de8d02200e46bcf48ac3c`. The integrat
 
 In the three-document engineering case, the only judged relevant passage contained the literal word “xylolith”. At K=3 BM25 and fusion scored 1.0 on both recall and nDCG. Dense, unconstrained and locked retrieval abstained and scored 0.0. A separate threshold test blocked a missed expected document, and an unlabeled preview produced null relevance metrics and blocked the gate. These observations verify handling of a known vocabulary gap. Search quality on independent user tasks and willingness to pay remain unmeasured.
 
+### FOCUS pre-merge verification
+
+[PR #3](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/3) opened at application commit `d5b0c36dd0b131c9cc4f86c3fce06e077f71c841` against main. The 59 Python tests, TypeScript and Vite build, fixture checks and five Chrome suites passed. Browser checks covered the six existing workspaces, the 390px debugger, private import, missed labels and exact report replay. All five archived SciFact and eight QASPER digests matched.
+
+Two fresh Chrome contexts independently opened the debugger. A synthetic import, query, labels and report in the first context did not appear in the second. Both contexts made only loopback HTTP requests. Saved concept directions have a separate browser-origin persistence policy. The debugger export includes mapped source texts.
+
+Against the hosted app initialized locally, a calibration request returned 200 with `Cache-Control: no-store`. Foreign origins, a missing client header, training and custom documents returned 403. The import route returned 404. A 32,769-byte body returned 413. Seventeen tasks, a 401-character query and K=21 each returned 422. A busy worker returned 429. The debugger permits up to 256 documents of 4,096 characters locally, 16 tasks, and K up to 20. The one-operation limit applies per worker. The client header and origin checks do not identify individual callers.
+
+Vercel built the candidate and the authenticated branch preview displayed the Retrieval Debugger and six workspace links. It displayed **API unavailable**. The production Railway API returned HTTP 400 for the preview-origin preflight. Interactive hosted comparison awaits a matching frontend and backend origin. Production merge and deployment require separate approval. [Branch preview](https://eidolon-vector-x-git-feature-fla-44b09a-skandamp-sudos-projects.vercel.app/#retrieval-debugger)
+
+The supplementary 56.67-second local tutorial records the passing #6 calibration judgment, the deliberate #24 miss at rank eight, and the exported report. Standalone replay matched exactly. The rendered H.264/AAC file passed full decoding and browser playback at the beginning, middle and end. The three original films matched their recorded SHA-256 digests.
+
 ## Obsidian production release
 
 On 27 November 2026, PR #2 merged approved head `135f6777bb25eb0ddf5b3feb1080b3ef168ac25e` into main at `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`, retaining its milestone commits. GitHub reported both PR checks successful. Vercel and Railway reported successful deployments for the merge. Verification used the stable public domain. [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2) · [Mission Control](https://eidolon-vector-x.vercel.app/#mission-control)

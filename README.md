@@ -15,6 +15,8 @@ On the FOCUS branch, Mission Control opens the retrieval debugging workflow. Cho
 3. Set release criteria and run the comparison. Inspect each missed ID, rank change, abstention, retrieval score and measured endpoint violation. An unlabeled preview blocks the gate.
 4. Select **Export reproducible report**. With the local service running, use `python3 scripts/replay_focus.py /path/to/report.json` to verify the result. The report contains query text, judgments and, for imports, the mapped document texts. Keep private reports local.
 
+**Try a known pass and a known miss.** Search for `telescope light` with dense cosine and K=3. Document #6 ranks first. Change only the expected document to #24 and require Recall@3 of 1. The same ranking puts #24 eighth and the gate blocks. The [judge walkthrough](docs/JUDGE-WALKTHROUGH.md#one-minute-with-the-retrieval-debugger) shows how to inspect and replay both cases in the [local debugger](http://localhost:5173/#retrieval-debugger).
+
 The live debugger uses the 8D encoder and accepts up to 256 eligible source rows per suite. The existing comparison of four research encoders remains in Research Lab. Reports describe engineering checks on operator judgments. Customer demand and retrieval performance on unseen tasks remain unvalidated. [Scoring and scope](docs/FOCUS-PROTOCOL.md) · [Customer discovery questions](docs/CUSTOMER-DISCOVERY.md)
 
 ## Obsidian production release
