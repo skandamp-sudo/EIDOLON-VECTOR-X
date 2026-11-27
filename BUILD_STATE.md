@@ -139,3 +139,7 @@ Reader, clarification, adaptive layout and scientific inspection checkpoint: mea
 Final combined regression passed: 49 Python tests, TypeScript, production Vite build, inventory and language fixtures, five private-scorer engineering checks and four Chrome suites. The two-context suite exercised 32 route changes and retained 256 of 270 preference actions.
 
 Mastery documentation reviewed against application commit 9c4a54d2206610e1484f1bef2a4fca3e768bb6d6. Verified the supplied local CSV through capture of four embeddings and an explicit abstention. The local study kit contains 14 Markdown chapters, six PDFs and an offline portal with 107 Q&A entries and four annotated screenshot plates. PDF checks covered 73 rendered pages across the six files. Only public walkthrough and build documentation are staged.
+
+## ASCENSION baseline · 27 November 2026 IST
+
+The isolated worktree starts at fc762db. Captured 55 local Chrome views. Production rollback 93d9054 remains the reviewed tree. The [registered plan](ASCENSION_PLAN.md) records acceptance gates and the engineering fixture before implementation.

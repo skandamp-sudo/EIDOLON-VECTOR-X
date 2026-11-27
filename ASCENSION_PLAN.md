@@ -1,0 +1,17 @@
+# ASCENSION acceptance plan
+
+Registered before implementation on 27 November 2026. The worktree starts at FOCUS fc762db. Production stays at 93d9054. Only the feature branch is a release target.
+
+| Priority | Observed baseline | Acceptance |
+| --- | --- | --- |
+| Reliability | A failed health poll clears the model snapshot. The debugger and Intelligence can unmount and lose drafts. CLARITY shares a deadline across sequential readings. Foundry holds its compute slot while reading the request. | Simulate failed polling while editing, recover in place, distinguish unavailable and cached data. Exercise staged-body and busy-compute limits independently. |
+| Flagship | The debugger has five retrieval methods in one 8D basis. Research Lab has four model-specific inference paths. | Select each existing encoder locally, verify its fitted identity, bind results and directions to the selected basis, reject mismatches, export and replay. Hosted remains 8D. |
+| Geometry | Atlas checks only sampled path points for a zero crossing. The current governor re-normalizes after projection. | Check the minimum norm over the continuous segment. Verify a separately versioned rotation on the protected sphere against randomized invariants and degeneracies before exposing it. |
+| Operator experience | CORTEX puts source selection and inspection in one long column. SUPPLY separates its controls from the causes of late jobs. SYMBIOSIS separates proposals from human decisions. MORPH leaves an empty adaptive panel until learning begins. CLARITY can hide vocabulary loss behind a neighbor list. | Give each workflow one concrete improvement and browser check, preserve direct links, explain actual measurements and empty states, and keep failure recoverable. |
+| Research and release | Existing evidence concerns distinct protocols. Customer demand and independent gains remain unknown. | Preserve 13 archive digests. Keep engineering results separate from frozen evidence. Capture 11 routes at five sizes before and after. Run regression, keyboard, reduced-motion and available browser checks. |
+
+Baseline Chrome captures and route measurements are in [the screenshot index](docs/ascension/before/index-1440.html). No independent Neon document or official statement file has yet been located. The detached Neon worktree is at the FOCUS revision. Production logs and current account credit balance require independent access.
+
+## Registered exploratory comparison ascension-fixture-v1
+
+Use the original 24 calibration sentences and three fixed query/expected-row tasks: telescope light (6), ocean waves (9), and xylolith (24, deliberate vocabulary gap). Run all four encoders with K=3, strength 1, minimum cosine 0.8, maximum drift 0.05. Use Ocean versus Botanical directions derived in each model basis from those labeled source groups. Compare BM25, dense, RRF, unconstrained, existing governor and spherical candidate. Report representation, abstentions, Recall@3, nDCG@3, endpoint drift, cosine, signed gain, violations, and wall time. Match positive spherical gains to observed existing-governor gains within 0.01 on a fixed grid of 101 strength values in [0,2]; report unmatched counts. No parameter selection from outcomes. These are engineering fixtures, not independent data.

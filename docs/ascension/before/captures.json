@@ -1,0 +1,442 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "mission-control",
+    "title": "Mission Control",
+    "excess": 0,
+    "file": "1440-mission-control.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "retrieval-debugger",
+    "title": "Retrieval Debugger",
+    "excess": 0,
+    "file": "1440-retrieval-debugger.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "cortex",
+    "title": "CORTEX",
+    "excess": 0,
+    "file": "1440-cortex.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "supply",
+    "title": "SUPPLY",
+    "excess": 0,
+    "file": "1440-supply.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "symbiosis",
+    "title": "SYMBIOSIS",
+    "excess": 0,
+    "file": "1440-symbiosis.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "morph",
+    "title": "MORPH",
+    "excess": 0,
+    "file": "1440-morph.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "vector-x",
+    "title": "Semantic atlas",
+    "excess": 0,
+    "file": "1440-vector-x.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "clarity",
+    "title": "CLARITY",
+    "excess": 0,
+    "file": "1440-clarity.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "data-foundry",
+    "title": "Data Foundry",
+    "excess": 0,
+    "file": "1440-data-foundry.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "research-lab",
+    "title": "Research Lab",
+    "excess": 0,
+    "file": "1440-research-lab.jpg"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "route": "evidence-vault",
+    "title": "Evidence Vault",
+    "excess": 0,
+    "file": "1440-evidence-vault.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "mission-control",
+    "title": "Mission Control",
+    "excess": 0,
+    "file": "1280-mission-control.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "retrieval-debugger",
+    "title": "Retrieval Debugger",
+    "excess": 0,
+    "file": "1280-retrieval-debugger.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "cortex",
+    "title": "CORTEX",
+    "excess": 0,
+    "file": "1280-cortex.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "supply",
+    "title": "SUPPLY",
+    "excess": 0,
+    "file": "1280-supply.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "symbiosis",
+    "title": "SYMBIOSIS",
+    "excess": 0,
+    "file": "1280-symbiosis.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "morph",
+    "title": "MORPH",
+    "excess": 0,
+    "file": "1280-morph.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "vector-x",
+    "title": "Semantic atlas",
+    "excess": 0,
+    "file": "1280-vector-x.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "clarity",
+    "title": "CLARITY",
+    "excess": 0,
+    "file": "1280-clarity.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "data-foundry",
+    "title": "Data Foundry",
+    "excess": 0,
+    "file": "1280-data-foundry.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "research-lab",
+    "title": "Research Lab",
+    "excess": 0,
+    "file": "1280-research-lab.jpg"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "route": "evidence-vault",
+    "title": "Evidence Vault",
+    "excess": 0,
+    "file": "1280-evidence-vault.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "mission-control",
+    "title": "Mission Control",
+    "excess": 0,
+    "file": "768-mission-control.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "retrieval-debugger",
+    "title": "Retrieval Debugger",
+    "excess": 0,
+    "file": "768-retrieval-debugger.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "cortex",
+    "title": "CORTEX",
+    "excess": 0,
+    "file": "768-cortex.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "supply",
+    "title": "SUPPLY",
+    "excess": 0,
+    "file": "768-supply.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "symbiosis",
+    "title": "SYMBIOSIS",
+    "excess": 0,
+    "file": "768-symbiosis.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "morph",
+    "title": "MORPH",
+    "excess": 0,
+    "file": "768-morph.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "vector-x",
+    "title": "Semantic atlas",
+    "excess": 0,
+    "file": "768-vector-x.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "clarity",
+    "title": "CLARITY",
+    "excess": 0,
+    "file": "768-clarity.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "data-foundry",
+    "title": "Data Foundry",
+    "excess": 0,
+    "file": "768-data-foundry.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "research-lab",
+    "title": "Research Lab",
+    "excess": 0,
+    "file": "768-research-lab.jpg"
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "route": "evidence-vault",
+    "title": "Evidence Vault",
+    "excess": 0,
+    "file": "768-evidence-vault.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "mission-control",
+    "title": "Mission Control",
+    "excess": 0,
+    "file": "390-mission-control.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "retrieval-debugger",
+    "title": "Retrieval Debugger",
+    "excess": 0,
+    "file": "390-retrieval-debugger.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "cortex",
+    "title": "CORTEX",
+    "excess": 0,
+    "file": "390-cortex.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "supply",
+    "title": "SUPPLY",
+    "excess": 0,
+    "file": "390-supply.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "symbiosis",
+    "title": "SYMBIOSIS",
+    "excess": 0,
+    "file": "390-symbiosis.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "morph",
+    "title": "MORPH",
+    "excess": 0,
+    "file": "390-morph.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "vector-x",
+    "title": "Semantic atlas",
+    "excess": 0,
+    "file": "390-vector-x.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "clarity",
+    "title": "CLARITY",
+    "excess": 0,
+    "file": "390-clarity.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "data-foundry",
+    "title": "Data Foundry",
+    "excess": 0,
+    "file": "390-data-foundry.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "research-lab",
+    "title": "Research Lab",
+    "excess": 0,
+    "file": "390-research-lab.jpg"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "route": "evidence-vault",
+    "title": "Evidence Vault",
+    "excess": 0,
+    "file": "390-evidence-vault.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "mission-control",
+    "title": "Mission Control",
+    "excess": 0,
+    "file": "360-mission-control.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "retrieval-debugger",
+    "title": "Retrieval Debugger",
+    "excess": 0,
+    "file": "360-retrieval-debugger.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "cortex",
+    "title": "CORTEX",
+    "excess": 0,
+    "file": "360-cortex.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "supply",
+    "title": "SUPPLY",
+    "excess": 0,
+    "file": "360-supply.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "symbiosis",
+    "title": "SYMBIOSIS",
+    "excess": 0,
+    "file": "360-symbiosis.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "morph",
+    "title": "MORPH",
+    "excess": 0,
+    "file": "360-morph.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "vector-x",
+    "title": "Semantic atlas",
+    "excess": 0,
+    "file": "360-vector-x.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "clarity",
+    "title": "CLARITY",
+    "excess": 0,
+    "file": "360-clarity.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "data-foundry",
+    "title": "Data Foundry",
+    "excess": 0,
+    "file": "360-data-foundry.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "research-lab",
+    "title": "Research Lab",
+    "excess": 0,
+    "file": "360-research-lab.jpg"
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "route": "evidence-vault",
+    "title": "Evidence Vault",
+    "excess": 0,
+    "file": "360-evidence-vault.jpg"
+  }
+]
