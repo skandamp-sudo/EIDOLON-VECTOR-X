@@ -111,3 +111,11 @@ uv pip install --python .venv/bin/python --only-binary :all: --no-deps --require
 Open Research Lab → Recovery experiment. The selector switches recorded evidence and the live local encoder. A probe compares unsteered, unconstrained and governed retrieval on training reference paragraphs. The published evidence uses separate paper families. The hosted configuration serves recorded recovery measurements and disables live recovery probes and uploads.
 
 On 15 QASPER questions with evidence, unsteered nDCG@3 was 0.223 for BM25, 0.144 for expanded LSA and 0.020 for MiniLM. Both new encoders represented 16/16 questions. Neither improved the fraction of methodology-labeled retrieved paragraphs in this sample. [Measured comparisons](REVIEW_PHASE_3.md) · [Limitations](docs/LIMITATIONS.md)
+
+## Public prototype and judge walkthrough
+
+[Open VECTOR-X](https://eidolon-vector-x.vercel.app) · [Railway API health](https://vector-x-backend-production.up.railway.app/api/v1/health)
+
+Open **Applications** and use **Next step**. CORTEX follows document neighbors, CLARITY compares two topic readings, and SUPPLY searches a ten-item illustrative inventory. MORPH learns category weights from explicit saves in the current browser tab and supports rollback against a static baseline. SYMBIOSIS recommends a feasible measured setting and supports approval, rejection and undo. The final step opens recorded encoder comparisons including negative results. These are application demonstrations. Catalog similarity and category flags require human review.
+
+Production serves live calibration inference and the recorded four-encoder evidence. Use the local checkout for all four live encoders, private uploads and training. Vercel builds the frontend directory on Hobby. Railway runs one restricted worker with its exact Vercel origin and the /api/v1/health readiness check.

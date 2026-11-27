@@ -27,6 +27,8 @@ export default function Frontier() {
     },200)
     return ()=>{clearTimeout(timer);c.abort()}
   },[space,query,direction,protection,strength,drift,cos,labels,retry])
+  const [rejected,setRejected]=useState(false)
+  useEffect(()=>setRejected(false),[points])
   const feasible=points.map((p,i)=>({p,i})).filter(({p})=>p.feasible)
   const rec=feasible.filter(({p})=>p.frontier && (p.gain??0)>1e-9).sort((a,b)=>(b.p.ndcg??0)-(a.p.ndcg??0)||(b.p.gain??0)-(a.p.gain??0)||(a.p.drift??0)-(b.p.drift??0))[0]
   const current=points[selected]
@@ -52,7 +54,9 @@ export default function Frontier() {
       <p>Applied {fmt(current.applied)} · gain {fmt(current.gain)} · drift {fmt(current.drift)} · cosine {fmt(current.cosine)} · nDCG@3 {fmt(current.ndcg)}.</p>
       <ol>{current.top.map(i=><li key={i}>{space?.documents[i]}</li>)}</ol><h3>SYMBIOSIS recommendation</h3>
       {rec ? <p>{names[rec.p.method]} at {fmt(rec.p.requested)} gives gain {fmt(rec.p.gain)} with drift {fmt(rec.p.drift)}. The recommendation prioritizes labeled retrieval, then gain, among feasible frontier points.</p>:<p>No sampled feasible configuration increases the signed target score.</p>}
-      <div className="foundry-actions"><button disabled={!rec||rec.i===selected} onClick={()=>rec&&choose(rec.i)}>Approve recommendation</button>
+      <div className="foundry-actions"><button disabled={!rec||rejected||rec.i===selected} onClick={()=>rec&&choose(rec.i)}>Approve recommendation</button>
+        {rec&&<button onClick={()=>setRejected(!rejected)}>{rejected?'Restore recommendation':'Reject recommendation'}</button>}
+        {rejected&&<span role="status">Recommendation rejected. Current setting retained.</span>}
         <button disabled={previous===null} onClick={()=>{if(previous!==null)select(previous);setPrevious(null)}}>Undo selection</button></div>
       <details><summary>Inspect all candidates</summary><div className="preview-scroll"><table><thead><tr>{['Method','Requested','Applied','Gain','Drift','Cosine','nDCG','Status'].map(x=><th key={x}>{x}</th>)}</tr></thead>
       <tbody>{points.map((p,i)=><tr key={i}><th>{names[p.method]}</th>{[p.requested,p.applied,p.gain,p.drift,p.cosine,p.ndcg].map((v,j)=><td key={j}>{fmt(v)}</td>)}<td>{p.frontier?'Frontier':p.feasible?'Feasible':'Infeasible'}</td></tr>)}</tbody></table></div></details></>}

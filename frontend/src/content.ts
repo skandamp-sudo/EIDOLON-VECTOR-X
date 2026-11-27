@@ -6,7 +6,7 @@ export const modules = [
   { status: 'Implemented', name: 'Semantic Universe', icon: Orbit, brief: 'Explore embedding neighborhoods in 3D.', detail: 'The atlas renders the corpus and query trajectory in one training-fitted PCA frame. Held-out neighborhood fidelity is scheduled for Phase 3.' },
   { status: 'Implemented · proxy constraints', name: 'Drift Guardian', icon: ShieldCheck, brief: 'Measure and constrain semantic drift.', detail: 'Semantic Lock measures protected score drift and query cosine after normalization. Its governor reports reductions and neighborhood changes.' },
   { status: 'Implemented · baseline', name: 'Counterfactual Engine', icon: GitCompareArrows, brief: 'Compare retrieval under steering.', detail: 'Rank the same fixed index for the original and steered query. Compare both top-three lists and inspect both cosine scores for any point.' },
-  { status: 'Planned', name: 'Research Lab', icon: FlaskConical, brief: 'Reproduce baselines and evaluation runs.', detail: 'Record split hashes, seeds, settings and package versions. Compare paired outcomes for identity, fixed-direction and learned baselines.' },
+  { status: 'Implemented', name: 'Research Lab', icon: FlaskConical, brief: 'Reproduce baselines and evaluation runs.', detail: 'Record split hashes, seeds, settings and package versions. Inspect recorded per-family outcomes and compare the four encoders.' },
 ]
 export const protocol = [
   ['Split before fitting', 'Group paraphrases and source families. Freeze separate train, validation and test manifests. The startup samples are calibration probes only.'],

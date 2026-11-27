@@ -24,3 +24,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 
 - Archived both original SciFact runs and their one-ULP diagnosis. Added a separate deterministic ranking policy, four-encoder recovery runner and a pre-outcome QASPER protocol.
 - Integrated actual per-family QASPER evidence and local probes for all four encoders into Research Lab. Published equal-strength and matched-gain comparisons, independent section-label outcomes and unavailable measurements.
+
+- Published the Vercel/Railway prototype and added a six-step judge walkthrough, directed document and inventory search, clarification, reversible session preferences, and recommendation rejection.

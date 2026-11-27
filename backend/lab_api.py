@@ -4,6 +4,7 @@ from pydantic import ValidationError
 
 from .concepts import PRESETS, Training, learn, model_id, preset
 from .frontier import frontier
+from .applications import Search, explore
 from .foundry import local_operation
 from .intelligence import Comparison, compare
 
@@ -12,7 +13,7 @@ router = APIRouter(prefix="/api/v1/intelligence")
 
 @router.post("/{operation}")
 async def intelligence(operation: str, request: Request):
-    if operation not in ("workspace", "learn", "compare", "frontier"):
+    if operation not in ("workspace", "learn", "compare", "frontier", "applications"):
         raise HTTPException(404, "Unknown lab operation.")
     atlas = request.app.state.atlas
 
@@ -21,6 +22,8 @@ async def intelligence(operation: str, request: Request):
             return {"model_id": model_id(atlas), "presets": [preset(atlas, name) for name in PRESETS],
                     "documents": list(atlas.model.documents), "categories": atlas.labels.tolist()}
         try:
+            if operation == "applications":
+                return explore(atlas, Search.model_validate_json(body))
             if operation == "learn":
                 return learn(atlas, Training.model_validate_json(body))
             form = Comparison.model_validate_json(body)
@@ -30,5 +33,5 @@ async def intelligence(operation: str, request: Request):
         except ValidationError:
             raise ValueError("Invalid dimensions, example structure, index size or constraint settings.") from None
 
-    limit = {"workspace": 16, "learn": 2_000_000, "compare": 6_000_000, "frontier": 6_000_000}[operation]
+    limit = {"applications": 4096, "workspace": 16, "learn": 2_000_000, "compare": 6_000_000, "frontier": 6_000_000}[operation]
     return await local_operation(request, limit, process)

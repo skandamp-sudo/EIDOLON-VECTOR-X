@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import {checkApplications} from './applicationSmoke.mjs'
 import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
@@ -278,6 +279,8 @@ try {
   assert.equal(await feasible.inputValue(), original)
   await page.setViewportSize({width:390,height:844})
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
+  await page.setViewportSize({width:1400,height:920})
+  await checkApplications(page,'http://localhost:5173')
   page.off('request', monitor)
   assert.deepEqual(external, [])
   assert.deepEqual(errors, [])
