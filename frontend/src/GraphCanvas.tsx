@@ -23,12 +23,15 @@ export default function GraphCanvas({title,nodes,edges,selected,onSelect,color='
  <defs><marker id={id} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 8 4 0 8" fill="#92a9be"/></marker></defs>
  <rect width="100%" height="100%" fill="#0b1520"/><g data-camera="" transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
  {edges.map((e,i)=>{const a=nodes[e.src],b=nodes[e.dst];if(!a||!b)return null
+ // A highlighted connection is one hop from the selected stage; cycles and branches remain explicit.
+ const incident=download&&(e.src===selected||e.dst===selected)
+ const incoming=incident&&e.dst===selected
  const dx=b.x-a.x,dy=b.y-a.y,side=Math.abs(dx)>Math.abs(dy),sx=side?Math.sign(dx):0,sy=side?0:Math.sign(dy),ax=a.x+sx*(a.kind==='term'?36:73),ay=a.y+sy*(a.kind==='term'?33:25),bx=b.x-sx*(b.kind==='term'?37:75),by=b.y-sy*(b.kind==='term'?34:27)
  const long=side&&Math.abs(dx)>255&&Math.abs(dy)<35, lift=long?-51:0
  const path=long?`M${a.x} ${a.y-25} Q${a.x} ${a.y-64} ${(ax+bx)/2} ${ay+lift} T${b.x} ${b.y-28}`:side?`M${ax} ${ay} C${(ax+bx)/2} ${ay} ${(ax+bx)/2} ${by} ${bx} ${by}`:`M${ax} ${ay} C${ax} ${(ay+by)/2} ${bx} ${(ay+by)/2} ${bx} ${by}`
- return <g key={i}><path d={path} stroke={e.accent?color:'#627d95'} strokeWidth={e.accent?2.6:1.7} fill="none" markerEnd={'url(#'+id+')'}/>{e.label&&e.label!=='Next'&&<text x={(ax+bx)/2} y={(ay+by)/2+lift-4} fill="#d3deeb" stroke="#0b1520" strokeWidth="4" paintOrder="stroke" fontSize="11" textAnchor="middle">{e.label}</text>}</g>})}
+ return <g key={i} data-selected-edge={incident?(incoming?"incoming":"outgoing"):undefined}><path d={path} stroke={incident||e.accent?color:'#627d95'} strokeWidth={incident?3.4:e.accent?2.6:1.7} strokeDasharray={incoming?"6 3":undefined} fill="none" markerEnd={'url(#'+id+')'}/>{e.label&&e.label!=='Next'&&<text x={(ax+bx)/2} y={(ay+by)/2+lift-4} fill="#d3deeb" stroke="#0b1520" strokeWidth="4" paintOrder="stroke" fontSize={download?13:11} fontWeight={incident?700:500} textAnchor="middle">{e.label}</text>}</g>})}
  {nodes.map((n,i)=>{const active=selected===i,stroke=active?color:'#577289',shape={fill:active?'#173345':'#152331',stroke,strokeWidth:active?2.5:1.3},wrapped=lines(n.title)
  return <g key={i} role="button" tabIndex={0} aria-label={'Inspect '+n.title} aria-pressed={active} onClick={()=>onSelect(i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect(i)}}} transform={`translate(${n.x} ${n.y})`}>
  <title>{n.detail??n.title}</title>{n.kind==='term'?<ellipse rx="38" ry="32" {...shape}/>:n.kind==='decision'?<polygon points="0,-35 82,0 0,35 -82,0" {...shape}/>:<rect x="-73" y="-25" width="146" height="50" rx={n.kind==='start'||n.kind==='end'?24:n.kind==='human'?15:7} {...shape}/>}
- {n.kind==='store'&&<path d="M-68 -16H68" stroke={stroke}/>}<text textAnchor="middle" fill={active?'#ffffff':'#dce7f2'} fontSize="12" fontFamily="system-ui,sans-serif">{wrapped.map((s,j)=><tspan key={j} x="0" y={(j-(wrapped.length-1)/2)*14+4}>{s}</tspan>)}</text></g>})}</g></svg></div>
+ {n.kind==='store'&&<path d="M-68 -16H68" stroke={stroke}/>}<text textAnchor="middle" fill={active?'#ffffff':'#dce7f2'} fontSize={download?14:12} fontWeight={active?650:500} fontFamily="system-ui,sans-serif">{wrapped.map((s,j)=><tspan key={j} x="0" y={(j-(wrapped.length-1)/2)*14+4}>{s}</tspan>)}</text></g>})}</g></svg>{download&&<small className="path-legend">Selected stage · dashed lines enter it, solid highlighted lines leave it.</small>}</div>
 }

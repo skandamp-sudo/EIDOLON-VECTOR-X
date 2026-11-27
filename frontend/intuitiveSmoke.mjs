@@ -54,7 +54,14 @@ try{
   if(name==='cortex'){await page.getByLabel('Find a passage').fill('no-such-field-note');await shot(name,'empty',page.getByText('No passages match.',{exact:false}));await page.getByLabel('Find a passage').fill('')}
   if(name==='supply'){await btn('Replay duplicate').click();await shot(name,'error',page.getByText('Duplicate event ID.',{exact:true}))}
   if(name==='symbiosis'){await page.getByLabel('Sweep query').fill(' ');await shot(name,'empty',page.getByText(/Enter a nonempty sweep query/));await page.getByLabel('Sweep query').fill('forest canopy gathers distant light');await target('agent-approve').waitFor()}
-  if(name==='morph'){await target('morph-reset').click();assert.ok(!(await target('morph-consent').isChecked()));await shot(name,'learning-off',page.locator('.preview-pair').first())}
+  if(name==='morph'){
+   const rails=page.locator('.preview-pair .mini-rail')
+   assert.equal(await rails.nth(1).getByRole('button').first().innerText(),'Shortcut to CORTEX')
+   assert.equal(await rails.first().getByText('Shortcut to CORTEX').count(),0)
+   await page.getByRole('status').filter({hasText:'Pinned CORTEX at the top'}).waitFor()
+   await btn('Undo adaptation').click()
+   assert.equal(await rails.getByText('Shortcut to CORTEX').count(),0)
+   await target('morph-reset').click();assert.ok(!(await target('morph-consent').isChecked()));await shot(name,'learning-off',page.locator('.preview-pair').first())}
   if(name==='clarity'){await page.getByLabel('Instruction to interpret').fill('Inspect the telescope');await target('clarify-inspect').click();await shot(name,'no-cues',page.getByText('No rule matched this instruction.'))}
   if(name==='vector-x'){await target('atlas-query').fill('xylolith');await target('atlas-embed').click();await shot(name,'abstention',page.getByText(/No known vocabulary/));await target('atlas-query').fill('A telescope records light from a distant star.');await target('atlas-embed').click();await page.locator('.star').first().waitFor()}
   await btn('Advanced').click();assert.equal(await btn('Advanced').getAttribute('aria-pressed'),'true');await shot(name,'advanced',page.locator(({cortex:'.cortex-desk details.expert-settings',supply:'.logistics details.expert-settings',symbiosis:'.pareto-figure',morph:'.morph-desk details.expert-settings',clarity:'.clarity-studio details.expert-settings','vector-x':'.science-strip'})[name]).first())
@@ -74,6 +81,11 @@ try{
   await graph.getByRole('button',{name:'Fit to view'}).click();assert.equal(await camera.getAttribute('transform'),original)
   await graph.getByRole('button',{name:'Fullscreen'}).click();await page.keyboard.press('Escape');assert.ok(!(await graph.getAttribute('class')).includes('expanded'))
   const node=graph.locator('g[role=button]').nth(2);await node.focus();await page.keyboard.press('Enter');assert.equal(await node.getAttribute('aria-pressed'),'true')
+  if(view==='workflows'){
+   await graph.getByRole('button',{name:'Inspect Quality gate?',exact:true}).click()
+   assert.ok(await graph.locator('[data-selected-edge=incoming] path[stroke-dasharray]').count()>0)
+   assert.ok(await graph.locator('[data-selected-edge=outgoing] path:not([stroke-dasharray])').count()>0)
+  }
   const svg=graph.locator('svg[tabindex]'),box=await svg.boundingBox();assert.ok(box)
   const prior=await camera.getAttribute('transform');await page.mouse.move(box.x+6,box.y+6);await page.mouse.down();await page.mouse.move(box.x+37,box.y+28,{steps:3});await page.mouse.up();assert.notEqual(await camera.getAttribute('transform'),prior);await graph.getByRole('button',{name:'Reset view'}).click()
   const download=page.waitForEvent('download');await graph.getByRole('button',{name:'Export SVG'}).click();assert.equal((await download).suggestedFilename(),'eidolon-workflow.svg');await shot('flow',view,graph)

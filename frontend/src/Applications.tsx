@@ -5,6 +5,7 @@ import Morph,{navigateBack,visit} from './convergence/Morph'
 import type {Domain} from './convergence/session'
 import Supply from './convergence/SupplyDesk'
 import Cortex from './convergence/Cortex'
+import {WorkspaceGuide} from './Judge'
 import Frontier from './Frontier'
 import Recovery from './Recovery'
 import type {Topic} from './explore'
@@ -86,12 +87,14 @@ export default function Applications({online,initialStep=0,direct=false}:{online
   const navigate=(d:Domain)=>{if(d==='VECTOR-X'){location.hash='vector-x';return}setStep(steps.indexOf(d))}
   const walkthrough=<section className="panel foundry-panel"><label>Walkthrough step<select value={step} onChange={e=>setStep(Number(e.target.value))}>{steps.map((s,i)=><option value={i} key={s}>{i+1}. {s}</option>)}</select></label>
     <p>{instructions[step]}</p><div className="foundry-actions"><button disabled={!step} onClick={()=>{if(domain)navigateBack(domain);setStep(step-1)}}>Previous step</button><button disabled={step===5} onClick={()=>setStep(step+1)}>Next step</button></div></section>
-  return <section className={"foundry intelligence app-workspace workspace-"+steps[step].toLowerCase()}><div className="atlas-intro"><h1>{direct?steps[step]:'Application demonstrations'}</h1><p>{direct?['Search a collection and follow a word back to its source.','Choose the intended meaning of a sentence.','Explore a simulated shipment and the orders it serves.','Try a shortcut and compare the two layouts.','Decide which proposed search setting to use.'][step]:'Follow the five application demonstrations and inspect the independent evidence.'}</p></div>
+  return <section className={"foundry intelligence app-workspace workspace-"+steps[step].toLowerCase()}>{!direct&&<div className="atlas-intro"><h1>Application demonstrations</h1><p>Follow the five application demonstrations and inspect the independent evidence.</p></div>}
     {!direct&&walkthrough}
-    {domain&&(!direct||step===3)&&<details open={step===3}><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
+    {direct&&step===3&&domain&&<Morph context={domain} onNavigate={navigate}/>}
+    {domain&&!direct&&<details open={step===3}><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
     {step===0&&<Cortex/>}{step===2&&<Supply/>}{step===1&&<Clarity/>}
     {step===5?<><Recovery online={online}/><p>BM25 led unsteered retrieval. Neither new encoder increased the fraction of methodology-labeled paragraphs in the governed top three. Only three evaluation paragraphs carried that label.</p><a href="#research-lab">Open full Evidence Vault</a></>:!online?<p role="status">Waiting for the model service.</p>:step===4?<Frontier/>:direct&&step===1&&!inspectRelated?<button onClick={()=>setInspectRelated(true)}>Explore related calibration documents</button>:<Explorer key={step<2?'knowledge':'inventory'} step={step}/>}
     {direct&&domain&&step!==3&&<details><summary>Navigation preferences and study</summary><Morph context={domain} onNavigate={navigate}/></details>}
+    {direct&&domain&&<WorkspaceGuide name={domain}/>}
     {direct&&walkthrough}
   </section>
 }

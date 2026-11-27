@@ -21,3 +21,20 @@ main .foundry .workbench [data-tour=supply-delay],main .foundry .workbench [data
 @media(max-width:780px){.notebook-grid>.relation-graph{grid-row:1}.notebook-grid>.source-pane{grid-row:2}.notebook-grid.read-focus>.source-pane{grid-row:1}.app-workspace .desk-tabs{gap:.3rem}.library-pane{scroll-margin-top:6rem}.workbench section[tabindex]{scroll-margin-top:6rem}}
 
 .map-layers{margin:0 0 1rem}.mini-rail button,.mini-window article button{display:flex;align-items:center;gap:.4rem}.mini-window article button{margin:.4rem 0}.mini-window article h4{margin:.6rem 0}.mini-window article>p{min-height:3em}.mission-page .hero-actions button[data-tour=mission-start]{background:#a3ded6;color:#0b2228;border-color:#a3ded6}.mission-page .secondary-actions>a.studio-primary{background:transparent;color:#badbdc;border:1px solid #344654}.mission-page .mission-directory .tool-vector-x{grid-column:1/-1;grid-row:1;background:#112329;border:1px solid #365654;border-radius:8px;padding:.9rem}.mission-page .mission-directory .tool-vector-x h3{font-size:1.23rem}
+
+.experience-tools .workspace-name { margin:0 auto 0 0; font:650 .85rem/1.4 var(--mono); letter-spacing:.08em }
+.app-workspace .desk-tabs { padding:.25rem 0 .55rem }
+.app-workspace .workbench h2 { margin-top:0 }
+.flow-workspace .path-legend { padding:.3rem .7rem; color:#bdd0e1 }
+.preview-pair>.adapted-preview { border-color:#cf9ec3 }
+.mini-rail .pinned { background:#482d45; color:#ffe5f7; border-bottom:2px solid #e4a7d3 }
+.adaptation-feedback:not(:empty) { border-left:3px solid #dfaad1; padding:.45rem .7rem; background:#241e2b }
+.adaptation-feedback:empty { margin:0 }
+.advanced-copy, [data-experience=advanced] .beginner-copy { display:none }
+[data-experience=advanced] .advanced-copy { display:inline }
+
+.reading-tree > .map-canvas { align-items:stretch; gap:0; padding:0 }
+@media (max-width:780px) {
+  .clarity-studio .prompt-line { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end }
+  .clarity-studio .prompt-line input { width:100%; box-sizing:border-box }
+}

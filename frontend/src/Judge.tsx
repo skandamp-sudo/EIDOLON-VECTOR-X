@@ -73,7 +73,7 @@ function ReferenceMap({f,view}:{f:Flow;view:string}){
 }
 export function SystemFlow(){
  const q=useParams(),f=match(q.get('ps')),view=q.get('view')??'platform'
- return <div className="foundry judge-page"><header><p className="kicker">Engineering reference</p><h1>System Flow &amp; Architecture</h1><p>From user intent to verifiable outcomes.</p></header><nav data-tour="flow-view" className="view-nav" aria-label="Architecture views">{[['platform','Platform overview'],['workflows','Six workflows'],['technical','Technical architecture'],['trace','Evidence traceability']].map(([v,title])=><a key={v} aria-current={view===v?'page':undefined} href={flowLink(f,v)}>{title}</a>)}</nav>
+ return <div className="foundry judge-page"><header><h1>System Flow &amp; Architecture</h1></header><nav data-tour="flow-view" className="view-nav" aria-label="Architecture views">{[['platform','Platform overview'],['workflows','Six workflows'],['technical','Technical architecture'],['trace','Evidence traceability']].map(([v,title])=><a key={v} aria-current={view===v?'page':undefined} href={flowLink(f,v)}>{title}</a>)}</nav>
  <section className="workbench flow-workspace">{(view==='trace'||view==='workflows')&&<FlowSelect flow={f} onChange={w=>location.hash=flowLink(w,view)}/>} {view==='workflows'?<Diagram key={f.id} f={f}/>:<ReferenceMap key={view==='platform'?view:view+f.id} f={f} view={view}/>}<p>{hosted?'Hosted controls are restricted.':'Local workspace'} · <a href={flowLink(f)}>Inspect this engine’s workflow →</a></p></section></div>
 }
 export function EvidenceCenter(){

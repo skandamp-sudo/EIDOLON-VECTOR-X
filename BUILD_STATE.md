@@ -1,5 +1,9 @@
 # Build state
 
+## INTUITIVE final acceptance · 28 November 2026, 00:13 IST
+
+The feature candidate builds on `a8a072d`. The six measured entry panels start higher on desktop and mobile. MORPH pins the accepted shortcut in the adaptive preview. System Flow identifies incoming and outgoing paths with different line styles. The [acceptance record](docs/final-acceptance/README.md) includes viewport measurements, native Safari interactions and three exact judge report replays. The seven Chrome walkthroughs and all four graph views passed the focused checks. All 13 archived digests matched. No external research evaluation was rerun. Production remains at `93d9054`.
+
 ## INTUITIVE 017 · local feature candidate · 27 November 2026 IST
 
 Baseline `11ec9f2` on feature/ascension. Production remains on `93d9054`. The approved CORTEX workstation uses the existing normalized term weights, positive cosine neighbors and source passages. SUPPLY traces a simulated lot through allocation to an order. SYMBIOSIS uses the existing feasibility search and reversible proposal decisions. MORPH compares interactive navigation previews with opt-in tab-only learning. CLARITY displays the detected readings and records one confirmation at a time. The Atlas keeps its established search and steering interface.
