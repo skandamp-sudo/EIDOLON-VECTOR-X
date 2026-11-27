@@ -104,3 +104,5 @@ Inventory and vector checkpoint: ledger-derived quantity bands and dated order t
 Reader, clarification, adaptive layout and scientific inspection checkpoint: measured all 64 route and viewport combinations without horizontal overflow. Native Safari opened the local inventory desk. All four live encoder probes and thirteen archived checksums matched. Hosted-mode production build passed.
 
 Final combined regression passed: 49 Python tests, TypeScript, production Vite build, inventory and language fixtures, five private-scorer engineering checks and four Chrome suites. The two-context suite exercised 32 route changes and retained 256 of 270 preference actions.
+
+Mastery documentation reviewed against application commit 9c4a54d2206610e1484f1bef2a4fca3e768bb6d6. Verified the supplied local CSV through capture of four embeddings and an explicit abstention. The local study kit contains 14 Markdown chapters, six PDFs and an offline portal with 107 Q&A entries and four annotated screenshot plates. PDF checks covered 73 rendered pages across the six files. Only public walkthrough and build documentation are staged.
