@@ -36,3 +36,5 @@ Preserved two independent held-out runs and documented three nonreproducing 16D 
 - 2026-11-27 13:20 IST · SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
 
 - 2026-11-27 13:22 IST · MORPH ranks optional shortcuts from bounded, opt-in tab interactions. Static and adaptive navigation trials record elapsed time, destination changes, completion and optional mental effort. Chrome exercised learning, acceptance, rollback and deletion. Human usability effects are unmeasured.
+
+- 2026-11-27 13:24 IST · CLARITY ranks six kinds of linguistic cue by entropy per effort unit, requests explicit referents, compares live 8D readings and gates simulated decisions. Six authored positives localized correctly and two negative controls passed. A bank-only baseline detected one positive. Independent resolution accuracy and generalization are unmeasured.

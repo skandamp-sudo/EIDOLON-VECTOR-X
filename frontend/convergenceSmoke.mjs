@@ -49,6 +49,17 @@ try {
   await page.getByRole('button',{name:'Delete history and reset learning'}).click()
   assert.equal(await opt.isChecked(),false)
  }
+ if(check==='all'||check==='clarity'){
+  await step.selectOption('1')
+  await page.getByLabel('Instruction to interpret').fill('Send it')
+  await page.getByRole('button',{name:'Inspect language'}).click()
+  await page.getByText('DEFER',{exact:true}).waitFor()
+  await page.getByLabel('Enter the entity or reference frame').fill('ocean waves')
+  await page.getByRole('button',{name:'Use my interpretation'}).click()
+  await page.getByText('PROCEED',{exact:true}).waitFor()
+  await page.getByRole('button',{name:'Compare interpretation retrieval'}).click()
+  await page.getByText(/top passages/).first().waitFor()
+ }
  // Additional module checks
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}
