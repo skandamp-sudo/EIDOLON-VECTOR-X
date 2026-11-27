@@ -48,25 +48,30 @@ export default function Cortex({rows=sample,source='Illustrative field notebook'
  const [study,setStudy]=useState<Record<string,unknown>|null>(null)
  const ranked=passages.map((p,id)=>({id,score:terms(q).reduce((s,t)=>s+(mode==='Keyword' ? Number(p.words.includes(t)):p.weights.get(t)??0),0)}))
  if(mode!=='Source order')ranked.sort((a,b)=>b.score-a.score||a.id-b.id)
+ const queryWords=new Set(terms(q))
  const current=passages[sel]
  const peers=current?passages.map((p,id)=>({id,score:[...current.weights].reduce((s,[t,n])=>s+n*(p.weights.get(t)??0),0)})).filter(r=>r.id!==sel&&r.score>0).sort((a,b)=>b.score-a.score).slice(0,3):[]
  const ref=(id:number)=>'Row '+passages[id].row+' · offset '+passages[id].offset
  return <section className="panel foundry-panel"><h2>CORTEX research reader</h2><p>{source} · {passages.length} passages · first 128 nonblank chunks of up to 600 UTF-16 units. Local Data Foundry opens this reader on the mapped text column.</p>
+ <div className={focus?'reader-desk focused':'reader-desk'}><section aria-label="Collection"><h3>Collection</h3>
  <label>Research priority<input value={q} maxLength={300} onChange={e=>query(e.target.value)}/></label>
  <label>Reading workflow<select disabled={start!==null} value={mode} onChange={e=>setMode(e.target.value)}>{['Weighted concepts','Keyword','Source order'].map(s=><option key={s}>{s}</option>)}</select></label>
  <label><input type="checkbox" checked={focus} onChange={e=>setFocus(e.target.checked)}/> Focus on selected passage</label>
- {!focus&&current&&<figure className="relation-graph"><figcaption>Selected passage relationships</figcaption><div className="branches"><section><small>Term membership</small>{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</section><b>{ref(sel)}</b><section><small>TF–IDF cosine</small>{peers.length?peers.map(r=><button key={r.id} onClick={()=>select(r.id)}>{ref(r.id)} · {r.score.toFixed(3)}</button>):<p>No positive edges</p>}</section></div></figure>}
  {!focus&&branch&&<details><summary>Explore topic and passage relationships</summary><p>Select a top-weighted term, then follow a linked source. Edges indicate term membership. Neighboring passages below use vector similarity.</p>
  <label>Research scope<select value={branch[0]} onChange={e=>setTopic(e.target.value)}>{hierarchy.map(([t,ids])=><option key={t} value={t}>{t} · {ids.length} passages</option>)}</select></label>
  <ul>{branch[1].slice(0,12).map(id=><li key={id}><button onClick={()=>{select(id);query(branch[0])}}>{branch[0]} → {ref(id)}</button> · {passages[id].concepts.filter(t=>t!==branch[0]).slice(0,3).join(', ')}</li>)}</ul></details>}
  {!focus&&<ol>{ranked.slice(0,8).map(r=><li key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {passages[r.id].concepts.slice(0,3).join(', ')} · {r.score.toFixed(2)}</li>)}</ol>}
  {!ranked.some(r=>r.score>0)&&<p>No query vocabulary overlaps the indexed passages.</p>}
- {current&&<><h3>{source} · {ref(sel)}</h3><blockquote>{current.text}</blockquote>{!hosted&&<button onClick={()=>openAtlasDraft(current.text,ref(sel))}>Open passage in Vector Warp</button>}
+</section>
+ {!focus&&<section aria-label="Passage relationships"><h3>Relationships</h3><p>Links show shared weighted terms. Open a source to assess its claim.</p> {!focus&&current&&<figure className="relation-graph"><figcaption>Selected passage relationships</figcaption><div className="branches"><section><small>Term membership</small>{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</section><b>{ref(sel)}</b><section><small>TF–IDF cosine</small>{peers.length?peers.map(r=><button key={r.id} onClick={()=>select(r.id)}>{ref(r.id)} · {r.score.toFixed(3)}</button>):<p>No positive edges</p>}</section></div></figure>}
+</section>}
+ <section aria-label="Source inspector"> {current&&<><h3>{source} · {ref(sel)}</h3><blockquote>{current.text.split(/([\p{L}\p{N}]+)/u).map((part,i)=>queryWords.has(part.toLowerCase())?<mark key={i}>{part}</mark>:part)}</blockquote>{!hosted&&<button onClick={()=>openAtlasDraft(current.text,ref(sel))}>Open passage in Vector Warp</button>}
  <div className="foundry-actions">{current.concepts.map(t=><button key={t} onClick={()=>query(t)}>{t}</button>)}</div>
  <details><summary>Related passages by TF–IDF cosine</summary>{peers.map(r=><p key={r.id}><button onClick={()=>select(r.id)}>{ref(r.id)}</button> · {r.score.toFixed(3)} · {passages[r.id].text}</p>)}</details>
  <label>Evidence assessment<select value={marks[sel]??''} onChange={e=>mark({...marks,[sel]:e.target.value})}><option value="">Unassessed</option><option>Supports</option><option>Conflicts</option><option>Open question</option></select></label>
  <button onClick={()=>select(ranked[(ranked.findIndex(r=>r.id===sel)+1)%ranked.length].id)}>Next in reading sequence</button>
  <details><summary>Evidence comparison</summary>{Object.entries(marks).filter(([,v])=>v).map(([id,v])=><p key={id}>{v} (reader assessment) · {ref(+id)} · {passages[+id].text}</p>)}</details></>}
+ </section></div>
  {rows===sample&&<details><summary>Timed comprehension and decision task</summary><p>Identify the row reporting increased pressure. Decide whether the two water records establish a contradiction.</p>
  <button disabled={start!==null} onClick={()=>{setStudy(null);setStart(performance.now());setEffort(null);setAnswer('');setDecision('')}}>Start reading task</button>
  {start!==null&&<><label>Evidence row<input value={answer} onChange={e=>setAnswer(e.target.value)} maxLength={3}/></label><label><span id="reader-decision-label">Decision</span><select aria-labelledby="reader-decision-label" value={decision} onChange={e=>setDecision(e.target.value)}><option value="">Choose</option><option>Contradiction established</option><option>Sites and times need alignment</option></select></label>

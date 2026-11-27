@@ -163,3 +163,7 @@ No scoring or tolerance adjustment followed the failure. This gate blocks releas
 ## Numerical recovery · 27 November 2026 IST
 
 65/65 Python tests. Three fresh processes each repeated the original case 100 times, producing SHA-256 8b6ef4fff543b87a28aed85a6a10d62188676476c2386cb681d71e243bb3230e. All four real Chrome exports passed exact CLI replay, including two blocked configurations. All 13 frozen checksums and all 16 original reports verified. [Diagnosis and verification](docs/ascension/numerical-recovery/README.md).
+
+## CORTEX · 27 November 2026 22:28 IST
+
+Link collection, relationships and highlighted evidence. Focused Chrome interaction passed against the local feature checkout.

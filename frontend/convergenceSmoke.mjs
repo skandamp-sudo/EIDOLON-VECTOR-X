@@ -11,6 +11,7 @@ try {
  if(check==='all'||check==='cortex'){
   await page.getByLabel('Research priority').fill('pressure')
   await page.getByRole('button',{name:'Row 1 · offset 0'}).first().click()
+  assert.equal(await page.getByLabel('Source inspector').locator('blockquote mark').first().innerText(),'pressure')
   await page.getByLabel('Evidence assessment').selectOption('Supports')
   await page.getByText('Evidence comparison',{exact:true}).click()
   await page.getByText(/Supports \(reader assessment\)/).waitFor()
