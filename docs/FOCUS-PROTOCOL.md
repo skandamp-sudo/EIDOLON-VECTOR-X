@@ -7,3 +7,5 @@ Use one-based source row IDs, binary relevance judgments and the same corpus, qu
 Record per-query Recall@K, nDCG@K, rank movement, missed positives, abstention and endpoint geometry where available. A release rule applies to each labeled task individually. When a required measurement is unavailable, the gate blocks. A passing operator-defined rule makes no claim about unseen queries, human meaning or customer demand.
 
 Engineering fixtures exercise exact matches, out-of-vocabulary queries, incomplete indexes, conflicting directions, retrieval regressions, gate failures and report replay. Keep settings fixed for these checks. Independent scientific work requires a separate preregistration and unseen family-separated data. The frozen SciFact and QASPER protocols and records are outside this workflow.
+
+Unlabeled previews display rankings and block the gate. Their recall and nDCG are null and they are excluded from labeled means. The implementation records improvements, regressions, mixed changes and unchanged results at an absolute tolerance of 1e-12. The report includes full ranking orders for all five methods and moved row IDs for the selected pair.

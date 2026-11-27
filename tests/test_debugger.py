@@ -77,6 +77,26 @@ class RetrievalDebuggerTests(unittest.TestCase):
         self.assertFalse(r["tasks"][0]["gate_reasons"])
         self.assertIn("Recall below minimum",r["tasks"][1]["gate_reasons"])
 
+    def test_unlabeled_preview_has_ranks_and_null_metrics(self):
+        report = self.report(tasks=[dict(query="telescope light", relevant=[])])
+        task = report["tasks"][0]
+        self.assertTrue(task["methods"]["dense"]["order"])
+        self.assertIsNone(task["methods"]["dense"]["recall"])
+        self.assertIsNone(report["summary"]["dense"]["ndcg"])
+        self.assertEqual(report["changes"], {"unlabeled": 1})
+        self.assertEqual(report["gate"], "BLOCK")
+
+    def test_rank_regression_and_geometric_violation_block(self):
+        report = self.report(documents=[dict(id=1,text="telescope light"),dict(id=2,text="xylolith")],
+                             tasks=[dict(query="xylolith",relevant=[2])],
+                             settings={"baseline":"fusion","candidate":"dense"})
+        self.assertEqual(report["changes"], {"regressed":1})
+        self.assertEqual(report["tasks"][0]["rank_changes"],[dict(id=2,baseline=1,candidate=None)])
+        self.assertIn("Ranking metric regressed",report["tasks"][0]["gate_reasons"])
+        geometric = self.report(settings={"candidate":"unconstrained","min_cosine":1})
+        self.assertEqual(geometric["summary"]["unconstrained"]["violations"],1)
+        self.assertIn("Endpoint violates a geometric limit",geometric["tasks"][0]["gate_reasons"])
+
     def test_public_debugger_rejects_custom_documents(self):
         host,origin="debug-demo.up.railway.app","https://debug-demo.vercel.app"
         with patch.dict("os.environ", RAILWAY_PUBLIC_DOMAIN=host,VECTOR_X_FRONTEND_ORIGIN=origin):

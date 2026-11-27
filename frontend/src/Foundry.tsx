@@ -1,3 +1,4 @@
+import {lazy, Suspense} from 'react'
 import Cortex from './convergence/Cortex'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Database, Upload } from 'lucide-react'
@@ -10,6 +11,8 @@ import type { Topic, XYZ } from './explore'
 import { downloadFile, exportNeighbors, nearest, quality, requestData } from './foundryData'
 import type { Dataset } from './foundryData'
 import './foundry.css'
+
+const Studio = lazy(() => import('./Studio'))
 
 type Batch = { model: string; model_id: string; points: (Omit<FoundryPoint, 'row'> | null)[] }
 type Steering = { original: number[]; steered: number[]; trajectory: XYZ[]; model_id: string }
@@ -198,6 +201,7 @@ export default function Foundry({ digest }: { digest?: string }) {
     } catch (e) { if (!controller.signal.aborted) { resetIndex(); setNote(message(e)) } }
     finally { if (active.current === controller) { active.current = null; setBusy(null) } }
   }
+  const [debug,showDebug]=useState(false)
   const [reader,showReader]=useState(false)
   const fingerprint = library.current.get(datasetKey)?.fingerprint ?? ''
   function exportQuality() {
@@ -243,6 +247,10 @@ export default function Foundry({ digest }: { digest?: string }) {
     </section></>}
     <div className="foundry-feedback" role="status">{!digest ? 'Embedding runtime unavailable.' : note}
       {busy && <button onClick={cancel}>Cancel operation</button>}</div>
+    {data && digest && stats && <section className="panel foundry-panel"><h2>Retrieval debugging</h2>
+      <p>Use the mapped text and original row IDs. Lexical retrieval can include records the dense encoder cannot represent.</p>
+      {stats.indices.length>256?<p>The debugger accepts up to 256 eligible documents. Import a smaller collection to use this workflow.</p>:<button disabled={!stats.indices.length} onClick={()=>showDebug(!debug)}>{debug?'Close retrieval debugger':'Debug this dataset'}</button>}
+      {debug && stats.indices.length>0 && stats.indices.length<=256 && <Suspense fallback={<p>Loading debugger…</p>}><Studio key={fingerprint+':'+column} modelId={digest} imported={{fileHash:fingerprint,column:data.columns[column],documents:stats.indices.map(i=>({id:i+1,text:data.rows[i][column]}))}}/></Suspense>}</section>}
     {data&&<><button onClick={()=>showReader(v=>!v)}>{reader?'Close research reader':'Open research reader'}</button>{reader&&<Cortex key={fingerprint+column} source={name} rows={data.rows.map(r=>r[column])}/>}</>}
     {data && points.length > 0 && digest === completedDigest && <Retrieval key={datasetKey + column + completedDigest} fingerprint={fingerprint} data={data} points={points} column={column} metadata={metadata} digest={completedDigest}/>}
   </section>

@@ -28,7 +28,7 @@ class Document(Strict):
 
 class Task(Strict):
     query: str = Field(min_length=1, max_length=400)
-    relevant: list[Row] = Field(min_length=1, max_length=256)
+    relevant: list[Row] = Field(max_length=256)
 
 
 class Settings(Strict):
@@ -87,7 +87,7 @@ def measure(order, relevant, k):
     hits = gold.intersection(top)
     dcg = sum(1/math.log2(rank+2) for rank, row in enumerate(top) if row in gold)
     ideal = sum(1/math.log2(rank+2) for rank in range(min(k, len(gold))))
-    return dict(order=order, recall=len(hits)/len(gold), ndcg=dcg/ideal,
+    return dict(order=order, recall=len(hits)/len(gold) if gold else None, ndcg=dcg/ideal if gold else None,
                 missed=sorted(gold-hits), abstained=not order)
 
 
@@ -134,13 +134,22 @@ def score_task(atlas, idx, lexical, task, form):
     orders["fusion"] = fuse(orders["bm25"], orders["dense"])
     methods = {m: {**measure(order, task.relevant, cfg.k), "geometry": geometry[m]} for m, order in orders.items()}
     base, cand = methods[cfg.baseline], methods[cfg.candidate]
-    delta = {key: cand[key]-base[key] for key in ("recall", "ndcg")}
-    reasons = []
-    if cand["recall"] < cfg.min_recall:
+    delta = {key: cand[key]-base[key] if task.relevant else None for key in ("recall", "ndcg")}
+    change = "unlabeled"
+    if task.relevant:
+        gain = max(delta.values()) > 1e-12
+        loss = min(delta.values()) < -1e-12
+        change = "mixed" if gain and loss else "improved" if gain else "regressed" if loss else "unchanged"
+    old = {row: rank for rank, row in enumerate(base["order"], 1)}
+    new = {row: rank for rank, row in enumerate(cand["order"], 1)}
+    movements = [{"id": row, "baseline": old.get(row), "candidate": new.get(row)}
+                 for row in sorted(old.keys() | new.keys()) if old.get(row) != new.get(row)]
+    reasons = [] if task.relevant else ["Relevance judgments required"]
+    if task.relevant and cand["recall"] < cfg.min_recall:
         reasons.append("Recall below minimum")
-    if cand["ndcg"] < cfg.min_ndcg:
+    if task.relevant and cand["ndcg"] < cfg.min_ndcg:
         reasons.append("nDCG below minimum")
-    if cfg.block_regressions and min(delta.values()) < -1e-12:
+    if task.relevant and cfg.block_regressions and min(delta.values()) < -1e-12:
         reasons.append("Ranking metric regressed")
     if cfg.block_abstentions and cand["abstained"]:
         reasons.append("Candidate abstained")
@@ -150,7 +159,7 @@ def score_task(atlas, idx, lexical, task, form):
         elif cand["geometry"]["violated"]:
             reasons.append("Endpoint violates a geometric limit")
     return dict(query=task.query, relevant=task.relevant, methods=methods, delta=delta, gate_reasons=reasons,
-                governor_reason=reason)
+                governor_reason=reason, change=change, rank_changes=movements)
 
 
 def run(atlas, form):
@@ -176,8 +185,9 @@ def run(atlas, form):
     for method in METHODS:
         results = [t["methods"][method] for t in tasks]
         measured = [r["geometry"] for r in results if r["geometry"] is not None]
-        summary[method] = dict(recall=sum(r["recall"] for r in results)/len(results),
-                               ndcg=sum(r["ndcg"] for r in results)/len(results),
+        labeled = [r for r in results if r["recall"] is not None]
+        summary[method] = dict(labeled=len(labeled), recall=sum(r["recall"] for r in labeled)/len(labeled) if labeled else None,
+                               ndcg=sum(r["ndcg"] for r in labeled)/len(labeled) if labeled else None,
                                abstentions=sum(r["abstained"] for r in results), geometry_measured=len(measured),
                                violations=sum(g["violated"] for g in measured) if measured else None)
     return dict(protocol="focus-retrieval-v1", evidence_scope="Exploratory operator labels / engineering verification",
@@ -185,5 +195,6 @@ def run(atlas, form):
                              "Operator release gate only; independent retrieval effectiveness and commercial demand unvalidated"],
                 dataset_sha256=fingerprint, model_id=form.model_id, documents=len(rows), represented=len(idx.ids),
                 ranking_policy=POLICY, rrf_constant=60, bm25={"k1":1.2,"b":.75,"positive_matches_only":True},
+                changes=dict(Counter(t["change"] for t in tasks)),
                 gate="BLOCK" if any(t["gate_reasons"] for t in tasks) else "PASS", summary=summary, tasks=tasks,
                 replay=form.model_dump())

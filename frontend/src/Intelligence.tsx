@@ -12,7 +12,7 @@ type Entry = {direction: Direction; validation?: Concept['validation']}
 const modes: Mode[] = ['original','naive','learned','locked']
 
 const storageKey = 'vector-x.learned-directions.v1'
-function savedDirections(id: string): Direction[] {
+export function savedDirections(id: string): Direction[] {
   const raw = localStorage.getItem(storageKey)
   if (!raw) return []
   if (raw.length > 32768) throw new Error('Saved direction data exceeds the limit.')

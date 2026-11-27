@@ -4,6 +4,10 @@
 
 The feature branch starts at OBSIDIAN production commit `3356e97e0db83a5f2f689c4b04c48995dc374ee8`. Eight focused backend checks passed for the five-method debugger, missed labels, abstentions, stable ties, replay, per-task gates and hosted dataset restrictions. The scoring rules and engineering evidence boundary are in [FOCUS protocol v1](docs/FOCUS-PROTOCOL.md).
 
+The engine milestone is `bbaa35be97efe4f09f9de8d02200e46bcf48ac3c`. The integrated workflow passed ten focused backend tests and the desktop/390px Chrome scenario. The browser imported a synthetic CSV, mapped its text, judged a query, exported the full comparison and reproduced the result exactly on loopback. The standalone replay command independently matched a synthetic report. TypeScript and the hosted-mode build passed. All 13 frozen evidence hashes matched.
+
+In the three-document engineering case, the only judged relevant passage contained the literal word “xylolith”. At K=3 BM25 and fusion scored 1.0 on both recall and nDCG. Dense, unconstrained and locked retrieval abstained and scored 0.0. A separate threshold test blocked a missed expected document, and an unlabeled preview produced null relevance metrics and blocked the gate. These observations verify handling of a known vocabulary gap. Search quality on independent user tasks and willingness to pay remain unmeasured.
+
 ## Obsidian production release
 
 On 27 November 2026, PR #2 merged approved head `135f6777bb25eb0ddf5b3feb1080b3ef168ac25e` into main at `fd4bae9c1ecf3c3794caca361e6a86d1e843ba37`, retaining its milestone commits. GitHub reported both PR checks successful. Vercel and Railway reported successful deployments for the merge. Verification used the stable public domain. [PR #2](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/2) · [Mission Control](https://eidolon-vector-x.vercel.app/#mission-control)
