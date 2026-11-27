@@ -36,11 +36,13 @@ class AtlasTests(unittest.TestCase):
         self.assertAlmostEqual(r["explained_variance"], self.atlas.pca.explained_variance_ratio_.sum())
         self.assertAlmostEqual(r["neighbor_overlap"], len(set(r["after"]) & set(r["before"])) / 3)
         self.assertAlmostEqual(r["retained_cosine"], np.dot(original, r["steered"]))
+        self.assertAlmostEqual(r["displacement"], np.linalg.norm(np.subtract(original, r["steered"])))
 
     def test_zero_preserves_ranking_and_vector(self):
         r = post(8000, strength=0.0)
         self.assertEqual(r["original"], r["steered"])
         self.assertEqual(r["before"], r["after"])
+        self.assertEqual(r["displacement"], 0.0)
         np.testing.assert_allclose(r["trajectory"], np.tile(r["trajectory"][0], (25,1)), atol=1e-12)
 
     def test_signed_control_changes_direction_in_fixed_frame(self):
@@ -58,6 +60,15 @@ class AtlasTests(unittest.TestCase):
 
     def test_new_text_changes_original(self):
         self.assertNotEqual(post()["original"], post(text="forest roots in cold soil")["original"])
+
+    def test_each_concept_uses_its_own_annotated_examples(self):
+        for topic in self.atlas.directions:
+            with self.subTest(topic=topic):
+                run = post(8000, target=topic)
+                mask = self.atlas.labels == topic
+                difference = self.atlas.vectors[mask].mean(0) - self.atlas.vectors[~mask].mean(0)
+                expected = np.array(run["original"]) + run["strength"] * difference / np.linalg.norm(difference)
+                np.testing.assert_allclose(run["steered"], expected / np.linalg.norm(expected))
 
     def test_input_errors(self):
         for invalid in [{"text": ""}, {"text": "qzxqzx"}, {"text":"a"*401}, {"target":"unknown"},

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import { chromium } from 'playwright-core'
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true })
@@ -20,6 +21,14 @@ try {
   assert.equal(await page.locator('.star').count(), 24)
   assert.equal(await page.locator('.rank-panel li').count(), 6)
   await page.screenshot({ path: '../.runtime/atlas.png', fullPage: true })
+  await page.getByText('Search corpus points', {exact:true}).click()
+  await page.getByLabel('Document text or topic').fill('orchestra')
+  await page.getByRole('button', {name:/Acoustics.*orchestra tunes/}).click()
+  await page.locator('.doc-inspect').getByText(/The orchestra tunes/).waitFor()
+  await page.getByText('Semantic X-Ray · query vectors').click()
+  assert.equal(await page.locator('.inspection tbody tr').count(), 8)
+  await page.getByText('Semantic X-Ray · query vectors').click()
+  await page.getByText('Search corpus points', {exact:true}).click()
   const before = await page.locator('.before li button').allTextContents()
   const after = await page.locator('.after li button').allTextContents()
   assert.notDeepEqual(before, after)
@@ -75,6 +84,78 @@ try {
   await page.setViewportSize({ width: 390, height: 844 })
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
   await page.screenshot({ path: '../.runtime/mobile.png', fullPage: true })
+  await page.getByRole('link', {name:'Data Foundry'}).click()
+  const external = []
+  const monitor = req => { if (new URL(req.url()).hostname !== 'localhost') external.push(new URL(req.url()).origin) }
+  page.on('request', monitor)
+  const upload = page.getByLabel('Dataset file')
+  const file = (name, body) => ({name, mimeType:'application/octet-stream', buffer:Buffer.from(body)})
+  await upload.setInputFiles(file('broken.csv', 'text,meta\n"unclosed'))
+  await page.getByText(/Malformed file/).waitFor()
+  const records = [
+    'label,caption,source', 'A,telescope star light,=1+1', 'B,ocean deep water,label',
+    'C,forest roots soil,label', 'D,orchestra concert hall,label', 'A,telescope star light,=1+1',
+    'E,,missing', 'F,zzqxzz,unknown',
+  ]
+  const drop = await page.evaluateHandle(csv => {
+    const transfer = new DataTransfer()
+    transfer.items.add(new File([csv], 'review-fixture.csv', {type:'text/csv'}))
+    return transfer
+  }, records.join('\n'))
+  await page.locator('.drop-zone').dispatchEvent('drop', {dataTransfer:drop})
+  await page.getByLabel('Text column').selectOption('1')
+  await page.getByLabel('source', {exact:true}).check()
+  await page.getByText('1 missing text', {exact:true}).waitFor()
+  await page.getByText('1 duplicate records', {exact:true}).waitFor()
+  await page.getByRole('button', {name:'Generate embeddings'}).click()
+  await page.getByText('4 embedded points', {exact:true}).waitFor()
+  await page.getByText('5 / 5 processed · 1 unrepresented').waitFor()
+  const csvButton = page.getByRole('button', {name:'Export retrieval CSV'})
+  const output = page.locator('.foundry .rank-pair ol')
+  await output.nth(1).waitFor()
+  const initialRanks = await output.nth(1).textContent()
+  await page.getByRole('button', {name:'Reset steering'}).click()
+  await page.waitForFunction(() => {
+    const lists = [...document.querySelectorAll('.foundry .rank-pair ol')]
+    return lists.length === 2 && lists[0].textContent === lists[1].textContent
+  })
+  assert.notEqual(await output.nth(1).textContent(), initialRanks)
+  const downloadEvent = page.waitForEvent('download')
+  await csvButton.click()
+  const download = await downloadEvent
+  const exported = await readFile(await download.path(), 'utf8')
+  assert.ok(exported.includes('"' + "'" + '=1+1"'))
+  await download.delete()
+  await page.screenshot({path:'../.runtime/foundry-mobile.png',fullPage:true})
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
+  await page.setViewportSize({width:1400,height:920})
+  await page.screenshot({path:'../.runtime/foundry.png',fullPage:true})
+  await page.getByRole('button', {name:'Delete dataset'}).click()
+  await page.getByText('Dataset deleted from this view.').waitFor()
+  assert.equal(await page.getByRole('heading', {name:'Dataset point cloud'}).count(), 0)
+  const larger = ['text', ...Array.from({length:130}, (_,i) => 'forest roots '+i)].join('\n')
+  await upload.setInputFiles(file('cancel.csv', larger))
+  let batches = 0
+  let release
+  const hold = new Promise(resolve => { release = resolve })
+  await page.route('**/api/v1/foundry/embed', async route => {
+    batches++
+    if (batches === 2) { await hold; await route.abort().catch(() => {}); return }
+    await route.continue()
+  })
+  await page.getByRole('button', {name:'Generate embeddings'}).click()
+  await page.getByText(/64 \/ 130 processed/).waitFor()
+  await page.getByRole('button', {name:'Cancel operation'}).click()
+  release()
+  await page.getByText('Operation cancelled.').waitFor()
+  assert.equal(await page.getByRole('heading', {name:'Dataset point cloud'}).count(), 0)
+  await page.unroute('**/api/v1/foundry/embed')
+  await page.getByRole('link', {name:'Atlas',exact:true}).click()
+  await page.getByRole('link', {name:'Data Foundry'}).click()
+  await page.getByRole('button', {name:'Choose file'}).waitFor()
+  assert.equal(await page.getByText('cancel.csv', {exact:true}).count(), 0)
+  page.off('request', monitor)
+  assert.deepEqual(external, [])
   assert.deepEqual(errors, [])
   console.log('Browser smoke passed: live samples, controls, module dialog, navigation, outage, recovery and mobile layout.')
 } finally {

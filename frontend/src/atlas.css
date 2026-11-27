@@ -29,3 +29,25 @@ background-image:radial-gradient(ellipse at 50% 47%,#17243770,transparent 68%),r
 @media(max-width:900px){.atlas-layout{grid-template-columns:minmax(0,1.6fr) minmax(240px,1fr)}.atlas-intro{margin-bottom:16px}.compare-scores{gap:10px}.compare-scores b{display:block;margin:4px 0 0}.science-strip{padding:12px;gap:6px}.science-strip>div+div{padding-left:8px}}
 @media(max-width:680px){.atlas-layout,.rank-pair{grid-template-columns:1fr}.atlas-intro>p{font-size:.92rem}.galaxy{height:auto;min-height:205px}.view-tools{bottom:5px;right:5px}.view-tools button{width:24px;height:24px}.cluster-name{font-size:16px}.axis-name{font-size:12px}.science-strip{margin-top:7px}.science-strip b{font-size:.89rem}.science-strip span{font-size:.74rem}.doc-inspect{flex-wrap:wrap}.doc-inspect>div:nth-child(2){flex:1}.compare-scores{width:100%;margin-left:30px}.compare-scores b{display:inline;margin-left:4px}.topbar nav{justify-content:space-between;gap:4px}.topbar nav a{font-size:.8rem;gap:4px}}
 @media(prefers-reduced-motion:reduce){.trajectory{animation:none}}
+
+.science-strip { grid-template-columns: 1.2fr 1.15fr 1fr 1fr; }
+.coordinates { color: var(--muted); font: .75rem/1.8 var(--mono); }
+.inspection-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; align-items: start; margin: -12px 0 24px; }
+.inspection { min-width: 0; padding: 12px 16px; border: 1px solid var(--line); border-radius: 7px; background: #11171e; }
+.inspection summary { font-size: .9rem; color: #c6d5df; }
+.inspection label, .inspection caption { display: block; margin: 14px 0 7px; color: var(--muted); font-size: .82rem; }
+.inspection caption { display: table-caption; text-align: left; }
+.inspection input { width: 100%; padding: 7px 10px; background: #0c141a; border: 1px solid #44535f; border-radius: 4px; color: inherit; font: inherit; }
+.inspection p { margin-top: 9px; color: var(--muted); font-size: .82rem; }
+.inspection ul { max-height: 13rem; overflow: auto; margin: 6px 0 0; padding: 0; list-style: none; }
+.inspection button { width: 100%; padding: 9px 6px; text-align: left; background: transparent; border: 0; border-top: 1px solid var(--line); font-size: .85rem; }
+.inspection button[aria-pressed=true] { background: #203238; }
+.inspection button small { display: block; margin-bottom: 4px; color: var(--cyan); }
+.inspection table { width: 100%; border-collapse: collapse; font: .8rem var(--mono); }
+.inspection td, .inspection th { text-align: right; padding: 6px 2px; border-bottom: 1px solid var(--line); }
+.inspection th:first-child { text-align: left; }
+@media (max-width: 900px) {
+  .science-strip { grid-template-columns: 1fr 1fr; }
+  .science-strip > div:nth-child(3) { border: 0; padding-left: 0; }
+}
+@media (max-width: 680px) { .inspection-tools { grid-template-columns: 1fr; } }

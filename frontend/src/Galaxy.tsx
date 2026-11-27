@@ -24,8 +24,8 @@ export default function Galaxy({ run, selected, select }: { run: Run | null; sel
     setView(v => ({...v, yaw: v.yaw+x, pitch: Math.max(-1.5,Math.min(1.5,v.pitch+y))}))
   }
   function zoom(step:number) { setView(v => ({...v,zoom: Math.min(1.65,Math.max(.65,v.zoom+step))})) }
-  return <section className="atlas-plot panel" aria-label="Semantic galaxy">
-    <div className="panel-head"><div className="panel-title"><Orbit size={19}/><h2>Semantic galaxy</h2></div><span className="frame-label">PCA · 3D</span></div>
+  return <section className="atlas-plot panel" aria-label="Semantic Universe">
+    <div className="panel-head"><div className="panel-title"><Orbit size={19}/><h2>Semantic Universe</h2></div><span className="frame-label">PCA · 3D</span></div>
     <div className="space"><svg viewBox="0 0 720 364" className="galaxy" role="group" aria-label="Rotatable three-dimensional PCA map. Arrow keys orbit the camera." tabIndex={0}
       onKeyDown={e => {const directions:Record<string,number[]>={ArrowLeft:[-.15,0],ArrowRight:[.15,0],ArrowUp:[0,-.15],ArrowDown:[0,.15]};if(directions[e.key]){e.preventDefault();const [x,y]=directions[e.key];turn(x,y)}}}
       onPointerDown={e => {drag.current=[e.clientX,e.clientY];moved.current=false}}

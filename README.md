@@ -14,6 +14,8 @@ How does moving a query toward a concept change what it retrieves? VECTOR-X embe
 flowchart LR
     Corpus[24 annotated sentences] --> Fit[TF-IDF + truncated SVD]
     Fit --> Index[8D unit-vector index]
+    File[Local dataset] --> Parse[Validate and map rows]
+    Parse --> Encode
     Text[Query text] --> Encode[Frozen encoder]
     Fit --> Encode
     Index --> Directions[Four centroid differences]
@@ -26,6 +28,8 @@ flowchart LR
     Warp --> PCA
     PCA --> UI[Interactive atlas]
     Rank --> UI
+    Encode --> Private[Transient imported index]
+    Private --> UI
 ```
 
 ## Mathematics
@@ -36,11 +40,20 @@ The trained CPU baseline uses TF–IDF and seeded truncated SVD to produce a uni
 
 | Feature | Status | Operator capability |
 | --- | --- | --- |
-| Semantic Universe | IN PROGRESS | Orbit, zoom, reset and select actual corpus points |
-| Vector Warp | IN PROGRESS | Signed control, animated trajectory and cosine |
-| Semantic X-Ray | IN PROGRESS | Compare full-space top-three neighbors |
-| Concept DNA preview | IMPLEMENTED | Steer toward or away from astronomy, ocean, acoustics or botany |
-| Mission Control | IMPLEMENTED | Inspect live model identity, dimensions and API availability |
+| Semantic Universe | VERIFIED | Search, orbit, zoom, reset and select actual corpus points |
+| Vector Warp | VERIFIED | Signed control, animated trajectory, cosine and L2 displacement |
+| Semantic X-Ray | VERIFIED | Inspect every query coefficient and compare top-three neighbors |
+| Concept DNA preview | VERIFIED | Steer toward or away from astronomy, ocean, acoustics or botany |
+| Mission Control | VERIFIED | Inspect live model identity, dimensions and API availability |
+| Data Foundry | VERIFIED | Import local files, map columns, inspect fixed PCA coordinates, steer and export retrieval |
+
+## Import a dataset
+
+Open **Data Foundry** and drop a UTF-8 CSV (header row), JSON (array of flat objects), JSONL (one object per line) or TXT (one record per line). Choose a text field and any metadata, then generate embeddings. The progress counter advances after each completed batch of up to 64. Select an embedded row, change its direction and compare the ranked results.
+
+Imports accept up to 10,000,000 bytes, 5,000 records, 32 columns and 4,096 characters per cell. Empty text and exact duplicate parsed records are skipped. Unknown-only records are counted as unrepresented. The frozen encoder and PCA frame match the calibration atlas. The original and steered rankings include the source row.
+
+Data passes through a loopback API with one active Foundry operation per worker. Only the active view retains the index. Delete, reload or leave the view to release it. Cancelling discards partial results and prevents subsequent batches. An in-flight bounded server operation may finish. CSV export creates a local file and quotes formula-leading text. Delete exported files separately.
 
 ## Run locally
 
@@ -56,9 +69,9 @@ Start installs missing locked dependencies, fits the local model and enables Vit
 
 ## Three-phase roadmap
 
-1. **IN PROGRESS · Interactive baseline.** Recover and verify the local steering workbench. The recovery run passed 18 model and live HTTP tests.
-2. **PLANNED · Learned control.** Trainable directions, Semantic Lock, constrained and multi-concept steering, Drift Guardian and Parallel Universes.
-3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration.
+1. **VERIFIED · Interactive baseline.** 27 model, parser and HTTP tests passed, plus TypeScript, Vite build and desktop/mobile Chrome smoke. [Phase 1 evidence and demonstration](REVIEW_PHASE_1.md)
+2. **PLANNED · Learned control.** Trainable directions, Semantic Lock, constrained and multi-concept steering, Drift Guardian and Parallel Universes. Foundry roadmap includes dataset fingerprints, model-keyed caching, dataset management, quality reports, learned concepts, multi-model comparison and vector export.
+3. **PLANNED · Evaluation and delivery.** Held-out comparisons, ablations, stress tests, projection fidelity, Evidence Vault, Vercel/Railway deployment and final demonstration. Foundry adds split management and reproducible experiment exports. PDF/NPY imports are optional.
 
 ## Scientific limits
 

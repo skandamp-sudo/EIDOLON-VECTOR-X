@@ -41,6 +41,7 @@ class Result(BaseModel):
     before: list[int]
     after: list[int]
     retained_cosine: float
+    displacement: float
     explained_variance: float
     neighbor_overlap: float
 
@@ -60,17 +61,21 @@ class Atlas:
             delta = self.vectors[mask].mean(axis=0) - self.vectors[~mask].mean(axis=0)
             self.directions[topic] = delta / np.linalg.norm(delta)
 
-    def explore(self, request: Query) -> Result:
-        original = np.array(self.model.encode(request.text))
-        steps = np.linspace(0, request.strength, 25)[:, None]
-        path = original + steps * self.directions[request.target]
+    def steering_path(self, original: np.ndarray, target: Topic, strength: float) -> np.ndarray:
+        steps = np.linspace(0, strength, 25)[:, None]
+        path = original + steps * self.directions[target]
         norms = np.linalg.norm(path, axis=1, keepdims=True)
         if np.any(norms < 1e-10):
             raise ValueError("The requested path crosses an undefined vector")
         path /= norms
         path[0] = original
-        if request.strength == 0:
+        if strength == 0:
             path[:] = original
+        return path
+
+    def explore(self, request: Query) -> Result:
+        original = np.array(self.model.encode(request.text))
+        path = self.steering_path(original, request.target, request.strength)
         steered = path[-1]
         before = np.clip(self.vectors @ original, -1, 1)
         after = np.clip(self.vectors @ steered, -1, 1)
@@ -86,5 +91,6 @@ class Atlas:
                       documents=documents, trajectory=self.pca.transform(path).tolist(),
                       before=top_before, after=top_after,
                       retained_cosine=float(np.clip(original @ steered, -1, 1)),
+                      displacement=float(np.linalg.norm(steered - original)),
                       explained_variance=float(self.pca.explained_variance_ratio_.sum()),
                       neighbor_overlap=len(set(top_before) & set(top_after)) / 3)

@@ -1,0 +1,30 @@
+.foundry { margin-bottom: 24px; }
+.foundry h2, .foundry p, .foundry small { overflow-wrap: anywhere; }
+.foundry p, .foundry small { color: var(--muted); line-height: 1.55; }
+.drop-zone { display: grid; justify-items: center; gap: 12px; padding: clamp(30px,6vw,76px) 20px; border: 1px dashed #51746f; background: #101b20; border-radius: 10px; text-align: center; }
+.drop-zone svg { color: var(--cyan); }
+.drop-zone.over { background: #1a3438; }
+.foundry-panel { padding: clamp(14px,2vw,24px); margin-bottom: 14px; min-width: 0; }
+.foundry-grid { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); gap: 16px; margin: 15px 0; align-items: start; }
+.foundry label, .foundry legend, .foundry caption { display: block; color: #bdcbd4; font-size: .85rem; margin: 10px 0 6px; }
+.foundry select { width: 100%; padding: 9px; background: #18212a; border: 1px solid #44505b; border-radius: 4px; }
+.foundry fieldset { margin: 0; padding: 0; border: 0; }
+.foundry fieldset label { display: inline-flex; align-items: center; gap: 4px; margin-right: 12px; }
+.foundry input { accent-color: var(--cyan); }
+.foundry input[type=range] { width: 100%; }
+.foundry button:not(.encode) { color: #c7d7dc; border: 1px solid #3b4954; background: #19232c; border-radius: 4px; padding: 5px 9px; font-size: .82rem; }
+.foundry-stats,.foundry-actions,.foundry-feedback { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.foundry-stats { border-block: 1px solid var(--line); padding: 12px 0; gap: 20px; color: var(--muted); }
+.foundry-stats b,.foundry li b { font-family: var(--mono); color: var(--cyan); }
+.preview-scroll { overflow: auto; max-height: 290px; }
+.foundry table { border-collapse: collapse; width: 100%; font-size: .86rem; }
+.foundry th,.foundry td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; min-width: 6rem; }
+.foundry caption { text-align: left; display: table-caption; }
+.foundry-panel p { margin: 12px 0; font-size: .88rem; }
+.foundry-panel .rank-pair li { margin: 6px 0; overflow-wrap: anywhere; }
+.foundry-feedback { margin: 12px 0; color: #abdfd3; }
+.foundry-cloud svg { width: 100%; display: block; background: #0c151c; touch-action: none; }
+.foundry-cloud small { font: .8rem var(--mono); }
+.foundry progress { accent-color: var(--cyan); }
+@media(max-width:800px) { .foundry-grid { grid-template-columns: 1fr; } }
+@media(max-width:680px) { .topbar nav { flex-wrap: wrap; } .foundry .section-title { align-items: flex-start; gap: 8px; } }
