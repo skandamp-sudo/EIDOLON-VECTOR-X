@@ -36,6 +36,19 @@ try {
   await page.getByLabel('Agent interaction mode').selectOption('Automatic preview')
   await page.getByRole('button',{name:'Undo selection'}).click()
  }
+ if(check==='all'||check==='morph'){
+  await step.selectOption('3')
+  const opt=page.getByLabel('Learn from this tab')
+  assert.equal(await opt.isChecked(),false)
+  await opt.check()
+  await page.getByRole('button',{name:'Record preference'}).click()
+  await page.getByRole('button',{name:'Accept shortcut'}).click()
+  await page.getByRole('button',{name:'Shortcut to CORTEX'}).waitFor()
+  await page.getByRole('button',{name:'Undo adaptation'}).click()
+  assert.equal(await page.getByRole('button',{name:'Shortcut to CORTEX'}).count(),0)
+  await page.getByRole('button',{name:'Delete history and reset learning'}).click()
+  assert.equal(await opt.isChecked(),false)
+ }
  // Additional module checks
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}

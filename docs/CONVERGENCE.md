@@ -11,3 +11,5 @@ Base f5fc5ee3c963289628a22c0442a743eaf683ac0e. The six domains share one applica
 - SUPPLY replays a bounded one-warehouse simulation and reviews sourced purchase proposals. Six authored order snapshots gave CRD precision and recall 1.0, reactive recall 0, and zero MAE on four dated predictions. Lead times were 5, 3 and 5 simulated days. Field accuracy and supplier timing are unmeasured.
 
 - SYMBIOSIS exposes measured frontier alternatives, editable objectives, pause, abort, rejection and undo. The bounded automatic mode previews one feasible point per sweep. Browser checks exercised control boundaries. Participant completion, trust and perceived control await a human study.
+
+- MORPH ranks optional shortcuts from bounded, opt-in tab interactions. Static and adaptive navigation trials record elapsed time, destination changes, completion and optional mental effort. Chrome exercised learning, acceptance, rollback and deletion. Human usability effects are unmeasured.
