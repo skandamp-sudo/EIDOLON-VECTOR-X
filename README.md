@@ -10,6 +10,8 @@ Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
 Open [Mission Control on localhost](http://localhost:5173/#mission-control) on the `feature/convergence` branch to enter any of the six workspaces. The existing public release remains available on [Vercel](https://eidolon-vector-x.vercel.app). Implementation coverage, reproducible tests and the scientific review queue are in [the Convergence report](docs/CONVERGENCE.md).
 
+[Judge walkthrough and local fallback](docs/JUDGE-WALKTHROUGH.md) · [Independent evaluation instructions](docs/INDEPENDENT-EVALUATION.md)
+
 ## Research question
 
 How does moving a query toward a concept change what it retrieves? VECTOR-X embeds a sentence, ranks a fixed corpus, then lets the operator steer the same query and inspect which documents move up or down.
@@ -147,3 +149,5 @@ Production serves live calibration inference and the recorded four-encoder evide
 - The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
 
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+- The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.

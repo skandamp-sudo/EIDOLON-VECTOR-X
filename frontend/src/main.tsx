@@ -27,12 +27,18 @@ function App() {
   const [index, setIndex] = useState(0)
   const [detail, setDetail] = useState<number | null>(null)
   const dialog = useRef<HTMLDialogElement>(null)
+  const previousPage = useRef(page)
   const sample = data?.samples[index] ?? data?.samples[0]
   useEffect(() => {
     const update = () => setPage(pageFromHash())
     window.addEventListener('hashchange',update)
     return () => window.removeEventListener('hashchange',update)
   }, [])
+  useEffect(() => {
+    document.title = page + ' · EIDOLON VECTOR-X'
+    if (previousPage.current !== page) document.getElementById('workspace')?.focus()
+    previousPage.current = page
+  }, [page])
   useEffect(() => { if (detail !== null) dialog.current?.showModal() }, [detail])
   const moduleList = <div className="module-grid">{modules.map((m,i) => <button className="module" key={m.name} onClick={() => setDetail(i)}>
     <span className={'module-icon tint'+i}><m.icon size={19}/></span><span><strong>{m.name}</strong><small>{m.brief}</small></span><ChevronRight className="disclose" size={15}/>

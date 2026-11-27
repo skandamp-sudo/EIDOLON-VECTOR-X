@@ -1,6 +1,10 @@
 # Build state
 
-## Current Convergence verification
+## Continuation 009 release candidate
+
+The hardening checkpoint is `ad69353`. The final gate includes 49 Python tests, inventory and language fixtures, the separate offline scorer checks, TypeScript, the production build, both original Chrome suites, and a two-context session and keyboard suite. The same source also built in hosted mode against the authorized API origin. Four model probes and frozen evidence verification were performed separately. See [release review](docs/CONVERGENCE.md#continuation-009-release-review). Merge authorization remains outstanding.
+
+## Continuation 008 verification
 
 The source checkpoint `d04e3a7` passed the full local gate on Intel macOS. Vite HMR and Uvicorn's reload supervisor serve ports 5173 and 8000 on loopback. All four existing local research encoder identities matched on an interactive probe. The production frontend and backend passed the previous release walkthrough in desktop Chrome and Pixel 7 emulation. GitHub main remains at `f5fc5ee3c963289628a22c0442a743eaf683ac0e`. The final source and scientific review matrix is in [docs/CONVERGENCE.md](docs/CONVERGENCE.md).
 
@@ -75,3 +79,5 @@ Release 6094410d2238a5bd29f78578d8c6231a2c2ed19e passed 48 Python tests, TypeScr
 - The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
 
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+- The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.

@@ -49,3 +49,17 @@ Open [local Mission Control](http://localhost:5173/#mission-control). The top-le
 - The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
 
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
+
+## Continuation 009 release review
+
+The browser gate covers route changes, history navigation, page reload, keyboard focus, reduced-motion preference, state rollback, backend outage and recovery, cache identity, malformed files and dataset switching. A separate two-context Chrome check verified simulation isolation and opt-in history retention. In one local development sample, 270 preference actions retained 256 entries. Across 32 route changes, the collected JavaScript heap grew from 10,353,172 to 10,960,928 bytes. DOMContentLoaded took 317 ms on that navigation. These are short-run development measurements. Leak freedom, production load capacity and physical-device performance remain unverified.
+
+Native desktop Safari 27.2 displayed Mission Control with a connected API and opened the SUPPLY desk. Safari WebDriver declined a session because remote automation was disabled. Chrome desktop and narrow-width tests provide the broader automated coverage.
+
+Security review covered rendering of user text, filename handling, bounded parsing, CSP-independent React text escaping, CSV formula protection, the hosted route allowlist, actual CORS controls, simulation-only approvals and storage deletion. A contention regression holds one local parser request open, observes a second client receive 429, then retries and confirms each client receives only its own data. The production backend has no dataset registry or upload routes. No production load test was run.
+
+The current Vite pin and 39 operational Python pins were checked against npm and PyPI advisories on 27 November 2026. The registered historical wheel file still contains five packages with reported advisories. Reproduction retains that file. The interactive installation uses the separate patched operational lock. Evidence review verified five SciFact manifest entries and all eight first/repeat QASPER artifact digests. All four live local probes matched the recorded IDs. Both reviewed release tags and the earlier scientific stop remain in effect.
+
+Use the [evaluation handoff](INDEPENDENT-EVALUATION.md) for independent labels and participant collection. Use the [judge guide](JUDGE-WALKTHROUGH.md) for the timed demos, mathematics and fallback. No independent results were collected in this review.
+
+- The release review adds an offline case scorer, paired-study collection procedures, keyboard and long-session regressions, and timed three- and five-minute judge scripts. The test conditions, advisory audit, research checksums and browser coverage are recorded in docs/CONVERGENCE.md. Independent participant and domain effectiveness remains unmeasured.
