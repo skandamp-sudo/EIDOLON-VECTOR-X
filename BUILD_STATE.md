@@ -167,3 +167,7 @@ No scoring or tolerance adjustment followed the failure. This gate blocks releas
 ## CORTEX · 27 November 2026 22:28 IST
 
 Link collection, relationships and highlighted evidence. Focused Chrome interaction passed against the local feature checkout.
+
+## SUPPLY · 27 November 2026 22:36 IST
+
+Compare delivery changes with same-day ledger baseline. Focused Chrome interaction passed against the local feature checkout.

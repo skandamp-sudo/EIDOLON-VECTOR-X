@@ -24,6 +24,11 @@ try {
  }
  if(check==='all'||check==='supply'){
   await step.selectOption('2')
+  const line=page.getByLabel('Scenario comparison').getByRole('row').filter({has:page.getByRole('rowheader',{name:'O1',exact:true})})
+  assert.equal(await line.getByRole('cell').nth(1).innerText(),'0')
+  await page.getByRole('button',{name:'Delay supplier'}).click()
+  assert.equal(await line.getByRole('cell').nth(1).innerText(),'4')
+  await page.getByRole('button',{name:'Reset simulated ledger'}).click()
   await page.getByRole('button',{name:'Replay duplicate'}).click()
   await page.getByText('Duplicate event ID.').waitFor()
   await page.getByRole('button',{name:'Approve simulated PO'}).click()
