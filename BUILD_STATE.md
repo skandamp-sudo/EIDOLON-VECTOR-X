@@ -1,8 +1,21 @@
 # Build state
 
+## Convergence production release
+
+On 27 November 2026, PR #1 merged reviewed head `3cc11e925cba63eb5ec25c165a115f9dd150e8fe` into main with merge commit `9a5f246c98ecf883ac24a68ccf7cfc33a3e76e26`. The first parent is the previous production source, `f5fc5ee3c963289628a22c0442a743eaf683ac0e`. Vercel and Railway reported successful production deployments of the merge.
+
+| Production gate | Observed result |
+| --- | --- |
+| [Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) | Desktop Chrome and Pixel 7 Chrome emulation each entered all six workspaces and exercised passage assessment, simulated purchase approval, agent approval and undo, optional shortcut learning and deletion, live vector steering and ambiguity resolution with retrieval. Data Foundry, Research Lab and Evidence Vault also opened on both viewports. No uncaught page errors or horizontal overflow were observed on the checked destinations. |
+| [Railway API](https://vector-x-backend-production.up.railway.app/api/v1/health) | Health and foundation returned 200. Public 8D model identity was `5f716edfd50eebe37b3bd69e63424aba7569187be0b5d855c1bd694fa2056f19`. The Ocean steering probe changed the top three IDs from [5, 0, 1] to [6, 7, 10]. |
+| Cross-origin and hosted restrictions | Production-origin preflight returned 200 with the exact allowed origin. Foreign-origin preflight returned 400 without an allow-origin header. The upload route returned 404, and training returned 403. |
+| Local encoders and frozen evidence | Local 8D, 16D, 128D and 384D probes matched their registered model identities and returned original, unconstrained and locked outputs. All five SciFact manifest entries and eight QASPER first/repeat file hashes matched. No frozen evaluation was rerun. |
+
+The engineering tag for this release is `v1.0.0-convergence`. The scientific Phase 3 stop remains in effect. Feature development is frozen at this release.
+
 ## Continuation 009 release candidate
 
-The hardening checkpoint is `ad69353`. The final gate includes 49 Python tests, inventory and language fixtures, the separate offline scorer checks, TypeScript, the production build, both original Chrome suites, and a two-context session and keyboard suite. The same source also built in hosted mode against the authorized API origin. Four model probes and frozen evidence verification were performed separately. See [release review](docs/CONVERGENCE.md#continuation-009-release-review). Merge authorization remains outstanding.
+The hardening checkpoint is `ad69353`. The final gate includes 49 Python tests, inventory and language fixtures, the separate offline scorer checks, TypeScript, the production build, both original Chrome suites, and a two-context session and keyboard suite. The same source also built in hosted mode against the authorized API origin. Four model probes and frozen evidence verification were performed separately. See [release review](docs/CONVERGENCE.md#continuation-009-release-review). This pre-merge gate preceded the production authorization recorded above.
 
 ## Continuation 008 verification
 

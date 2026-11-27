@@ -6,9 +6,11 @@ RESURRECT 2026 | Problem Statement 05
 
 Team EIDOLON · Skanda MP · Vani Bhat · Y Nayana · Kavana Y M
 
-## Convergence preview
+## Convergence production release
 
-Open [Mission Control on localhost](http://localhost:5173/#mission-control) on the `feature/convergence` branch to enter any of the six workspaces. The existing public release remains available on [Vercel](https://eidolon-vector-x.vercel.app). Implementation coverage, reproducible tests and the scientific review queue are in [the Convergence report](docs/CONVERGENCE.md).
+Open [public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) to explore all six workspaces. The [Railway health endpoint](https://vector-x-backend-production.up.railway.app/api/v1/health) reports service readiness. Public inference uses the 8D calibration encoder. Use the [local workspace](http://localhost:5173/#mission-control) for private dataset imports, concept training and the four research encoders.
+
+The engineering release preserves the individual milestones from [PR #1](https://github.com/skandamp-sudo/EIDOLON-VECTOR-X/pull/1). See [the release record](BUILD_STATE.md#convergence-production-release) and [the scientific results and limits](docs/CONVERGENCE.md).
 
 [Judge walkthrough and local fallback](docs/JUDGE-WALKTHROUGH.md) · [Independent evaluation instructions](docs/INDEPENDENT-EVALUATION.md)
 
@@ -146,7 +148,7 @@ Production serves live calibration inference and the recorded four-encoder evide
 
 - The simulated inventory ledger survives route changes and can be reset. CLARITY recalls operator answers for up to eight identical instructions in tab memory, requests a new binding for different instructions and clears the bindings on request. Chrome verified revisit, reset and context separation.
 
-- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. At the release-review checkpoint, production still served the prior release.
 
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
 

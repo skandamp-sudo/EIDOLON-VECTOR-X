@@ -1,6 +1,6 @@
 # Convergence integration ledger
 
-Base f5fc5ee3c963289628a22c0442a743eaf683ac0e. The six domains share one application. Public calibration inference, local-only Data Foundry imports, the four local encoder identities, static QASPER reports and both SciFact archives retain their original boundaries. Use the Applications walkthrough for the published release. The feature branch is independent of production main.
+Base f5fc5ee3c963289628a22c0442a743eaf683ac0e. The six domains share one application. Public calibration inference, local-only Data Foundry imports, the four local encoder identities, static QASPER reports and both SciFact archives retain their original boundaries. Use [public Mission Control](https://eidolon-vector-x.vercel.app/#mission-control) for the production release. PR #1 preserved the feature milestones in main.
 
 ## Verification ledger
 
@@ -26,7 +26,7 @@ Base f5fc5ee3c963289628a22c0442a743eaf683ac0e. The six domains share one applica
 
 ## Requirement coverage and reproduction
 
-Open [local Mission Control](http://localhost:5173/#mission-control). The top-left brand opens it from every workspace. The published Vercel site serves the earlier release. Run `./scripts/start` to check or start the loopback Vite and FastAPI supervisor. Run `./scripts/verify` with the locked dependencies, local Chrome and Node with native TypeScript stripping, verified on Node 24.
+Open [local Mission Control](http://localhost:5173/#mission-control). The top-left brand opens it from every workspace. The public Vercel site also serves the six workspaces, with hosted imports and training restricted. Run `./scripts/start` to check or start the loopback Vite and FastAPI supervisor. Run `./scripts/verify` with the locked dependencies, local Chrome and Node with native TypeScript stripping, verified on Node 24.
 
 | PS | Success criterion and implementation | Baseline, sample and result | Known limits |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ Open [local Mission Control](http://localhost:5173/#mission-control). The top-le
 - **Usability and tests.** Run assisted screen-reader and keyboard studies. Broaden the order-stream and language fixtures before extrapolating beyond the authored tasks. An externally operated inventory feed and independent usability benchmarks remain outside the verified release.
 - **Remaining effort.** Allow roughly one to two engineering days for additional browser, accessibility and load checks. Independent domain labels and participant studies have separate recruitment and review dependencies. This planning estimate does not measure runtime or credit usage.
 
-- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. Public deployment remains at the prior release.
+- The Convergence report records success criteria, controls, sample sizes, failure cases, reproduction commands, the debugging queue and estimated engineering follow-up. Human efficacy and independent language or inventory accuracy remain open. At this pre-merge checkpoint, production still served the prior release.
 
 - Release hardening updates Vite to 7.3.8 and five optional support wheels in a separate hash-locked runtime file. The original research lock is preserved. The lab rejects mismatched model responses, CORTEX records unanswered effort as null, and MORPH can undo restoring the static layout. The Evidence step no longer counts as a VECTOR-X visit. Native desktop Safari rendered Mission Control and opened SUPPLY. Local client contention, retry isolation and study-control regressions are covered.
 
