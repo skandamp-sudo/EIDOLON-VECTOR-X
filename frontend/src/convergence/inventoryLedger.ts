@@ -1,7 +1,7 @@
 export type Kind='receipt'|'order'|'purchase'|'delivery'|'adjustment'|'demand'|'approve'|'reject'
 export type Entry={id:string;day:number;kind:Kind;sku:string;qty:number;due:number;ref:string}
 type Lot={id:string;sku:string;qty:number;due:number}
-export type Order={id:string;sku:string;qty:number;due:number;booked:number}
+export type Order={id:string;sku:string;qty:number;due:number;booked:number;group:string}
 export const fixture:Entry[]=[
  {id:'R1',day:0,kind:'receipt',sku:'membrane',qty:4,due:0,ref:''},
  {id:'P1',day:0,kind:'purchase',sku:'membrane',qty:6,due:3,ref:''},
@@ -51,8 +51,12 @@ export function replay(log:readonly Entry[],now:number){
    }
    stock.set(e.sku,balance+e.qty)
   }else if(e.kind==='order'||e.kind==='purchase'){
-   if(!e.qty||e.due<e.day||e.ref)fail('Supply and orders require a dated positive quantity.')
-   if(e.kind==='order')orders.push({...e,booked:e.day})
+   if(!e.qty||e.due<e.day||(e.ref&&(e.kind!=='order'||!/^[-\w]{1,32}$/.test(e.ref))))fail('Supply and orders require a dated positive quantity.')
+   if(e.kind==='order'){
+    const group=e.ref||e.id
+    if(orders.some(o=>o.group===group&&o.due!==e.due))fail('Grouped material lines require the same CRD.')
+    orders.push({...e,group,booked:e.day})
+   }
    else lots.push({...e})
   }else if(e.kind==='delivery'){
    const l=lots.find(x=>x.id===e.ref&&x.sku===e.sku)
@@ -79,5 +83,9 @@ export function replay(log:readonly Entry[],now:number){
   const allocated=rows.filter(x=>x.sku===sku).reduce((n,x)=>n+x.qty-x.missing,0)
   return {sku,onHand,incoming,allocated,net:onHand+incoming-allocated}
  })
- return {balances,rows,stale:!log.length||now-prev>2,proposals:rows.filter(o=>o.missing&&!decisions.has(o.id+'@'+o.missing)).map(o=>({order:o.id,sku:o.sku,qty:o.missing,evidence:log.filter(e=>e.sku===o.sku).map(e=>e.id)}))}
+ const groups=Array.from(new Set(rows.map(o=>o.group)),id=>{
+  const lines=rows.filter(o=>o.group===id)
+  return {id,lines:lines.map(o=>o.id),ship:lines.some(o=>o.ship===null)?null:Math.max(...lines.map(o=>o.ship!)),risk:lines.some(o=>o.risk)}
+ })
+ return {balances,groups,rows,stale:!log.length||now-prev>2,proposals:rows.filter(o=>o.missing&&!decisions.has(o.id+'@'+o.missing)).map(o=>({order:o.id,sku:o.sku,qty:o.missing,evidence:log.filter(e=>e.sku===o.sku).map(e=>e.id)}))}
 }

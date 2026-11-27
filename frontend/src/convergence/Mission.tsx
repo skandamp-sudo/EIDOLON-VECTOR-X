@@ -8,8 +8,10 @@ const missions=[
  ['CLARITY','PS-06','Inspect “Compare waves near the bank”. Resolve the meaning of each cue and compare the retrieved passages.','Six authored positive constructions and two unambiguous controls. Independent generalization is unmeasured.']
 ] as const
 const href=(s:string)=>'#'+s.toLowerCase().replaceAll(' ','-')
+let lastStage=0
 export default function Mission(){
- const [selected,setSelected]=useState(0)
+ const [selected,select]=useState(lastStage)
+ const setSelected=(value:number)=>{lastStage=value;select(value)}
  const [title,ps,task,evidence]=missions[selected]
  return <section className="foundry intelligence"><div className="atlas-intro"><h1>Mission Control</h1><p>Investigate a coastal monitoring scenario across six workspaces. VECTOR-X is the primary steering experiment.</p></div>
  <nav className="suite-nav" aria-label="Mission destinations">{['Mission Control','CORTEX','SUPPLY','SYMBIOSIS','MORPH','VECTOR-X','CLARITY','Data Foundry','Research Lab','Evidence Vault'].map(s=><a href={href(s)} key={s}>{s}</a>)}</nav>

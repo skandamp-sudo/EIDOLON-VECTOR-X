@@ -8,6 +8,7 @@ import {exportEvidence} from './session'
 
 type Meaning={text:string;run:Run|null;error:string}
 async function encode(text:string,signal:AbortSignal):Promise<Meaning>{
+ if(text.length>400)return {text,run:null,error:'Interpretation exceeds the 400-character encoder limit. Shorten the instruction.'}
  try{
   const res=await fetch(apiOrigin+'/api/v1/explore',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,strength:0,target:'Ocean'}),signal,cache:'no-store'})
   const run=await res.json()
@@ -23,7 +24,7 @@ export default function Clarity(){
  const [draft,edit]=useState('Compare waves near the bank'),[query,setQuery]=useState(draft),[answers,answer]=useState<Record<string,string>>({}),[custom,setCustom]=useState('')
  const [comparison,compare]=useState<string[]>([]),[vectors,show]=useState<Meaning[]>([]),[busy,loading]=useState(false)
  const issues=inspect(query),pending=issues.filter(i=>!answers[i.key]),issue=pending[0],decision=verdict(query,pending.length)
- const resolved=(extra='')=>[query,...Object.values(answers),extra].filter(Boolean).join(' · ').slice(0,400)
+ const resolved=(extra='')=>[query,...Object.values(answers),extra].filter(Boolean).join(' · ')
  useEffect(()=>{
   show([]);if(!comparison.length){loading(false);return}
   const c=new AbortController(),timer=setTimeout(()=>c.abort(),12000)

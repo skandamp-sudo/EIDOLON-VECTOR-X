@@ -14,6 +14,10 @@ export default function Frontier() {
   const [paused,pause]=useState(false),[mode,modeTo]=useState('Approval required'),[goal,goalTo]=useState('Maximize gain')
   const [timeline,setTimeline]=useState<{time:number;action:string}[]>([]),[rating,rate]=useState(''),[trust,setTrust]=useState('')
   const [began]=useState(()=>Date.now()),[finished,finish]=useState<number|null>(null)
+  const [formRevision,submitForm]=useState(0)
+  const sequential=mode==='Sequential form'
+  const sweepKey=JSON.stringify([query,direction,protection,strength,drift,cos,labels])
+  const approvedForm=useRef('')
   const automatic=useRef<Point[]|null>(null)
   function log(action:string){setTimeline(v=>[...v.slice(-127),{time:Date.now(),action}])}
   useEffect(()=>{const c=new AbortController()
@@ -21,6 +25,7 @@ export default function Frontier() {
     return ()=>c.abort()
   },[retry])
   useEffect(()=>{if(!space||paused)return
+    if(sequential&&approvedForm.current!==sweepKey){setPoints([]);setStatus('Edit constraints and submit the form.');return}
     const c=new AbortController()
     log('Sweep requested · target '+direction+', protect '+protection+', strength '+strength+', drift '+drift+', cosine '+cos);setPoints([]); select(0); setPrevious(null); setStatus('Computing operating points…')
     const timer=setTimeout(async()=>{
@@ -32,7 +37,7 @@ export default function Frontier() {
       }catch(e){if(!c.signal.aborted)setStatus(e instanceof Error?e.message:'Calculation failed.')}
     },200)
     return ()=>{clearTimeout(timer);c.abort()}
-  },[space,query,direction,protection,strength,drift,cos,labels,retry,paused])
+  },[space,query,direction,protection,strength,drift,cos,labels,retry,paused,sequential,sweepKey,formRevision])
   const [rejected,setRejected]=useState(false)
   useEffect(()=>setRejected(false),[points])
   const feasible=points.map((p,i)=>({p,i})).filter(({p})=>p.feasible)
@@ -67,6 +72,7 @@ export default function Frontier() {
       <label>Sweep limit<input type="number" min="-2" max="2" step=".25" value={strength} onChange={e=>setStrength(Number(e.target.value))}/></label>
       <label>Drift limit<input type="number" min="0" max="2" step=".005" value={drift} onChange={e=>setDrift(Number(e.target.value))}/></label>
       <label>Cosine floor<input type="number" min="-1" max="1" step=".05" value={cos} onChange={e=>setCos(Number(e.target.value))}/></label></div></fieldset>
+    {sequential&&<button disabled={paused} onClick={()=>{approvedForm.current=sweepKey;submitForm(n=>n+1);log('Submitted baseline form')}}>Calculate form settings</button>}
     {status && <p role="status">{status} <button onClick={()=>setRetry(v=>v+1)}>Retry sweep</button></p>}
     {current && <><figure className="pareto-figure"><svg viewBox="0 0 600 190" role="img" aria-label="Candidate points by protected drift horizontally and signed target gain vertically">
       <path d="M45 12V161H583" fill="none" stroke="#65828c"/><text x="45" y="181">0 drift</text><text x="475" y="181">{fmt(maxD)} drift</text>

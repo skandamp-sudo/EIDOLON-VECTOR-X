@@ -35,6 +35,7 @@ function Explorer({step}:{step:number}) {
       return Array.isArray(values)&&values.length<=20&&values.every(v=>['Marine','Optics','Acoustics'].includes(v))?values:[]
     } catch {return []}
   })
+  useEffect(()=>{const reset=()=>setHistory([]);window.addEventListener('vector-x-reset-preferences',reset);return ()=>window.removeEventListener('vector-x-reset-preferences',reset)},[])
   function updateHistory(next:string[]){
     setHistory(next)
     try {sessionStorage.setItem('vector-x.inventory-saves.v1',JSON.stringify(next))} catch { /* In-memory use remains available. */ }

@@ -4,6 +4,8 @@ const browser=await chromium.launch({channel:'chrome',headless:true,timeout:3000
 try {
  const page=await browser.newPage()
  await page.goto('http://localhost:5173/#applications')
+ const faults=[]
+ page.on('pageerror',e=>faults.push(e.message))
  const step=page.getByLabel('Walkthrough step')
  const check=process.argv[2]??'all'
  if(check==='all'||check==='cortex'){
@@ -35,6 +37,9 @@ try {
   await page.getByRole('button',{name:'Resume agent'}).click()
   await page.getByLabel('Agent interaction mode').selectOption('Automatic preview')
   await page.getByRole('button',{name:'Undo selection'}).click()
+  await page.getByLabel('Agent interaction mode').selectOption('Sequential form')
+  await page.getByRole('button',{name:'Calculate form settings'}).click()
+  await page.getByLabel('Feasible operating point').waitFor()
  }
  if(check==='all'||check==='morph'){
   await step.selectOption('3')
@@ -85,5 +90,6 @@ try {
   }
  }
  // Additional module checks
+ assert.deepEqual(faults,[])
  console.log('Convergence browser checks passed:',check)
 } finally {await browser.close()}

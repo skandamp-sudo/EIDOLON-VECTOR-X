@@ -12,3 +12,8 @@ assert.throws(()=>replay([...fixture,{...approve,qty:3}],1))
 assert.equal(replay([...fixture,{...approve,kind:'delivery',qty:0,ref:'P1',due:8}],1).rows[0].ship,8)
 assert.equal(replay(fixture,5).stale,true)
 console.log('SUPPLY simulated ledger, allocation, approval and delay checks passed.')
+
+const extra={...fixture[2],id:'O1b',sku:'gasket',qty:1,ref:'O1'}
+const kit=replay([...fixture,extra],1).groups.find(g=>g.id==='O1')
+assert.deepEqual(kit,{id:'O1',lines:['O1','O1b'],ship:null,risk:true})
+assert.throws(()=>replay([...fixture,{...extra,due:8}],1),/same CRD/)

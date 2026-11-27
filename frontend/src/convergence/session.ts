@@ -4,13 +4,13 @@ import {downloadFile} from '../foundryData'
 export const domains=['CORTEX','SUPPLY','SYMBIOSIS','MORPH','VECTOR-X','CLARITY'] as const
 export type Domain=typeof domains[number]
 export type Action='visit'|'complete'|'retry'|'back'|'prefer'|'approve'|'reject'|'undo'
-export type Interaction={domain:Domain;action:Action;time:number}
+export type Interaction={domain:Domain;action:Action;time:number;context?:Domain}
 let events:Interaction[]=[]
 let enabled=false
 const listeners=new Set<()=>void>()
 const notify=()=>listeners.forEach(f=>f())
-export function record(domain:Domain,action:Action){
-  if(enabled){events=[...events.slice(-255),{domain,action,time:Date.now()}];notify()}
+export function record(domain:Domain,action:Action,context?:Domain){
+  if(enabled){events=[...events.slice(-255),{domain,action,context,time:Date.now()}];notify()}
 }
 export function configureLearning(value:boolean){enabled=value;notify()}
 export function clearHistory(){events=[];notify()}

@@ -135,3 +135,5 @@ Production serves live calibration inference and the recorded four-encoder evide
 - The CORTEX reader and resolved CLARITY interpretations can populate a 400-character Vector Warp draft in memory on loopback. The operator edits or encodes it explicitly. The original 8D atlas, four research encoders and frozen evidence remain available through their existing entry points.
 
 - Mission Control provides ten direct destinations, a six-stage coastal investigation and measured limits for each application. Desktop and 390px Chrome checks visit every destination and check horizontal overflow. Production remains on its existing release.
+
+- The combined gate runs the 48 Python tests, TypeScript, production build, authored SUPPLY and CLARITY checks, original browser suite and six-domain Chrome suite. Regression work covers multi-material order completion, tab-local draft and preference controls, explicit form submission and paired navigation tasks. All four live local probes matched the recorded model identities. Production walkthrough and both archived SciFact SHA-256 values were rechecked.
