@@ -1,5 +1,11 @@
 # Build state
 
+## Atlas ranked similarity inspector · 28 November 2026, 09:43 IST
+
+The inspector starts with five steered matches. Both cosine ranks are calculated across the full calibration corpus before filtering. Exact score ties follow the runtime’s point ID order. Change filters include only strictly positive or strictly negative differences. The selected galaxy point stays visible in a separate row when it falls outside the ranked list.
+
+The focused Chrome regression checked all four ranking modes, all four result limits, the four topics, full-corpus ranks, PCA details, selection in both directions, zero-strength and unrepresentable-query states, steering updates and a 390-pixel viewport. The TypeScript check and Vite build passed. All 13 archived evidence hashes matched.
+
 ## INTUITIVE final acceptance · 28 November 2026, 00:13 IST
 
 The feature candidate builds on `a8a072d`. The six measured entry panels start higher on desktop and mobile. MORPH pins the accepted shortcut in the adaptive preview. System Flow identifies incoming and outgoing paths with different line styles. The [acceptance record](docs/final-acceptance/README.md) includes viewport measurements, native Safari interactions and three exact judge report replays. The seven Chrome walkthroughs and all four graph views passed the focused checks. All 13 archived digests matched. No external research evaluation was rerun. Production remains at `93d9054`.

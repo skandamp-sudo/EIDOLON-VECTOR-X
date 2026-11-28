@@ -5,11 +5,40 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, AudioLines, ChevronDown, Crosshair, Layers3, SlidersHorizontal } from 'lucide-react'
 import Galaxy from './Galaxy'
 import { colors, topics, validRun } from './explore'
-import type { Run, Topic } from './explore'
+import type { Doc, Run, Topic } from './explore'
 import './atlas.css'
 
 const initialText = 'A telescope records light from a distant star.'
 const signed = (n:number) => (n>0?'+':'')+n.toFixed(2)
+type Ranking = 'before' | 'after' | 'gain' | 'loss'
+
+function similarityOrder(documents: Doc[], side: 'before' | 'after') {
+  // The runtime sorts full-precision scores stably in corpus (point ID) order.
+  return [...documents].sort((a, b) => b[side] - a[side] || a.id - b.id)
+}
+
+function MatchRow({ document: d, beforeRank, afterRank, active, select }: {
+  document: Doc; beforeRank: number; afterRank: number; active: boolean; select: (id: number) => void
+}) {
+  const change = d.after - d.before
+  return <div className="atlas-match">
+    <button type="button" className="match-pick" aria-pressed={active} onClick={() => select(d.id)}>
+      <span className="match-source">
+        <span className="match-id"><i style={{ background: colors[d.topic] }}/>Point {d.id + 1} · {d.topic}{active && <strong>Selected</strong>}</span>
+        <span>{d.text}</span>
+      </span>
+      <span className="match-measures">
+        <span title={String(d.before)}>Original cosine<b>{d.before.toFixed(4)}</b></span>
+        <span title={String(d.after)}>Steered cosine<b>{d.after.toFixed(4)}</b></span>
+        <span title={String(change)}>Change<b>{change > 0 ? '+' : ''}{change.toFixed(4)}</b></span>
+        <span>Original rank<b>#{beforeRank}</b></span>
+        <span>Steered rank<b>#{afterRank}</b></span>
+      </span>
+    </button>
+    <details><summary>PCA coordinates</summary><p>{d.xyz.map((value, i) => 'PC' + (i + 1) + ' ' + value.toFixed(4)).join(' · ')}</p></details>
+  </div>
+}
+
 export default function Atlas({ online }: { online: boolean }) {
   const [handoff]=useState(readAtlasDraft)
   const [draft,setDraft]=useState(handoff?.text??initialText)
@@ -20,6 +49,9 @@ export default function Atlas({ online }: { online: boolean }) {
   const [strength,setStrength]=useState(1.2)
   const [result,setResult]=useState<Run|null>(null)
   const [selected,setSelected]=useState<number|null>(null)
+  const [ranking, setRanking] = useState<Ranking>('after')
+  const [topic, setTopic] = useState<Topic | 'all'>('all')
+  const [limit, setLimit] = useState('5')
   const [search, setSearch] = useState('')
   const [error,setError]=useState('')
   const [pending,setPending]=useState(true)
@@ -49,7 +81,25 @@ export default function Atlas({ online }: { online: boolean }) {
     return ()=>{active=false;clearTimeout(timer);controller.abort()}
   },[online,query,target,strength,attempt])
   const run=online?result:null
-  const doc=run?.documents[selected??run.after[0]]
+  const documents = run?.documents ?? []
+  const originalOrder = similarityOrder(documents, 'before')
+  const steeredOrder = similarityOrder(documents, 'after')
+  const ranks = (order: Doc[]) => new Map(order.map((d, i) => [d.id, i + 1]))
+  const originalRanks = ranks(originalOrder)
+  const steeredRanks = ranks(steeredOrder)
+  let ordered = ranking === 'before' ? originalOrder : steeredOrder
+  if (ranking === 'gain' || ranking === 'loss') {
+    const direction = ranking === 'gain' ? 1 : -1
+    const change = (d: Doc) => direction * (d.after - d.before)
+    ordered = documents.filter(d => change(d) > 0).sort((a, b) => change(b) - change(a) || a.id - b.id)
+  }
+  const eligible = ordered.filter(d => topic === 'all' || d.topic === topic)
+  const visible = limit === 'all' ? eligible : eligible.slice(0, Number(limit))
+  const doc = selected === null ? visible[0] : documents.find(d => d.id === selected)
+  const outside = doc && !visible.some(d => d.id === doc.id)
+  const row = (d: Doc) => <MatchRow document={d} beforeRank={originalRanks.get(d.id)!} afterRank={steeredRanks.get(d.id)!}
+    active={d.id === doc?.id} select={setSelected}/>
+
   const term = search.trim().toLowerCase()
   const matches = run?.documents.filter(d => (d.topic + ' ' + d.text).toLowerCase().includes(term)) ?? []
   function submit(e:React.FormEvent){
@@ -83,10 +133,29 @@ export default function Atlas({ online }: { online: boolean }) {
           <div className={'run-status '+(error?'error':'')} role="status">{!online?'Waiting for runtime':error|| (pending?'Computing embeddings…':draft.trim()!==query?'Edit ready to embed':run?'Applied '+signed(run.strength)+' toward '+run.target:'Waiting for query')}</div>
         </div></aside>
     </div>
-    <section className="panel doc-inspect" aria-label="Semantic similarity inspector"><Crosshair size={18}/><div><span className="eyelabel">Similarity inspector {doc?' / '+doc.topic:''}</span>
-      <p>{doc?.text??'Select a document in the map or retrieval results.'}</p>
-      {doc && <small className="coordinates">Point {doc.id + 1} · PCA ({doc.xyz.map(value => value.toFixed(3)).join(', ')})</small>}</div>
-      <div className="compare-scores"><span>Original <b>{doc?.before.toFixed(3)??'—'}</b></span><span>Steered <b>{doc?.after.toFixed(3)??'—'}</b></span></div></section>
+    <section className="panel doc-inspect" aria-label="Semantic similarity inspector">
+      <div className="panel-title"><Crosshair size={18}/><h2>Similarity inspector</h2></div>
+      <div className="match-controls">
+        <div><label htmlFor="atlas-match-order">Rank by</label><select id="atlas-match-order" value={ranking} onChange={e => setRanking(e.target.value as Ranking)}>
+          <option value="before">Original cosine similarity</option><option value="after">Steered cosine similarity</option>
+          <option value="gain">Largest positive similarity change</option><option value="loss">Largest negative similarity change</option>
+        </select></div>
+        <div><label htmlFor="atlas-match-topic">Topic</label><select id="atlas-match-topic" value={topic} onChange={e => setTopic(e.target.value as Topic | 'all')}>
+          <option value="all">All topics</option>{topics.map(t => <option key={t}>{t}</option>)}
+        </select></div>
+        <div><label htmlFor="atlas-match-count">Match count</label><select id="atlas-match-count" value={limit} onChange={e => setLimit(e.target.value)}>
+          {[3, 5, 10].map(n => <option key={n} value={n}>Top {n}</option>)}<option value="all">All available documents</option>
+        </select></div>
+      </div>
+      <p className="match-summary" role="status">{pending ? 'Updating matches…' : !run ? 'Awaiting a valid embedding.' :
+        eligible.length ? visible.length + ' of ' + eligible.length + ' matches · Ranks are across all ' + documents.length + ' documents.' :
+        'No documents match these filters.'}</p>
+      {!pending && run && <>
+        {visible.length > 0 && <ol className="match-list" aria-label="Ranked semantic matches">{visible.map(d => <li key={d.id}>{row(d)}</li>)}</ol>}
+        {outside && <div className="match-outside"><h3>Selected point outside these results</h3>{row(doc)}</div>}
+      </>}
+    </section>
+
     <div className="inspection-tools">
       <details className="inspection">
         <summary>Search corpus points</summary>

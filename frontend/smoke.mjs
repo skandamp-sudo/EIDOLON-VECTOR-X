@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import {checkAtlasInspector} from './atlasInspectorSmoke.mjs'
 import {checkApplications} from './applicationSmoke.mjs'
 import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
@@ -20,15 +21,17 @@ try {
   await page.goto('http://localhost:5173', { waitUntil: 'domcontentloaded' })
   await page.getByText('API connected', { exact: true }).waitFor()
   await page.getByRole('heading', {name:'Mission Control',exact:true}).waitFor()
+  const atlasResponse = page.waitForResponse(r => r.url().endsWith('/api/v1/explore') && r.request().method() === 'POST')
   await page.getByRole('link', {name:'Explore Semantic Universe'}).click()
   await page.getByRole('heading', { name: 'Semantic atlas' }).waitFor()
   await page.locator('.star').first().waitFor()
   assert.equal(await page.locator('.star').count(), 24)
+  await checkAtlasInspector(page, await (await atlasResponse).json())
   assert.equal(await page.locator('.rank-panel li').count(), 6)
   await page.screenshot({ path: '../.runtime/atlas.png', fullPage: true })
   await page.getByText('Search corpus points', {exact:true}).click()
   await page.getByLabel('Document text or topic').fill('orchestra')
-  await page.getByRole('button', {name:/Acoustics.*orchestra tunes/}).click()
+  await page.locator('details.inspection').getByRole('button', {name:/Acoustics.*orchestra tunes/}).click()
   await page.locator('.doc-inspect').getByText(/The orchestra tunes/).waitFor()
   await page.getByText('Semantic X-Ray · query vectors').click()
   assert.equal(await page.locator('.inspection tbody tr').count(), 8)
@@ -39,11 +42,19 @@ try {
   assert.notDeepEqual(before, after)
   await page.getByRole('button', {name:'Zero',exact:true}).click()
   await page.getByText('3/3 neighbors retained').waitFor()
+  const inspector = page.getByRole('region', {name:'Semantic similarity inspector'})
+  for (const mode of ['gain', 'loss']) {
+    await inspector.getByLabel('Rank by').selectOption(mode)
+    await inspector.getByText('No documents match these filters.').waitFor()
+    assert.equal(await inspector.locator('.match-list li').count(), 0)
+  }
+  await inspector.getByLabel('Rank by').selectOption('after')
   assert.deepEqual(await page.locator('.before li button').allTextContents(), await page.locator('.after li button').allTextContents())
   await page.getByLabel('Concept direction').selectOption('Botany')
   await page.getByLabel('Steering strength').focus()
   await page.keyboard.press('ArrowRight')
   await page.getByText('Applied +0.05 toward Botany').waitFor()
+  assert.deepEqual(await inspector.locator('.match-list li .match-source > span:last-child').allTextContents().then(items => items.slice(0,3)), await page.locator('.after li button > span:nth-of-type(2)').allTextContents())
   const starPosition = await page.locator('.star circle').first().getAttribute('cx')
   await page.getByRole('button', {name:'Rotate galaxy right'}).click()
   assert.notEqual(await page.locator('.star circle').first().getAttribute('cx'), starPosition)
@@ -53,6 +64,7 @@ try {
   await page.getByRole('button', {name:'Embed query'}).click()
   await page.getByText(/No known vocabulary/).waitFor()
   assert.equal(await page.locator('.star').count(), 0)
+  assert.equal(await inspector.locator('.match-pick').count(), 0)
   await page.getByLabel('Query text').fill('forest soil and growing roots')
   await page.getByRole('button', {name:'Embed query'}).click()
   await page.locator('.star').first().waitFor()
